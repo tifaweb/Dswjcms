@@ -1,0 +1,61 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--主体 -->
+<div class="row-fluid">
+	<div class="container login_cone">
+    	<div class="span7 login_left">
+    	<h2>找回密码</h2>
+        <form class="form-horizontal" name="myform" method="post" action='__URL__/rPassword'>
+          <div class="control-group">
+            <label class="control-label">用户名</label>
+            <div class="controls">
+              <input type="text" maxlength="16" name="user" datatype="me" nullmsg="请输入用户名！" errormsg="用户名允许2-16个字,可包含中英文、数字、点和下划线！" ajaxurl="__URL__/ajaxverify" placeholder="用户名">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">验证码</label>
+            <div class="controls">
+            <label class="inline span4">
+              <input type="text" class="span12" name="proving" placeholder="验证码" maxlength="4" datatype="*"  errormsg="验证码不能为空！">
+            </label>
+              <label class="checkbox inline">
+               <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+            </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <p>
+              <button type="submit" class="btn btn-info">提交</button>
+              </p>
+            </div>
+          </div>
+        </form>
+        </div>
+        <div class="span3 login_right">
+        <p><a href="__ROOT__/Logo/login.html" class="btn btn-warning">登陆</a> <a href="__ROOT__/Logo/register.html" class="btn btn-success">注册</a></p>
+        </div>
+    </div>
+</div>
+<!-- 主体 end-->
+<!--底部 -->
+ <script language="JavaScript">
+	function changeVerify(){
+		var timenow = new Date().getTime();
+		document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+	}
+</script>
+<script src="__PUBLIC__/jquery/Validform_v5.3.2min.js"></script>
+<script language="JavaScript">
+ $(function(){
+	//$(".form-horizontal").Validform();  //就这一行代码！;
+
+	$(".form-horizontal").Validform({
+		datatype:{
+			"me" : /^[\u4E00-\u9FA5\uf900-\ufa2d\w]{2,16}$/,
+		}
+	});
+})
+</script>
+<include file="Index:footer" />
+<!--底部 end-->

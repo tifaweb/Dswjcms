@@ -1,0 +1,60 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">数据表列表</li>
+    <div  class="pull-right"> <a href="__ROOT__/Admin/Database/editdat.html" >添加新数据表</a></div>
+</ul>
+<table class="table table-striped table-bordered table-condensed datatable">
+            <thead>
+              <tr>
+                <th>表名</th>
+                <th>类型</th>
+                <th>编码</th>
+                <th>大小</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+                <volist name="audit" id="vo">
+                <tr>
+                <td>{$vo.table}</td>
+                <td>{$vo.nature.Engine}</td>
+                <td>{$vo.nature.Collation}</td>
+                <td>{$vo.nature.Index_length} B</td>
+                <td>
+                	 <a href="#audit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-search"title="查看SQL" onclick="var table='{$vo.table}'; $('#modal').load('__URL__/viewda',{table:table});"></a>
+                    <a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__URL__/deleteda/{$vo.table}'"></a>
+                </td>
+              </tr>
+</volist>
+            </tbody>
+          </table>
+
+<div>
+</div>
+<!--查看SQL start-->
+<div id="audit" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>查看SQL</h3>
+    </div>
+	<pre class="prettyprint linenums" style="margin-bottom:18px;" id="modal">
+    	<div class="invest_loading"><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div>
+        <div class="invest_loading">加载中...</div>
+    </pre>
+</div>
+<!--复审 end-->
+<!--底部 -->
+<include file="Index:footer" />
+

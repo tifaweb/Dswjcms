@@ -1,0 +1,63 @@
+<!-- left start-->
+    <div class="center_left span3">
+    	<dl class="integral_portrait">
+        <if condition="$Think.session.user_uid gt 0">
+            <dd>
+            	
+                 <if condition="$heads gt 0">
+                    <span><img src="__PUBLIC__/FaustCplus/php/img/small_user_{$Think.session.user_uid}.jpg"/></span>
+                 <else/>
+                 	<span><img src="__PUBLIC__/FaustCplus/php/img/small_user_0.jpg"/></span>
+                 </if>
+                <span>你好，{$Think.session.user_name}<br /><a href="__ROOT__/Integral/record.html">兑换记录</a></span>
+            </dd>
+            <dd>
+            	<span><b>会员积分：</b>{$users.member_available}分</span>
+                <span><b>VIP&nbsp;&nbsp;积分：</b>{$users.vip_available_integral}分</span>
+                <span><b>推广积分：</b>{$users.promote_available_integral}分</span>
+            </dd>
+        <else/>
+        	<dd class="integral_login">只有<a href="__ROOT__/Logo/register.html">注册</a>用户才可以查看个人信息！现在<a href="__ROOT__/Logo/login.html">登录</a></dd>
+        </if>
+        </dl>
+        <dl>
+        	<dt>热门商品</dt>
+            <div id="accordion2" class="accordion integral_hot">
+            <volist name="hot" id="vo" key="k">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" href="#collapse{$k}" data-parent="#accordion2" data-toggle="collapse"><i>NO.{$k}</i> {$vo.title}</a>                        
+                    </div>
+                    <div id="collapse{$k}" class="accordion-body collapse {$k==1?'in':''}">
+                        <div class="accordion-inner">
+                            <ul>
+                                <li class="img"  style="width:70px;"><img src="__PUBLIC__/uploadify/uploads/goods/{$vo.master}" /></li>
+                                <li class="right">
+                                    <p><a href="__ROOT__/Integral/page/{$vo.id}.html">{$vo.title}</a></p>
+                                    <p>所需积分：{$vo.integral} 分</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </volist>
+            </div>
+        </dl>
+        <dl>
+        	<dt>最新兑换</dt>
+            <div id="scrollDiv2" class="scrollText"> 
+            <ul>
+            	<volist name="forr" id="v">
+                <li><a>{$v.username}</a>兑换了<a class="goods" href="__ROOT__/Integral/page/{$v.gid}.html">{$v.integral_title}</a></li>
+                </volist>
+            </ul>
+            </div> 
+        </dl>
+        <dl class="integral_common">
+        	<dt>常见问题</dt>
+            <volist name="article" id="v">
+            	<dd><a href="__ROOT__/Site/article/id/{$v.id}.html">{$v.title}</a></dd>
+            </volist>
+        </dl>
+    </div>  
+<!-- left end-->

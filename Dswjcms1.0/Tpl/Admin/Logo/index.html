@@ -1,0 +1,54 @@
+<?php $no_visible_elements=true;?>
+<include file="Index:header" />
+<!--头部 end -->
+
+			<div class="row-fluid">
+				<div class="span12 center login-header">
+					<h2>欢迎来到本站</h2>
+				</div><!--/span-->
+			</div><!--/row-->
+			
+			<div class="row-fluid">
+				<div class="well span5 center login-box">
+					<div class="alert alert-info">
+						请登录你的用户名和密码.
+					</div>
+					<form class="form-horizontal" name="myform" method="post">
+						<fieldset>
+							<div class="input-prepend" title="用户" data-rel="tooltip">
+								<span class="add-on"><i class="icon-user"></i></span><input autofocus class="input-large span10" name="name" type="text"  />
+							</div>
+							<div class="clearfix"></div>
+
+							<div class="input-prepend" title="密码" data-rel="tooltip">
+								<span class="add-on"><i class="icon-lock"></i></span><input class="input-large span10" name="passw" type="password"  />
+							</div>
+							<div class="clearfix"></div>
+							
+                            <div class="input-prepend" title="验证码" data-rel="tooltip" style="width:180px;">
+								<span class="add-on"><i class="icon-qrcode"></i></span><input class="input-large" name="proving" type="text"  style="width:50px;"/>
+                                 <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" style="cursor:pointer"/>
+							</div>
+							<div class="clearfix"></div>
+                            
+							<div class="input-prepend">
+							<label class="remember" for="remember"><input type="checkbox" id="remember" />记住密码</label>
+							</div>
+							<div class="clearfix"></div>
+
+							<p class="center span5">
+							<button type="submit" class="btn btn-primary">登 录</button>
+							</p>
+						</fieldset>
+					</form>
+				</div><!--/span-->
+			</div><!--/row-->
+<!--底部 -->
+ <script language="JavaScript">
+	function changeVerify(){
+		var timenow = new Date().getTime();
+		document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+	}
+</script>
+<include file="Index:footer" />
+<!--底部 end-->

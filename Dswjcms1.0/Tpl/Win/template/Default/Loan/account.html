@@ -1,0 +1,65 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop row-fluid">
+<!-- left start-->
+<include file="left" />
+<!-- left end-->
+    <!-- right start-->
+    <div  id="content" class="center_right">
+     <volist name="list" id="ls">
+    	<div  class="center_top">
+         <if condition="$refun neq ''">
+         <div class="alert alert-block center_remind">
+         	<a class="close" data-dismiss="alert">
+                    ×
+                    </a>
+         	<h5>提醒</h5>
+            <p>最近有 <b>{$count}</b> 笔待还款</p>
+            <p>
+            	<table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>还款时间</th>
+                        <th>还款金额</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="refun" id="vos">
+                      <tr>
+                        <td>{$vos.time|date="Y-m-d H:i:s",###}</td>
+                        <td>{$vos.money|number_format=2,'.',','} 元</td>
+                      </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </p>
+        </div>
+        </if>
+         <div class="center_below">
+            <h5>账号详情</h5>
+            <p>用户名：{$Think.session.user_name}</p>
+            <p>账户总额：{$ls.total_money|number_format=2,'.',','}</p>
+            <p>可用余额：{$ls.available_funds|number_format=2,'.',','}</p>
+            <p><span>冻结总额：{$ls.freeze_funds|number_format=2,'.',','}</span><span>待收总额：{$ls.due_in|number_format=2,'.',','}</span></p>
+            <if condition="$coll.money neq ''">
+            <p><span> 最近待收金额：{$coll.money|number_format=2,'.',','}</span><span>最近待收时间：{$coll.time|date="Y-m-d H:i:s",###}</span></p>
+            <else/>
+            <p><span>最近待收金额:0</span><span>最近待收时间：无</span></p>
+            </if>
+            <if condition="$ref.money neq ''">
+            <p><span>最近待还金额:{$ref.money|number_format=2,'.',','}</span><span>最近待还时间：{$ref.time|date="Y-m-d H:i:s",###}</span></p>
+            <else/>
+            <p><span>最近待还金额:0</span><span>最近待还时间：无</span></p>
+            </if>
+            <p><span> 待收利息：{$ls.stay_interest|number_format=2,'.',','}</span><span> 已赚利息：{$ls.make_interest|number_format=2,'.',','}</span></p>
+            <p><span>已赚奖励：{$ls.make_reward|number_format=2,'.',','}</span></p>
+            
+         </div>
+    </volist>
+    </div>
+    </div>
+    <!-- right end--> 
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />

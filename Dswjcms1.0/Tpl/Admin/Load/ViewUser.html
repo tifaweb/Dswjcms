@@ -1,0 +1,28 @@
+  <table class="table table-striped table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>用户名</th>
+        <th>用户ID</th>
+        <th>email</th>
+        <th>注册时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+     <volist name="list" id="vo">
+      <tr>
+        <td>{$vo.username}</td>
+        <td>{$vo.id}</td>
+        <td>
+           {$vo.email} 
+        </td>
+        <td>{$vo.time|date="y-m-d",###}</td>
+        <td>
+          <a href="###">详细信息</a>
+          <a href="###">删除</a>
+        </td>
+      </tr>
+    </volist>
+    </tbody>
+   
+  </table> 

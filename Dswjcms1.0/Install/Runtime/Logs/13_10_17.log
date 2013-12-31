@@ -1,0 +1,576 @@
+[ 2013-10-17T18:56:18+08:00 ] 127.0.0.1 /install.php
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001302s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001594s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001403s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001643s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.013857s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014092s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000882s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.001147s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.001320s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001359s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007028s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001285s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001504s ]
+
+[ 2013-10-17T18:56:20+08:00 ] 127.0.0.1 /install.php/Index/install/step/1
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001489s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001868s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001128s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001367s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [2] fopen(App/_dedet.txt): failed to open stream: No such file or directory F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 617 行.
+NOTIC: [2] fopen(Common/_dedet.txt): failed to open stream: No such file or directory F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 617 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001686s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001905s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\87a47085e35556dc3204de01c62ee454.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.018825s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019044s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001039s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000979s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000712s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001175s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004571s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.002540s ]
+INFO: [ view_end ] --END-- [ RunTime:0.002770s ]
+
+[ 2013-10-17T18:57:08+08:00 ] 127.0.0.1 /install.php/Index/install/step/2
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001520s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001846s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001221s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001454s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [8] Use of undefined constant _ - assumed '_' F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 65 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001249s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001475s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\3408f6ad4ffc3e79a8293ef096cbd320.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.065423s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.065634s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000955s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000922s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000603s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001012s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004119s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001662s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001881s ]
+
+[ 2013-10-17T18:57:08+08:00 ] 127.0.0.1 /install.php/Index/install/include/dedeajax2.js
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002296s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002555s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001358s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001581s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:00:09+08:00 ] 127.0.0.1 /install.php/Index/install/step/2
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001719s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001966s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001359s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001583s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [8] Use of undefined constant _ - assumed '_' F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 65 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001770s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001993s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\3408f6ad4ffc3e79a8293ef096cbd320.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.015849s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016062s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001185s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.002551s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000932s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001211s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006506s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001311s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001525s ]
+
+[ 2013-10-17T19:00:09+08:00 ] 127.0.0.1 /install.php/Index/install/include/dedeajax2.js
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001506s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001750s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001175s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001396s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:00:35+08:00 ] 127.0.0.1 /install.php/Index/dbconnect?dbhost=localhost&dbuser=root&dbpwd=&dbname=dswjcaca
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001681s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001933s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001168s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001355s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:00:39+08:00 ] 127.0.0.1 /install.php/Index/install/step/3
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001543s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001923s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001109s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001367s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 73 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 74 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 83 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 188 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 189 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 198 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 199 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 220 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 221 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 240 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 241 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 252 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 255 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 256 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 268 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 269 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 279 行.
+NOTIC: [8] Undefined variable: webname F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 280 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 295 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 296 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 314 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 315 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 325 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 326 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 339 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 340 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 350 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 351 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 357 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 358 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 368 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 369 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 384 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 461 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 462 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 472 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 477 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 478 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 484 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 489 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 490 行.
+NOTIC: [8] Undefined variable: dbprefix F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 506 行.
+NOTIC: [8] Undefined variable: adminuser F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 507 行.
+NOTIC: [8] Undefined variable: adminuser F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 507 行.
+NOTIC: [8] Undefined variable: adminpwd F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 507 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001113s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001354s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.013006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013261s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000961s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.001296s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.001159s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001443s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.005485s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001309s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001526s ]
+
+[ 2013-10-17T19:00:42+08:00 ] 127.0.0.1 /install.php/Index/install
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001511s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001755s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001030s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001264s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:04:02+08:00 ] 127.0.0.1 /install.php/Index/install/step/2
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001986s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002318s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001375s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001626s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [8] Use of undefined constant _ - assumed '_' F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 65 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001843s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002092s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\3408f6ad4ffc3e79a8293ef096cbd320.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.020752s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.020965s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001022s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.002200s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000936s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001246s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006270s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001271s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001482s ]
+
+[ 2013-10-17T19:04:02+08:00 ] 127.0.0.1 /install.php/Index/install/include/dedeajax2.js
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002298s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002546s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001320s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001546s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:04:08+08:00 ] 127.0.0.1 /install.php/Index/install/step/3
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002309s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002575s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001555s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001258s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001505s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.015209s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015448s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001101s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.001010s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000822s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001282s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004831s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001304s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001529s ]
+
+[ 2013-10-17T19:04:09+08:00 ] 127.0.0.1 /install.php/Index/install/step/4.html
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002367s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002628s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001425s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001650s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001807s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002052s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\28ca293015b5e69ec3732ebee3f066c1.php 第 4 行.
+NOTIC: [8] Undefined variable: errmsg F:\wamp\www\fzxy\Install\Runtime\Cache\28ca293015b5e69ec3732ebee3f066c1.php 第 47 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.014946s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015162s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001062s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.001025s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000777s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001273s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004753s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001372s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001584s ]
+
+[ 2013-10-17T19:44:31+08:00 ] 127.0.0.1 /install.php/
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.003751s ]
+INFO: [ route_check ] --END-- [ RunTime:0.004132s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.006119s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006819s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.002741s ]
+INFO: [ view_template ] --END-- [ RunTime:0.003026s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.015589s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015992s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001052s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.001212s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000970s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001754s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.005600s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001346s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001558s ]
+
+[ 2013-10-17T19:44:35+08:00 ] 127.0.0.1 /install.php/Index/install/step/1
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002148s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002432s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001325s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001569s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [2] fopen(App/_dedet.txt): failed to open stream: No such file or directory F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 337 行.
+NOTIC: [2] fopen(Common/_dedet.txt): failed to open stream: No such file or directory F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 337 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.002222s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002457s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\87a47085e35556dc3204de01c62ee454.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.029346s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029559s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001068s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.001083s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000781s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001343s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004905s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001421s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001640s ]
+
+[ 2013-10-17T19:44:42+08:00 ] 127.0.0.1 /install.php/Index/install/step/2
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001426s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001673s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001193s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001427s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [8] Use of undefined constant _ - assumed '_' F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 65 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001317s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001543s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\3408f6ad4ffc3e79a8293ef096cbd320.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.013029s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013264s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001204s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000910s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000590s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.000960s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004255s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001137s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001348s ]
+
+[ 2013-10-17T19:44:42+08:00 ] 127.0.0.1 /install.php/Index/install/include/dedeajax2.js
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001481s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001733s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001201s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001423s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:46:14+08:00 ] 127.0.0.1 /install.php/Index/dbconnect?dbhost=localhost&dbuser=root&dbpwd=&dbname=dswjcaca
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001666s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001921s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001242s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001428s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:46:19+08:00 ] 127.0.0.1 /install.php/Index/install/step/3
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001610s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001861s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001268s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001493s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+
+[ 2013-10-17T19:53:38+08:00 ] 127.0.0.1 /install.php
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001372s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001638s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001199s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001438s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.012830s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013064s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000928s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.001042s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000713s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001836s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.005160s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001565s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001824s ]
+
+[ 2013-10-17T19:56:06+08:00 ] 127.0.0.1 /install.php/Index/install/step/1
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002364s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002628s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001462s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001710s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [2] fopen(App/_dedet.txt): failed to open stream: No such file or directory F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 337 行.
+NOTIC: [2] fopen(Common/_dedet.txt): failed to open stream: No such file or directory F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 337 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001716s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001939s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\87a47085e35556dc3204de01c62ee454.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.019661s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019871s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.001001s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000985s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000705s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001285s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004662s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001317s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001522s ]
+
+[ 2013-10-17T19:56:08+08:00 ] 127.0.0.1 /install.php/Index/install/step/2
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001587s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001850s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001618s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001851s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: [8] Use of undefined constant _ - assumed '_' F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 65 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.001135s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001358s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\3408f6ad4ffc3e79a8293ef096cbd320.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.014764s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014975s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.000890s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.000835s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.000552s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.001343s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004219s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.001275s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001497s ]
+
+[ 2013-10-17T19:56:09+08:00 ] 127.0.0.1 /install.php/Index/install/include/dedeajax2.js
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001236s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001481s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001260s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001481s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:56:16+08:00 ] 127.0.0.1 /install.php/Index/dbconnect?dbhost=localhost&dbuser=root&dbpwd=&dbname=dswjcaca
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001588s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001835s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001336s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001540s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-17T19:56:19+08:00 ] 127.0.0.1 /install.php/Index/install/step/3
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002094s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002342s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001517s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001747s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+
+[ 2013-10-17T19:56:52+08:00 ] 127.0.0.1 /install.php/Index/install/step/3
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002275s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002521s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001280s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001498s ]
+NOTIC: [8] A session had already been started - ignoring session_start() F:\wamp\www\fzxy\ThinkPHP\Common\functions.php 第 566 行.
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+

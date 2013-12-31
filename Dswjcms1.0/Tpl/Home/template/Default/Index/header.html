@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title>{$s.sys_name}<if condition="($si['link'] eq '/') OR ($si['link'] eq '')"><else/>-{$si['title']}</if>-{$Think.config.DS_TOP_POWERED}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="{$si['remark']?$si['remark']:$s['sys_describe']}{$so.title}">
+	<meta name="KeyWords" content="{$si['keyword']?$si['keyword']:$s['sys_keyword']}{$so.title}">
+    <meta name="generator" content="Dswjcms! X1.0" />
+    <meta name="author" content="Dswjcms! Team and Tf Team" />
+    <meta name="copyright" content="2013-2014 Tf Inc." />
+    <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href='__PUBLIC__/bootstrap/css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='__PUBLIC__/bootstrap/css/uploadify.css' rel='stylesheet'>
+    <link href='__PUBLIC__/bootstrap/css/jquery-ui-1.8.21.custom.css' rel='stylesheet'>
+    <link href='__PUBLIC__/bootstrap/css/uniform.default.css' rel='stylesheet'>
+    <link href="__PUBLIC__/css/hdocs.css" rel="stylesheet">
+    <link href='__PUBLIC__/bootstrap/css/opa-icons.css' rel='stylesheet'>
+    <link href='__PUBLIC__/css/fotorama.css' rel='stylesheet'>
+    <link  href="__PUBLIC__/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    	<![endif]-->
+    <!--[if lte IE 6]>
+    <link href="__PUBLIC__/bootstrap/css/bootstrap-ie6.min.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/bootstrap/css/ie.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap-ie.js"></script>
+    <![endif]-->
+    {$head}
+	<link rel="shortcut icon" href="__PUBLIC__/bootstrap/img/favicon.ico">
+    <!-- jQuery -->
+    <script src="__PUBLIC__/js/timecount.js"></script>
+    <script src="__PUBLIC__/bootstrap/js/jquery-1.7.2.min.js"></script>
+    
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+<!-- navbar start -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+		  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">TF</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+             <li class="{$active.index}">
+                <a href="/">主页</a>
+              </li>
+              <li class="{$active.loan}">
+                <a href="__ROOT__/Loan.html">我要投资</a> 
+              </li>
+              <li class="dropdown {$active.borrow}">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">我要借款 <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="__ROOT__/Borrow/index/second.html">发布秒还标</a></li>
+                  <li><a href="__ROOT__/Borrow/index/mortgage.html">发布抵押标</a></li>
+                  <li><a href="__ROOT__/Borrow/index/pledge.html">发布质押标</a></li>
+                  <li><a href="__ROOT__/Borrow/index/worth.html">发布净值标</a></li>
+                  <li><a href="__ROOT__/Borrow/index/credit.html">发布信用标</a></li>
+                  <!--<li><a href="__ROOT__/Borrow/index/guarantee.html">发布担保标</a></li>-->
+                  <li><a href="__ROOT__/Borrow/flow.html">发布流转标</a></li>
+                  <li class="divider"></li>
+                  <li><a href="__ROOT__/Borrow/welfare.html">借款页</a></li>
+                </ul>
+              </li>
+              <!--<li  class="{$active.counter}">
+                <a href="__ROOT__/Index/counter.html">计算器</a>
+              </li>-->
+              <li class="{$active.center}">
+                <a href="__ROOT__/Center.html">我的账户</a>
+              </li>
+              <li class="{$active.integral}">
+                <a href="__ROOT__/Integral.html">积分商城</a>
+              </li>
+              <li  class="{$active.about}">
+                <a href="__ROOT__/Site/page/id/1.html">关于我们</a>
+              </li>
+              <li  class="{$active.explanation}">
+                <a href="__ROOT__/Site/listTpl/id/28.html">名词解释</a>
+              </li>
+              <li class="divider-vertical"></li>
+              <if condition="$Think.session.user_name eq ''">
+                   <li>
+                    <a href="__ROOT__/Logo/register.html">注册</a>
+                  </li>
+                  <li>
+                    <a href="__ROOT__/Logo/login.html">登陆</a>
+                  </li>
+                <else />
+                  <li>
+                  	<a href="__ROOT__/Center.html">欢迎您  {$Think.session.user_name}</a>
+                  </li>
+                  <li>
+                    <a href="__ROOT__/Logo/exits.html">退出</a>
+                  </li>
+              </if>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header_soften">
+        <div class="row-fluid header_top" >
+        <div class="span2">
+        </div>
+        <div class="span4">
+        <img src="__PUBLIC__/uploadify/uploads/logo/{$s.sys_logo}"/>
+        </div>
+        <div class="span3">
+        <form class=" header_search"  method="get"  action='__ROOT__/Loan.html'>
+          <div class="input-append">
+            <input type="text" name="search" placeholder="借款标搜索" value="{$Think.get.search}">
+            <button type="submit" class="btn">搜索</button>
+          </div>
+        </form>
+        </div>
+    </div>
+    </div>
+ <div class="zt">
+ <!-- navbar end -->

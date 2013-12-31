@@ -1,0 +1,113 @@
+[ 2013-10-21T21:47:13+08:00 ] 127.0.0.1 /install.php
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.013824s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.014315s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.022293s ]
+INFO: [ view_template ] --END-- [ RunTime:0.022778s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:0.096724s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.097258s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.022998s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.017600s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.003378s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.004136s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.049360s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.016662s ]
+INFO: [ view_end ] --END-- [ RunTime:0.017114s ]
+
+[ 2013-10-21T21:47:16+08:00 ] 127.0.0.1 /install.php/Index/install/step/1
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.029231s ]
+INFO: [ route_check ] --END-- [ RunTime:0.029740s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.003319s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003782s ]
+NOTIC: 建议使用I方法替代_get
+NOTIC: [2] fopen(App/_dedet.txt): failed to open stream: No such file or directory F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 337 行.
+NOTIC: [2] fopen(Common/_dedet.txt): failed to open stream: No such file or directory F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 337 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.004443s ]
+INFO: [ view_template ] --END-- [ RunTime:0.004909s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\87a47085e35556dc3204de01c62ee454.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.062262s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.062685s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.002089s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.002385s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.001582s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.002418s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.009693s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.002919s ]
+INFO: [ view_end ] --END-- [ RunTime:0.003357s ]
+
+[ 2013-10-21T21:47:18+08:00 ] 127.0.0.1 /install.php/Index/install/step/2
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.003101s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003601s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.002509s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002945s ]
+NOTIC: 建议使用I方法替代_get
+NOTIC: [8] Use of undefined constant _ - assumed '_' F:\wamp\www\fzxy\Install\Lib\Action\IndexAction.class.php 第 65 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:0.002393s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002841s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined variable: s_lang F:\wamp\www\fzxy\Install\Runtime\Cache\3408f6ad4ffc3e79a8293ef096cbd320.php 第 4 行.
+INFO: Run ParseTemplate Behavior [ RunTime:0.057266s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.057698s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:0.002307s ]
+INFO: Run TokenBuild Behavior [ RunTime:0.002063s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:0.001563s ]
+INFO: Run ShowRuntime Behavior [ RunTime:0.002355s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.010036s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:0.002420s ]
+INFO: [ view_end ] --END-- [ RunTime:0.002843s ]
+
+[ 2013-10-21T21:47:18+08:00 ] 127.0.0.1 /install.php/Index/install/include/dedeajax2.js
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.003547s ]
+INFO: [ route_check ] --END-- [ RunTime:0.004036s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.002564s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003023s ]
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-21T21:47:28+08:00 ] 127.0.0.1 /install.php/Index/dbconnect?dbhost=localhost&dbuser=root&dbpwd=&dbname=fzxy
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.002957s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003456s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.005219s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005632s ]
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_get
+
+[ 2013-10-21T21:47:29+08:00 ] 127.0.0.1 /install.php/Index/install/step/3
+INFO: [ route_check ] --START--
+INFO: Run CheckRoute Behavior [ RunTime:0.001680s ]
+INFO: [ route_check ] --END-- [ RunTime:0.001985s ]
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001582s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001876s ]
+NOTIC: 建议使用I方法替代_get
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+NOTIC: 建议使用I方法替代_post
+

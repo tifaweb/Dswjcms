@@ -1,0 +1,242 @@
+<include file="Index:header" />
+
+<div class="container-fluid">
+	<div class="row-fluid">
+        <!--左栏 starts -->
+		<include file="left" />
+        <!--左栏 end -->
+			
+			
+       <!-- content starts -->
+      <div id="content" class="span10">
+          <ul class="breadcrumb">
+              <li>
+                  <a href="/">用户管理</a> <span class="divider">/</span>
+              </li>
+              <li class="active">用户组管理</li>
+               <if condition="intval($group['level']) gt 2 ">
+                  <div  class="pull-right"> 从用户表添加用户</div>
+                  <div  class="pull-right"> 手动添加用户</div>
+               <else />
+                   <div  class="pull-right"> <a data-toggle="modal" data-rel="tooltip" href="#aDdit" onclick="getUser({$id})">从用户表添加用户</a></div>
+                  <div  class="pull-right"> <a data-toggle="modal" data-rel="tooltip" href="#cDdit" >手动添加用户</a></div>              
+               </if>
+          </ul>
+          <div id="viewGroupUser">
+          <table class="table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>用户名</th>
+                <th>用户ID</th>
+                <th>email</th>
+                <th>注册时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+			 <volist name="list" id="vo">
+              <tr>
+                <td>{$vo.username}</td>
+                <td>{$vo.id}</td>
+                <td>
+                   {$vo.email} 
+                </td>
+                <td>{$vo.time|date="y-m-d",###}</td>
+                <td>
+                 <td>
+                  <a href="###">详细信息</a>
+                                      <a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" 
+                    onclick="if(confirm('是否要删除？'))window.location.href='__URL__/delGroupUser/uid/{$vo.id}'"></a>
+               
+                </td>
+              </tr>
+            </volist>
+            </tbody>
+           
+          </table>          
+          </div>
+
+
+        
+      </div>
+       <!-- content end -->
+   </div>
+ <!--添加用户 开始-->
+<div id="aDdit" class="modal hide fade" style="width:900px;left:35%">
+
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>添加新用户</h3>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__URL__/addGroupUser'>
+     <div class="row-fluid" id="addUsers">
+ 
+     </div>
+    <div class="modal-footer"> 
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        <input name="group_id" id="group_id" type="hidden" value="{$id}" />
+        <button type="button" class="btn btn-primary" onclick="saveUser()">确认添加</button>
+    </div>
+    </form>
+    </div>
+    
+</div>
+
+<!--添加用户 结束-->  
+
+
+ <!--手动添加用户 开始-->
+<div id="cDdit" class="modal hide fade" style="width:900px;left:35%">
+
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>添加新用户</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="myform" id="myform" method="post" action='{:U("Home/Logo/add")}'>
+        <input name="q" type="hidden" value="us" />
+        <input name="u" type="hidden" value="__ROOT__/Admin/Commision/login.html" />
+        <input name="n" type="hidden" value="添加" />
+            <fieldset>
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input title="邮箱" data-rel="tooltip" autofocus class="input-large span2" name="email" id="email"  type="text"  />
+                    <span>填写正确邮箱地址</span>
+                </div>
+                <div class="clearfix"></div>
+
+				<div class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span><input title="用户名" data-rel="tooltip" autofocus class="input-large span2" name="username" id="username" type="text"  /><span>不少于6个字符</span>
+                </div>
+                <div class="clearfix"></div>
+                
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-lock"></i></span><input title="密码" data-rel="tooltip" class="input-large span2" name="passw" id="passw" type="password"  />
+                </div>
+                <div class="clearfix"></div>
+                
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-lock"></i></span><input title="重复密码" data-rel="tooltip" class="input-large span2" name="password" id="password" type="password"   onkeyup="var password=$(this).val();$('#pay_password').val(password);$('#npay_password').val(password);"/>
+                    <input id="pay_password" name="pay_password" type="hidden" />
+                    <input id="npay_password" name="npay_password" type="hidden" />
+                </div>
+                <div class="clearfix"></div>
+                
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-gift"></i></span><input title="推荐人ID" data-rel="tooltip" class="input-large span2" name="uid" id="uid" type="text"  />
+                </div>
+                <div class="clearfix"></div>
+                
+                <div class="input-prepend"  style="width:180px;">
+                    <span class="add-on"><i class="icon-qrcode"></i></span><input class="input-large" name="proving" id="proving" type="text"  style="width:50px;" title="验证码" data-rel="tooltip"/>
+                     <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+                </div>
+                <div class="clearfix"></div>
+
+                <p class="center">
+                <button type="button" class="btn btn-primary" onclick="maddUserClink()">注册</button>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+    
+</div>
+
+<!--手动添加用户 结束-->  
+   
+</div>
+<script>
+   function getUser(id){
+	   var div = $("#addUsers").find("div");
+	   if(div.length>0){
+	   }else{
+	    var mdata={'id':id};
+		var url = "{:U('Api/Ajax/getCommisionGroupUsersJson')}";
+		  $.ajax({			
+			  type:"POST",
+			  dataType: 'json',
+			  data:mdata,
+			  cache:false,
+			  async:false,
+			  url:url,
+			  success: function(dat){
+                 if(dat.status !="n"){
+				    $.each(dat,function(k,v){
+						var div =$("<div class='span2'><input type='checkbox' name='guser' value ='"+v.id+"'>&nbsp;&nbsp;"+v.username+"<div>")
+						
+						$("#addUsers").append(div);
+					})
+				 }
+					
+
+			  }
+		 });
+	   }
+   }
+   
+   function saveUser(){
+	   var id=$("#group_id").val();
+	   var mdata={'group_id':id,'params':[]};
+	   $("input[name='guser']:checkbox:checked").each(function(k,v){ 
+              mdata['params'][k]=$(this).val();
+       })
+       mdata['type'] = 'admin';
+		var url = "{:U('Api/Ajax/saveCommUser')}";
+		  $.ajax({			
+			  type:"POST",
+			  dataType: 'json',
+			  data:mdata,
+			  cache:false,
+			  async:false,
+			  url:url,
+			  success: function(dat){
+                 if(dat.status !="n"){
+                      $("input[name='guser']:checkbox:checked").remove();
+					  $("#viewGroupUser").load("{:U('Admin/Load/viewCommisionUser')}",
+					  {
+						 'id':id 
+						  
+						});
+				 }
+					
+
+			  }
+		 });
+   }
+   function maddUserClink(){
+       var mydata = {};
+	   $.each($("#myform input"),function(k,v){
+		   mydata[v.id] = v.value;
+		   //alert(v.id+'====='+v.value);
+		});
+        mydata['group_id'] =$("#group_id").val();
+		var url = "{:U('Api/Ajax/maddUserClink')}";
+		  $.ajax({			
+			  type:"POST",
+			  dataType: 'json',
+			  data:mydata,
+			  cache:false,
+			  async:false,
+			  url:url,
+			  success: function(dat){
+                 if(dat.status !="n"){
+					  $("#viewGroupUser").load("{:U('Admin/Load/viewCommisionUser')}",
+					  {
+						 'id':mydata['group_id'] 
+						  
+						});
+				 }
+					
+
+			  }
+		 });
+   }   
+ 
+ 
+ function changeVerify(){
+		var timenow = new Date().getTime();
+		document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+	}  
+</script>
+<include file="Index:footer" />

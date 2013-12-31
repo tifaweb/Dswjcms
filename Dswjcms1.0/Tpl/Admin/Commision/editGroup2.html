@@ -1,0 +1,133 @@
+<include file="Index:header" />
+<style type="text/css">
+.cla1{ font-weight:600; font-size:14px;}
+.cla2{ font-weight:500; font-size:12px; margin-left:5px;}
+.cla3{ font-weight:500; font-size:10px; margin-left:10px;}
+</style>
+<div class="container-fluid">
+	<div class="row-fluid">
+        <!--左栏 starts -->
+		<include file="left" />
+        <!--左栏 end -->
+			
+			
+       <!-- content starts -->
+      <div id="content" class="span10">
+          <ul class="breadcrumb">
+              <li>
+                  <a href="/">首页</a> <span class="divider">/提成管理/</span>
+              </li>
+              <li class="active">添加分成小组</li>
+              <div  class="pull-right"> <a data-toggle="modal" data-rel="tooltip" href="#aDdit" >提成比例分配介绍</a></div>
+          </ul>
+     
+
+                <div id="myContent" class="content">
+              <form method="post"  action='__URL__/upda'>
+               <input name="id" id="id" type="hidden" value="{$list['id']}" />
+              <input name="catpid" id="catpid" type="hidden" value="{$list['catpid']}" />
+               <input name="level" id="level" type="hidden" value="{$list['level']}" />
+               <input name="q" id="q" type="hidden" value="cm" />
+               <table class="table">
+                   <tbody>
+                    <tr>
+                      <td>
+                             名称：
+                      </td>
+                      <td>
+                           <input name="name" type="text" class="span2" value="{$list['name']}">
+
+                      </td>
+                    </tr>  
+                    <tr>
+                      <td>
+                             提成比例：
+                      </td>
+                      <td>
+                           <input name="bonus" id="bonus" type="text" class="span2" value="{$list['bonus']}" >
+                         
+
+                          
+                      </td>
+                    </tr>                    
+                   
+                    <tr>
+                      <td>
+                             上级分组ID：
+                      </td>
+                      <td>
+                         <span class="input-xlarge uneditable-input" id="cbass" name="cbass" title="">
+                       <em id="getcbass" name="getcbass" style="color:#093;">{$list['pid']}</em>
+                       </span>
+                      </td>
+                    </tr>
+                      <tr>
+                      <td>
+                             状态：
+                      </td>
+                      <td>
+                       <if condition="intval($list['status']) eq 1">
+                        <label class="radio"><input type="radio" name="status" value="0" /> 禁用</label>
+                        <label class="radio"><input type="radio" name="status" value="1" checked/> 启用</label>
+                        <else />
+                        <label class="radio"><input type="radio" name="status" value="0" /> 禁用</label>
+                        <label class="radio"><input type="radio" name="status" value="1" checked/> 启用</label>                       </if>
+                      </td>
+                    </tr>                   
+                                      
+                    </tbody>
+                    </table>
+
+              
+              <div class="modal-footer">
+                  <a href="#" class="btn" data-dismiss="modal">关闭</a>
+                  <button type="submit" class="btn btn-primary" >确认修改</button>
+              </div>
+              </form>
+
+
+            </div>
+
+          
+          
+  
+       <!-- content end -->
+   </div>
+  <!--提成比例分配介绍 开始-->
+<div id="aDdit" class="modal hide fade" style="width:900px;left:35%">
+
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>提成比例分配介绍</h3>
+    </div>
+    <div class="modal-body">
+     <img src="__PUBLIC__/img/ratio.png" alt="提成分配" />
+    </div>
+    
+</div>
+
+<!--提成比例分配介绍组 结束-->  
+   
+</div>
+<include file="Index:footer" />
+<script>
+$(function(){
+	
+	 
+	$("#setpid option").click(function(){
+	   var gid = parseInt($("#pid").attr("gid"));
+	   var setpid =parseInt($(this).val());
+	   if(gid != setpid){
+		 var catpid = $(this).attr("title");
+		 var level = parseInt($(this).attr("level"));
+
+		  $("#pid").attr("value",setpid);
+		 $("#catpid").attr("value",catpid);
+		 $("#level").attr("value",level+1);
+	   }else{
+		   alert("不能选择节点本身做为父节点");
+	   }
+	});
+	
+});
+</script>

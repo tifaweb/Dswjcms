@@ -1,0 +1,56 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop  row-fluid">
+<!-- left start-->
+<include file="left" />
+<!-- left end-->
+    <!-- right start-->
+    <div  id="content" class="center_right span8">
+     	<div class="integral_search">
+        <input id="type" type="hidden" value="0" />
+        <input id="scope" type="hidden" value="0" />
+        <input id="classify" type="hidden" value="0" />
+            <dl id="types">
+            	<dt>积分类型：</dt>
+                <dd onclick="integral('type',0);$(this).addClass('pitch');" class="pitch"><a href="#">全部</a><span>({$number.total})</span></dd>
+                <dd onclick="integral('type',1);$(this).addClass('pitch');"><a href="#" >会员积分</a><span>({$number.members})</span></dd>
+                <dd onclick="integral('type',2);$(this).addClass('pitch');"><a href="#">VIP积分</a><span>({$number.vip})</span></dd>
+                <dd onclick="integral('type',3);$(this).addClass('pitch');"><a href="#">推广积分</a><span>({$number.promote})</span></dd>
+            </dl>
+            <div class="division"></div>
+            <dl id="scopes">
+            	<dt>积分范围：</dt>
+                <dd onclick="integral('scope',0);$(this).addClass('pitch');" class="pitch"><a href="#">全部</a></dd>
+                <dd onclick="integral('scope','1-100');$(this).addClass('pitch');"><a href="#">1-100</a></dd>
+                <dd onclick="integral('scope','101-200');$(this).addClass('pitch');"><a href="#" >101-200</a></dd>
+                <dd onclick="integral('scope','201-500');$(this).addClass('pitch');"><a href="#">201-500</a></dd>
+                <dd onclick="integral('scope','501-*');$(this).addClass('pitch');"><a href="#">501-以上</a></dd>
+            </dl>
+            <div class="division"></div>
+            <dl id="classifys">
+            	<dt>商品分类：</dt>
+                <dd onclick="integral('classify',0);$(this).addClass('pitch');" class="pitch"><a href="#">全部</a></dd>
+                <dd onclick="integral('classify',1);$(this).addClass('pitch');"><a href="#">实物</a></dd>
+                <dd onclick="integral('classify',2);$(this).addClass('pitch');"><a href="#">虚拟</a></dd>
+            </dl>
+        </div>
+		<div class="integral_subject">
+        <volist name="list" id="vo" key="vk">
+        	<dl onmouseover="intOver('int{$vk}')" onmouseout="intOut('int{$vk}')">
+            	<dt class="top" id="int{$vk}"><a  class="integ" ><span>积分</span><span>{$vo.integral}分</span></a><a ><span>数量</span><span>{$vo.surplus} 件</span></a></dt>
+                <dd><a href="__ROOT__/Integral/page/{$vo.id}.html"><img src="__PUBLIC__/uploadify/uploads/goods/{$vo.master}" style="width:170px;height:170px;"/></a></dd>
+                <dd class="integral_title"><a href="__ROOT__/Integral/page/{$vo.id}.html" >{$vo.title}</a></dd>
+            </dl>
+         </volist>
+            <div class="pagination pagination-centered span9">
+            	<ul>{$page}</ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- right end--> 
+</div>
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />
