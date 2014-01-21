@@ -34,7 +34,7 @@ class HomeAction extends CommAction{
 //计划任务
 		$msgTools = A('msg','Event');
 		$borrows=D('Borrowing');
-		$system=R('dswjjd://Sharing/systems');
+		$system=R('Sharing/systems');
 		$this->assign('s',$system);
 		//站点关闭
 		if($system['sys_site_switch']==1){	

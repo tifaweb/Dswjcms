@@ -23,7 +23,7 @@ class IntegralAction extends HomeAction{
 		$this->assign('active',$active);
 		$user=D('User');		
 		import('ORG.Util.Page');// 导入分页类
-		$list=R('dswjjd://Sharing/integralLest',array('','','',1));
+		$list=R('Sharing/integralLest',array('','','',1));
 		$number['total']=$list['total'];
 		$number['members']=$list['members'];
 		$number['vip']=$list['vip'];
@@ -36,12 +36,12 @@ class IntegralAction extends HomeAction{
 		$show       = $Page->show();// 分页显示输出
 		$head=$this->headPortrait('./Public/FaustCplus/php/img/big_user_'.$this->_session('user_uid').'.jpg');
 		$this->assign('heads',$head);
-		$lists=R('dswjjd://Sharing/integralLest',array('','',$Page->firstRow.','.$Page->listRows));
+		$lists=R('Sharing/integralLest',array('','',$Page->firstRow.','.$Page->listRows));
 		$this->assign('number',$number);
 		$this->assign('list',$lists);
 		$this->assign('page',$show);
 		
-		$hot=R('dswjjd://Sharing/integralLest',array('`convert` DESC','',10));
+		$hot=R('Sharing/integralLest',array('`convert` DESC','',10));
 		$this->assign('hot',$hot);
 		
 		$users=reset($user->relation(true)->where('id='.$this->_session('user_uid'))->select());
@@ -51,7 +51,7 @@ class IntegralAction extends HomeAction{
 		$list=$this->someArticle(30,5);
 		$this->assign('article',$list);
 		
-		$forr=R('dswjjd://Sharing/top',array('Forrecord','','time desc',20));
+		$forr=R('Sharing/top',array('Forrecord','','time desc',20));
 		$this->assign('forr',$forr);
 		$endjs='
 //商品头部显示
@@ -123,7 +123,7 @@ function integral(type,value){
 			$classify=$classify?$classify." and ":'';
 			$where=$type.$scope.$classify;
 		}
-		$lists=R('dswjjd://Sharing/integralLest',array('','','','1',$where));
+		$lists=R('Sharing/integralLest',array('','','','1',$where));
 		$number['total']=$lists['total'];
 		unset($lists['total']);
 		unset($lists['members']);
@@ -131,7 +131,7 @@ function integral(type,value){
 		unset($lists['promote']);
 		$Page       = new Page($number['total'],15);// 实例化分页类 传入总记录数和每页显示的记录数
 		$show       = $Page->show();// 分页显示输出
-		$list=R('dswjjd://Sharing/integralLest',array('','',$Page->firstRow.','.$Page->listRows,'',$where));
+		$list=R('Sharing/integralLest',array('','',$Page->firstRow.','.$Page->listRows,'',$where));
 		if(!$list){
 			echo '<div class="invest_loading"><div>暂无数据</div> </div>';
 			exit;
@@ -168,13 +168,13 @@ function integral(type,value){
 		$head=$this->headPortrait('./Public/FaustCplus/php/img/big_user_'.$this->_session('user_uid').'.jpg');
 		$this->assign('heads',$head);
 		$user=D('User');
-		$list=R('dswjjd://Sharing/integralLest',array('',$this->_get('id')));
+		$list=R('Sharing/integralLest',array('',$this->_get('id')));
 		$this->assign('list',$list);
-		$hot=R('dswjjd://Sharing/integralLest',array('`convert` DESC'));
+		$hot=R('Sharing/integralLest',array('`convert` DESC'));
 		$this->assign('hot',$hot);
 		$users=reset($user->relation(true)->where('id='.$this->_session('user_uid'))->select());
 		$this->assign('users',$users);
-		$forr=R('dswjjd://Sharing/top',array('Forrecord','','time desc',20));
+		$forr=R('Sharing/top',array('Forrecord','','time desc',20));
 		$this->assign('forr',$forr);
 		 //标题、关键字、描述
 		$Integral = D("Integral");
@@ -189,7 +189,7 @@ function integral(type,value){
 		$this->display();
 	}
 //兑换记录	
-	public function record(){
+	public function records(){
 		$this->homeVerify();
 		$head=$this->headPortrait('./Public/FaustCplus/php/img/big_user_'.$this->_session('user_uid').'.jpg');
 		$this->assign('heads',$head);
@@ -197,11 +197,11 @@ function integral(type,value){
 		$forrecord=D('Forrecord');
 		$list=$forrecord->relation(true)->where('uid='.$this->_session('user_uid'))->select();;
 		$this->assign('list',$list);
-		$hot=R('dswjjd://Sharing/integralLest',array('`convert` DESC'));
+		$hot=R('Sharing/integralLest',array('`convert` DESC'));
 		$this->assign('hot',$hot);
 		$users=reset($user->relation(true)->where('id='.$this->_session('user_uid'))->select());
 		$this->assign('users',$users);
-		$forr=R('dswjjd://Sharing/top',array('Forrecord','','time desc',20));
+		$forr=R('Sharing/top',array('Forrecord','','time desc',20));
 		$this->assign('forr',$forr);
 		 //标题、关键字、描述
 		$Site = D("Site");
@@ -216,7 +216,7 @@ function integral(type,value){
 //快递跟踪显示
 	public function deliveryAjax(){
 		$this->homeVerify();
-		$express=R('dswjjd://Sharing/expressQuery',array($this->_post('name'),$this->_post('number')));	//快递跟踪记录
+		$express=R('Sharing/expressQuery',array($this->_post('name'),$this->_post('number')));	//快递跟踪记录
 		if(!$express['data']){
 			echo '
 				<tr>
@@ -272,7 +272,7 @@ function integral(type,value){
 					if($users['pay_password']==$pay_password){	//支付密码
 						if($create=$forrecord->create()){
 							$create['uid']		=$this->_session('user_uid');		//用户ID
-							$create['indent']	=R('dswjjd://Sharing/orderNumber');	//订单号
+							$create['indent']	=R('Sharing/orderNumber');	//订单号
 							$create['detailed']	=$this->_post('detailed');			//转义内容
 							$create['location']	=implode(" ",$create['location']);	//组合城市
 							$create['time']		=time();	//兑换时间

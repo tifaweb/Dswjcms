@@ -2,13 +2,13 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="utf-8">
-	<title>{$s.sys_name}<if condition="($si['link'] eq '/') OR ($si['link'] eq '')"><else/>-{$si['title']}</if>-{$Think.config.DS_TOP_POWERED}</title>
+	<title><if condition="($si['link'] eq '/') OR ($si['link'] eq '')"><else/>{$si['title']}-</if>{$s.sys_name}-{$Think.config.DS_TOP_POWERED}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="{$si['remark']?$si['remark']:$s['sys_describe']}{$so.title}">
 	<meta name="KeyWords" content="{$si['keyword']?$si['keyword']:$s['sys_keyword']}{$so.title}">
-    <meta name="generator" content="Dswjcms! X1.0" />
+    <meta name="generator" content="Dswjcms! X1.0.1" />
     <meta name="author" content="Dswjcms! Team and Tf Team" />
-    <meta name="copyright" content="2013-2014 Tf Inc." />
+    <meta name="copyright" content="2013-2015 Tf Inc." />
     <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
     <link href='__PUBLIC__/bootstrap/css/jquery.iphone.toggle.css' rel='stylesheet'>
     <link href='__PUBLIC__/bootstrap/css/uploadify.css' rel='stylesheet'>

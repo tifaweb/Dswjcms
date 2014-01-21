@@ -62,6 +62,7 @@ class SiteAction extends AdminCommAction {
 		$order = " absPath,id ";
 		$site = $mod->field($field)->order($order)->select();
 		$list = $mod->where("id=".$id)->relation("site_add")->find();
+		$list['newOrder'] = intval($list['order']);
 		$sites = D("Site")->where("id=".$list['pid'])->find();	
 		if(!$sites){
 			$sites['title']='顶级类目';

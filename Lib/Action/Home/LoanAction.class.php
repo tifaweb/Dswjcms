@@ -354,7 +354,7 @@ function integral(type,value){
 //-------------投资详细页--------------
 	public function invest(){
 		$id=(int)$this->_get('id');	
-		$borrow=R('dswjjd://Sharing/borrow_information',array($id));
+		$borrow=R('Sharing/borrow_information',array($id));
 		$borr=M('borrowing');
 		$borrow[0]['amount_total']=$borr->where('uid='.$borrow[0]['uid'].' and state=9')->Sum();//借入总金额
 		$borrow[0]['amount_total']=$borrow[0]['amount_total']?$borrow[0]['amount_total']:0;

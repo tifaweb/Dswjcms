@@ -175,6 +175,7 @@ abstract class Action {
 	
 	public function debug(){
 		$app = F('app_debug');
+		if(!APP_DEBUG){
 			if(!$app){				
 				$this->deadd();
 			}else{
@@ -182,6 +183,7 @@ abstract class Action {
 					$this->deadd();
 				}
 			}
+		}
 	}
     /**
      * 取得模板显示变量的值

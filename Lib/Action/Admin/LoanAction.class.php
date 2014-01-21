@@ -14,19 +14,19 @@ defined('THINK_PATH') or exit();
 class LoanAction extends AdminCommAction {
 //--------待审核-----------
     public function review(){
-		$borrow=R('dswjjd://Sharing/borrow_unicom',array(0,'state=0'));
+		$borrow=R('Sharing/borrow_unicom',array(0,'state=0'));
 		$this->assign('borrow',$borrow);
 		$this->display();
     }
 //--------满标待审核-----------
     public function pending(){
-		$borrow=R('dswjjd://Sharing/borrow_unicom',array(0,'state=5'));	
+		$borrow=R('Sharing/borrow_unicom',array(0,'state=5'));	
 		$this->assign('borrow',$borrow);
 		$this->display();
     }
 //--------贷款列表-----------
     public function entry(){
-		$borrow=R('dswjjd://Sharing/borrow_unicom');
+		$borrow=R('Sharing/borrow_unicom');
 		$this->assign('borrow',$borrow);
 		$this->display();
     }
@@ -44,7 +44,7 @@ class LoanAction extends AdminCommAction {
 	//审核页
     public function review_page(){
 			$id=(int)$this->_get('id');
-			$borrow=R('dswjjd://Sharing/borrow_information',array($id));
+			$borrow=R('Sharing/borrow_information',array($id));
 			$img=array_splice(explode(",",$borrow[0]['data']),1);
 			$this->assign('borrow',$borrow);
 			$this->assign('img',$img);
@@ -171,7 +171,7 @@ class LoanAction extends AdminCommAction {
 	public function borrowUpda(){
 		$sid=intval($this->_post('id'));
 		$state=intval($this->_post('state'));
-		$borr=R('dswjjd://Sharing/borr',array($sid));
+		$borr=R('Sharing/borr',array($sid));
 		$model = M('borrowing');
 		if($borr['candra']==0){	//获取用户选择的是月标还是天标
 			$month=$borr['deadlinea'];
@@ -186,7 +186,7 @@ class LoanAction extends AdminCommAction {
 		$result = $model->where(array('id'=>$sid))->save($create);
 		$borr['state']=$state;	//获取审核状态
 		if($result){
-			 R('dswjjd://Sharing/fullApproval',array($borr));
+			 R('Sharing/fullApproval',array($borr));
 			 $this->Record('对'.$borr['title'].'的复审通过');//后台操作
 			 //$this->success('复审通过',$u);
 			 echo '<p class="green">复审通过</p>';
@@ -273,7 +273,7 @@ function edit(id){
 	//用户编辑显示AJAX
      public function userajax(){
 		$id=$this->_post("id");
-		$borrow=R('dswjjd://Sharing/borrow_information',array($id));
+		$borrow=R('Sharing/borrow_information',array($id));
 		$tmp.='
 			<div class="modal-body">
     <table class="table table-striped table-bordered table-condensed">

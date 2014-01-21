@@ -22,7 +22,7 @@ class WeixinAction extends CommAction {
 	 *
 	 */
 	public function weiUserlist(){
-		$systems=R('dswjjd://Sharing/systems');
+		$systems=R('Sharing/systems');
 		//$weiuser=M('weiuser');
 		//模似登陆微信
 		$options = array(

@@ -31,7 +31,7 @@ class AdminCommAction extends CommAction {
 	   //计划任务
 	   $msgTools = A('msg','Event');
 		$borrows=D('Borrowing');
-		$system=R('dswjjd://Sharing/systems');
+		$system=R('Sharing/systems');
 		$this->assign('s',$system);
 		$borrow=$borrows->where('`state`=1 or `state`=10')->select();
 		if($borrow){

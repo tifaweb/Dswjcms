@@ -8,7 +8,7 @@
 
 
   function toSearch(dom){
-	  var url = $(dom).attr("url");
+	  var url = $("#o_"+dom).attr("url");
 	  window.location = url;
   }
 </script>
@@ -30,16 +30,16 @@
           </ul>
           <ul class="breadcrumb">
             <li>
-            <select id="catid" name="catid">
-            <option value="0"  class="cla0" url="__ROOT__/Admin/Site/articleList/id/0.html" onclick="toSearch(this)">全部</option>
+            <select id="catid" name="catid" onchange="var id=$(this).val();toSearch(id)">
+            <option id="o_0"  value="0"  class="cla0" url="__ROOT__/Admin/Site/articleList/id/0.html" onclick="toSearch(this)">全部</option>
                <volist name="site" id="vo">
                
                    <if condition="$vo['order'] eq 1 ">
-                   <option value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html" onclick="toSearch(this)">{$vo.title}</option>
+                   <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html">{$vo.title}</option>
                    <elseif condition="$vo['order'] eq 2 " />
-                     <option value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html" onclick="toSearch(this)">├ {$vo.title}</option>
+                     <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html">├ {$vo.title}</option>
                     <elseif condition="$vo['order'] eq 3 " /> 
-                    <option value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html" onclick="toSearch(this)">│├  {$vo.title}</option>
+                    <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html">│├  {$vo.title}</option>
                     </if>
                
                </volist>
@@ -53,7 +53,6 @@
                 <th>文章ID</th>
                 <th>文章名称</th>
                 <th>关键字</th>
-                <th>描述</th>
                 <th>操作</th>
               </tr>
             </thead>
@@ -70,7 +69,6 @@
                 </td>
 
                 <td>{$vo.keyword}</td>
-                <td>{$vo.remark}</td>
                 <td>
                    <a href="__ROOT__/Site/article/id/{$vo.id}.html"   data-rel="tooltip"
                     class=" icon icon-color icon-search" title="查看文章"></a>

@@ -389,14 +389,14 @@ class CommAction extends SharingAction{
 		$logtotal=$array['total']			=$users['total_money'];
 		$logavailable=$moneyarr['available_funds']=$array['available']		=$users['available_funds'];
 		$logfreeze=$moneyarr['freeze_funds']=$array['freeze']				=$users['freeze_funds'];
-		$array['operation_reward']				=R('dswjjd://Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
-		$array['interest']						=R('dswjjd://Sharing/interest',array($borr,$auto['price']));
+		$array['operation_reward']				=R('Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
+		$array['interest']						=R('Sharing/interest',array($borr,$auto['price']));
 		$array['operation']		=$auto['price'];
 		$borrowlog=$this->borrowLog($array);
 		unset($array);
 		unset($users);
-		$array['operation_reward']				=R('dswjjd://Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
-		$array['interest']						=R('dswjjd://Sharing/interest',array($borr,$auto['price']));
+		$array['operation_reward']				=R('Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
+		$array['interest']						=R('Sharing/interest',array($borr,$auto['price']));
 		$array['type']				=4;
 		$array['uid']				=$borr['uid'];
 		$array['uname']				= $uname;
@@ -437,12 +437,12 @@ class CommAction extends SharingAction{
 					$day=$borr['deadline'];
 					$limittime=strtotime("+$day day");
 				}
-				$bid_records=R('dswjjd://Sharing/secondPayment',array($borr));
+				$bid_records=R('Sharing/secondPayment',array($borr));
 				$borrows=$models->table('ds_borrowing')->where('id='.$auto['id'])->save(array('state'=>9,'reviewtime'=>$reviewtime,'limittime'=>$limittime));
 				
 			}else{
 				$borrows=$models->table('ds_borrowing')->where('id='.$auto['id'])->save(array('state'=>5));
-				$bid_records=R('dswjjd://Sharing/withAudit',array($borr));
+				$bid_records=R('Sharing/withAudit',array($borr));
 			}
 		}
 	}*/
@@ -459,9 +459,9 @@ class CommAction extends SharingAction{
 		$uid=$this->_post('uid')?$this->_post('uid'):$this->_session('user_uid');
 		$uname=$this->_post('uname')?$this->_post('uname'):$this->_session('user_name');
 		if($uid){
-			$borr=R('dswjjd://Sharing/borr',array($this->_post('id')));
+			$borr=R('Sharing/borr',array($this->_post('id')));
 			if($borr['surplus']>=$this->_post('price')){	//所需金额小于投标金额
-				$users=reset(R('dswjjd://Sharing/user_details'));
+				$users=reset(R('Sharing/user_details'));
 				if($this->_post('update_uid')==$uid){
 					$this->error("不能投自己的标！");
 				}else{
@@ -500,15 +500,15 @@ class CommAction extends SharingAction{
 									//}else{
 										$logfreeze=$moneyarr['freeze_funds']=$array['freeze']				=$users['freeze_funds']+$this->_post('price');
 									//}
-									$array['operation_reward']				=R('dswjjd://Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
-									//$array['interest']						=R('dswjjd://Sharing/interest',array($borr,$this->_post('price')));
+									$array['operation_reward']				=R('Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
+									//$array['interest']						=R('Sharing/interest',array($borr,$this->_post('price')));
 									$array['interest']						=$counters['interest'];
 									$array['operation']		=$this->_post('price');
 									$borrowlog=$this->borrowLog($array);
 									unset($array);
 									unset($users);
-									$array['operation_reward']				=R('dswjjd://Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
-									//$array['interest']						=R('dswjjd://Sharing/interest',array($borr,$this->_post('price')));
+									$array['operation_reward']				=R('Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
+									//$array['interest']						=R('Sharing/interest',array($borr,$this->_post('price')));
 									$array['interest']						=$counters['interest'];
 									$array['type']				=4;
 									$array['uid']				=$borr['uid'];
@@ -552,7 +552,7 @@ class CommAction extends SharingAction{
 												$day=$borr['deadline'];
 												$limittime=strtotime("+$day day");
 											}
-											$bid_records=R('dswjjd://Sharing/secondPayment',array($borr));
+											$bid_records=R('Sharing/secondPayment',array($borr));
 											$borrows=$models->table('ds_borrowing')->where('id='.$this->_post('id'))->save(array('state'=>9,'reviewtime'=>$reviewtime,'limittime'=>$limittime));
 											$this->success('投标成功','__ROOT__/Center/invest/win.html');
 											exit;
@@ -589,6 +589,7 @@ class CommAction extends SharingAction{
 		   $this->error('验证码错误！');
 			exit;
 		}
+		$refund=M('collection');
 		$msgTools = A('msg','Event');
 		$models = new Model();
 		$uid=$this->_post('uid')?$this->_post('uid'):$this->_session('user_uid');
@@ -601,7 +602,7 @@ class CommAction extends SharingAction{
 			if($collec){	//流转标一轮用户只能认购一次
 				$this->error("每个用户只限认购一次！");
 			}
-			$borr=reset(R('dswjjd://Sharing/borrow_information',array($this->_post('id'))));
+			$borr=reset(R('Sharing/borrow_information',array($this->_post('id'))));
 			if($borr['candra']==0){	//获取用户选择的是月标还是天标
 				$month=$this->_post('deadline');
 				$limittime=strtotime("+$month month");
@@ -627,7 +628,7 @@ class CommAction extends SharingAction{
 				$this->error("认购期限不能大于流转期限小于最低流转期限！");
 			}
 			if($borr['subscribe']>=$this->_post('copies')){	//认购份数比剩余数小
-				$users=reset(R('dswjjd://Sharing/user_details'));
+				$users=reset(R('Sharing/user_details'));
 				if($this->_post('update_uid')==$uid){
 					$this->error("不能投自己的标！");
 				}else{
@@ -658,8 +659,8 @@ class CommAction extends SharingAction{
 									$array['instructions']	='对<a href="'.$_SERVER['HTTP_REFERER'].'">【'.$borr['title'].'】</a>的认购';
 									$logtotal=$moneyarr['total_money']=$array['total']			=$users['total_money']-$this->_post('copies')*$borr['min'];
 									$logavailable=$moneyarr['available_funds']=$array['available']		=$users['available_funds']-$this->_post('copies')*$borr['min'];
-									$array['operation_reward']				=R('dswjjd://Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
-									//$array['interest']						=R('dswjjd://Sharing/interest',array($borr,$this->_post('copies')*$borr['min'],$this->_post('deadline')));
+									$array['operation_reward']				=R('Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
+									//$array['interest']						=R('Sharing/interest',array($borr,$this->_post('copies')*$borr['min'],$this->_post('deadline')));
 									$array['interest']						=$counters['interest'];
 									$moneyarr['stay_interest']=$array['stay_interest']=$users['stay_interest']+$array['interest'];
 									$moneyarr['due_in']=$array['collected']	=$users['due_in']+$this->_post('copies')*$borr['min']+$array['interest']+$array['operation_reward'];
@@ -689,7 +690,7 @@ class CommAction extends SharingAction{
 									unset($array);
 									unset($moneyarr);
 									unset($users);
-									$users=reset(R('dswjjd://Sharing/user_details',array($borr['uid'])));
+									$users=reset(R('Sharing/user_details',array($borr['uid'])));
 									$array['type']				=16;
 									$array['uid']				=$borr['uid'];
 									$array['uname']				=$uname;
@@ -697,8 +698,8 @@ class CommAction extends SharingAction{
 									$array['instructions']		='用户：'.$uname.'对<a href="'.$_SERVER['HTTP_REFERER'].'">【'.$borr['title'].'】</a>的认购';
 									$moneyarr['total_money']=$array['total']			=$users['total_money']+$this->_post('copies')*$borr['min'];
 									$moneyarr['available_funds']=$array['available']		=$users['available_funds']+$this->_post('copies')*$borr['min'];
-									$array['operation_reward']				=R('dswjjd://Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
-									//$array['interest']						=R('dswjjd://Sharing/interest',array($borr,$this->_post('copies')*$borr['min'],$this->_post('deadline')));
+									$array['operation_reward']				=R('Sharing/rewardCalculation',array($rewardCalculationArr,$borr['money']));
+									//$array['interest']						=R('Sharing/interest',array($borr,$this->_post('copies')*$borr['min'],$this->_post('deadline')));
 									$array['deadline']		=$this->_post('deadline');
 									$array['candra']		=$borr['candra'];
 									$array['interest']						=$counters['interest'];

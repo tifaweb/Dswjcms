@@ -45,7 +45,7 @@
                                                文章名称：
                                         </td>
                                         <td>
-                                          <input name="title" type="text" class="span5" value="{$list['title']}">
+                                          <input name="title" type="text" class="span5" value="{$list['title']}" maxlength="30">
                                         </td>
                                       </tr>
                                       <tr>
@@ -90,7 +90,7 @@
                                                关键字：
                                         </td>
                                         <td>
-                                          <input name="keyword" type="text" class="span10" value="{$list['keyword']}">
+                                          <input name="keyword" type="text" class="span10" value="{$list['keyword']}" maxlength="150">
                                         </td>
                                       </tr>
                               <tr>
@@ -98,7 +98,7 @@
                                                描述：
                                         </td>
                                         <td>
-                                          <textarea name="remark" class="span5" >{$list['remark']}</textarea>
+                                          <textarea name="remark" class="span5"  maxlength="200" style="height:200px;">{$list['remark']}</textarea>
                                         </td>
                                       </tr>
   
@@ -193,7 +193,7 @@
                              内容：
                       </td>
                       <td>
-                          <textarea class="editor" name="introtext" style="width:700px;height:300px;">
+                          <textarea class="editor" name="introtext" style="width:1000px;height:600px;">
                           {$list['introtext']}
                           </textarea>  
                       </td>

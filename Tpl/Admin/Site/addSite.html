@@ -45,7 +45,7 @@
                                                栏目名称：
                                         </td>
                                         <td>
-                                          <input name="title" type="text" class="span5" placeholder="请输入分类名称...">
+                                          <input name="title" type="text" class="span5" placeholder="请输入分类名称..." maxlength="30">
                                         </td>
                                       </tr>
                                       <tr>
@@ -53,7 +53,7 @@
                                                自定义链接：
                                         </td>
                                         <td>
-                                          <input name="link" type="text" class="span5" placeholder="请输入自定义链接...">
+                                          <input name="link" type="text" class="span5" placeholder="请输入自定义链接..." maxlength="100">
                                         </td>
                                       </tr>
                                       <tr>
@@ -68,10 +68,10 @@
                                             </select>                                          
                                           
                                         <else />
-                                            <select name="pid" id="pid">
+                                            <select name="pid" id="pid"  onchange="var id=$(this).val();orclick(id);setCatPid(id);">
                                                 <option value="0" id="Type">顶级类目</option>
                                                 <volist name="site" id="vo">
-                                                  <option value="{$vo.id}" class="cal{$vo.order}">
+                                                  <option id="o_{$vo.id}" value="{$vo.id}" class="cal{$vo.order}" catpid="{$vo.absPath}" order="{$vo.order}">
                                                     <if condition="intval($vo['order']) eq 1 ">
                                                        {$vo.title}
                                                   
@@ -98,7 +98,7 @@
                                                关键字：
                                         </td>
                                         <td>
-                                          <input name="keyword" type="text" class="span10" placeholder="请输入关键字...">
+                                          <input name="keyword" type="text" class="span10" placeholder="请输入关键字..." maxlength="100">
                                         </td>
                                       </tr>
                               <tr>
@@ -106,7 +106,7 @@
                                                描述：
                                         </td>
                                         <td>
-                                          <textarea name="remark" class="span5" placeholder="请输入描述..." ></textarea>
+                                          <textarea name="remark" class="span5" placeholder="请输入描述..." maxlength="200" style="height:200px;" ></textarea>
                                         </td>
                                       </tr>
 
@@ -163,6 +163,11 @@
                                         </td>
                                       </tr>
                                     </tbody>
+                                    <if condition="$list['newOrder'] ">
+                                      <input id="order" name="order" type="hidden" class="span2"  value="{$list['newOrder']}">
+                                     <else />
+                                     <input id="order" name="order" type="hidden" class="span2"  value="1">
+                                     </if>
                 
                     </table>
 
@@ -205,7 +210,7 @@
                              内容：
                       </td>
                       <td>
-                          <textarea class="editor" name="content" style="width:700px;height:300px;"></textarea>  
+                          <textarea class="editor" name="content"  style="width:1000px;height:600px;"></textarea>  
                       </td>
                     </tr>
                     
@@ -230,11 +235,22 @@
    </div>
    <script>
      function setCatPid(v){
-		 var catpid  = $(v).attr("catpid");
-		 var order =  $(v).attr("order");
-		 var pid  = $(v).attr("value");
+		 if(v==0){
+			catpid=0;	
+		}else{
+			 var catpid  = $("#o_"+v).attr("catpid");
+		}
 		 $("#catpid").attr("value",catpid);
 	 }
+	 function orclick(s){
+		if(s==0){
+			order=1;	
+		}else{
+			var order =  $("#o_"+s).attr("order");
+			order=parseInt(order)+1;
+		}
+		$('#order').val(order);	
+	}
    </script>
 </div>
 <include file="Index:footer" />

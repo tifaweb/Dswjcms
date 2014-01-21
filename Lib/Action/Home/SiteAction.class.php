@@ -29,7 +29,7 @@ class SiteAction extends HomeAction{
 		$sb=$Site->field('title,link')->where('id='.$si['catid'])->find();
 		$sin['title']=','.$si['title'];
 		$this->assign('so',$sin);
-		$si['title']=$sb['title']."-".$si['title'];
+		$si['title']=$si['title']."-".$sb['title'];
 		$si['link']=$sb['link']?$sb['link']:1;
 		$si[$si['link']]='active';
 		$this->assign('si',$si);

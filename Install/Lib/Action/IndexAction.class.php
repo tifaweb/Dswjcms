@@ -134,7 +134,7 @@ $sqls[]="DROP TABLE IF EXISTS `{$dbprefix}article`;";
 $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fid` int(11) DEFAULT NULL,
-  `title` varchar(150) NOT NULL,
+  `title` varchar(30) NOT NULL,
   `introtext` mediumtext NOT NULL,
   `published` tinyint(1) DEFAULT '1',
   `catid` int(11) DEFAULT NULL,
@@ -142,8 +142,8 @@ $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}article` (
   `order` int(11) DEFAULT '1',
   `access` tinyint(3) DEFAULT '1',
   `is_comment` tinyint(1) DEFAULT '0',
-  `keyword` varchar(255) DEFAULT NULL,
-  `remark` varchar(255) DEFAULT NULL,
+  `keyword` varchar(100) DEFAULT NULL,
+  `remark` varchar(200) DEFAULT NULL,
   `addtime` char(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;";		
@@ -212,11 +212,11 @@ $sqls[]="DROP TABLE IF EXISTS `{$dbprefix}auth_group`;";
 $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}auth_group` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL DEFAULT '',
-  `rules` varchar(400) NOT NULL DEFAULT '',
+  `rules` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;";	
 $sqls[]="INSERT INTO `{$dbprefix}auth_group` (`id`, `title`, `rules`) VALUES
-(1, '管理员', ',1,7,12,20,25,30,35,42,47,52,58,63,68,75,80,88,95,102,104,105,98,99,94,84,79,73,67,57,62,51,46,41,34,29,24,19,6,11,5,10,4,32,37,44,49,54,60,65,70,77,87,91,90,96,97,93,89,78,72,66,61,50,45,40,33,28,23,15,14,22,27,55,53,59,64,69,76,83,13,8,2,9,21,26,31,36,43,48'),
+(1, '管理员', ',1,7,12,20,25,30,35,42,47,52,58,63,68,75,80,88,95,102,104,105,98,99,94,84,79,73,67,57,62,51,46,41,34,29,24,19,6,11,5,10,4,32,37,44,49,54,60,65,70,77,87,91,90,96,97,93,89,78,72,66,61,50,45,40,33,28,23,15,14,22,27,55,53,59,64,69,76,83,13,8,2,9,21,26,31,36,43,48,106,107,108,109,110,111,112,113,114,115,116,117,118,120,119,122,121,123,124,125,126,127,128,129,130,131,132,133,134,138,135,137,136,139,140,,141,143,144,142,145,146,147,148,149,150,151,152,153,154'),
 (2, '审核人员', ',46,47,48,49,50,51,52,53,54,55,57,58,59,60,61,62,63,64,65,66,67,68,69,91,93'),
 (3, '编辑人员', ',36,37,40,41,42,43,44,45,70,72,73,78,77,76,75,79,91,93');";	
 
@@ -228,9 +228,6 @@ $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}auth_group_access` (
   KEY `uid` (`uid`),
   KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";	
-$sqls[]="INSERT INTO `{$dbprefix}auth_group_access` (`uid`, `group_id`) VALUES
-(2, 1),
-(3, 2);";
 
 $sqls[]="DROP TABLE IF EXISTS `{$dbprefix}auth_rule`;";
 $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}auth_rule` (
@@ -329,7 +326,56 @@ $sqls[]="INSERT INTO `{$dbprefix}auth_rule` (`id`, `name`, `type`, `fid`, `condi
 (99, '分配权限', 0, 11, 'Admin/User/editUserGroups'),
 (102, '管理员管理', 0, 11, 'Admin/User/manage'),
 (104, '删除管理员', 0, 11, 'Admin/User/exitman'),
-(105, '删除权限', 0, 11, 'Admin/User/exitcom');";	
+(105, '删除权限', 0, 11, 'Admin/User/exitcom'),
+(106, '实名认证审核', 0, 6, 'Admin/Audit/upda'),
+(107, '视频认证', 0, 6, 'Admin/Audit/integral_upda'),
+(108, '手机认证', 0, 6, 'Admin/Audit/phone'),
+(109, '认证中心用户详情', 0, 6, 'Admin/Audit/userajax'),
+(110, 'VIP个人详情', 0, 6, 'Admin/Audit/editajax'),
+(111, '界面风格', 0, 2, 'Admin/Index/colour'),
+(112, '界面风格刷新', 0, 2, 'Admin/Index/colourRefresh'),
+(113, '界面风格设为默认', 0, 2, 'Admin/Index/setDefault'),
+(114, '微信界面风格', 0, 2, 'Admin/Index/wcolour'),
+(115, '微信界面风格刷新', 0, 2, 'Admin/Index/wcolourRefresh'),
+(116, '微信界面风格设为默认', 0, 2, 'Admin/Index/wsetDefault'),
+(117, '积分等级编辑', 0, 3, 'Admin/Basis/editint'),
+(118, '积分等级编辑保存', 0, 3, 'Admin/Basis/upda'),
+(119, '删除积分等级', 0, 3, 'Admin/Basis/deleint'),
+(120, '线下银行编辑', 0, 2, 'Admin/Basis/editlin'),
+(121, '线下银行编辑保存', 0, 3, 'Admin/Basis/upda'),
+(122, '删除线下银行', 0, 3, 'Admin/Basis/delelin'),
+(123, '栏目编辑', 0, 4, 'Admin/Site/editSite'),
+(124, '栏目编辑保存', 0, 4, 'Admin/Site/upda'),
+(125, '添加栏目', 0, 4, 'Admin/Site/add'),
+(126, '删除文章', 0, 4, 'Admin/Site/dellelist'),
+(127, '逾期列表', 0, 5, 'Admin/Loan/overduebid'),
+(128, '贷款管理用户信息', 0, 5, 'Admin/Loan/userajax'),
+(129, '充值列表查看', 0, 7, 'Admin/Fund/recharge_page'),
+(130, '提现审核', 0, 7, 'Admin/Fund/withUpda'),
+(131, '提现列表查看', 0, 7, 'Admin/Fund/withdrawal_page'),
+(132, '其它费用操作', 0, 7, 'Admin/Fund/other'),
+(133, '添加积分商品', 0, 8, 'Admin/Integral/addgoo'),
+(134, '编辑积分商品', 0, 8, 'Admin/Integral/editgoo'),
+(135, '积分商品添加操作', 0, 8, 'Admin/Integral/add'),
+(136, '积分商品编辑保存', 0, 8, 'Admin/Integral/upda'),
+(137, '删除积分商品', 0, 8, 'Admin/Integral/delego'),
+(138, '兑换记录', 0, 8, 'Admin/Integral/records'),
+(139, '联动编辑', 0, 9, 'Admin/Ganged/upda'),
+(140, '添加联动', 0, 9, 'Admin/Ganged/add'),
+(141, '删除联动', 0, 9, 'Admin/Ganged/exitgan'),
+(142, '会员积分配置编辑', 0, 10, 'Admin/Integralconf/upda'),
+(143, '添加会员积分配置', 0, 10, 'Admin/Integralconf/add'),
+(144, '删除会员积分配置', 0, 10, 'Admin/Integralconf/exitgan'),
+(145, '用户管理用户详情', 0, 11, 'Admin/User/userajax'),
+(146, '普通用户密码修改', 0, 11, 'Admin/User/passajax'),
+(147, '普通用户密码修改保存', 0, 11, 'Admin/User/upda'),
+(148, '删除普通用户', 0, 11, 'Admin/User/exituse'),
+(149, '管理员编辑', 0, 11, 'Admin/User/adminajax'),
+(150, '删除管理员', 0, 11, 'Admin/User/exitman'),
+(151, '权限管理', 0, 11, 'Admin/User/competence'),
+(152, '添加权限', 0, 11, 'Admin/User/add'),
+(153, '编辑权限', 0, 11, 'Admin/User/editajax'),
+(154, '删除权限', 0, 11, 'Admin/User/exitcom');";	
 
 $sqls[]="DROP TABLE IF EXISTS `{$dbprefix}automatic`;";
 $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}automatic` (
@@ -4175,9 +4221,9 @@ $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}site` (
   `pid` int(11) DEFAULT '0',
   `aid` int(11) DEFAULT NULL,
   `catpid` varchar(100) CHARACTER SET latin1 DEFAULT '0',
-  `title` varchar(50) NOT NULL,
-  `keyword` varchar(150) DEFAULT NULL,
-  `remark` varchar(150) DEFAULT NULL,
+  `title` varchar(30) NOT NULL,
+  `keyword` varchar(100) DEFAULT NULL,
+  `remark` varchar(200) DEFAULT NULL,
   `page_tpl` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `list_tpl` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `content_tpl` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
@@ -4192,27 +4238,28 @@ $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}site` (
 $sqls[]="INSERT INTO `{$dbprefix}site` (`id`, `order`, `pid`, `aid`, `catpid`, `title`, `keyword`, `remark`, `page_tpl`, `list_tpl`, `content_tpl`, `link`, `user_id`, `status`, `type`, `orde`, `addtime`) VALUES
 (1, 1, 0, 1, '0', '关于我们', '', '', 'page', 'list', 'content', 'about', 22, 1, 3, 7, '1385889550'),
 (3, 1, 0, 3, '0', '首页', '123', '456', 'page', 'list', 'content', '/', 22, 1, 1, 1, '1384765588'),
-(4, 1, 0, 4, '0', '我要投资', '', '', 'page', 'list', 'content', '/Loan', 22, 1, 1, 2, '1384762494'),
-(5, 1, 0, 5, '0', '我要借款', '', '', 'page', 'list', 'content', '/Borrow/welfare', 22, 1, 1, 3, '1384762501'),
-(6, 2, 5, 6, '0-5', '发布秒还标', '', '', 'page', 'list', 'content', '/Borrow/index/second', 22, 1, 1, 5, '1384997110'),
-(7, 2, 5, 7, '0-5', '发布抵押标', '', '', 'page', 'list', 'content', '/Borrow/index/mortgage', 22, 1, 1, 5, '1384762542'),
+(4, 1, 0, 4, '0', '我要投资', '', '', 'page', 'list', 'content', '/Loan.html', 22, 1, 1, 2, '1389678778'),
+(5, 1, 0, 5, '0', '我要借款', '', '', 'page', 'list', 'content', '/Borrow/welfare.html', 22, 1, 1, 3, '1384762501'),
+(6, 2, 5, 6, '0-5', '发布秒还标', '', '', 'page', 'list', 'content', '/Borrow/index/second.html', 22, 1, 1, 5, '1384997110'),
+(7, 2, 5, 7, '0-5', '发布抵押标', '', '', 'page', 'list', 'content', '/Borrow/index/mortgage.html', 22, 1, 1, 5, '1384762542'),
 (16, 1, 0, 16, '0', '新闻中心', '', '', 'page', 'list', 'content', 'new', 22, 1, 2, 6, '1385002935'),
-(8, 2, 5, 8, '0-5', '发布质押标', '', '', 'page', 'list', 'content', '/Borrow/index/pledge', 22, 1, 1, 5, '1384762552'),
-(9, 2, 5, 9, '0-5', '发布净值标', '', '', 'page', 'list', 'content', '/Borrow/index/worth', 22, 1, 1, 5, '1384762558'),
-(10, 2, 5, 10, '0-5', '发布信用标', '', '', 'page', 'list', 'content', '/Borrow/index/credit', 22, 1, 1, 5, '1384997089'),
-(11, 2, 5, 11, '0-5', '发布担保标', '', '', 'page', 'list', 'content', '/Borrow/index/guarantee', 22, 1, 1, 5, '1384762517'),
-(12, 2, 5, 12, '0-5', '发布流转标', '', '', 'page', 'list', 'content', '/Borrow/flow', 22, 1, 1, 6, '1384762525'),
-(13, 1, 0, 13, '0', '计算器', '', '', 'page', 'list', 'content', '/Index/counter', 22, 1, 1, 8, '1384762460'),
-(14, 1, 0, 14, '0', '我的账户', '', '', 'page', 'list', 'content', '/Center', 22, 1, 1, 4, '1384762467'),
-(15, 1, 0, 15, '0', '积分商城', '', '', 'page', 'list', 'content', '/Integral', 22, 1, 1, 5, '1384762476'),
-(17, 1, 0, 17, '0', '登陆', '', '', 'page', 'list', 'content', '/Logo/login', 22, 1, 1, 5, '1384764322'),
-(18, 1, 0, 18, '0', '注册', '', '', 'page', 'list', 'content', '/Logo/register', 22, 1, 1, 5, '1384764337'),
-(19, 1, 0, 19, '0', '忘记密码', '', '', 'page', 'list', 'content', '/Logo/forgotpass', 22, 1, 1, 5, '1384764387'),
-(20, 1, 0, 20, '0', '兑换记录', '', '', 'page', 'list', 'content', '/Integral/record', 22, 1, 1, 5, '1384764670'),
+(8, 2, 5, 8, '0-5', '发布质押标', '', '', 'page', 'list', 'content', '/Borrow/index/pledge.html', 22, 1, 1, 5, '1384762552'),
+(9, 2, 5, 9, '0-5', '发布净值标', '', '', 'page', 'list', 'content', '/Borrow/index/worth.html', 22, 1, 1, 5, '1384762558'),
+(10, 2, 5, 10, '0-5', '发布信用标', '', '', 'page', 'list', 'content', '/Borrow/index/credit.html', 22, 1, 1, 5, '1384997089'),
+(11, 2, 5, 11, '0-5', '发布担保标', '', '', 'page', 'list', 'content', '/Borrow/index/guarantee.html', 22, 1, 1, 5, '1384762517'),
+(12, 2, 5, 12, '0-5', '发布流转标', '', '', 'page', 'list', 'content', '/Borrow/flow.html', 22, 1, 1, 6, '1384762525'),
+(13, 1, 0, 13, '0', '计算器', '', '', 'page', 'list', 'content', '/Index/counter.html', 22, 1, 1, 8, '1389678808'),
+(14, 1, 0, 14, '0', '我的账户', '', '', 'page', 'list', 'content', '/Center.html', 22, 1, 1, 4, '1384762467'),
+(15, 1, 0, 15, '0', '积分商城', '', '', 'page', 'list', 'content', '/Integral.html', 22, 1, 1, 5, '1384762476'),
+(17, 1, 0, 17, '0', '登陆', '', '', 'page', 'list', 'content', '/Logo/login.html', 22, 1, 1, 5, '1384764322'),
+(18, 1, 0, 18, '0', '注册', '', '', 'page', 'list', 'content', '/Logo/register.html', 22, 1, 1, 5, '1384764337'),
+(19, 1, 0, 19, '0', '忘记密码', '', '', 'page', 'list', 'content', '/Logo/forgotpass.html', 22, 1, 1, 5, '1384764387'),
+(20, 1, 0, 20, '0', '兑换记录', '', '', 'page', 'list', 'content', '/Integral/record.html', 22, 1, 1, 5, '1384764670'),
 (21, 1, 0, 21, '0', '联系我们', '', '', 'page', 'list', 'content', 'contact', 22, 1, 2, 5, '1385002773'),
 (28, 1, 0, 28, '0', '名词解释', '', '', NULL, 'list', 'content', 'explanation', 1, 1, 2, 5, '1385780428'),
 (29, 1, 0, 29, '0', '收费规则', '收费规则', '收费规则', NULL, 'list', 'page', 'rules', 1, 1, 3, 5, '1385811710'),
-(30, 1, 0, 30, '0', '积分商城帮助中心', '', '', NULL, 'list', 'content', 'jfabout', 1, 1,2, 5, '1391478013');";	
+(30, 1, 0, 30, '0', '积分商城帮助中心', '', '', NULL, 'list', 'content', 'jfabout', 1, 1, 2, 5, '1391478013'),
+(31, 1, 0, 31, '0', '帮助中心', '', '', NULL, 'list', 'content', 'help', 1, 1, 2, 5, '1389527300');";	
 
 $sqls[]="DROP TABLE IF EXISTS `{$dbprefix}site_add`;";
 $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}site_add` (
@@ -4253,16 +4300,18 @@ $sqls[]="
 
 $sqls[]="DROP TABLE IF EXISTS `{$dbprefix}smtp`;";
 $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}smtp` (
+  `id` tinyint(1) NOT NULL,
   `smtp` varchar(255) NOT NULL,
   `validation` tinyint(1) NOT NULL,
   `send_email` varchar(255) NOT NULL,
   `password` varchar(15) NOT NULL,
   `addresser` varchar(15) NOT NULL,
-  PRIMARY KEY (`send_email`),
-  UNIQUE KEY `send_email` (`send_email`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `send_email` (`send_email`),
+  UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";	
 $sqls[]="INSERT INTO `{$dbprefix}smtp` (`smtp`, `validation`, `send_email`, `password`, `addresser`) VALUES
-('smtp.126.com', 1, 'dianshiweijin@126.com', '1233', '宁波天发网络');";
+(1,'smtp.126.com', 1, 'tifawebcesi@126.com', 'abcd12345', '宁波天发网络');";
 
 $sqls[]="DROP TABLE IF EXISTS `{$dbprefix}system`;";
 $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}system` (

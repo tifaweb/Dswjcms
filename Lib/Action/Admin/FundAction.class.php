@@ -14,7 +14,7 @@ defined('THINK_PATH') or exit();
 class FundAction extends AdminCommAction {
 //--------充值-----------
     public function recharge(){
-		$recharges=R('dswjjd://Sharing/rechargeUser');
+		$recharges=R('Sharing/rechargeUser');
 		$this->assign('list',$recharges);
 		$this->display();
     }
@@ -52,13 +52,13 @@ class FundAction extends AdminCommAction {
     }
 	//充值查看页
     public function recharge_page(){
-		$recharges=R('dswjjd://Sharing/rechargeUser',array($this->_get('id')));
+		$recharges=R('Sharing/rechargeUser',array($this->_get('id')));
 		$this->assign('list',$recharges);
 		$this->display();
     }
 //--------提现-----------
     public function withdrawal(){
-		$unites=R('dswjjd://Sharing/showUser');
+		$unites=R('Sharing/showUser');
 		$this->assign('list',$unites);
 		$this->display();
     }
@@ -103,7 +103,7 @@ class FundAction extends AdminCommAction {
 	
 	//提现查看页
     public function withdrawal_page(){
-		$unites=R('dswjjd://Sharing/showUser',array($this->_get('id')));
+		$unites=R('Sharing/showUser',array($this->_get('id')));
 		$this->assign('list',$unites);
 		$this->display();
     }

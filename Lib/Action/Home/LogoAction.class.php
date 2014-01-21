@@ -188,7 +188,7 @@ class LogoAction extends HomeAction {
 											<p>发件时间：'.date('Y/m/d H:i:s').'</p>
 											<p>此邮件为系统自动发出的，请勿直接回复。</p>
 										</div>';
-		$emailsend=R('dswjjd://Sharing/email_send',array($stmpArr));	
+		$emailsend=R('Sharing/email_send',array($stmpArr));	
 		if($emailsend){
 			$this->success('邮件发送成功', '__ROOT__/Logo/forgotpass.html');
 		}else{

@@ -14,7 +14,7 @@ defined('THINK_PATH') or exit();
 class AuditAction extends AdminCommAction {
 //--------认证列表-----------
     public function entry(){
-		$audit=R('dswjjd://Sharing/audit',array(0,1));
+		$audit=R('Sharing/audit',array(0,1));
 		$this->assign('audit',$audit);
 		$endjs='
 //编辑
@@ -29,14 +29,14 @@ function edit(id){
     }
 //--------实名认证-----------
     public function autonym(){
-		$audit=R('dswjjd://Sharing/audit',array(1));
+		$audit=R('Sharing/audit',array(1));
 		$this->assign('audit',$audit);
 		$this->display();
     }
 
 //--------视频认证-----------
     public function video(){
-		$audit=R('dswjjd://Sharing/audit',array(2));
+		$audit=R('Sharing/audit',array(2));
 		$this->assign('audit',$audit);
 		$s=$this->systems();
 		$this->assign('s',$s);
@@ -53,7 +53,7 @@ function edit(id){
     }
 //--------现场认证-----------
     public function site(){
-		$audit=R('dswjjd://Sharing/audit',array(3));
+		$audit=R('Sharing/audit',array(3));
 		$this->assign('audit',$audit);
 		$s=$this->systems();
 		$this->assign('s',$s);
@@ -71,7 +71,7 @@ function edit(id){
 
 //--------手机认证-----------
     public function phone(){
-		$audit=R('dswjjd://Sharing/audit',array(4));
+		$audit=R('Sharing/audit',array(4));
 		$this->assign('audit',$audit);
 		$s=$this->systems();
 		$this->assign('s',$s);

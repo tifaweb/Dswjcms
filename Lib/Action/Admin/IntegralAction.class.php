@@ -77,7 +77,7 @@ class IntegralAction extends AdminCommAction {
     }
 	
 	//兑换记录
-	public function record(){
+	public function records(){
 		$forrecord=D('Forrecord');
 		$list=$forrecord->relation(true)->order('`time` DESC')->select();
 		$this->assign('list',$list);
@@ -128,7 +128,7 @@ class IntegralAction extends AdminCommAction {
 			$create['audittime']=time();//审核时间
 			$result = $forrecord->where(array('id'=>$this->_post('id')))->save($create);
 			if($result){
-				$this->success("发货成功","__URL__/record");
+				$this->success("发货成功","__URL__/records");
 			
 			}else{
 				$this->error("发贷失败");
@@ -155,7 +155,7 @@ class IntegralAction extends AdminCommAction {
 					$promote_integral=M('promote_integral');
 					$promote_integral->where('uid='.$this->_post('uid'))->setInc('`available`',$this->_post('integral'));	//推广积分
 				}
-				$this->success("撤销成功","__URL__/record");
+				$this->success("撤销成功","__URL__/records");
 			
 			}else{
 				$this->error("撤销失败");
@@ -211,7 +211,7 @@ class IntegralAction extends AdminCommAction {
 		$data['content']=$content;
 		$excel=$this->excelExport($data);
 		
-			$this->success("导出成功","__URL__/record");
+			$this->success("导出成功","__URL__/records");
 		
 	}
 	

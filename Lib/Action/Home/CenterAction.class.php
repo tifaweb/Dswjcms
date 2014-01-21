@@ -22,7 +22,7 @@ class CenterAction extends HomeAction {
 		$this->assign('si',$site);
 		$active['center']='active';
 		$this->assign('active',$active);
-		$list=R('dswjjd://Sharing/user_details');	
+		$list=R('Sharing/user_details');	
 		//number_format($array['wmoweeks'],2,'.',',')
 		$this->assign('list',$list);
 		$msgTools = A('msg','Event');
@@ -58,7 +58,7 @@ class CenterAction extends HomeAction {
 		$refund=M('collection');
 		$automatic=D('Automatic');
 		$this->assign('mid',$this->_get('mid'));
-		$isflo=R('dswjjd://Sharing/bidRecords',array(15,0,$this->_session('user_uid')));
+		$isflo=R('Sharing/bidRecords',array(15,0,$this->_session('user_uid')));
 		if($isflo){	//筛选需要显示正在流转的标
 			foreach($isflo as $id=>$is){
 				$bid=$is['actionname']['bid'];
@@ -84,9 +84,9 @@ class CenterAction extends HomeAction {
 		}
 		unset($arr);
 		unset($isflo);
-		$isbid=R('dswjjd://Sharing/bidRecords',array(3,0,$this->_session('user_uid')));	
+		$isbid=R('Sharing/bidRecords',array(3,0,$this->_session('user_uid')));	
 		$this->assign('isbid',$isbid);
-		$isbids=R('dswjjd://Sharing/bidRecords',array(15,0,$this->_session('user_uid')));	
+		$isbids=R('Sharing/bidRecords',array(15,0,$this->_session('user_uid')));	
 		if($isbids){	//筛选需要显示流转的标
 			foreach($isbids as $id=>$is){
 				$bid=$is['actionname']['bid'];
@@ -114,13 +114,13 @@ class CenterAction extends HomeAction {
 		unset($isbids);
 
 		$this->assign('isbids',$isflows);
-		$isclosed=R('dswjjd://Sharing/bidRecords',array(7,0,$this->_session('user_uid'),1));
-		$win=R('dswjjd://Sharing/bidRecords',array(9,0,$this->_session('user_uid'),1));
+		$isclosed=R('Sharing/bidRecords',array(7,0,$this->_session('user_uid'),1));
+		$win=R('Sharing/bidRecords',array(9,0,$this->_session('user_uid'),1));
 		$this->assign('win',$win);
 		$overdue=$this->overdue($this->_session('user_uid'));//逾期信息
 		$this->assign('overdue',$overdue);
-		$uncollected=R('dswjjd://Sharing/bidRecords',array(11,0,$this->_session('user_uid'),1));
-		$assure=R('dswjjd://Sharing/bidRecords',array(13,0,$this->_session('user_uid'),1));
+		$uncollected=R('Sharing/bidRecords',array(11,0,$this->_session('user_uid'),1));
+		$assure=R('Sharing/bidRecords',array(13,0,$this->_session('user_uid'),1));
 		//自动投标
 		$linkage=$this->borrowLinkage();
 		$auto=$automatic->where('uid='.$this->_session('user_uid'))->select();//自动投标
@@ -319,7 +319,7 @@ class CenterAction extends HomeAction {
 	public function loan(){
 		$this->homeVerify();
 		$this->assign('mid',$this->_get('mid'));
-		$list=R('dswjjd://Sharing/borrowUidUnicom',array('uid'=>$this->_session('user_uid')));
+		$list=R('Sharing/borrowUidUnicom',array('uid'=>$this->_session('user_uid')));
 		$list=$this->borrowUidUnicom($this->_session('user_uid'));
 		$refund=M('refund');
 		if($this->_get('bid') && $this->_get('mid')=='plan'){	//还款计划
@@ -347,7 +347,7 @@ class CenterAction extends HomeAction {
 		
 		
 		
-		$isflo=R('dswjjd://Sharing/bidRecords',array(16,0,$this->_session('user_uid')));
+		$isflo=R('Sharing/bidRecords',array(16,0,$this->_session('user_uid')));
 		
 		if($isflo){	//筛选需要显示并不重复的正在流转的标
 			foreach($isflo as $id=>$is){
@@ -399,7 +399,7 @@ class CenterAction extends HomeAction {
 		$this->assign('list',$list);
 		$this->assign('userinfos',$userinfos);
 		//提现记录
-		$withuser=R('dswjjd://Sharing/showUser',array('',$this->_session('user_uid')));
+		$withuser=R('Sharing/showUser',array('',$this->_session('user_uid')));
 		foreach($withuser as $show){
 			$withusers['money']+=$show['money'];	//提现总金额
 			if($show['type']==2){
@@ -410,10 +410,10 @@ class CenterAction extends HomeAction {
 		$this->assign('withusers',$withusers);
 		$this->assign('withuser',$withuser);
 		//账户充值
-		$audit=R('dswjjd://Sharing/offlineBank');
+		$audit=R('Sharing/offlineBank');
 		$this->assign('audit',$audit);
 		//充值记录
-		$showuser=R('dswjjd://Sharing/rechargeUser',array('',$this->_session('user_uid')));
+		$showuser=R('Sharing/rechargeUser',array('',$this->_session('user_uid')));
 		foreach($showuser as $show){
 			$showusers['money']+=$show['money'];	//提现总金额
 			if($show['type']==2){
@@ -507,9 +507,9 @@ class CenterAction extends HomeAction {
 		$recharge=D('Recharge');
 		
 		if($create=$recharge->create()){	
-			 	$create['nid']				=R('dswjjd://Sharing/orderNumber');	//订单号
+			 	$create['nid']				=R('Sharing/orderNumber');	//订单号
 				$create['uid']				=$this->_session('user_uid');	//用户ID
-				$create['poundage']			=R('dswjjd://Sharing/topUpFees',array($create['money']));//充值手续费
+				$create['poundage']			=R('Sharing/topUpFees',array($create['money']));//充值手续费
 				$create['account_money']	=$create['money']-$create['poundage'];//到帐金额
 				$create['time']				=time();
 				$create['type']				=1;
@@ -539,7 +539,7 @@ class CenterAction extends HomeAction {
 		$userinfo=M('userinfo');
 		$list=$unite->field('name,value')->where('`state`=0 and `pid`=13')->order('`order` asc,`id` asc')->select();
 		$this->assign('list',$list);
-		$user_details=R('dswjjd://Sharing/user_details');
+		$user_details=R('Sharing/user_details');
 		$certification=$user_details[0][certification];
 		$this->assign('user_details',$user_details);
 		$userfo=$userinfo->field('qq,certification')->where('uid='.$this->_session('user_uid'))->find();
@@ -666,7 +666,7 @@ class CenterAction extends HomeAction {
 											<p>您好，<b>'.$this->_session('user_name').'</b> ：</p>
 										</div>
 										<div style="margin: 6px 0 60px 0;">
-											<p>欢迎加入<strong>点石为金</strong>！请点击下面的链接来认证您的邮箱。</p>
+											<p>欢迎加入<strong>'.$stmpArr['addresser'].'</strong>！请点击下面的链接来认证您的邮箱。</p>
 											<p><a href="http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Center/emailVerifyConfirm/'.base64_encode($this->_session('user_uid')).'">http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Center/emailVerifyConfirm/'.base64_encode($this->_session('user_uid')).'</a></p>
 											<p>如果您的邮箱不支持链接点击，请将以上链接地址拷贝到你的浏览器地址栏中认证。</p>
 										</div>
@@ -674,7 +674,7 @@ class CenterAction extends HomeAction {
 											<p>发件时间：'.date('Y/m/d H:i:s').'</p>
 											<p>此邮件为系统自动发出的，请勿直接回复。</p>
 										</div>';
-		$emailsend=R('dswjjd://Sharing/email_send',array($stmpArr));	
+		$emailsend=R('Sharing/email_send',array($stmpArr));	
 		if($emailsend){
 			$this->success('邮件发送成功', '__ROOT__/Center/approve/email.html');
 		}else{
@@ -733,7 +733,7 @@ class CenterAction extends HomeAction {
 											<p>发件时间：'.date('Y/m/d H:i:s').'</p>
 											<p>此邮件为系统自动发出的，请勿直接回复。</p>
 										</div>';
-		$emailsend=R('dswjjd://Sharing/email_send',array($stmpArr));	
+		$emailsend=R('Sharing/email_send',array($stmpArr));	
 		if($emailsend){
 			$this->success('邮件发送成功', '__ROOT__/Center/security/Rpassword.html');
 		}else{
@@ -782,7 +782,7 @@ class CenterAction extends HomeAction {
 											<p>发件时间：'.date('Y/m/d H:i:s').'</p>
 											<p>此邮件为系统自动发出的，请勿直接回复。</p>
 										</div>';
-		$emailsend=R('dswjjd://Sharing/email_send',array($stmpArr));	
+		$emailsend=R('Sharing/email_send',array($stmpArr));	
 		if($emailsend){
 			$this->success('邮件发送成功', '__ROOT__/Center/security/dealRpassword.html');
 		}else{

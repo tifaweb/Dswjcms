@@ -187,7 +187,7 @@ class SharingAction extends Action{
 					$arr[4]=$ufee['total'];
 					$arr[5]=$ufee['available'];
 					$arr[6]=$ufee['freeze'];
-					$moneyLog=R('dswjjd://Comm/moneyLog',array($arr));
+					$moneyLog=R('Comm/moneyLog',array($arr));
 				}
 			}
 		}
@@ -203,7 +203,7 @@ class SharingAction extends Action{
 					$arr[4]=$ufee['total'];
 					$arr[5]=$ufee['available'];
 					$arr[6]=$ufee['freeze'];
-					$moneyLog=R('dswjjd://Comm/moneyLog',array($arr));
+					$moneyLog=R('Comm/moneyLog',array($arr));
 				}
 			}
 		}
@@ -219,7 +219,7 @@ class SharingAction extends Action{
 					$arr[4]=$ufee['total'];
 					$arr[5]=$ufee['available'];
 					$arr[6]=$ufee['freeze'];
-					$moneyLog=R('dswjjd://Comm/moneyLog',array($arr));
+					$moneyLog=R('Comm/moneyLog',array($arr));
 				}
 			}
 		}
@@ -1928,7 +1928,7 @@ class SharingAction extends Action{
 			$moneyarr['due_in']			=$array['collected']			=$brd['money']['due_in']+$brd['total']+$interestReward;
 			$array['operation_reward']	=$brd['operation_reward'];
 			$moneyarr['stay_interest']	=$array['stay_interest']		=$brd['money']['stay_interest']+$brd['interest'];
-			$borrowlog=R('dswjjd://Comm/borrowLog',array($array));	
+			$borrowlog=R('Comm/borrowLog',array($array));	
 			$money=$models->table('ds_money')->where('uid='.$brd['id'])->save($moneyarr);//投资者资金操作
 			unset($array);
 			unset($moneyarr);
@@ -1950,7 +1950,7 @@ class SharingAction extends Action{
 		$array['operation_reward']				=$bid_record['operation_reward'];
 		$array['operation']			=$bid_record['total'];
 		$moneyarr['stay_still']		=$array['also']					=$bid_record['money']['stay_still']+$bid_record['total']+$interestReward;
-		$borrowlogs=R('dswjjd://Comm/borrowLog',array($array));	
+		$borrowlogs=R('Comm/borrowLog',array($array));	
 		$moneys=$models->table('ds_money')->where('uid='.$bid_record['id'])->save($moneyarr);//借款者资金操作
 		if($borrowlog && $money && $borrowlogs && $moneys){	//操作全成功返回1
 			return 1;
@@ -1984,17 +1984,17 @@ class SharingAction extends Action{
 				$moneyarr['due_in']			=$array['collected']=$brd['money']['due_in']+$brd['total']+$brd['interest'];	//待收=借出+利息
 				$moneyarr['stay_interest']	=$array['stay_interest']=$brd['money']['stay_interest']+$brd['interest'];
 				$moneyarr['make_reward']	=$array['make_reward']=$brd['make_reward']+$brd['operation_reward'];
-				$borrowlog=R('dswjjd://Comm/borrowLog',array($array));	
+				$borrowlog=R('Comm/borrowLog',array($array));	
 				$moneys=$money->where('uid='.$brd['id'])->save($moneyarr);//借款者资金操作
 				//记录添加点
 				//投资者
 				$available_funds=$money->field('total_money,available_funds,make_reward,freeze_funds')->where('uid='.$brd['id'])->find();	//总额和可用余额
 				
 				if($array['make_reward']>0){	//如果有奖励
-					$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】投标成功，扣除冻结资金',$brd['total'],$borr['username'],($available_funds['total_money']-$brd['operation_reward']),($available_funds['available_funds']-$brd['operation_reward']),$available_funds['freeze_funds'],$brd['id'])));//资金记录
-					$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】投标成功，获得奖励',$brd['operation_reward'],$borr['username'],$moneyarr['total_money'],$moneyarr['available_funds'],$available_funds['freeze_funds'],$brd['id'])));//资金记录
+					$moneyLog=R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】投标成功，扣除冻结资金',$brd['total'],$borr['username'],($available_funds['total_money']-$brd['operation_reward']),($available_funds['available_funds']-$brd['operation_reward']),$available_funds['freeze_funds'],$brd['id'])));//资金记录
+					$moneyLog=R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】投标成功，获得奖励',$brd['operation_reward'],$borr['username'],$moneyarr['total_money'],$moneyarr['available_funds'],$available_funds['freeze_funds'],$brd['id'])));//资金记录
 				}else{
-					$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】投标成功，扣除冻结资金',$brd['total'],$borr['username'],$available_funds['total_money'],$available_funds['available_funds'],$available_funds['freeze_funds'],$brd['id'])));//资金记录
+					$moneyLog=R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】投标成功，扣除冻结资金',$brd['total'],$borr['username'],$available_funds['total_money'],$available_funds['available_funds'],$available_funds['freeze_funds'],$brd['id'])));//资金记录
 				}
 				$sendMsg=$msgTools->sendMsg(3,'对【'.$borr['title'].'】投标成功','对<a href="'.__ROOT__.'/Home/Loan/invest/'.$brd['id'].'.html">【'.$borr['title'].'】</a>的投标已生效，等待收款','admin',$brd['id']);//站内信
 				$this->collection($borr['id'],$brd['id']);//收款记录
@@ -2009,12 +2009,12 @@ class SharingAction extends Action{
 				$array['operation']			=$brd['total'];
 				$array['interest']			=$brd['interest'];
 				$array['operation_reward']	=$brd['operation_reward'];
-				$borrowlog=R('dswjjd://Comm/borrowLog',array($array));	
+				$borrowlog=R('Comm/borrowLog',array($array));	
 				$moneys=$money->where('uid='.$brd['id'])->save($moneyarr);//借款者资金操作
 				//记录添加点
 				//投资者
 				$available_funds=$money->field('total_money,available_funds,make_reward,freeze_funds')->where('uid='.$brd['id'])->find();	//总额和可用余额
-				$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】投标复审失败，资金返还',$brd['total'],$borr['username'],$available_funds['total_money'],$available_funds['available_funds'],$available_funds['freeze_funds'],$brd['id'])));//资金记录
+				$moneyLog=R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】投标复审失败，资金返还',$brd['total'],$borr['username'],$available_funds['total_money'],$available_funds['available_funds'],$available_funds['freeze_funds'],$brd['id'])));//资金记录
 				$sendMsg=$msgTools->sendMsg(3,'对【'.$borr['title'].'】投标复审失败','对<a href="'.__ROOT__.'/Home/Loan/invest/'.$brd['id'].'.html">【'.$borr['title'].'】</a>的投标复审失败，资金成功返还','admin',$brd['id']);//站内信
 			}
 			unset($array);
@@ -2041,7 +2041,7 @@ class SharingAction extends Action{
 				$array['interest']			=$bid_record['money']['interest'];
 				$array['operation_reward']	=$bid_record['operation_reward'];
 				$array['operation']			=$bid_record['total'];
-			$borrowlog=R('dswjjd://Comm/borrowLog',array($array));	
+			$borrowlog=R('Comm/borrowLog',array($array));	
 			$moneys=$money->where('uid='.$bid_record['id'])->save($moneyarr);//借款者资金操作
 			$available_funds=$money->field('total_money,available_funds,make_reward,freeze_funds')->where('uid='.$borr['uid'])->find();	//总额和可用余额
 				//记录添加点
@@ -2049,10 +2049,10 @@ class SharingAction extends Action{
 				$uid=$this->userinfo($borr['uid']);	
 				
 				if($brd['operation_reward']>0){	//如果有奖励
-					$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'【'.$borr['title'].'】投标成功，获得资金',$bid_record['total'],$uid['username'],($available_funds['total_money']+$bid_record['operation_reward']),($available_funds['available_funds']+$bid_record['operation_reward']),$available_funds['freeze_funds'],$borr['uid'])));//资金记录
-					$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'【'.$borr['title'].'】投标成功，扣除奖励',$bid_record['operation_reward'],$uid['username'],$available_funds['total_money'],$moneyarr['available_funds'],$available_funds['freeze_funds'],$borr['uid'])));//资金记录
+					$moneyLog=R('Comm/moneyLog',array(array(0,'【'.$borr['title'].'】投标成功，获得资金',$bid_record['total'],$uid['username'],($available_funds['total_money']+$bid_record['operation_reward']),($available_funds['available_funds']+$bid_record['operation_reward']),$available_funds['freeze_funds'],$borr['uid'])));//资金记录
+					$moneyLog=R('Comm/moneyLog',array(array(0,'【'.$borr['title'].'】投标成功，扣除奖励',$bid_record['operation_reward'],$uid['username'],$available_funds['total_money'],$moneyarr['available_funds'],$available_funds['freeze_funds'],$borr['uid'])));//资金记录
 				}else{
-					$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'【'.$borr['title'].'】投标成功，获得资金',$bid_record['total'],$uid['username'],$available_funds['total_money'],$available_funds['available_funds'],$available_funds['freeze_funds'],$borr['uid'])));//资金记录
+					$moneyLog=R('Comm/moneyLog',array(array(0,'【'.$borr['title'].'】投标成功，获得资金',$bid_record['total'],$uid['username'],$available_funds['total_money'],$available_funds['available_funds'],$available_funds['freeze_funds'],$borr['uid'])));//资金记录
 				}
 				$sendMsg=$msgTools->sendMsg(3,'【'.$borr['title'].'】通过复审','<a href="'.__ROOT__.'/Home/Loan/invest/'.$brd['id'].'.html">【'.$borr['title'].'】</a>投标已成功，等待还款','admin',$borr['uid']);//站内信	
 				$this->refunds($borr['id']);	//还款记录
@@ -2084,7 +2084,7 @@ class SharingAction extends Action{
 			//记录添加点
 			//投资者
 			$available_funds=$money->field('total_money,available_funds,make_reward,freeze_funds')->where('uid='.$brd['id'])->find();	//总额和可用余额
-			$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'【'.$borr['title'].'】流标，资金返还',$brd['total'],$borr['username'],$available_funds['total_money'],$available_funds['available_funds'],$available_funds['freeze_funds'],$brd['id'])));//资金记录
+			$moneyLog=R('Comm/moneyLog',array(array(0,'【'.$borr['title'].'】流标，资金返还',$brd['total'],$borr['username'],$available_funds['total_money'],$available_funds['available_funds'],$available_funds['freeze_funds'],$brd['id'])));//资金记录
 			$sendMsg=$msgTools->sendMsg(3,'【'.$borr['title'].'】流标','对<a href="'.__ROOT__.'/Home/Loan/invest/'.$brd['id'].'.html">【'.$borr['title'].'】</a>流标，资金成功返还','admin',$brd['id']);//站内信
 			unset($array);
 			unset($bid_records);
@@ -2136,11 +2136,11 @@ class SharingAction extends Action{
 		$models->query("UPDATE `ds_money` SET `total_money` = total_money-".($refun['money']+$interest).",`available_funds` = available_funds-".($refun['money']+$interest).",`stay_still` = stay_still-".$refun['money']." WHERE `uid` =".$refun['uid']);
 		$total=$money->field('total_money,available_funds,freeze_funds')->where('uid='.$refun['uid'])->find();	//查询资金
 		//记录添加点
-		$userLog=R('dswjjd://Comm/userLog',array('对【'.$borr['title'].'】的第'.$id.'期还款'));//会员记录
-		$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的第'.$id.'期还款',$refun['money'],'投资者',($total['total_money']+$interest),($total['available_funds']+$interest),$total['freeze_funds'],$refun['uid'])));//资金记录
+		$userLog=R('Comm/userLog',array('对【'.$borr['title'].'】的第'.$id.'期还款'));//会员记录
+		$moneyLog=R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的第'.$id.'期还款',$refun['money'],'投资者',($total['total_money']+$interest),($total['available_funds']+$interest),$total['freeze_funds'],$refun['uid'])));//资金记录
 		$sendMsg=$msgTools->sendMsg(3,'对【'.$borr['title'].'】的第'.$id.'期还款','对<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">【'.$borr['title'].'】</a>的第'.$id.'期还款成功','admin',$this->_session('user_name'));//站内信
 		
-		R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的第'.$id.'期还款扣除借款手续费',$interest,'平台',$total['total_money'],$total['available_funds'],$total['freeze_funds'])));//资金记录
+		R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的第'.$id.'期还款扣除借款手续费',$interest,'平台',$total['total_money'],$total['available_funds'],$total['freeze_funds'])));//资金记录
 		$msgTools->sendMsg(3,'对【'.$borr['title'].'】的第'.$id.'期还款扣除借款手续费','对<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">【'.$borr['title'].'】</a>的第'.$id.'期还款成功，扣除借款手续费 '.$interest.' 元','admin',$this->_session('user_name'));//站内信
 		/*投资者操作*/
 		foreach($colle as $co){
@@ -2150,7 +2150,7 @@ class SharingAction extends Action{
 			$models->query("UPDATE `ds_money` SET `total_money` = total_money+".$co['money'].",`available_funds` = available_funds+".$co['money'].",`stay_interest` = stay_interest-".$co['interest'].",`make_interest` = make_interest+".$co['interest'].",`due_in` = due_in-".$co['money']." WHERE `uid` =".$co['uid']);
 			$total=$money->field('total_money,available_funds,freeze_funds')->where('uid='.$co['uid'])->find();	//查询资金
 			//记录添加点
-			$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'【'.$borr['title'].'】第'.$id.'期收款',$co['money'],$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$co['uid'])));//资金记录
+			$moneyLog=R('Comm/moneyLog',array(array(0,'【'.$borr['title'].'】第'.$id.'期收款',$co['money'],$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$co['uid'])));//资金记录
 			$sendMsg=$msgTools->sendMsg(3,'对【'.$borr['title'].'】第'.$id.'期收款','<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">【'.$borr['title'].'】</a>第'.$id.'期成功收款','admin',$co['uid']);//站内信
 		}
 		if(!$end_refun){	//已还完
@@ -2163,8 +2163,8 @@ class SharingAction extends Action{
 					$models->query("UPDATE `ds_money` SET `total_money` = total_money+".$price.",`available_funds` = available_funds+".$price." WHERE `uid` =".$as['actionname']['uid']);//增加资金
 					$total=$money->field('total_money,available_funds,freeze_funds')->where('uid='.$as['actionname']['uid'])->find();	//查询资金
 					//记录添加点
-					$userLog=R('dswjjd://Comm/userLog',array('对【'.$borr['title'].'】的担保获得奖励',$as['actionname']['uid']));//会员记录
-					$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的担保获得奖励',$price,$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$as['actionname']['uid'])));//资金记录
+					$userLog=R('Comm/userLog',array('对【'.$borr['title'].'】的担保获得奖励',$as['actionname']['uid']));//会员记录
+					$moneyLog=R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的担保获得奖励',$price,$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$as['actionname']['uid'])));//资金记录
 					$sendMsg=$msgTools->sendMsg(3,'对【'.$borr['title'].'】的担保获得奖励','<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">对【'.$borr['title'].'】</a>的担保获得奖励','admin',$as['actionname']['uid']);//站内信
 				}
 				//借款者操作
@@ -2172,8 +2172,8 @@ class SharingAction extends Action{
 				$models->query("UPDATE `ds_money` SET `total_money` = total_money-".$price.",`available_funds` = available_funds-".$price." WHERE `uid` =".$borr['uid']);//增加资金
 				$total=$money->field('total_money,available_funds,freeze_funds')->where('uid='.$borr['uid'])->find();	//查询资金
 				//记录添加点
-				$userLog=R('dswjjd://Comm/userLog',array('【'.$borr['title'].'】的担保奖励支出',$borr['uid']));//会员记录
-				$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'【'.$borr['title'].'】的担保奖励支出',$price,$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$borr['uid'])));//资金记录
+				$userLog=R('Comm/userLog',array('【'.$borr['title'].'】的担保奖励支出',$borr['uid']));//会员记录
+				$moneyLog=R('Comm/moneyLog',array(array(0,'【'.$borr['title'].'】的担保奖励支出',$price,$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$borr['uid'])));//资金记录
 				$sendMsg=$msgTools->sendMsg(3,'【'.$borr['title'].'】的担保奖励支出','<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">【'.$borr['title'].'】</a>的担保奖励支出','admin',$borr['uid']);//站内信
 			}*/
 			$borrowing->where('id='.$bid)->save(array('state'=>9));
@@ -2227,11 +2227,11 @@ class SharingAction extends Action{
 		$models->query("UPDATE `ds_money` SET `total_money` = total_money-".($refun['money']+$interest).",`available_funds` = available_funds-".($refun['money']+$interest).",`stay_still` = stay_still-".$refun['money']." WHERE `uid` =".$refun['uid']);
 		$total=$money->field('total_money,available_funds,freeze_funds')->where('uid='.$refun['uid'])->find();	//查询资金
 		//记录添加点
-		$userLog=R('dswjjd://Comm/userLog',array('对【'.$borr['title'].'】的回购'));//会员记录
-		$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的回购',$refun['money'],'投资者',($total['total_money']+$interest),($total['available_funds']+$interest),$total['freeze_funds'])));//资金记录
+		$userLog=R('Comm/userLog',array('对【'.$borr['title'].'】的回购'));//会员记录
+		$moneyLog=R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的回购',$refun['money'],'投资者',($total['total_money']+$interest),($total['available_funds']+$interest),$total['freeze_funds'])));//资金记录
 		$sendMsg=$msgTools->sendMsg(3,'对【'.$borr['title'].'】的回购','对<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">【'.$borr['title'].'】</a>的回购成功','admin',$this->_session('user_name'));//站内信
 		
-		R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的回购扣除借款手续费',$interest,'平台',$total['total_money'],$total['available_funds'],$total['freeze_funds'])));//资金记录
+		R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的回购扣除借款手续费',$interest,'平台',$total['total_money'],$total['available_funds'],$total['freeze_funds'])));//资金记录
 		$msgTools->sendMsg(3,'对【'.$borr['title'].'】的回购扣除借款手续费','对<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">【'.$borr['title'].'】</a>的回购成功，扣除借款手续费 '.$interest.' 元','admin',$this->_session('user_name'));//站内信
 		
 	
@@ -2243,7 +2243,7 @@ class SharingAction extends Action{
 		$models->query("UPDATE `ds_money` SET `total_money` = total_money+".$refun['money'].",`available_funds` = available_funds+".$colle['money'].",`stay_interest` = stay_interest-".$colle['interest'].",`make_interest` = make_interest+".$colle['interest'].",`due_in` = due_in-".$colle['money']." WHERE `uid` =".$colle['uid']);
 		$total=$money->field('total_money,available_funds,freeze_funds')->where('uid='.$colle['uid'])->find();	//查询资金
 		//记录添加点
-		$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'【'.$borr['title'].'】被借款者回购成功收款',$colle['money'],$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$colle['uid'])));//资金记录
+		$moneyLog=R('Comm/moneyLog',array(array(0,'【'.$borr['title'].'】被借款者回购成功收款',$colle['money'],$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$colle['uid'])));//资金记录
 		$sendMsg=$msgTools->sendMsg(3,'对【'.$borr['title'].'】被借款者回购成功收款','<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">【'.$borr['title'].'】</a>被借款者回购成功收款','admin',$colle['uid']);//站内信
 		
 		//回购后更新表可认购数
@@ -2366,10 +2366,10 @@ class SharingAction extends Action{
 			$array['operation']			=$brd['total']+$interestReward;
 			$moneyarr['make_reward']	=$array['make_reward']			=$brd['money']['make_reward']+$brd['operation_reward'];
 			$moneyarr['make_interest']	=$array['make_interest']		=$brd['money']['make_interest']+$brd['interest'];
-			$borrowlog=R('dswjjd://Comm/borrowLog',array($array));	
+			$borrowlog=R('Comm/borrowLog',array($array));	
 			$money=$models->table('ds_money')->where('uid='.$brd['id'])->save($moneyarr);//投资者资金操作
 			//记录添加点
-			$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'【'.$borr['title'].'】的收款',$array['operation'],$borr['username'],$moneyarr['total_money'],$moneyarr['available_funds'],$moneyarr['freeze_funds'],$brd['id'])));//资金记录
+			$moneyLog=R('Comm/moneyLog',array(array(0,'【'.$borr['title'].'】的收款',$array['operation'],$borr['username'],$moneyarr['total_money'],$moneyarr['available_funds'],$moneyarr['freeze_funds'],$brd['id'])));//资金记录
 			$sendMsg=$msgTools->sendMsg(3,'【'.$borr['title'].'】的收款','<a href="'.__ROOT__.'/Loan/invest/'.$borr['id'].'.html">【'.$borr['title'].'】</a>的收款','admin',$brd['id']);//站内信
 			unset($array);
 			unset($moneyarr);
@@ -2390,10 +2390,10 @@ class SharingAction extends Action{
 		$array['operation']			=$interestReward;
 		$array['has_also']			=$brd['total']+$interestReward;
 		$array['stay_also']			=$brd['total']+$interestReward;
-		$borrowlogs=R('dswjjd://Comm/borrowLog',array($array));	
+		$borrowlogs=R('Comm/borrowLog',array($array));	
 		$moneys=$models->table('ds_money')->where('uid='.$bid_record['id'])->save($moneyarr);//借款者资金操作
 		//记录添加点
-		$moneyLog=R('dswjjd://Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的还款',$array['operation'],'投资者',$moneyarr['total_money'],$moneyarr['available_funds'],$moneyarr['freeze_funds'],$borr['uid'])));//资金记录
+		$moneyLog=R('Comm/moneyLog',array(array(0,'对【'.$borr['title'].'】的还款',$array['operation'],'投资者',$moneyarr['total_money'],$moneyarr['available_funds'],$moneyarr['freeze_funds'],$borr['uid'])));//资金记录
 		$sendMsg=$msgTools->sendMsg(3,'对【'.$borr['title'].'】的还款','<a href="'.__ROOT__.'/Loan/invest/'.$borr['id'].'.html">对【'.$borr['title'].'】</a>的还款','admin',$borr['uid']);//站内信
 		if($borrowlog && $money && $borrowlogs && $moneys){	//操作全成功返回1
 			return 1;
@@ -2614,7 +2614,7 @@ class SharingAction extends Action{
 	 */
 	function someArticle($id,$limt){
 		$mod = D("Article");
-		$list = $mod->field('id,title,addtime')->where("published=1 and catid=".$id)->limit($limt)->select();
+		$list = $mod->field('id,title,addtime')->where("published=1 and catid=".$id)->order('`order` desc,`addtime` desc')->limit($limt)->select();
 		return $list;
 	}
 	

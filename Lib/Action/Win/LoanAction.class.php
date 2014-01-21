@@ -16,7 +16,7 @@ class LoanAction extends WinAction {
 		$this->WxVerify();	//验证权限
 		$this->assign('title','我要投资');
 		$id=(int)$this->_get('id');	
-		$borrow=R('dswjjd://Sharing/borrow_information',array($id));
+		$borrow=R('Sharing/borrow_information',array($id));
 		$borr=M('borrowing');
 		$borrow[0]['amount_total']=$borr->where('uid='.$borrow[0]['uid'].' and state=9')->Sum();//借入总金额
 		$borrow[0]['amount_total']=$borrow[0]['amount_total']?$borrow[0]['amount_total']:0;
@@ -224,7 +224,7 @@ class LoanAction extends WinAction {
     public function account(){
 		$this->WxVerify();	//验证权限
 		$this->assign('title','我的账户');
-		$list=R('dswjjd://Sharing/user_details');	
+		$list=R('Sharing/user_details');	
 		$this->assign('list',$list);
 		$msgTools = A('msg','Event');
 		$msgCount = $msgTools->msgCount($this->_session('user_name'));

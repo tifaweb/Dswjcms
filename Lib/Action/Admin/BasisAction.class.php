@@ -16,7 +16,7 @@ class BasisAction extends AdminCommAction {
     public function linebank(){
 		$unite=M('unite');
 		$list=$unite->field('name,value')->where('`state`=0 and `pid`=14')->order('`order` asc,`id` asc')->select();
-		$audit=R('dswjjd://Sharing/offlineBank');
+		$audit=R('Sharing/offlineBank');
 		$this->assign('list',$list);
 		$this->assign('audit',$audit);
         $this->display();
@@ -215,7 +215,7 @@ class BasisAction extends AdminCommAction {
 			$last=$Shuff->add();
 			if($last){
 				$this->Record('添加友情链接成功');//后台操作
-					$this->success('添加成功', '__URL__/Basis/links');
+					$this->success('添加成功', '__URL__/links');
 			}else{
 				$this->Record('添加友情链接失败');//后台操作
 					$this->error('友情链接添加失败');

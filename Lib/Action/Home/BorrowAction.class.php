@@ -15,7 +15,7 @@ class BorrowAction extends HomeAction {
 //-------------借款标发布--------------
 	//普通标显示
 	public function index(){
-		$linkage=R('dswjjd://Sharing/borrowLinkage');
+		$linkage=R('Sharing/borrowLinkage');
 		$this->assign('linkage',$linkage);
 		//标题、关键字、描述
 		$Site = D("Site");
@@ -30,7 +30,7 @@ class BorrowAction extends HomeAction {
 	
 	//流转标显示
 	public function flow(){
-		$linkage=R('dswjjd://Sharing/borrowLinkage');
+		$linkage=R('Sharing/borrowLinkage');
 		$this->assign('linkage',$linkage);
 		//标题、关键字、描述
 		$Site = D("Site");
