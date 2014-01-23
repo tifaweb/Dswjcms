@@ -1,0 +1,87 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">VIP</li>
+</ul>
+<table class="table table-striped table-bordered table-condensed datatable ">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>可用积分</th>
+                <th>有效期</th>
+                <th>申请时间</th>
+                <th>有效期时间</th>
+                <th>状态</th>
+                <th>操作</th>
+              </tr>
+            <thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.username}</td>
+                <td>{$vo['available']?$vo['available']:无}</td>
+                <td><if condition="$vo.deadline gt 0">{$vo.deadline}{$vo['unit']==1?'个月':'年'}<else/>无</if></td>
+                <td><if condition="$vo.checktime gt 0">{$vo.checktime|date="Y-m-d H:i:s",###}<else/>无</if></td>
+                <td>
+                <if condition="$vo.expiration_time gt 0">
+                <if condition="$vo.type gt 0">
+                {$vo.opening_time|date="Y-m-d H:i:s",###} 至 {$vo.expiration_time|date="Y-m-d H:i:s",###}
+                <elseif condition="$vo.type eq ''"/>
+                未开通
+                <else />
+                已过期
+                </if>
+                <else/>
+                未开通
+                </if>
+                </td>
+                <td>
+                    <switch name="vo.audit" >
+                    <case value="0">未申请</case>
+                    <case value="1">申请中</case>
+                    <case value="2">已开通</case>
+                    <case value="3">审核失败</case>
+                    <case value="4">已过期</case>
+                    <default />
+                    </switch>
+                </td>
+                
+                <td>
+                    <a href="#edit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-search" title="查看" onclick='edit({$vo.id})'></a>
+                    <!--<a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__URL__/exitgan/{$vo.id}'"></a>-->
+                </td>
+              </tr>
+            </volist>
+            </tbody>
+          </table>
+<div>
+</div>
+<!--VIP审核 start-->
+<div id="edit" class="modal hide fade">
+    
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>VIP审核/查看</h3>
+    </div>
+    <div class="span11">
+    <form method="post"  action='__URL__/exitvip'>
+    <div id='edits'></div>
+    </form>
+    </div>
+</div>
+<!--VIP审核 end-->
+<!--底部 -->
+<include file="Index:footer" />

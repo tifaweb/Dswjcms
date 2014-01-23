@@ -1,0 +1,227 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop">
+<!-- left start-->
+<include file="left" />
+<!-- left end-->
+    <!-- right start-->
+    <div id="content" class="center_right span10">
+      	<switch name="mid" >
+            <case value="password">
+            <!--修改登陆密码 start-->
+            <form method="post"  action='__URL__/updaPass'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">安全中心</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">修改登陆密码</li>
+                </ul>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>请不要在网吧、公共场合修改密码！</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="span2">原始密码：</td>
+                            <td><input name="passwd" type="password" class="span2"/>&nbsp;&nbsp;&nbsp;&nbsp;<a href="__ROOT__/Center/security/Rpassword.html">找回密码</a></td>
+                         </tr>
+                         <tr>
+                            <td class="span2">新密码：</td>
+                            <td><input name="passw" type="password" class="span2"/></td>
+                         </tr>
+                         <tr>
+                            <td class="span2">确认密码：</td>
+                            <td><input name="password" type="password" class="span2"/></td>
+                         </tr>
+                    </tbody>
+                </table>
+                 <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+            <!--修改登陆密码 end-->
+            </case>
+            <case value="tpassword">
+            <!--修改交易密码 start-->
+            <form method="post"  action='__URL__/updaPayPass'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">安全中心</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">修改交易密码</li>
+                </ul>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>原始交易密码没修改时为登陆密码</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="span2">原始交易密码：</td>
+                            <td><input name="pay_pasd" type="password" class="span2"/>&nbsp;&nbsp;&nbsp;&nbsp;<a href="__ROOT__/Center/security/dealRpassword.html">找回密码</a></td>
+                         </tr>
+                         <tr>
+                            <td class="span2">新交易密码：</td>
+                            <td><input name="npay_password" type="password" class="span2"/></td>
+                         </tr>
+                         <tr>
+                            <td class="span2">确认交易密码：</td>
+                            <td><input name="pay_password" type="password" class="span2"/></td>
+                         </tr>
+                    </tbody>
+                </table>
+                 <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+            <!--修改交易密码 end-->
+            </case>
+            <case value="Rpassword">
+            <!--找回密码 start-->
+            <form method="post"  action='__URL__/emailBack'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">安全中心</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">找回密码</li>
+                </ul>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>通过安全邮箱找回</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="span2">安全邮箱：</td>
+                            <td class="span4">{$email.email}</td>
+                            <input name="email" type="hidden" value="{$email.email}" />
+                            <td><button class="btn btn-primary" type="submit">发送</button></td>
+                         </tr>
+                    </tbody>
+                </table>
+            <!--找回密码 end-->
+            </case>
+            <case value="Rpasswordpag">
+            <!--找回密码修改页 start-->
+            <form method="post"  action='__URL__/emailPasssubmit'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">安全中心</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">设置新密码</li>
+                </ul>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>设置新密码</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="span2">新密码：</td>
+                            <td><input name="passw" type="password" class="span2"/></td>
+                         </tr>
+                         <tr>
+                            <td class="span2">确认密码：</td>
+                            <td><input name="password" type="password" class="span2"/></td>
+                         </tr>
+                    </tbody>
+                </table>
+                 <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+            <!--找回密码修改页 end-->
+            </case>
+            <case value="dealRpassword">
+            <!--找回交易密码 start-->
+            <form method="post"  action='__URL__/dealemailBack'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">安全中心</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">找回交易密码</li>
+                </ul>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>通过安全邮箱找回</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="span2">安全邮箱：</td>
+                            <td class="span4">{$email.email}</td>
+                            <input name="email" type="hidden" value="{$email.email}" />
+                            <td><button class="btn btn-primary" type="submit">发送</button></td>
+                         </tr>
+                    </tbody>
+                </table>
+            <!--找回交易密码 end-->
+            </case>
+            <case value="dealRpasswordpag">
+            <!--找回交易密码修改页 start-->
+            <form method="post"  action='__URL__/dealemailPasssubmit'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">安全中心</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">设置新交易密码</li>
+                </ul>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>设置交易新密码</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="span2">新交易密码：</td>
+                            <td><input name="npay_password" type="password" class="span2"/></td>
+                         </tr>
+                         <tr>
+                            <td class="span2">确认交易密码：</td>
+                            <td><input name="pay_password" type="password" class="span2"/></td>
+                         </tr>
+                    </tbody>
+                </table>
+                 <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+            <!--找回交易密码修改页 end-->
+            </case>
+            <case value="score">
+            <!--安全评分 start-->
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">安全中心</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">安全评分</li>
+                </ul>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>你的安全评分为：</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="span2">原始交易密码：</td>
+                            <td><input name="name" type="password" class="span2"/></td>
+                         </tr>
+                        
+                    </tbody>
+                </table>
+            <!--安全评分 end-->
+            </case>
+            <default />空
+        </switch>
+    </div>
+    <!-- right end--> 
+
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />

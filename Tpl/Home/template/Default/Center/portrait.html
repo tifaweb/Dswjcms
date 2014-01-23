@@ -1,0 +1,50 @@
+<include file="Index:header" />
+<style type="text/css" media="screen">
+html, body { height:100%; background-color: #ffffff;}
+#flashContent { width:100%; height:100%; }
+</style>
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop">
+<!-- left start-->
+<include file="left" />
+<!-- left end-->
+    <!-- right start-->
+    <div  id="content" class="center_right span10">
+    	<div id="altContent"></div>
+		
+
+		<script type="text/javascript" src="__PUBLIC__/FaustCplus/swfobject.js"></script>
+		<script type="text/javascript">
+			var flashvars = {
+			  "jsfunc":"uploadevent",
+			  "imgUrl":'__PUBLIC__/FaustCplus/<if condition="$heads gt 0">php/img/raw_user_{$Think.session.user_uid}.jpg<else />php/img/raw_user_0.jpg</if>',
+			  "pid":"75642723",
+			  "uploadSrc":true,
+			  "showBrow":true,
+			  "showCame":true,
+			  "uploadUrl":"__PUBLIC__/FaustCplus/php/saveavater.php?action=user_{$Think.session.user_uid}"
+			};
+
+			var params = {
+				menu: "false",
+				scale: "noScale",
+				allowFullscreen: "true",
+				allowScriptAccess: "always",
+				wmode:"transparent",
+				bgcolor: "#FFFFFF"
+			};
+
+			var attributes = {
+				id:"FaustCplus"
+			};
+
+			swfobject.embedSWF("__PUBLIC__/FaustCplus/FaustCplus.swf", "altContent", "650", "500", "9.0.0", "", flashvars, params, attributes);
+
+		</script>
+    </div>
+    <!-- right end--> 
+
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />

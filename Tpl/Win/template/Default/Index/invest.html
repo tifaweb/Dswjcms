@@ -1,0 +1,140 @@
+<include file="header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop row-fluid">
+	<!--搜索 start-->
+	<div class="loan_search integral_search row-fluid">
+    <input id="type" type="hidden" value="0" />
+    <input id="state" type="hidden" value="0" />
+    <input id="scope" type="hidden" value="0" />
+    <input id="classify" type="hidden" value="0" />
+        <dl>
+            <dt>借款类型：</dt>
+            <dd>
+            	<div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <o id="types">选择类型</o>
+                <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li onclick="integral('type',1);$('#types').html('秒 还 标');"><a href="#" >秒还标</a></li>
+                    <li onclick="integral('type',2);$('#types').html('抵 押 标');"><a href="#">抵押标</a></li>
+                    <li onclick="integral('type',3);$('#types').html('质 押 标');"><a href="#">质押标</a></li>
+                    <li onclick="integral('type',4);$('#types').html('净 值 标');"><a href="#">净值标</a></li>
+                    <li onclick="integral('type',5);$('#types').html('信 用 标');"><a href="#">信用标</a></li>
+                    <!--<li onclick="integral('type',6);$('#types').html('担保标');"><a href="#">担保标</a></li>-->
+                    <li onclick="integral('type',8);$('#types').html('流 转 标');"><a href="#">流转标</a></li>
+                </ul>
+                </div>
+            </dd>
+        </dl>
+        <div class="division"></div>
+        <dl>
+            <dt>借贷状态：</dt>
+            <dd>
+            	<div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <o id="states">选择类型</o>
+                <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li onclick="integral('state',1);$('#states').html('招 标 中');"><a href="#">招标中</a></li>
+                    <li onclick="integral('state',7);$('#states').html('还 款 中');"><a href="#">还款中</a></li>
+                    <!--<li onclick="integral('state',10);$('#states').html('担保中');"><a href="#">担保中</a></li>-->
+                    <li onclick="integral('state',9);$('#states').html('已 成 功');"><a href="#">已成功</a></li>
+                    <li onclick="integral('state',4);$('#states').html('已 流 标');"><a href="#">已流标</a></li>
+                    <li onclick="integral('state',8);$('#states').html('已 逾 期');" ><a href="#">已逾期</a></li>
+                </ul>
+                </div>
+            </dd>
+        </dl>
+        <div class="division"></div>
+        <dl>
+            <dt>还款方式：</dt>
+       		<dd>
+            	<div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <o id="classifys">选择类型</o>
+                <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li onclick="integral('classify',0);$('#classifys').html('全部');"><a href="#">全部</a></li>
+                    <li onclick="integral('classify',2);$('#classifys').html('按月付本息');"><a href="#">按月付本息</a></li>
+                    <li onclick="integral('classify',1);$('#classifys').html('月付息到期还本');"><a href="#">月付息到期还本</a></li>
+                </ul>
+                </div>
+            </dd>
+        </dl>
+        <div class="division"></div>
+        <dl>
+            <dt>借款期限：</dt>
+            <dd>
+            	<div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <o id="scopes">选择类型</o>
+                <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li onclick="integral('scope',0);$('#scopes').html('全  部');"><a href="#">全部</a></li>
+                    <li onclick="integral('scope','1');$('#scopes').html('按  月');"><a href="#" >按月</a></li>
+                    <li onclick="integral('scope','2');$('#scopes').html('按  天');"><a href="#">按天</a></li>
+                </ul>
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <!--搜索 end-->
+    <!--内容 start-->
+<div class="loan_top row-fluid">
+<ul class="thumbnails">
+<volist name="borrow" id="v">
+<if condition="$v.type eq 7">
+        <li class="span6">
+          	<a href="__ROOT__/Win/Loan/loan/id/{$v.id}.html">
+            <div class="thumbnail">
+              <img src="__PUBLIC__/uploadify/uploads/mark/{$v.img}" style="width:150px;height:150px;"/>
+              <div class="caption">
+                <h6>{$v.title}</h6>
+              		<div class="progress" style="margin-bottom:0px;"  data-rel="tooltip" title="{$v.flow_ratio}%">
+                      <div class="bar" style="width: {$v.flow_ratio}%;"></div>
+                    </div>
+              </div>
+            </div>
+            </a>
+          </li>
+<else/>
+          <li class="span6">
+          	<a href="__ROOT__/Win/Loan/loan/id/{$v.id}.html">
+            <div class="thumbnail">
+              <img src="__PUBLIC__/uploadify/uploads/mark/{$v.img}" style="width:150px;height:150px;"/>
+              <div class="caption">
+                <h6>{$v.title}</h6>
+              	<if condition="$v.state eq 10">
+                    <div class="progress" style="margin-bottom:0px;"  data-rel="tooltip" title="{$v.ratios}%">
+                      <div class="bar" style="width: {$v.ratios}%;"></div>
+                    </div>
+                    <else/>
+                    <div class="progress" style="margin-bottom:0px;"  data-rel="tooltip" title="{$v.ratio}%">
+                      <div class="bar" style="width: {$v.ratio}%;"></div>
+                    </div>
+                    </if>
+              </div>
+            </div>
+            </a>
+          </li>
+       
+       
+        <script>timeCount('limittime{$key}');</script> 
+</if>
+</volist>
+ </ul>
+        <div class="pagination pagination-centered loan_page">
+        <ul>{$page}</ul>
+        </div>
+    </div> 
+</div>
+			
+          <!--内容 end-->
+<!-- container end -->
+<!--底部  start-->
+<include file="footer" />

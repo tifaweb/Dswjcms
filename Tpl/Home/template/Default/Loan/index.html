@@ -1,0 +1,243 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop">
+	<!--搜索 start-->
+	<div class="loan_search integral_search">
+    <input id="type" type="hidden" value="0" />
+    <input id="state" type="hidden" value="0" />
+    <input id="scope" type="hidden" value="0" />
+    <input id="classify" type="hidden" value="0" />
+        <dl id="types">
+            <dt>借款类型：</dt>
+            <dd onclick="integral('type',0);$(this).addClass('pitch');" class="pitch"><a href="#">全部</a></dd>
+            <dd onclick="integral('type',1);$(this).addClass('pitch');"><a href="#" >秒还标</a></dd>
+            <dd onclick="integral('type',2);$(this).addClass('pitch');"><a href="#">抵押标</a></dd>
+            <dd onclick="integral('type',3);$(this).addClass('pitch');"><a href="#">质押标</a></dd>
+            <dd onclick="integral('type',4);$(this).addClass('pitch');"><a href="#">净值标</a></dd>
+            <dd onclick="integral('type',5);$(this).addClass('pitch');"><a href="#">信用标</a></dd>
+            <!--<dd onclick="integral('type',6);$(this).addClass('pitch');"><a href="#">担保标</a></dd>-->
+            <dd onclick="integral('type',8);$(this).addClass('pitch');"><a href="#">流转标</a></dd>
+        </dl>
+        <div class="division"></div>
+        <dl id="states">
+            <dt>借贷状态：</dt>
+            <dd onclick="integral('state',1);$(this).addClass('pitch');" class="pitch"><a href="#">招标中</a></dd>
+            <dd onclick="integral('state',7);$(this).addClass('pitch');"><a href="#">还款中</a></dd>
+            <!--<dd onclick="integral('state',10);$(this).addClass('pitch');"><a href="#">担保中</a></dd>-->
+            <dd onclick="integral('state',9);$(this).addClass('pitch');"><a href="#">已成功</a></dd>
+			<dd onclick="integral('state',4);$(this).addClass('pitch');"><a href="#">已流标</a></dd>
+            <dd onclick="integral('state',8);$(this).addClass('pitch');"><a href="#">已逾期</a></dd>
+        </dl>
+        <div class="division"></div>
+        <dl id="classifys">
+            <dt>还款方式：</dt>
+            <dd onclick="integral('classify',0);$(this).addClass('pitch');" class="pitch"><a href="#">全部</a></dd>
+            <dd onclick="integral('classify',2);$(this).addClass('pitch');"><a href="#">按月付本息</a></dd>
+            <dd style="width:120px" onclick="integral('classify',1);$(this).addClass('pitch');"><a href="#">月付息到期还本</a></dd>
+        </dl>
+        <div class="division"></div>
+        <dl id="scopes">
+            <dt>借款期限：</dt>
+            <dd onclick="integral('scope',0);$(this).addClass('pitch');" class="pitch"><a href="#">全部</a></dd>
+            <dd onclick="integral('scope','1');$(this).addClass('pitch');"><a href="#" >按月</a></dd>
+            <dd onclick="integral('scope','2');$(this).addClass('pitch');"><a href="#">按天</a></dd>
+        </dl>
+    </div>
+    <!--搜索 end-->
+    <!--内容 start-->
+<div class="loan_top row-fluid">
+    	<dl>
+        	<dd class="span2 loan_img">图片</dd>
+            <dd class="span2">标题/借款者/所在地</dd>
+            <dd class="span2">金额/利率/用途</dd>
+            <dd class="span2">进度/已投/剩余</dd>
+            <dd class="span2">等级/期限/付款方式</dd>
+            <dd class="span2">&nbsp;</dd>
+        </dl>
+<volist name="borrow" id="v">
+<if condition="$v.type eq 7">
+		<dl class="loan_nr">
+        	<dd class="span2 loan_img">
+                <a href="__ROOT__/Loan/invest/{$v.id}.html">
+                    <img src="__PUBLIC__/uploadify/uploads/mark/{$v.img}" style="width:100px;height:100px;"/>
+                </a>
+            </dd>
+            <dd class="span2">
+            <ul>
+            	<li>
+                    <a href="__ROOT__/Loan/invest/{$v.id}.html" data-rel="tooltip" title="{$v.title}">{$v.title}</a>
+                    <i class="mark-ico-color mark-ico-flow" data-rel="tooltip" title="{$v.type_name}"></i>
+                    <eq name="v.candra" value="1"><i class="mark-ico-color mark-ico-day" data-rel="tooltip" title="天标"></i></eq>
+                    <gt name="v.reward_type" value="0"><i class="mark-ico-color mark-ico-prize" data-rel="tooltip" title="{$v.rewards}"></i></gt>    
+                    <eq name="v.stick" value="1"><i class="mark-ico-color mark-ico-push" data-rel="tooltip" title="推荐标"></i></eq>
+                    <eq name="v.code" value="1"><i class="icon icon-color icon-locked" data-rel="tooltip" title="密码标"></i></eq>
+                    
+                </li>
+                <li>
+                    发布者:{$v.username}     
+                </li>
+                <li>
+                    {$v.location}
+                </li>
+            </ul>
+            </dd>
+            <dd class="span2">
+            <ul>
+            	<li>
+                    流转金额：{$v.money}元
+                </li>
+                <li>
+                    利率：{$v.rates}%     
+                </li>
+                <li>
+                    可认购数：{$v.subscribe}份     
+                </li>
+            </ul>
+            </dd>
+            <dd class="span2">
+            <ul>
+            	<li>
+                    <div class="progress" style="margin-bottom:0px;"  data-rel="tooltip" title="{$v.flow_ratio}%">
+                      <div class="bar" style="width: {$v.flow_ratio}%;"></div>
+                    </div>
+                </li>
+                <li>
+                    正在流转 {$v.flows} 份   
+                </li>
+                <li>
+                    已回购 {$v.repos} 份
+                </li>
+            </ul>
+            </dd>
+           <dd class="span2">
+            <ul>
+            	<li>
+                    <img src="__PUBLIC__/uploadify/uploads/grade_img/{$v.member_total_img}" ata-rel="tooltip"  title="{$v.member_total_name}" data-rel="tooltip"/>
+                </li>
+                <li>
+                    流转期限：{$v.flow_deadlines}
+                </li>
+                <li>
+                    {$v.way}     
+                </li>
+            </ul>
+            </dd>
+            <dd class="span2 loan_sumb">
+            <if condition="($v.state eq 1)  OR  ($v.state eq 10)">
+             <a class="btn btn-primary loan_btn" href="__ROOT__/Loan/invest/{$v.id}.html">立即认购</a>
+            <else />
+             <a class="btn loan_btn" >{$v.state_name}</a>
+            </if>
+           
+            </dd>
+        </dl>
+<else/>
+    	<dl class="loan_nr">
+        	<dd class="span2 loan_img">
+                <a href="__ROOT__/Loan/invest/{$v.id}.html">
+                    <img src="__PUBLIC__/uploadify/uploads/mark/{$v.img}" style="width:100px;height:100px;"/>
+                </a>
+            </dd>
+            <dd class="span2">
+            <ul>
+            	<li>
+                    <a href="__ROOT__/Loan/invest/{$v.id}.html" data-rel="tooltip" title="{$v.title}">{$v.title}</a>
+                    <switch name="v.type">
+                        <case value="0"><i class="mark-ico-color mark-ico-seconds" data-rel="tooltip" title="{$v.type_name}"></i></case>
+                        <case value="1"><i class="mark-ico-color mark-ico-bet" data-rel="tooltip" title="{$v.type_name}"></i></case>
+                        <case value="2"><i class="mark-ico-color mark-ico-bet" data-rel="tooltip" title="{$v.type_name}"></i></case>
+                        <case value="3"><i class="mark-ico-color mark-ico-net" data-rel="tooltip" title="{$v.type_name}"></i></case>
+                        <case value="4"><i class="mark-ico-color mark-ico-letter" data-rel="tooltip" title="{$v.type_name}"></i></case>
+                        <case value="5"><i class="mark-ico-color mark-ico-bear" data-rel="tooltip" title="{$v.type_name}"></i></case>
+                        <case value="6"><i class="mark-ico-color mark-ico-group" data-rel="tooltip" title="{$v.type_name}"></i></case>
+                        <default />无
+                    </switch>
+                    <eq name="v.candra" value="1"><i class="mark-ico-color mark-ico-day" data-rel="tooltip" title="天标"></i></eq>
+                    <gt name="v.reward_type" value="0"><i class="mark-ico-color mark-ico-prize" data-rel="tooltip" title="{$v.rewards}"></i></gt>    
+                    <eq name="v.stick" value="1"><i class="mark-ico-color mark-ico-push" data-rel="tooltip" title="推荐标"></i></eq>
+                    <eq name="v.code" value="1"><i class="icon icon-color icon-locked" data-rel="tooltip" title="密码标"></i></eq>
+                    
+                </li>
+                <li>
+                    发布者:{$v.username}     
+                </li>
+                <li>
+                    {$v.location}
+                </li>
+            </ul>
+            </dd>
+            <dd class="span2">
+            <ul>
+            	<li>
+                    金额：{$v.money}元
+                </li>
+                <li>
+                    利率：{$v.rates}%     
+                </li>
+                <li>
+                    {$v.use}     
+                </li>
+            </ul>
+            </dd>
+            <dd class="span2">
+            <ul>
+            	<li>
+                	<if condition="$v.state eq 10">
+                    <div class="progress" style="margin-bottom:0px;"  data-rel="tooltip" title="{$v.ratios}%">
+                      <div class="bar" style="width: {$v.ratios}%;"></div>
+                    </div>
+                    <else/>
+                    <div class="progress" style="margin-bottom:0px;"  data-rel="tooltip" title="{$v.ratio}%">
+                      <div class="bar" style="width: {$v.ratio}%;"></div>
+                    </div>
+                    </if>
+                </li>
+                <li>
+                    已有{$v.bid_records_count}笔投标   
+                </li>
+                <li>
+                    
+                    <if condition="($v.state eq 7) OR ($v.state eq 8) OR ($v.state eq 9) ">
+                    <span style="color:#F00">已完成</span>
+                    <else />
+                    <span id="limittime{$key}" endtime="{$v.endtime|date="Y/m/d H:i:s",###}"></span>
+                    </if>
+                </li>
+            </ul>
+            </dd>
+           <dd class="span2">
+            <ul>
+            	<li>
+                    <img src="__PUBLIC__/uploadify/uploads/grade_img/{$v.member_total_img}" ata-rel="tooltip"  title="{$v.member_total_name}" data-rel="tooltip"/>
+                </li>
+                <li>
+                    {$v.deadlines}
+                </li>
+                <li>
+                    {$v.way}     
+                </li>
+            </ul>
+            </dd>
+            <dd class="span2 loan_sumb">
+            <if condition="($v.state eq 1)  OR  ($v.state eq 10)">
+             <a class="btn btn-primary loan_btn" href="__ROOT__/Loan/invest/{$v.id}.html">{$v.state_name}</a>
+            <else />
+             <a class="btn loan_btn" >{$v.state_name}</a>
+            </if>
+           
+            </dd>
+        </dl>
+        <script>timeCount('limittime{$key}');</script> 
+</if>
+</volist>
+        <div class="pagination pagination-centered loan_page">
+        <ul>{$page}</ul>
+        </div>
+    </div> 
+</div>
+			
+          <!--内容 end-->
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />

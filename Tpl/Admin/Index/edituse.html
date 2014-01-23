@@ -1,0 +1,69 @@
+<include file="header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__ROOT__/Admin/Index/user.html">管理员管理</a> <span class="divider">/</span>
+      </li>
+      <li class="active">编辑</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__ROOT__/Admin/Index/user.html" >返回管理员列表</a></div>
+</ul>
+<form method="post"  action='__URL__/editus'>
+ <table class="table table-striped table-bordered table-condensed">
+ <volist name="edlist" id="ed">
+   <tbody>
+                      <tbody>
+                      <tr>
+                        <td>
+                               用户名：
+                        </td>
+                        <td>
+                          <input name="name" type="text" class="span5" placeholder="请输入用户名..." value="{$ed.name}">
+                        </td>
+                      </tr>
+		      <tr>
+                        <td>
+                               密码：
+                        </td>
+                        <td>
+                            <input name="password" type="password" class="span5" placeholder="请输入密码..." >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                               权限：
+                        </td>
+                        <td>
+                            <select name="power">
+                                {$superior}
+                            </select>
+                        </td>
+                      </tr>
+                    </tbody>
+ </volist>
+ </table>
+<div>
+<div class="span4">
+
+</div>
+<div class="span5">
+          <button class="btn btn-primary" type="submit">
+              确认修改
+          </button>
+            <a href="__ROOT__/Admin/Index/user.html" class="btn btn-info ajax-link">取消</a>
+			<input name="id" type="hidden" value="{$ed.id}" />
+</div>
+</div>
+</form>
+<!--底部 -->
+<include file="footer" />

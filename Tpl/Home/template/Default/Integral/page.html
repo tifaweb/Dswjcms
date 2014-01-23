@@ -1,0 +1,118 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop">
+<!-- left start-->
+<include file="left" />
+
+<!-- left end-->
+    <!-- right start-->
+    <div  id="content" class="center_right span9">
+     	<div class="span4 page_top">
+           <div class="fotorama" data-nav="thumbs" data-allow-full-screen="true" data-transition = "crossfade" data-keyboard="true"  data-width="100%" data-ratio="800/600">
+                <foreach name="list.imges" item="vo">
+                    <img src="__PUBLIC__/uploadify/uploads/goods/{$vo}"/>
+                </foreach>
+           </div>
+        </div>
+        <div class="span4 page_top">
+        	<dl class="page_attribute">
+                <h4>{$list.title}</h4>
+                <dd><span>市场价：</span><s class="market">{$list.price}元</s></dd>
+                <dd>
+                	<span>
+                    <if condition="$list.kind eq 1">
+                    所需会员积分：
+                    <elseif condition="$list.kind eq 2"/>
+                    所需VIP积分：
+                    <else />
+                    所需推广积分：
+                    </if>
+                	</span>
+                    <em class="integral">{$list.integral}分</em>
+                </dd>
+                <dd><span>剩余数量：</span>{$list.surplus}份</dd>
+                <dd><span>已兑换：</span><em class="market">{$list.convert}份</em></dd>
+                <dd><span>到货时间：</span>5个工作日</dd>
+            </dl>
+           <if condition="$list.surplus gt 0"> 
+            <div class="page_btn"><a href="#tEnder" class="btn btn-primary" data-toggle="modal" data-rel="tooltip" >立即兑换</a></div>
+           <else/>
+           <div class="page_btn"><a href="#" class="btn" data-rel="tooltip" >兑换结束</a></div>
+           </if>
+        </div>
+        <hr class="soften" />
+        <div class="span9">
+        	{$list.content}
+        </div>
+    </div>
+    <!-- right end--> 
+</div>
+<!-- container end -->
+<!--底部  start-->
+<!--兑换确认 start-->
+<div id="tEnder" class="modal hide fade" style="width:900px;left:35%">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>兑换确认</h3>
+    </div>
+	<form method="post" action="__URL__/pageAdd">
+    <input name="gid" type="hidden" value="{$list.id}" />
+    <input name="kind" type="hidden" value="{$list.kind}" />
+    <input name="number" type="hidden" value="1" />
+    <input name="integral" type="hidden" value="{$list.integral}" />
+    <div class="modal-body">
+        <div class="span6">
+        <dl class="invest_bid">
+            <dd>收货地区：</dd>
+        	<dd id="area">
+            	<select id="province" name="location[]"  style="width:100px;"></select> 省 <select id="city" style="width:110px;"  name="location[]"></select> 市 <select id="county"  style="width:140px;" name="location[]"></select>
+            </dd>
+            <dd>收货详细地址：</dd>
+            <dd><textarea name="detailed" class="span5" placeholder="请填写收货详细地址..." ></textarea>
+            </dd>
+        </dl>
+        </div>
+        <div class="span4">
+        <dl class="page_convert">
+            <dd>兑换数量：1 份
+            	<!--<a class="icon icon-blue icon-minus invest_icon" href="#" onClick="Totalprice(1,{$v.surplus},{$money.available_funds},{$v.max},{$v.min})"></a>
+                <span class="input-prepend input-append">
+                	<span class="add-on">$</span>
+                	<input id="price" name="price" type="text" value="{$v.min}" class="span1"  onBlur="Totalprice(4,{$v.surplus},{$money.available_funds},{$v.max},{$v.min})"/>
+                    <span class="add-on">.00</span>
+                </span>
+                <a class="icon icon-blue icon-plus invest_icon" href="#" onClick="Totalprice(2,{$v.surplus},{$money.available_funds},{$v.max},{$v.min})"></a>
+                <a href="#" onClick="Totalprice(3,{$v.surplus},{$money.available_funds})">最大金额</a>
+                -->
+                
+            </dd>
+            <dd>
+            <if condition="$list.kind eq 1">
+            兑换所需会员积分：
+            <elseif condition="$list.kind eq 2"/>
+            兑换所需VIP积分：
+            <else />
+            兑换所需推广积分：
+            </if>
+            {$list.integral} 分</dd>
+            <dd>支付密码：<input type="password" class="span2" name="pay_password"/></dd>
+            <dd>&nbsp;&nbsp;&nbsp;&nbsp;验证码：
+            <input type="text" class="span1" name="proving"/>
+            <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" style="cursor:pointer;padding-left: 10px;"/>
+            </dd>
+            <dd><button type="submit" class="btn btn-primary span2" >确认提交</button></dd>
+        </dl>
+        </form>
+        </div>
+    </div>
+</volist>
+</div>
+<!--兑换确认 end-->
+<script>
+function changeVerify(){
+	var timenow = new Date().getTime();
+	document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+</script>
+<include file="Index:footer" />

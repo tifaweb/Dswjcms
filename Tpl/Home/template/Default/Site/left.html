@@ -1,0 +1,15 @@
+<!-- left start-->
+<div class="span3 bs-docs-sidebar">
+<ul class="nav nav-list bs-docs-sidenav main-menu"  data-spy="affix" data-offset-top="100">
+<volist name="site" id="vo">
+<if condition="$vo.type eq 2 ">
+<li><a class="ajax-link" href="__ROOT__/Site/listTpl/id/{$vo.id}.html"><i class="icon-chevron-right"></i>{$vo.title}</a></li>
+<else/>
+<li><a href="__ROOT__/Site/page/id/{$vo.id}.html"><i class="icon-chevron-right"></i>{$vo.title}</a></li>
+</if>
+</volist>
+</ul>
+</div>
+
+
+<!-- left end-->

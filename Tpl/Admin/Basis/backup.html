@@ -1,0 +1,44 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">数据备份</li>
+</ul>
+<form class="form-horizontal" method="post">
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">备份方式</label>
+    <div class="controls">
+        <label class="radio">
+          <input type="radio" name="pid"  value="2" checked>
+          全部备份
+        </label>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">收件邮箱</label>
+    <div class="controls">
+         <input type="text" name="email" placeholder="请输入收件邮箱">
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+     <button class="btn btn-primary" type="submit">
+     发送
+     </button>
+    </div>
+  </div>
+</form>
+<div>
+</div>
+<!--底部 -->
+<include file="Index:footer" />

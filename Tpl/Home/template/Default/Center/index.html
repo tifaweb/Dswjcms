@@ -1,0 +1,119 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop row-fluid">
+<!-- left start-->
+<include file="left" />
+<!-- left end-->
+    <!-- right start-->
+    <div  id="content" class="center_right span10">
+     <volist name="list" id="ls">
+    	<div  class="center_top">
+            <div class="span2">
+                <dl>
+                 <if condition="$heads gt 0">
+                    <dd><img src="__PUBLIC__/FaustCplus/php/img/big_user_{$Think.session.user_uid}.jpg" width="110"/></dd>
+                 <else/>
+                 	<dd><img src="__PUBLIC__/FaustCplus/php/img/big_user_0.jpg" width="110"/></dd>
+                 </if>
+                    <dd><a href="__ROOT__/Home/Center/portrait.html">更换头像</a></dd>
+                </dl>
+            </div>
+            <div class="span7">
+                    <p>信用等级：<img src="__PUBLIC__/uploadify/uploads/grade_img/{$ls.membership_grade_img}" title="{$ls.membership_grade_name}" data-rel="tooltip"/></p>
+                    <p>认证：
+                        <if condition="$ls.email_audit gt 1">
+                        <a class="icon icon-orange icon-envelope-closed ajax-link" href="__ROOT__/Center/approve/email.html"  data-rel="tooltip" title="邮箱已认证"></a>
+                        <else />
+                        <a class="icon icon-envelope-closed ajax-link" href="__ROOT__/Center/approve/email.html" data-rel="tooltip" title="邮箱未认证"></a>
+                        </if>
+                        <if condition="$ls.certification gt 1">
+                        <a class="icon icon-orange icon-profile" href="__ROOT__/Center/approve/autonym.html"  data-rel="tooltip" title="实名已认证"></a>
+                        <else />
+                        <a class="icon icon-profile" href="__ROOT__/Center/approve/autonym.html" data-rel="tooltip" title="实名未认证"></a>
+                        </if>
+                        <if condition="$ls.video_audit gt 1">
+                        <a class="icon icon-orange icon-comment-video" href="__ROOT__/Center/approve/video.html"  data-rel="tooltip" title="视频已认证"></a>
+                        <else />
+                        <a class="icon icon-comment-video" href="__ROOT__/Center/approve/video.html" data-rel="tooltip" title="视频未认证"></a>
+                        </if>
+                        <if condition="$ls.site_audit gt 1">
+                        <a class="icon icon-orange icon-users" href="__ROOT__/Center/approve/scene.html"  data-rel="tooltip" title="现场已认证"></a>
+                        <else />
+                        <a class="icon icon-users" href="__ROOT__/Center/approve/scene.html" data-rel="tooltip" title="现场未认证"></a>
+                        </if>
+						<!--<if condition="$ls.wechat_audit gt 1">
+                        <a class="icon icon-orange icon-messages ajax-link" href="__URL__/approve/Wechat"  data-rel="tooltip" title="微信已认证"></a>
+                        <else />
+                        <a class="icon icon-messages ajax-link" href="__URL__/approve/Wechat" data-rel="tooltip" title="微信未认证"></a>
+                        </if>-->
+                        <if condition="$ls.cellphone_audit gt 1">
+                        <a class="icon icon-orange icon-cellphone ajax-link" href="__ROOT__/Center/approve/cellphone.html"  data-rel="tooltip" title="手机已认证"></a>
+                        <else />
+                        <a class="icon icon-cellphone ajax-link" href="__ROOT__/Center/approve/cellphone.html" data-rel="tooltip" title="手机未认证"></a>
+                        </if>
+                </p>
+                    <p><a href="__ROOT__/Center/fund/inject.html">账号充值</a></p>
+                    <if condition="$ls.vip_audit eq 2">
+                        <p>VIP期限：{$ls.vip_opening_time|date="Y-m-d H:i:s",###} 至 {$ls.vip_expiration_time|date="Y-m-d H:i:s",###}</p>
+                        <else />
+                        <p><a href="__ROOT__/Center/approve/vip.html">申请VIP</a></p>
+                    </if>
+                    <p>系统告知：<a href="__ROOT__/Center/basic/mail.html?pid=unread">{$msgCount['unread']?$msgCount['unread']:'0'}</a> 封未读信息</p>
+            </div>
+         </div>
+         <if condition="$refun neq ''">
+         <div class="alert alert-block center_remind">
+         	<a class="close" data-dismiss="alert">
+                    ×
+                    </a>
+         	<h5>提醒</h5>
+            <p>最近有 <b>{$count}</b> 笔待还款</p>
+            <p>
+            	<table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>还款时间</th>
+                        <th>还款金额</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="refun" id="vos">
+                      <tr>
+                        <td>{$vos.time|date="Y-m-d H:i:s",###}</td>
+                        <td>{$vos.money|number_format=2,'.',','} 元</td>
+                        <td><a href="__ROOT__/Center/loan/{$vos['types']==7?'isflow':'plan'}.html?bid={$vos.bid}">查看</a></td>
+                      </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </p>
+        </div>
+        </if>
+         <div class="center_below">
+            <h5>账号详情</h5>
+            <p>账户总额：{$ls.total_money|number_format=2,'.',','} <a href="__ROOT__/Center/fund/fundrecord.html">资金记录查询</a></p>
+            <p>可用余额：{$ls.available_funds|number_format=2,'.',','} <a href="__ROOT__/Center/fund/draw.html">[提现]</a><a href="__ROOT__/Center/fund/inject.html">[充值]</a></p>
+            <p>担保额度：{$ls.assure|number_format=2,'.',','} <a href="__ROOT__/Center/fund/assured.html">[申请]</a></p>
+            <p><span>冻结总额：{$ls.freeze_funds|number_format=2,'.',','}</span><span>待收总额：{$ls.due_in|number_format=2,'.',','}</span></p>
+            <if condition="$coll.money neq ''">
+            <p><span> 最近待收金额：{$coll.money|number_format=2,'.',','}</span><span>最近待收时间：{$coll.time|date="Y-m-d H:i:s",###}</span><a href="__ROOT__/Center/invest/{$coll['types']==7?'isflow':'isclosed'}.html">[待收明细]</a></p>
+            <else/>
+            <p><span>最近待收金额:0</span><span>最近待收时间：无</span><a href="__ROOT__/Center/invest/{$coll['types']==7?'isflow':'isclosed'}.html">[待收明细]</a></p>
+            </if>
+            <if condition="$ref.money neq ''">
+            <p><span>最近待还金额:{$ref.money|number_format=2,'.',','}</span><span>最近待还时间：{$ref.time|date="Y-m-d H:i:s",###}</span><a href="__ROOT__/Center/loan/{$ref['types']==7?'isflow':'is'}.html">[还款明细]</a></p>
+            <else/>
+            <p><span>最近待还金额:0</span><span>最近待还时间：无</span><a href="__ROOT__/Center/loan/{$ref['types']==7?'isflow':'is'}.html">[还款明细]</a></p>
+            </if>
+            <p><span> 已逾期的借款数：{$overd}</span><a href="__ROOT__/Center/loan/overdue.html">[逾期明细]</a></p>
+            <p><span> 待收利息：{$ls.stay_interest|number_format=2,'.',','}</span><span> 已赚利息：{$ls.make_interest|number_format=2,'.',','}</span><span>已赚奖励：{$ls.make_reward|number_format=2,'.',','}</span></p>
+            
+         </div>
+    </volist>
+    </div>
+    <!-- right end--> 
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />

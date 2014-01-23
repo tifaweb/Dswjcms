@@ -1,0 +1,473 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop">
+<!-- left start-->
+<include file="left" />
+<!-- left end-->
+    <!-- right start-->
+    <div id="content" class="center_right span10">
+      	<switch name="mid" >
+            <case value="bank">
+            <!--银行账户 start-->
+            <form method="post"  action='__URL__/upda'>
+            <input name="q" type="hidden" value="ufo" />
+            <input name="u" type="hidden" value="__ROOT__/Center/fund/bank.html" />
+            <input name="n" type="hidden" value="银行账户修改" />
+            <input name="g" type="hidden" value="uid" />
+            <input name="sid" type="hidden" value="{$Think.session.user_uid}" />
+            
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">资金管理</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">银行账户</li>
+                </ul>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>真实姓名：</td>
+                            <td>{$userinfos.name}</td>
+                         </tr>
+                         <tr>
+                            <td>开户银行：</td>
+                            <td>
+                                <select name="bank" class="span2" style="width:160px;">   
+                                        <volist name="list" id="vo">
+                                        <if condition="$vo.value eq $userinfos.bank ">
+                                        <option value='{$vo.value}' selected>{$vo.name}</option>
+                                        <else/>
+                                        <option value='{$vo.value}' >{$vo.name}</option>
+                                        </if>
+                                        </volist>
+                                </select>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>开户支行名称：</td>
+                            <td><input name="bank_name" type="text" value="{$userinfos.bank_name}"/></td>
+                         </tr>
+                         <tr>
+                            <td>银行账号：</td>
+                            <td><input name="bank_account" type="text" value="{$userinfos.bank_account}"/></td>
+                         </tr>
+                    </tbody>
+                </table>
+                 <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+            <!--银行账户 end-->
+            </case>
+            <case value="draw">
+            <!--账户提现 start-->
+            <form method="post"  action='__URL__/drawUpda'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">资金管理</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">账户提现</li>
+                </ul>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="span2">开户人：</td>
+                            <td>{$userinfos.name}</td>
+                        </tr>
+                        <tr>
+                            <td>开户银行：</td>
+                            <td>{$userinfos.banks}</td>
+                        </tr>
+                        <tr>
+                            <td>所属支行：</td>
+                            <td>{$userinfos.bank_name}</td>
+                        </tr>
+                        <tr>
+                            <td>银行卡号：</td>
+                            <td>{$userinfos.bank_account}</td>
+                        </tr>
+                        <tr>
+                            <td>可提现金额：</td>
+                            <td>{$userinfos['available_funds']|number_format=2,'.',','}元</td>
+                        </tr>
+                        <tr>
+                            <td>提现金额：</td>
+                            <td >
+                            <div class="input-prepend input-append">
+                                <span class="add-on">$</span>
+                                    <input name="money" type="text" class="span1"/>
+                                 <span class="add-on">元</span>
+                            </div>
+                            </td>
+                        </tr>
+                        <input name="type" type="hidden" value="1" />
+                        <input name="uid" type="hidden" value="{$Think.session.user_uid}" />
+                        <tr>
+                            <td>交易密码：</td>
+                            <td><input name="password" type="password" class="span2"/></td>
+                        </tr>
+                        <tr>
+                            <td>验证码：</td>
+                            <td>
+                            	<input class="input-large" name="proving" type="text"  style="width:50px;margin-top:10px;" title="验证码" data-rel="tooltip"/>
+                            	<img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+            <!--账户提现 end-->
+            </case>
+            <case value="inject">
+            <!--账户充值 start-->
+            <form method="post"  action='__URL__/injectAdd'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">资金管理</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">账户充值</li>
+                </ul>
+                <table class="table table-striped datatable ">
+                    <tbody>
+                        <tr>
+                            <td class="span2">充值方式：</td>
+                            <td class="form-inline">
+                            	<label class="radio"><input type="radio" name="way" value="0" checked onclick="$('#online').hide();$('#offline').show();"/> 线下充值</label>
+                                <label class="radio"><input type="radio" name="way" value="1" onclick="$('#offline').hide();$('#online').show();"/> 网上充值</label>
+                            </td>
+                         </tr>
+                         <tr>
+                         	<td>充值类型：</td>
+                            <td class="form-inline fund_audit">  
+                            <div id="offline">
+                            	<label class="radio"><input type="radio" name="oid" value="" checked/> 请选择</label>
+                                <volist name="audit" id="vo">
+                                <label class="radio"><input type="radio" name="oid" value="{$vo.id}"/> {$vo.type_name}</label>
+                                <div class="fund_bank">
+                                    <dl>
+                                        <dt>支行名称：</dt>
+                                        <dd>{$vo.bank_name}</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>收款人：</dt>
+                                        <dd>{$vo.name}</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>银行账户：</dt>
+                                        <dd>{$vo.bank}</dd>
+                                    </dl>
+                                 </div>
+                                </volist>
+                                <div class="fund_bank">
+                                    <dl>
+                                        <dt>流水号：</dt>
+                                        <dd><input name="number" type="text" /></dd>
+                                    </dl>
+                                 </div>
+                            </div>
+                            <div id="online" style="display:none;">
+                            dsfsdf
+                            </div>
+                            </td>
+                         </tr>
+                         <tr>
+                         	<td>充值金额：</td>
+                            <td>
+                            <div class="input-prepend input-append">
+                                <span class="add-on">$</span>
+                                    <input name="money" type="text" class="span2"/>
+                                 <span class="add-on">元</span>
+                            </div>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>验证码：</td>
+                            <td>
+                            	<input class="input-large" name="proving" type="text"  style="width:50px;margin-top:10px;" title="验证码" data-rel="tooltip"/>
+                            	<img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+            <!--账户充值 end-->
+            </case>
+            <case value="drawrecord">
+            <!--提现记录 start-->
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">资金管理</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">提现记录</li>
+                </ul>
+                <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">
+                    ×
+                    </a>
+                    <p>提现总金额：{$withusers['money']?$withusers['money']:0}元，手续费：{$withusers['poundage']?$withusers['poundage']:0}元，到账金额：{$withusers['account']?$withusers['account']:0}元</p>
+                </div>
+                <table class="table table-striped datatable">
+                    <thead>
+                      <tr>
+                      	<th class="span2">提现时间</th>
+                        <th class="span2">提现银行</th>
+                        <th class="span2">提现账号</th>
+                        <th class="span1">提现<br />金额</th>
+                        <th class="span1">手续费</th>
+                        <th class="span1">到账<br />金额</th>
+                        <th class="span1">状态</th>
+                        <th  class="span1">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    	<volist name="withuser" id="vos">
+                        <tr>
+                        	<td>{$vos.time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$vos.bank}</td>
+                            <td>{$vos.bank_account}</td>
+                            <td>{$vos['money']?$vos['money']:0} 元</td>
+                            <td>{$vos['withdrawal_poundage']?$vos['withdrawal_poundage']:0} 元</td>
+                            <td>{$vos['account']?$vos['account']:0} 元</td>
+                            <td>
+                            	<switch name="vos.type">
+                                    <case value="1">提现申请</case>
+                                    <case value="2">提现成功</case>
+                                    <case value="3">提现失败</case>
+                                    <default />撤销提现
+                                </switch>
+                            </td>
+                            <td>
+                            	<if condition="$vos.type eq 1 ">
+                                <a href="#undo" data-toggle="modal" onclick="$('#undo_id').val({$vos.id});">撤销提现</a>
+                                <else/>
+                                无
+                                </if>
+                            
+                            </td>
+                         </tr>
+                         </volist>
+                    </tbody>
+                </table>
+            <!--提现记录 end-->
+            <!--撤销提现 start-->
+                <div id="undo" class="modal hide fade in" >
+                    <div class="modal-header">
+                      <a class="close" data-dismiss="modal" >&times;</a>
+                      <h3>撤销提现</h3>
+                    </div>
+                    <div class="modal-body">
+                    <form method="post"  action='__URL__/drawUndo'>
+                        <input id="undo_id" name="id" type="hidden" value="" />
+                        <input type="hidden" name="type" value="4"/>
+                        <div class="span4">
+                          <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+                          <input class="input-large" name="proving" type="text"  style="width:50px;margin-top:10px;" title="验证码" data-rel="tooltip"/>
+                          <button class="btn btn-primary" type="submit">
+                              确认提交
+                          </button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            <!--撤销提现 end-->
+            </case>
+            <case value="injectrecord">
+            <!--充值记录 start-->
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">资金管理</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">充值记录</li>
+                </ul>
+                <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">
+                    ×
+                    </a>
+                    <p>充值总金额：{$showusers['money']?$showusers['money']:0}元，手续费：{$showusers['poundage']?$showusers['poundage']:0}元，到账金额：{$showusers['account']?$showusers['account']:0}元</p>
+                </div>
+                <table class="table table-striped datatable">
+                    <thead>
+                      <tr>
+                      	<th class="span2">充值时间</th>
+                      	<th class="span2">订单号</th>
+                        <th class="span1">支付<br />方式</th>
+                        <th class="span1">充值<br />金额</th>
+                        <th class="span1">手续费</th>
+                        <th class="span1">到账<br />金额</th>
+                        <th class="span1">状态</th>
+                        <th class="span1">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    	<volist name="showuser" id="vo">
+                        <tr>
+                        	<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$vo.nid}</td>
+                            <td>{$vo.genre_name}</td>
+                            <td>{$vo['money']?$vo['money']:0} 元</td>
+                            <td>{$vo['poundage']?$vo['poundage']:0} 元</td>
+                            <td>{$vo['account_money']?$vo['account_money']:0} 元</td>
+                            <td>
+                            	<switch name="vo.type">
+                                    <case value="1">充值申请</case>
+                                    <case value="2">充值成功</case>
+                                    <case value="3">充值失败</case>
+                                    <default />撤销充值
+                                </switch>
+                            </td>
+                            <td>
+                            	<if condition="$vo.type eq 1 ">
+                                <a href="#undo" data-toggle="modal" onclick="$('#undo_id').val({$vo.id});">撤销充值</a>
+                                <else/>
+                                无
+                                </if>
+                            
+                            </td>
+                         </tr>
+                         </volist>
+                    </tbody>
+                </table>
+            <!--充值记录 end-->
+            <!--撤销充值 start-->
+                <div id="undo" class="modal hide fade in" >
+                    <div class="modal-header">
+                      <a class="close" data-dismiss="modal" >&times;</a>
+                      <h3>撤销充值</h3>
+                    </div>
+                    <div class="modal-body">
+                    <form method="post"  action='__URL__/upda'>
+                        <input name="q" type="hidden" value="rech" />
+                        <input name="u" type="hidden" value="__ROOT__/Center/fund/injectrecord.html" />
+                        <input name="n" type="hidden" value="撤销充值" />
+                        <input id="undo_id" name="sid" type="hidden" value="" />
+                        <input type="hidden" name="type" value="4"/>
+                        <div class="span4">
+                          <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+                          <input class="input-large" name="proving" type="text"  style="width:50px;margin-top:10px;" title="验证码" data-rel="tooltip"/>
+                          <button class="btn btn-primary" type="submit">
+                              确认提交
+                          </button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            <!--撤销充值 end-->
+            </case>
+            <case value="fundrecord">
+            <!--资金记录 start-->
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">资金管理</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">资金记录</li>
+                </ul>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>个人资金详情</th>
+                      </tr>
+                    </thead>
+                    <tbody>                
+                        <tr>
+                            <td>账户总额：{$money.total_money|number_format=2,'.',','}元</td>
+                            <td>可用余额：{$money.available_funds|number_format=2,'.',','}元</td>
+                            <td>冻结金额：{$money.freeze_funds|number_format=2,'.',','}元</td>
+                            <td>待收金额：{$money.due_in|number_format=2,'.',','}元</td>
+                         </tr>
+                         <tr>
+                            <td>待还金额：{$money.stay_still|number_format=2,'.',','}元</td>
+                            <td>待收利息：{$money.stay_interest|number_format=2,'.',','}元</td>
+                            <td>已赚利息：{$money.make_interest|number_format=2,'.',','}元</td>
+                            <td>已赚奖励：{$money.make_reward|number_format=2,'.',','}元</td>
+                         </tr>
+                         <tr>
+                            <td>逾期金额：{$money.overdue|number_format=2,'.',','}元</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                         </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped datatable">
+                    <thead>
+                      <tr>
+                      	<th class="span2">记录时间</th>
+                        <th class="span1">操作<br />金额</th>
+                        <th class="span1">总金额</th>
+                        <th class="span1">可用<br />金额</th>
+                        <th class="span1">冻结<br />金额</th>
+                        <th class="span1">交易<br />对方</th> 
+                        <th class="span3">操作说明</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="record" id="vo">
+                        <tr>
+                        	<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$vo.operation|number_format=2,'.',','}</td>
+                            <td>{$vo.total_money|number_format=2,'.',','}</td>
+                            <td>{$vo.available_funds|number_format=2,'.',','}</td>
+                            <td>{$vo.freeze_funds|number_format=2,'.',','}</td>
+                            <td>{$vo.counterparty}</td>
+                            <td>{$vo.actionname}</td>
+                         </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            <!--资金记录 end-->
+            </case>
+            <case value="assured">
+            <!--额度申请 start-->
+            <form method="post"  action='__URL__/assureUpda'>
+                <ul class="breadcrumb">
+                    <li>
+                    <a href="#">资金管理</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">额度申请</li>
+                </ul>
+                <table class="table table-striped datatable ">
+                    <tbody>
+                         <tr>
+                         	<td>担保额度：</td>
+                            <td><input name="assure" type="text" class="span2"/></td>
+                         </tr>
+                         <tr>
+                            <td>验证码：</td>
+                            <td>
+                            	<input class="input-large" name="proving" type="text"  style="width:50px;margin-top:10px;" title="验证码" data-rel="tooltip"/>
+                            	<img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+            <!--额度申请 end-->
+            </case>
+            <default />空
+            </form>
+        </switch>
+    </div>
+    <!-- right end--> 
+
+<!-- container end -->
+<!--底部  start-->
+<script>
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+</script>
+<include file="Index:footer" />
