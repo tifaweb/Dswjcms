@@ -4310,8 +4310,8 @@ $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}smtp` (
   UNIQUE KEY `send_email` (`send_email`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;";	
-$sqls[]="INSERT INTO `{$dbprefix}smtp` (`smtp`, `validation`, `send_email`, `password`, `addresser`) VALUES
-(1,'smtp.126.com', 1, 'tifawebcesi@126.com', 'abcd12345', '宁波天发网络');";
+$sqls[]="INSERT INTO `{$dbprefix}smtp` (`id`, `smtp`, `validation`, `send_email`, `password`, `addresser`) VALUES
+(1, 'smtp.126.com', 1, 'tifawebcesi@126.com', 'abcd12345', '宁波天发网络');";
 
 $sqls[]="DROP TABLE IF EXISTS `{$dbprefix}system`;";
 $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}system` (
