@@ -313,7 +313,7 @@ $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}site` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;";	
 $sqls[]="INSERT INTO `{$dbprefix}site` (`id`, `order`, `pid`, `aid`, `catpid`, `title`, `keyword`, `remark`, `page_tpl`, `list_tpl`, `content_tpl`, `link`, `user_id`, `status`, `type`, `orde`, `addtime`) VALUES
 (1, 1, 0, 1, '0', '关于我们', '', '', 'page', 'list', 'page', 'about', 22, 1, 3, 7, '1385889550'),
-(2, 1, 0, 2, '0', '首页', '123', '456', 'page', 'list', 'content', '/', 22, 1, 1, 1, '1384765588'),
+(2, 1, 0, 2, '0', '首页', 'Dswjcms,CMS,PHP,Thinkphp,完全免费开源', '新Dswjcms是基于TP+采用Bootstrap前端开发，整合Charisma后台的CMS，软件依于GPLV2协议发布。', 'page', 'list', 'content', '/', 22, 1, 1, 1, '1384765588'),
 (4, 1, 0, 4, '0', '我的账户', '', '', 'page', 'list', 'content', '/Center.html', 22, 1, 1, 4, '1384762467'),
 (5, 1, 0, 5, '0', '登陆', '', '', 'page', 'list', 'content', '/Logo/login.html', 22, 1, 1, 5, '1384764322'),
 (6, 1, 0, 6, '0', '注册', '', '', 'page', 'list', 'content', '/Logo/register.html', 22, 1, 1, 5, '1384764337'),
@@ -412,9 +412,9 @@ $sqls[]="CREATE TABLE IF NOT EXISTS `{$dbprefix}system` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;";	
 $sqls[]="INSERT INTO `{$dbprefix}system` (`id`, `state`, `prompt`, `value`, `name`, `type`) VALUES
-(1, '网站名称', '请输入网站名称', 'Dswjcms借贷系统', 'sys_name', 1),
-(2, '网站关键字', '请输入关键字', 'Dswjcms,借贷系统，借贷平台', 'sys_keyword', 1),
-(3, '网站描述', '请输入描述', '新一代的借贷系统', 'sys_describe', 2),
+(1, '网站名称', '请输入网站名称', 'Dswjcms', 'sys_name', 1),
+(2, '网站关键字', '请输入关键字', 'Dswjcms,CMS,PHP,Thinkphp,完全免费开源', 'sys_keyword', 1),
+(3, '网站描述', '请输入描述', '新Dswjcms是基于TP+采用Bootstrap前端开发，整合Charisma后台的CMS，软件依于GPLV2协议发布。', 'sys_describe', 2),
 (4, '网站LOGO', '请输入LOGO', '1388022762.5063.png', 'sys_logo', 3),
 (5, '联系电话', '请输入电话', '0574-8888888', 'sys_phone', 1),
 (6, '手机', '请输入手机号', '13088888888', 'sys_cellphone', 1),

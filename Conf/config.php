@@ -2,14 +2,10 @@
 return array(
 //'配置项'=>'配置值'
  'DB_TYPE'   => 'mysql', // 数据库类型
- 'DB_PORT'   => 3306, // 端口      
- 'DB_NAME'   => 'job', // 数据库名
- 'DB_USER'   => 'root', // 用户名
- 'DB_PWD'    => '', // 密码
- 'DB_PREFIX' => 'ds_', // 数据库表前缀  
- 'APP_GROUP_LIST' => 'Home,Admin,Api,Win', //项目分组设定
- //'TMPL_EXCEPTION_FILE'=>'./Tpl/Home/Logo/error.html',// 定义公共错误模板
- //'URL_404_REDIRECT'=>__ROOT__.'/error.html',
+ 'DB_PORT'   => 3306, // 端口        
+  'APP_GROUP_LIST' => 'Home,Admin,Api,Win', //项目分组设定
+ 'TMPL_EXCEPTION_FILE'=>'./Tpl/Home/Logo/error.html',// 定义公共错误模板
+ 'URL_404_REDIRECT'=>__ROOT__.'/error.html',
  'DS_PATH'=>'',
  'AUTH_CONFIG'=>array(
 	'AUTH_ON' => true, //认证开关
