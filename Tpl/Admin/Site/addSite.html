@@ -1,0 +1,256 @@
+<include file="Index:header" />
+
+<div class="container-fluid">
+	<div class="row-fluid">
+        <!--左栏 starts -->
+		<include file="left" />
+        <!--左栏 end -->
+			
+			
+       <!-- content starts -->
+      <div id="content" class="span10">
+          <ul class="breadcrumb">
+              <li>
+                  <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+              </li>
+              <li>
+                  <a href="__ROOT__/Admin/Site.html">栏目管理</a> <span class="divider">/</span>
+              </li>
+              <li class="active">添加栏目</li>
+              
+          </ul>
+          
+            <ul id="myTab" class="nav nav-tabs">
+
+              <li class="active"><a href="#home" data-toggle="tab">基本信息</a></li>
+
+              <li><a href="#profile" data-toggle="tab">详细信息</a></li>
+
+
+            </ul>
+ <form method="post"  action='__URL__/tfAdd'>
+ <input name="user_id" type="hidden" value="{$user_id}" />
+  <input name="catpid" id="catpid" type="hidden" value="{$catpid}" />
+  <input name="q" id="q" type="hidden" value="sta" />
+  <input name="u"  type="hidden" value="__ROOT__/Admin/Site.html" />
+            <div id="myTabContent" class="tab-content">
+
+              <div class="tab-pane fade in active" id="home">
+
+                
+                    <table class="table">
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                               栏目名称：
+                                        </td>
+                                        <td>
+                                          <input name="title" type="text" class="span5" placeholder="请输入分类名称..." maxlength="30">
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                               自定义链接：
+                                        </td>
+                                        <td>
+                                          <input name="link" type="text" class="span5" placeholder="请输入自定义链接..." maxlength="100">
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                               上级类目：
+                                        </td>
+                                        <td>
+                                        <if condition="$catpid ">
+
+                                            <select name="pid" id="pid">
+                                                <option value="{$pid}" id="Type">{$list['title']}</option>
+                                            </select>                                          
+                                          
+                                        <else />
+                                            <select name="pid" id="pid"  onchange="var id=$(this).val();orclick(id);setCatPid(id);">
+                                                <option value="0" id="Type">顶级类目</option>
+                                                <volist name="site" id="vo">
+                                                  <option id="o_{$vo.id}" value="{$vo.id}" class="cal{$vo.order}" catpid="{$vo.absPath}" order="{$vo.order}">
+                                                    <if condition="intval($vo['order']) eq 1 ">
+                                                       {$vo.title}
+                                                  
+                                                   <elseif condition="intval($vo['order']) eq 2 " />
+                                                    ├ {$vo.title}
+                                                    <elseif condition="intval($vo['order']) eq 3 " /> 
+                                                    │├ {$vo.title}
+                                                    <elseif condition="intval($vo['order']) eq 4 " /> 
+                                                   ││├ {$vo.title}
+                                                    <elseif condition="intval($vo['order']) eq 5 " /> 
+                                                    │││├ {$vo.title}
+                                                    <else />
+                                                    │--├ {$vo.title}
+                                                    </if>
+                    
+                                                  </option>
+                                                  </volist>
+                                            </select>
+                                        </if>
+                                        </td>
+                                      </tr>
+                                       <tr>
+                                        <td>
+                                               关键字：
+                                        </td>
+                                        <td>
+                                          <input name="keyword" type="text" class="span10" placeholder="请输入关键字..." maxlength="100">
+                                        </td>
+                                      </tr>
+                              <tr>
+                                        <td>
+                                               描述：
+                                        </td>
+                                        <td>
+                                          <textarea name="remark" class="span5" placeholder="请输入描述..." maxlength="200" style="height:200px;" ></textarea>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        <td>
+                                               页面类型：
+                                        </td>
+                                        <td class="form-inline">
+                                          <label class="radio"><input type="radio" name="type" value="1" checked/> 封面</label>
+                                          <label class="radio"><input type="radio" name="type" value="2" /> 列表</label>
+                                          <label class="radio"><input type="radio" name="type" value="3" /> 内容</label>
+                                        </td>
+                                      </tr>
+                                       <tr>
+                                        <td>
+                                               封面模板：
+                                        </td>
+                                        <td class="form-inline">
+                                              无
+                                        </td>
+                                      </tr>   
+                                       <tr>
+                                        <td>
+                                               列表模板：
+                                        </td>
+                                        <td class="form-inline">
+                                              <input name="list_tpl" type="text" class="span5" value="list">
+                                        </td>
+                                      </tr> 
+                                       <tr>
+                                        <td>
+                                               内容页模板：
+                                        </td>
+                                        <td class="form-inline">
+                                              <input name="content_tpl" type="text" class="span5" value="page">
+                                        </td>
+                                      </tr>                                                                                                               
+                                      
+                                      <tr>
+                                        <td>
+                                               显示/隐藏：
+                                        </td>
+                                        <td class="form-inline">
+                                          <label class="radio"><input type="radio" name="status" value="1" checked/> 显示</label>
+                                          <label class="radio"><input type="radio" name="status" value="0" /> 隐藏</label>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                               排序：
+                                        </td>
+                                        <td>
+                                         <input name="orde" type="text" class="span2"  value="5">
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                    <if condition="$list['newOrder'] ">
+                                      <input id="order" name="order" type="hidden" class="span2"  value="{$list['newOrder']}">
+                                     <else />
+                                     <input id="order" name="order" type="hidden" class="span2"  value="1">
+                                     </if>
+                
+                    </table>
+
+
+              </div>
+              <!--基本信息end-->
+
+              <div class="tab-pane fade" id="profile">
+               <table class="table">
+                   <tbody>
+                    <!--<tr>
+                      <td>
+                             缩略图：
+                      </td>
+                      <td>
+                           <ul class="thumbnails" >
+                                <li>
+                                <a id="feila" >
+                                <img id="feil" >
+                                </a>
+                                </li>
+                             </ul>
+                            <input id="img" name="litpic" type="hidden" value=""/>
+                            <input id="file_delete" type="hidden" value=""/>
+                            <input id="folder" type="hidden" value="column"/>
+                            <input data-no-uniform="true" type="file" name="file_upload" id="file_upload" />
+                      </td>
+                    </tr>  -->
+                    <tr>
+                      <td>
+                             调用模型：
+                      </td>
+                      <td>
+                           <input name="model" type="text" class="span5" value="article">
+                      </td>
+                    </tr>                    
+                   
+                    <tr>
+                      <td>
+                             内容：
+                      </td>
+                      <td>
+                          <textarea class="editor" name="content"  style="width:1000px;height:600px;"></textarea>  
+                      </td>
+                    </tr>
+                    
+                                      
+                    </tbody>
+                    </table>
+
+              </div>
+              <div class="modal-footer">
+                  <a href="#" class="btn" data-dismiss="modal">关闭</a>
+                  <button type="submit" class="btn btn-primary" >确认添加</button>
+              </div>
+              </form>
+
+
+            </div>
+
+          
+          
+      </div>
+       <!-- content end -->
+   </div>
+   <script>
+     function setCatPid(v){
+		 if(v==0){
+			catpid=0;	
+		}else{
+			 var catpid  = $("#o_"+v).attr("catpid");
+		}
+		 $("#catpid").attr("value",catpid);
+	 }
+	 function orclick(s){
+		if(s==0){
+			order=1;	
+		}else{
+			var order =  $("#o_"+s).attr("order");
+			order=parseInt(order)+1;
+		}
+		$('#order').val(order);	
+	}
+   </script>
+</div>
+<include file="Index:footer" />

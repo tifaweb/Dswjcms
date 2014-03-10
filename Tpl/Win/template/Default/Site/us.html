@@ -1,0 +1,68 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="container paddtop row-fluid">
+    <!--内容 start-->
+    <!-- left start-->
+    <!-- left end-->
+    <div  id="content" class="list_right">
+	  <ul class="breadcrumb">
+          <li>
+              <a href="__ROOT__/Win/Index/invest">首页</a> <span class="divider">/</span>
+          </li>
+          <li class="active">联系我们</li>
+      </ul>
+     <h4 class="text-center">联系我们</h4> 
+     <hr>
+     <div>
+     
+     <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=2b866a6daac9014292432d81fe9b47e3"></script>
+		<script src="http://d1.lashouimg.com/static/js/release/jquery-1.4.2.min.js" type="text/javascript"></script>
+
+        <div style="height:400px;border:1px solid gray" id="container">
+		</div>
+     </div> 
+     </div>
+ </div>     
+      
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />
+<script type="text/javascript">
+		var map = new BMap.Map("container");
+		map.centerAndZoom(new BMap.Point(121.554734,29.813266), 13);
+		map.enableScrollWheelZoom();
+		var marker=new BMap.Marker(new BMap.Point(121.554734,29.813266));
+		map.addOverlay(marker);
+		var licontent="<b>宁波天发网络</b><br>";
+        licontent+="<span><strong>地址：</strong>宁波商会国贸中心B605</span><br>";
+        licontent+="<span><strong>手机：</strong>13081971646</span><br>";
+        licontent+="<span class=\"input\"><strong></strong><input class=\"outset span6\" type=\"text\" name=\"origin\" value=\"南站\"/>&nbsp;&nbsp;<input class=\"outset-but btn btn-info\" type=\"button\" value=\"公交\" onclick=\"gotobaidu(1)\" />&nbsp;&nbsp;<input class=\"outset-but btn btn-warning\" type=\"button\" value=\"驾车\"  onclick=\"gotobaidu(2)\"/><a class=\"gotob\" href=\"url=\"http://api.map.baidu.com/direction?destination=latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:南站"+"®ion=宁波"+"&output=html\" target=\"_blank\"></a></span>";
+        var hiddeninput="<input type=\"hidden\" value=\""+'宁波'+"\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:"+marker.getPosition().lat+","+marker.getPosition().lng+"|name:南部商务区"+"\" name=\"destination\" />";
+       var content1 ="<form id=\"gotobaiduform\" action=\"http://api.map.baidu.com/direction\" target=\"_blank\" method=\"get\">" + licontent +hiddeninput+"</form>"; 
+        var opts1 = { width: 300 };
+   
+       var  infoWindow = new BMap.InfoWindow(content1, opts1);
+	 marker.openInfoWindow(infoWindow);
+	 marker.addEventListener('click',function(){ marker.openInfoWindow(infoWindow);});
+	
+	function gotobaidu(type)
+	{
+	    if($.trim($("input[name=origin]").val())=="")
+	    {
+	        alert("请输入起点！");
+	        return;
+	    }else{
+	        if(type==1)
+	        {
+	            $("input[name=mode]").val("transit");
+	            $("#gotobaiduform")[0].submit();
+	        }else if(type==2)
+	        {    
+	            $("input[name=mode]").val("driving");        
+	            $("#gotobaiduform")[0].submit();
+	        }
+	    }
+	}   
+	</script>
+

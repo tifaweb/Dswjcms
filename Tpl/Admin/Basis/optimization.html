@@ -1,0 +1,38 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">数据表优化</li>
+</ul>
+<form class="form-horizontal" method="post">
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">优化方式</label>
+    <div class="controls">
+        <label class="radio">
+          <input type="radio" name="oid"  value="1" checked>
+          全部优化
+        </label>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+     <button class="btn btn-primary" type="submit">
+     开始优化
+     </button>
+    </div>
+  </div>
+</form>
+<div>
+</div>
+<!--底部 -->
+<include file="Index:footer" />

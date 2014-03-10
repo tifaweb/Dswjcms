@@ -1,0 +1,85 @@
+<include file="header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__ROOT__/Admin/Index/system.html">系统设置</a> <span class="divider">/</span>
+      </li>
+      <li class="active">编辑</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__ROOT__/Admin/Index/system.html" >返回系统设置</a></div>
+</ul>
+<form method="post"  action='__URL__/savesys'>
+<input name="id" type="hidden" value="{$Think.get.id}" />
+ <table class="table table-striped table-bordered table-condensed">
+ <volist name="edlist" id="ed">
+   <tbody>
+	  <tr>
+		<td>
+			   参数说明：
+		</td>
+		<td>
+		  <input name="state" type="text" class="span5" placeholder="请输入参数说明..." value="{$ed.state}">
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			   输入提示：
+		</td>
+		<td>
+		  <input name="prompt" type="text" class="span5" placeholder="请输入输入提示..." value="{$ed.prompt}">
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			   参数值：
+		</td>
+		<td>
+		  <input name="value" type="text" class="span5" placeholder="请输入参数值..." value="{$ed.value}">
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			   变量名：
+		</td>
+		<td>
+		  <input name="name" type="text" class="span5" placeholder="请输入变量名以sys_开头..."  value="{$ed.name}">
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			   表单类型：
+		</td>
+		<td class="form-inline">
+		  <label class="radio"><input type="radio" name="type" value="1" <eq name="ed.type" value="1">checked</eq>/> 文本域</label>
+		  <label class="radio"><input type="radio" name="type" value="2" <eq name="ed.type" value="2">checked</eq>/> 文本区域</label>
+		  <label class="radio"><input type="radio" name="type" value="3" <eq name="ed.type" value="3">checked</eq>/> 文件域</label>
+		</td>
+	  </tr>
+	</tbody>
+ </volist>
+ </table>
+<div>
+<div class="span4">
+
+</div>
+<div class="span5">
+          <button class="btn btn-primary" type="submit">
+              确认修改
+          </button>
+            <a href="__ROOT__/Admin/Index/system.html" class="btn btn-info ajax-link">取消</a>
+			<input name="id" type="hidden" value="{$ed.id}" />
+</div>
+</div>
+</form>
+<!--底部 -->
+<include file="footer" />

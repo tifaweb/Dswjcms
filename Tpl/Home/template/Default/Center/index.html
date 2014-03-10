@@ -1,0 +1,32 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div clsss="">
+<div class="container ">
+    <!-- right start-->
+    <div  id="content" class="center_right">
+    	<div  class="center_top row-fluid">
+
+                <dl class="span2">
+                 <if condition="$heads gt 0">
+                    <dd><img src="__PUBLIC__/FaustCplus/php/img/big_user_{$Think.session.user_uid}.jpg" width="110"/></dd>
+                 <else/>
+                 	<dd><img src="__PUBLIC__/FaustCplus/php/img/big_user_0.jpg" width="110"/></dd>
+                 </if>
+                    <dd><a href="__ROOT__/Home/Center/portrait.html">更换头像</a></dd>
+                </dl>
+                <div class="span8">
+                <br/>
+                <br/>
+                <br/>
+                <p class="text-info">个人中心因为没有什么关于会员的功能，但考虑到头像这个功能在很多行业站开发都应该会用到，所以就单独放了个，所以这个页面样子有点丑，大家请谅解</p>
+                </div>
+                
+         </div>
+    </div>
+    <!-- right end--> 
+</div>
+</div>
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />

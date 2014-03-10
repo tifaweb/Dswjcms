@@ -1,0 +1,30 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!-- container start --> 
+<div class="row-fluid">
+	<div class="container paddtop">
+    <!--内容 start-->
+    <!-- left start-->
+    <include file="left" />
+    <!-- left end-->
+    <div  id="content" class="list_right span8">
+	  <ul class="breadcrumb">
+          <li>
+              <a href="/">首页</a> <span class="divider">/</span>
+          </li>
+          <li>
+              <a href="__ROOT__/Site/listTpl/id/{$artic.id}.html">{$artic.title}</a> <span class="divider">/</span>
+          </li>
+          <li class="active">{$list['title']}</li>
+      </ul>
+     <h4 class="text-center">{$list['title']}</h4> 
+     <hr>
+     <div>
+     {$list['introtext']}
+     </div> 
+    </div>
+</div>   
+</div> 
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />

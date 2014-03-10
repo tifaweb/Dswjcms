@@ -1,0 +1,45 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--主体 -->
+<div class="row-fluid">
+	<div class="container login_cone">
+    	<div class="span7 login_left">
+    	<h2>设置密码</h2>
+        <form class="form-horizontal" name="myform" method="post" action='__URL__/rsPassword'>
+          <div class="control-group">
+            <label class="control-label">新密码</label>
+            <div class="controls">
+              <input type="password" maxlength="16" name="passw" placeholder="新密码">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">确认密码</label>
+            <div class="controls">
+              <input type="password" maxlength="16" name="password" placeholder="确认密码">
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <p>
+              <input name="uid" type="hidden" value="{$Think.get.uid}" />
+              <button type="submit" class="btn btn-info">提交</button>
+              </p>
+            </div>
+          </div>
+        </form>
+        </div>
+        <div class="span3 login_right">
+        <p><a href="__ROOT__/Logo/login.html" class="btn btn-warning">登陆</a> <a href="__ROOT__/Logo/register.html" class="btn btn-success">注册</a></p>
+        </div>
+    </div>
+</div>
+<!-- 主体 end-->
+<!--底部 -->
+ <script language="JavaScript">
+	function changeVerify(){
+		var timenow = new Date().getTime();
+		document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+	}
+</script>
+<include file="Index:footer" />
+<!--底部 end-->
