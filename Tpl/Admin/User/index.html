@@ -11,13 +11,15 @@
       <div id="content" class="span10">
           <ul class="breadcrumb">
               <li>
-                  <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+                  <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
               </li>
               <li class="active">普通用户管理</li>
- 
+ 			  	<div  class="pull-right"> 
+                <a href="#screening" data-toggle="modal">筛选</a>&nbsp;&nbsp;
+                </div>
           </ul>
-          
-          <table class="table table-striped table-bordered table-condensed datatable">
+          <input id="datasort" type="hidden" value="3" />
+          <table class="table table-striped table-bordered table-condensed ">
             <thead>
               <tr>
                 <th>用户名</th>
@@ -38,18 +40,18 @@
                 <td>{$vo.time|date="Y-m-d",###}</td>
                 <td>
                 	<a href="#edit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-search" title="查看详情" onclick='edit({$vo.id})'></a>
-                  <a href="#aDdit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-locked" title="修改密码" onclick='edits({$vo.id})'></a>
-                  <a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__URL__/exituse?id={$vo.id}'"></a>
+                 	<a href="__APP__/TIFAWEB_DSWJCMS/Fund/money/uid/{$vo.id}.html" data-rel="tooltip" class="icon icon-color icon-profile" title="资金记录"></a>
+                 	<a href="#aDdit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-locked" title="修改密码" onclick='edits({$vo.id})'></a>
+                  	<!--<a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__APP__/TIFAWEB_DSWJCMS/User/exituse?id={$vo.id}'"></a>-->
                 </td>
               </tr>
             </volist>
             </tbody>
            
           </table>          
-          
-
-
-        
+			<div class="pagination pagination-centered">
+              <ul>{$page}</ul>
+              </div>
       </div>
        <!-- content end -->
    </div>
@@ -62,9 +64,9 @@
       <h3>修改用户密码</h3>
     </div>
     <div class="modal-body">
-    <form method="post"  action='__URL__/tfUpda'>
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/User/tfUpda'>
     <input name="q" type="hidden" value="us" />
-    <input name="u" type="hidden" value="__ROOT__/Admin/User.html" />
+    <input name="u" type="hidden" value="__APP__/TIFAWEB_DSWJCMS/User.html" />
     <input name="n" type="hidden" value="修改" />
    <div id='editss'></div>
     <div class="modal-footer"> 
@@ -87,4 +89,29 @@
     <div id='edits'></div>
 </div>
 <!--用户信息 end-->
+<div id="screening" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>筛选</h3>
+    </div>
+    <div class="modal-body">
+    <form method="get">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>查询：</td>
+          <td>
+             	<input name="title" type="text" placeholder="用户名/用户ID..." value="{$Think.get.title}">
+          </td>
+          </tr>
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
 <include file="Index:footer" />

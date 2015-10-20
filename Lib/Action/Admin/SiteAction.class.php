@@ -24,6 +24,7 @@ class SiteAction extends AdminCommAction {
 	  }else{
 	      $site = $mod->field($field)->order($order)->select();	
 	  }
+
 	  $this->assign('site',$site);
 	  $this->display();
 	}
@@ -102,7 +103,7 @@ class SiteAction extends AdminCommAction {
 					$art->fid = $ret1;
 					$ret2 = $art->add();
 					if($ret2){
-						$this->Record('文章添加成功','__URL__/articleList');//后台操作
+						$this->Record('文章添加成功','__APP__/TIFAWEB_DSWJCMS/Site/articleList');//后台操作
 						$this->success("添加成功");
 						//echo "添加成功";
 					}else{
@@ -269,13 +270,6 @@ class SiteAction extends AdminCommAction {
 			$this->error('栏目删除失败');
 		}
 		
-	}
-	
-	
-	public function addSiteInsert(){
-		pre($_POST);
-		
-
 	}
 
 

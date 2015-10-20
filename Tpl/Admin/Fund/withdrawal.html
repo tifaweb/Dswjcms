@@ -1,0 +1,201 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">提现列表</li>
+      <div  class="pull-right">
+      <a href="#screening" data-toggle="modal">筛选</a>&nbsp;&nbsp;
+      <a data-toggle="modal"  data-rel="tooltip" href="#mod">导出</a></div>
+</ul>
+<input id="datasort" type="hidden" value="8" />
+<table class="table table-striped table-bordered table-condensed  ">
+            <thead>
+              <tr>
+                <th>用户名</th>
+                <th>真实姓名</th>
+                <th>提现银行</th>
+                <th>提现支行</th>
+                <th>提现账户</th>
+                <th>提现金额</th>
+                <th>手续费</th>
+                <th>到账金额</th>
+                <th>提现时间</th>
+                <th>状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+<volist name="list" id="vo">
+                <tr>
+                <td>{$vo.username}</td>
+                <td>{$vo.name}</td>
+                <td>{$vo.bank}</td>
+                <td>{$vo.bank_name}</td>
+                <td>{$vo.bank_account}</td>
+                <td>{$vo.money}	元</td>
+                <td>{$vo.withdrawal_poundage} 元</td>
+                <td>{$vo.account} 元</td>
+                <td>{$vo.time|date="Y-m-d",###}</td>
+                 <td>
+                 	<switch name="vo.type">
+                        <case value="1">提现申请</case>
+                        <case value="2">提现成功</case>
+                        <case value="3">提现失败</case>
+                        <default />撤销提现
+                    </switch>
+                </td>
+                <td>
+                	<if condition="$vo.type eq 1">
+                    <a href="#audit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-book"title="审核" onclick="$('#up_id').val({$vo.id});"></a>
+                    <else />
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Fund/withdrawal_page/{$vo.id}.html"  data-rel="tooltip" class="icon-search " title="查看"></a>
+                    </if>
+                </td>
+              </tr>
+</volist>
+            </tbody>
+          </table>
+          <div class="pagination pagination-centered">
+          <ul>{$page}</ul>
+          </div>
+<div>
+</div>
+<!--底部 -->
+<!--审核 start-->
+<div id="audit" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>审核</h3>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Fund/withUpda'>
+        <input id="up_id" name="id" type="hidden" value="" />
+        <p class="form-inline">   
+          <label class="radio"><input type="radio" name="type" value="2" checked/> 通过</label>
+          <label class="radio"><input type="radio" name="type" value="3" /> 不通过</label>
+        </p>
+        <div class="span10">
+      	  <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+          <input class="input-large" name="proving" type="text"  style="width:50px;margin-top: 10px;" title="验证码" data-rel="tooltip"/>
+          <button class="btn btn-primary" type="submit">
+              确认提交
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--审核 end-->
+<!--导出设置 start-->
+<div id="mod" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>导出设置</h3>
+    </div>
+    <div class="alert alert-info">
+        <p>每次导出条数最多5000条，如果数据总合以超5000条请输入上一份导出文件的最大ID值</p>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Fund/integExports'>
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>开始ID：</td>
+          <td>
+             	<input name="fid" type="text"  value=''/>
+          </td>
+          
+          </tr>
+          <tr>
+          <td>导出类型：</td>
+          <td>
+             	<select name="type">  
+                	<option value='' >全部</option> 
+                    <option value='1'>提现申请</option>
+                    <option value='2'>提现成功</option>
+                    <option value='3'>提现失败</option>
+                    <option value='4'>撤销提现</option>
+                </select>
+          </td>
+          </tr>
+        </tbody>
+       	</table>
+        <div class="span10">
+          <button class="btn btn-primary" type="submit">
+              导出
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--导出设置 end-->
+<script>
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+</script>
+<div id="screening" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>筛选</h3>
+    </div>
+    <div class="modal-body">
+    <form method="get">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>查询：</td>
+          <td>
+             	<input name="title" type="text" placeholder="用户名..." value="{$Think.get.title}">
+          </td>
+          </tr>
+          <tr>
+          <td>状态：</td>
+          <td>
+                <select name="type">  
+                	<option value='' >全部</option> 
+                    <option value='1' <eq name="Think.get.type" value="1">selected="selected"</eq>>提现申请</option>
+                    <option value='2' <eq name="Think.get.type" value="2">selected="selected"</eq>>提现成功</option>
+                    <option value='3' <eq name="Think.get.type" value="3">selected="selected"</eq>>提现失败</option>
+                    <option value='4' <eq name="Think.get.type" value="4">selected="selected"</eq>>撤销提现</option>
+                </select>
+          </td>
+          </tr>
+          
+          <tr>
+          <td>操作时间：</td>
+          <td>
+             	<input name="starttime" type="text" id="starttime" style="width:150px;" value='{$Think.get.starttime}'/>
+                &nbsp;-&nbsp;
+                <input name="endtime" type="text" id="endtime" style="width:150px;" value='{$Think.get.endtime}'/>
+          </td>
+          
+          </tr>
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<include file="Index:footer" />
+<!-- 日期选择器 -->
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/jquery.datetimepicker.css">
+  <script src="__PUBLIC__/js/jquery.datetimepicker.js"></script>
+<script>
+$('#starttime').datetimepicker({lang:'ch',timepicker:false,format:'Y/m/d',});
+$('#endtime').datetimepicker({lang:'ch',timepicker:false,format:'Y/m/d'});
+</script>

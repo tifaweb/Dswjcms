@@ -6,27 +6,148 @@
         	<h3>快捷导航</h3>
             <div class="row-fluid admin_index">
                 <div class="span1">
-                	<a href="__ROOT__/Admin/Index/system.html">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Index/system.html">
                   		<span class="icon32 icon-color icon-gear"></span>
                 		<p>系统设置</p>
                     </a>
                 </div>
                 <div class="span1">
-                	<a href="__ROOT__/Admin/Basis/shuffling.html">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Basis/linebank.html">
                   		<span class="icon32 icon-color icon-wrench"></span>
                 		<p>基础配置</p>
                     </a>
                 </div>
                 <div class="span1">
-                	<a href="__ROOT__/Admin/Site.html">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Site.html">
                   		<span class="icon32 icon-color icon-book"></span>
                 		<p>文章管理</p>
                     </a>
                 </div>
                 <div class="span1">
-                	<a href="__ROOT__/Admin/User.html">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Audit/entry.html">
+                  		<span class="icon32 icon-color icon-lightbulb"></span>
+                		<p>认证管理</p>
+                    </a>
+                </div>
+                <div class="span1">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Loan/review.html">
+                  		<span class="icon32 icon-color icon-refresh"></span>
+                		<p>贷款管理</p>
+                    </a>
+                </div>
+                <div class="span1">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Instation.html">
+                  		<span class="icon32 icon-blue icon-envelope-closed"></span>
+                		<p>站内信</p>
+                    </a>
+                </div>
+                <div class="span1">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Fund/recharge.html">
+                  		<span class="icon32 icon-color icon-profile"></span>
+                		<p>资金管理</p>
+                    </a>
+                </div>
+                <div class="span1">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Ganged.html">
+                  		<span class="icon32 icon-color icon-book"></span>
+                		<p>联动管理</p>
+                    </a>
+                </div>
+                <div class="span1">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/User.html">
                   		<span class="icon32 icon-color icon-user"></span>
                 		<p>用户管理</p>
+                    </a>
+                </div>
+                <div class="span1">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Credit.html">
+                  		<span class="icon32 icon-color icon-web"></span>
+                		<p>征信查询</p>
+                    </a>
+                </div>
+                <div class="span1">
+                	<a href="__APP__/TIFAWEB_DSWJCMS/Plugins/index.html">
+                  		<span class="icon32 icon-color icon-unlink"></span>
+                		<p>插件管理</p>
+                    </a>
+                </div>
+            </div>
+			<h3>待办事务</h3>
+            <div  class="row-fluid admin_index">
+                <div class="span1">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Loan/review.html">
+                  		<span class="icon32 icon-orange icon-clock"></span>
+                        <gt name="stat.stay" value="0">
+                        <span class="admin_right label label-important">{$stat.stay}</span>
+                        </gt>
+                		<p>待审核</p>
+                        
+                    </a>
+                </div>
+                <div class="span1">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Loan/pending.html">
+                  		<span class="icon32 icon-orange icon-clock"></span>
+                        <gt name="stat.full" value="0">
+                        <span class="admin_right label label-important">{$stat.full}</span>
+                        </gt>
+                		<p>满标待审核</p>
+                        
+                    </a>
+                </div>
+                 <div class="span1">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Audit/autonym.html">
+                  		<span class="icon32 icon-orange icon-profile"></span>
+                        <gt name="stat.autonym" value="0">
+                        <span class="admin_right label label-important">{$stat.autonym}</span>
+                        </gt>
+                		<p>实名认证</p>
+                        
+                    </a>
+                </div>
+                <div class="span1">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Audit/video.html">
+                  		<span class="icon32 icon-orange icon-comment-video"></span>
+                        <gt name="stat.video" value="0">
+                        <span class="admin_right label label-important">{$stat.video}</span>
+                        </gt>
+                		<p>视频认证</p> 
+                    </a>
+                </div>
+                <div class="span1">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Audit/site.html">
+                  		<span class="icon32 icon-orange icon-users"></span>
+                        <gt name="stat.scene" value="0">
+                        <span class="admin_right label label-important">{$stat.scene}</span>
+                        </gt>
+                		<p>现场认证</p> 
+                    </a>
+                </div>
+                <div class="span1">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Audit/phone.html">
+                  		<span class="icon32 icon-orange icon-cellphone"></span>
+                        <gt name="stat.phone" value="0">
+                        <span class="admin_right label label-important">{$stat.phone}</span>
+                        </gt>
+                		<p>手机认证</p> 
+                    </a>
+                </div>
+                 <div class="span1">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Fund/recharge.html">
+                  		<span class="icon32 icon-orange icon-heart"></span>
+                        <gt name="stat.recharge" value="0">
+                        <span class="admin_right label label-important">{$stat.recharge}</span>
+                        </gt>
+                		<p>充值申请</p>
+                        
+                    </a>
+                </div>
+                <div class="span1">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Fund/withdrawal.html">
+                  		<span class="icon32 icon-orange icon-inbox"></span>
+                        <gt name="stat.withdrawal" value="0">
+                        <span class="admin_right label label-important">{$stat.withdrawal}</span>
+                        </gt>
+                		<p>提现申请</p> 
                     </a>
                 </div>
             </div>
@@ -35,21 +156,33 @@
             	<div class="span3">
                 	<dl class="dl-horizontal">
                         <dt>会员总数：</dt><dd><span class="red">{$stat.metotal}</span>人</dd>
+                        <dt>平台总资金：</dt><dd><span class="red">{$stat.mototal}</span>元</dd>
+                        <dt>冻结总金额：</dt><dd><span class="red">{$stat.frtotal}</span>元</dd>
+                        <dt>待收总金额：</dt><dd><span class="red">{$stat.dutotal}</span>元</dd>
+                        <dt>未还总金额：</dt><dd><span class="red">{$stat.sttotal}</span>元</dd>
+                        <dt>提现总金额：</dt><dd><span class="red">{$stat.wmototal}</span>元</dd>
+                        <dt>充值总金额：</dt><dd><span class="red">{$stat.rmototal}</span>元</dd>
                     </dl>
                 </div>
                 <div class="span3">
                 	<dl class="dl-horizontal">
                         <dt>今日会员数：</dt><dd><span class="red">{$stat.menow}</span>人</dd>
+                        <dt>今日提现总金额：</dt><dd><span class="red">{$stat.wmonow}</span>元</dd>
+                        <dt>今日充值总金额：</dt><dd><span class="red">{$stat.rmonow}</span>元</dd>
                     </dl>
                 </div>
                 <div class="span3">
                 	<dl class="dl-horizontal">
                         <dt>本周会员数：</dt><dd><span class="red">{$stat.meweeks}</span>人</dd>
+                        <dt>本周提现总金额：</dt><dd><span class="red">{$stat.wmoweeks}</span>元</dd>
+                        <dt>本周充值总金额：</dt><dd><span class="red">{$stat.rmoweeks}</span>元</dd>
                     </dl>
                 </div>
                 <div class="span3">
                 	<dl class="dl-horizontal">
                         <dt>本月会员数：</dt><dd><span class="red">{$stat.memonth}</span>人</dd>
+                        <dt>本月提现总金额：</dt><dd><span class="red">{$stat.wmomonth}</span>元</dd>
+                        <dt>本月充值总金额：</dt><dd><span class="red">{$stat.rmomonth}</span>元</dd>
                     </dl>
                 </div>
             </div>
@@ -75,5 +208,6 @@
                 </div>
             </div>
         </div>
+        
 <!--底部 -->
 <include file="footer" />

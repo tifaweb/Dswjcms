@@ -1,0 +1,33 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10 box">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">资源管理</li>
+</ul>
+					<div class="box-content">
+						<div class="alert alert-info">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<i class="icon-info-sign"></i> 不支持中文命名的文件或文件夹，请不要在该界面中对文件内容直接进行编辑。
+						</div>
+						<div class="file-manager"></div>
+					</div>
+<div>
+</div>
+<!--底部 -->
+<script>
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+</script>
+<include file="Index:footer" />

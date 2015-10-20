@@ -14,14 +14,26 @@ defined('THINK_PATH') or exit();
 class AuditAction extends AdminCommAction {
 //--------认证列表-----------
     public function entry(){
-		$audit=$this->audit(0,1);
+		if($this->_get('title')){
+			$uid=M('user')->field('id')->where('`username`="'.$this->_get('title').'"')->find();
+			$uid=$uid['id'];
+			$where=$uid?"`id`=".$uid:'';
+		}
+		import('ORG.Util.Page');// 导入分页类
+        $count      = M('userinfo')->where($where)->count();// 查询满足要求的总记录数
+		
+		$Page       = new Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数
+        $show       = $Page->show();// 分页显示输出
+        // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+        $audit=$this->audit($where,1,$Page->firstRow.','.$Page->listRows);
 		$this->assign('audit',$audit);
+		$this->assign('page',$show);// 赋值分页输出
 		$endjs='
 //编辑
 function edit(id){
 	var loading=\'<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>加载中...</div> </div>\';
 	$(".integral_subject").html(loading);
-		$("#edits").load("__URL__/userajax", {id:id});
+		$("#edits").load("__APP__/TIFAWEB_DSWJCMS/Audit/userajax", {id:id});
 }
 		';
 		$this->assign('endjs',$endjs);
@@ -33,7 +45,6 @@ function edit(id){
 		$this->assign('audit',$audit);
 		$this->display();
     }
-
 //--------视频认证-----------
     public function video(){
 		$audit=$this->audit(2);
@@ -45,7 +56,7 @@ function edit(id){
 function edit(id){
 	var loading=\'<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>加载中...</div> </div>\';
 	$(".integral_subject").html(loading);
-		$("#edits").load("__URL__/userajax", {id:id});
+		$("#edits").load("__APP__/TIFAWEB_DSWJCMS/Audit/userajax", {id:id});
 }
 		';
 		$this->assign('endjs',$endjs);
@@ -62,7 +73,7 @@ function edit(id){
 function edit(id){
 	var loading=\'<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>加载中...</div> </div>\';
 	$(".integral_subject").html(loading);
-		$("#edits").load("__URL__/userajax", {id:id});
+		$("#edits").load("__APP__/TIFAWEB_DSWJCMS/Audit/userajax", {id:id});
 }
 		';
 		$this->assign('endjs',$endjs);
@@ -80,7 +91,7 @@ function edit(id){
 function edit(id){
 	var loading=\'<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>加载中...</div> </div>\';
 	$(".integral_subject").html(loading);
-		$("#edits").load("__URL__/userajax", {id:id});
+		$("#edits").load("__APP__/TIFAWEB_DSWJCMS/Audit/userajax", {id:id});
 }
 		';
 		$this->assign('endjs',$endjs);
@@ -148,143 +159,6 @@ function edit(id){
 		echo $tmp;
     }
 	
-//--------VIP-----------
-    public function vip(){
-		$vippoints=D('Vip_points');
-		$vip=$vippoints->relation(true)->select();
-		foreach($vip as $id=>$vp){
-			$vip[$id]['type']=$vp['expiration_time']-time();
-		}
-		$this->assign('list',$vip);
-		$endjs='
-//编辑
-function edit(id){
-	var loading=\'<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>加载中...</div> </div>\';
-	$(".integral_subject").html(loading);
-		$("#edits").load("__URL__/editajax", {id:id});
-}
-function changeVerify(){
-    var timenow = new Date().getTime();
-    document.getElementById("verifyImg").src="'.__APP__.'/Public/verify/"+timenow;
-}
-		';
-		$this->assign('endjs',$endjs);
-		$this->display();
-    }
-	
-	//查看显示AJAX
-    public function editajax(){
-		$vippoints=D('Vip_points');
-		$id=$this->_post("id");
-		$list=$vippoints->relation(true)->where('`id`='.$id)->find();
-		if($list['audit']==1){
-			echo '<p class="form-inline">   
-          <label class="radio"><input type="radio" name="audit" value="2" checked/> 通过</label>
-          <label class="radio"><input type="radio" name="audit" value="3" /> 不通过</label>
-		  <p class="span2"><textarea name="text" placeholder="失败原因以站内信发送..."></textarea></p>
-        </p>
-		<input name="sid" type="hidden" value="'.$id.'" />
-		<input name="uid" type="hidden" value="'.$list['uid'].'" />
-		<input name="deadline" type="hidden" value="'.$list['deadline'].'" />
-		<input name="unit" type="hidden" value="'.$list['unit'].'" />
-        <div class="span10">
-      	  <img id="verifyImg" src="'.__APP__.'/Public/verify/" onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
-          <input class="input-large" name="proving" type="text"  style="width:50px;margin-top: 10px;" title="验证码" data-rel="tooltip"/>
-          <button class="btn btn-primary" type="submit">
-              确认提交
-          </button>
-      	</div>';
-		}else{
-			echo '
-			<table class="table">
-        <tbody>
-          <tr><td>用户名：</td><td>'.$list['username'].'</td></tr>
-          <tr><td>总积分：</td><td>'.$list['total'].'</td></tr>
-          <tr><td>可用积分：</td><td>'.$list['available'].'</td></tr>
-		  <tr><td>冻结积分：</td><td>'.$list['freeze'].'</td></tr>
-		  <tr>
-            <td>状态：</td>';
-		switch($list['audit']){
-			case 0:
-			echo "<td>未申请</td>";
-			break;
-			case 1:
-			echo "<td>申请中</td>";
-			break;
-			case 2:
-			echo "<td>已开通</td>";
-			break;
-			case 3:
-			echo "<td>审核失败</td>";
-			break;
-			case 4:
-			echo "<td>已过期</td>";
-			break;
-		}
-		echo '
-          </tr>
-		  <tr><td>申请时间：</td><td>'.($list['checktime']?date("Y-m-d H:i:s",$list['checktime']):'未开通').'</td></tr>
-		  <tr><td>有效期：</td>
-		  <td>'.$list['deadline'].($list['unit']==1?'个月':'年').'</td></tr>
-		  <tr><td>开通时间：</td><td>'.($list['opening_time']?date("Y-m-d H:i:s",$list['opening_time']):'未开通').'</td></tr>
-		  <tr><td>到期时间：</td><td>'.($list['expiration_time']?date("Y-m-d H:i:s",$list['expiration_time']):'未开通').'</td></tr>
-        </tbody>      
-    </table>
-		';
-		}
-    }
-	
-	//审核VIP
-    public function exitvip(){
-		$msgTools = A('msg','Event');
-		$model=D('Vip_points');
-		$money=M('money');
-		$models = new Model();
-		$systems=$this->systems();
-		$inf=$this->integralConf();
-		$arr['vip']=array('uid'=>$this->_post('uid'),'name'=>'vip_buy');
-		if($model->create()){
-			  $save['audit']=$this->_post('audit');
-			  $deadline=$this->_post('deadline');
-			  
-			  if($this->_post('unit')==1){	//月
-				 $limittime=strtotime("+$deadline month");
-				 $vipcost=$systems['sys_vipm']*$deadline;
-			  }else{	//年
-			  	$limittime=strtotime("+$deadline years");
-				$vipcost=$systems['sys_vipy']*$deadline;
-			  }
-			  	$available_funds=$money->field('total_money,available_funds,freeze_funds')->where('uid='.$this->_post('uid'))->find();	//可用余额
-				if($available_funds['available_funds']<$vipcost && $this->_post('audit')==2){
-					$this->error("用户账户可能余额不足以开通VIP！");
-				}
-			  $save['opening_time']=time();
-			  $save['expiration_time']=$limittime;
-			  
-			  $result = $model->where(array('id'=>$this->_post('sid')))->save($save);
-			 if($result){
-				 //记录添加点
-				 $this->integralAdd($arr);	//积分操作
-				 if($this->_post('audit')==2){
-					$models->query("UPDATE `ds_money` SET `total_money` = total_money-".$vipcost.",`available_funds` = available_funds-".$vipcost." WHERE `uid` =".$this->_post('uid'));	//平台代付
-				 	$msgTools->sendMsg(3,'VIP开通成功','您的VIP已成功开通！账户成功扣除'.$vipcost.'元','admin',$this->_post('uid'));//站内信
-					$this->moneyLog(array(0,'VIP开通，扣除资金',$vipcost,'平台',($available_funds['total_money']-$vipcost),($available_funds['available_funds']-$vipcost),$available_funds['total_money'],$this->_post('uid')));	//资金记录
-				 }else{
-				 	$msgTools->sendMsg(3,'VIP审核失败',$this->_post('text'),'admin',$this->_post('uid'));//站内信
-				 }
-				 $this->Record('审核VIP成功');//后台操作
-				 $this->success("审核成功");
-				
-			 }else{
-				$this->Record('审核VIP失败');//后台操作
-				$this->error("审核失败");
-			 }			 			
-		}else{
-		     $msgTools->sendMsg(3,'VIP审核失败','您的账户余额不足以开通VIP！','admin',$this->_post('uid'));//站内信
-			 $this->error($model->getError());
-		}
-	}
-	
 	//删除联动
     public function exitgan(){
 		$unite=D('Unite');
@@ -298,5 +172,6 @@ function changeVerify(){
 			$this->error("删除失败");
 		}		
 	}
+	
 }
 ?>

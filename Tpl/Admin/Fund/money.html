@@ -1,0 +1,159 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">资金记录</li>
+      <div  class="pull-right">
+      <a href="#screening" data-toggle="modal">筛选</a>&nbsp;&nbsp;
+      <a data-toggle="modal"  data-rel="tooltip" href="#mod">导出</a></div>
+</ul>
+<input id="datasort" type="hidden" value="6" />
+<table class="table table-striped table-bordered table-condensed  ">
+            <thead>
+              <tr>
+              	<th>用户名</th>
+                <th>操作金额</th>
+                <th>总金额</th>
+                <th>可用金额</th>
+                <th>冻结金额</th>
+                <th>交易对方</th>
+                <th>记录时间</th>
+                <th>操作说明</th>
+              </tr>
+            </thead>
+            <tbody>
+<volist name="record" id="vo">
+            <tr>
+            	<td>{$vo.username}</td>
+                <td>{$vo.operation}</td>
+                <td>{$vo.total_money}</td>
+                <td>{$vo.available_funds}</td>
+                <td>{$vo.freeze_funds}</td>
+                <td>{$vo.counterparty}</td>
+                <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                <td>{$vo.actionname}</td>
+              </tr>
+</volist>
+            </tbody>
+          </table>
+          <div class="pagination pagination-centered">
+          <ul>{$page}</ul>
+          </div>
+<div>
+</div>
+<!--审核 start-->
+<div id="audit" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>审核</h3>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Fund/rechUpda'>
+        <input id="up_id" name="id" type="hidden" value="" />
+        <p class="form-inline">   
+          <label class="radio"><input type="radio" name="type" value="2" checked/> 通过</label>
+          <label class="radio"><input type="radio" name="type" value="3" /> 不通过</label>
+        </p>
+        <div class="span10">
+      	  <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+          <input class="input-large" name="proving" type="text"  style="width:50px;margin-top: 10px;" title="验证码" data-rel="tooltip"/>
+          <button class="btn btn-primary" type="submit">
+              确认提交
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--审核 end-->
+<!--导出设置 start-->
+<div id="mod" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>导出设置</h3>
+    </div>
+    <div class="alert alert-info">
+        <p>每次导出条数最多5000条，如果数据总合以超5000条请输入上一份导出文件的最大ID值</p>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Fund/moneyExport'>
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>开始ID：</td>
+          <td>
+             	<input name="fid" type="text"  value=''/>
+          </td>
+          
+          </tr>
+          
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--导出设置 end-->
+<!--底部 -->
+<script>
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+</script>
+<div id="screening" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>筛选</h3>
+    </div>
+    <div class="modal-body">
+    <form method="get">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>查询：</td>
+          <td>
+             	<input name="title" type="text" placeholder="用户名..." value="{$Think.get.title}">
+          </td>
+          </tr>
+         
+          <tr>
+          <td>操作时间：</td>
+          <td>
+             	<input name="starttime" type="text" id="starttime" style="width:150px;" value='{$Think.get.starttime}'/>
+                &nbsp;-&nbsp;
+                <input name="endtime" type="text" id="endtime" style="width:150px;" value='{$Think.get.endtime}'/>
+          </td>
+          
+          </tr>
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<include file="Index:footer" />
+<!-- 日期选择器 -->
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/jquery.datetimepicker.css">
+  <script src="__PUBLIC__/js/jquery.datetimepicker.js"></script>
+<script>
+$('#starttime').datetimepicker({lang:'ch',timepicker:false,format:'Y/m/d',});
+$('#endtime').datetimepicker({lang:'ch',timepicker:false,format:'Y/m/d'});
+</script>

@@ -34,7 +34,7 @@ class AdminModel extends  RelationModel{
 
 		$id=intval($_REQUEST['id']);
 		$mod = D("auth_group_access");
-		$mod->where("uid=".$id)->delete();
+		$mod->where('uid="'.$id.'"')->delete();
 	}
 	
 	

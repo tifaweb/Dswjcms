@@ -1,53 +1,60 @@
 <include file="Index:header" />
 <!--头部 end -->
 <!--主体 -->
-<div class="row-fluid">
-	<div class="container login_cone">
-    	<div class="span7 login_left">
-    	<h2>用户登陆</h2>
-        <form class="form-horizontal" name="myform" method="post"  action='__URL__/loging'>
-          <div class="control-group">
-            <label class="control-label">用户名</label>
-            <div class="controls">
-              <input type="text" name="username" placeholder="用户名">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">密码</label>
-            <div class="controls">
-              <input type="password" name="password" placeholder="密码">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">验证码</label>
-            <div class="controls">
-            <label class="inline span4">
-              <input type="text" class="span12" name="proving" placeholder="验证码" maxlength="4">
-            </label>
-              <label class="checkbox inline">
-               <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
-            </label>
-            </div>
-          </div>
-          <div class="control-group">
-            <div class="controls">
-              <p>
-                <!--<span><input type="checkbox"> 记住我</span>-->
-               <span><a href="__ROOT__/Logo/forgotpass.html">忘记密码？</a></span>
-              </p>
-              <p>
-              <button type="submit" class="btn btn-info">登录</button>
-              </p>
-            </div>
-          </div>
-        </form>
-        </div>
-        <div class="span3 login_right">
-        <p>还没注册？<a href="__ROOT__/Logo/register.html" class="btn btn-success">注册</a></p>
-        <p>一键登陆</p>
-        <p></p>
+<div class="page-desc js-ignore-pagemark">
+    <!-- start:Page-desc-inner -->
+    <div class="page-desc-inner">
+        <div class="container">
+            <h3>欢迎登录{$s.sys_briefTitle}</h3>
         </div>
     </div>
+    <!-- end:Page-desc-inner -->
+</div>
+<div class="container">
+    <!--Row start -->
+    <div class="row">
+        <!--Wall start -->
+        <div class="span4 offset4 control-panle">
+            <div class="control-panle-header">
+    <h4>登录</h4>
+    <span>没有账号？ <a href="__ROOT__/Logo/register.html" id="act_login_register">免费注册</a></span>
+</div>
+<hr>
+
+ <form name="myform" method="post"  action='__URL__/loging'>
+    <div class="row-fluid">
+        
+        <div class="control-group">
+            <label class="control-label">用户名</label>
+            <div class="controls">
+                <input class="span12" name="username" type="text" placeholder="用户名">
+            </div>
+            <span class="help-block"></span>
+        </div>
+        <div class="control-group">
+            <label class="control-label">密码 <small><a href="__ROOT__/Logo/forgotpass.html">忘记密码?</a></small></label>
+            <div class="controls">
+                <input class="span12" type="password" name="password" placeholder="密码">
+            </div>
+            <span class="help-block"></span></span>
+        </div>
+        <div class="control-group">
+            <label class="control-label">验证码</label>
+            <div class="controls">
+            	<input id="CaptchaInputText" type="text" class="span12" name="proving" placeholder="验证码" maxlength="4"><img class="CaptchaImage" id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+            </div>
+
+            <span class="help-block"></span>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary span12" style="margin-left: 0" tabindex="4">登录</button>
+    </div>
+</form>
+
+        </div>
+        <!--Wall end-->
+    </div>
+    <!--Row end-->
 </div>
 <!-- 主体 end-->
 <!--底部 -->

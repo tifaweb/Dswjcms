@@ -1,0 +1,56 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">征信记录</li>
+      <div  class="pull-right">
+</ul>
+
+<div class="alert alert-error">
+    1、输入姓名或身份证进行查询<br/>
+	2、当查询不到时，建议换个条件查询
+</div>
+<form method="get">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>真实姓名：</td>
+          <td>
+             	<input name="name" type="text" placeholder="真实姓名..." value="{$Think.get.name}">
+          </td>
+          </tr>
+          <tr>
+          <td>身份证：</td>
+          <td>
+             	<input name="idcard" type="text" placeholder="身份证..." value="{$Think.get.idcard}">
+          </td>
+          </tr>
+          <tr>
+          <td></td>
+          <td>
+             	<button class="btn btn-primary" type="submit">
+              确定
+          </button>
+          </td>
+          </tr>
+        </tbody>
+       	</table>
+    </form>
+    {$con}
+      <div>
+      
+</div>
+<!--底部 -->
+<include file="Index:footer" />
+
+

@@ -1,0 +1,98 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">投资记录</li>
+      <div  class="pull-right"><a href="#export" data-toggle="modal">导出</a></div>
+</ul>
+<table class="table table-striped table-bordered table-condensed" id="table">
+            <thead>
+              <tr>
+              	<th>ID</th>
+                <th>用户ID</th>
+                <th>类型</th>
+                <th>总金额</th>
+                <th>可用金额</th>
+                <th>操作金额</th>
+                <th>操作说明</th>
+              </tr>
+            </thead>
+            <tbody>
+<volist name="record" id="vo">
+                <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo['actionname']['uid']>0?$vo['actionname']['uid']:'平台'}</td>
+                <td>
+                    <switch name="vo.type" >
+                    <case value="1">借款标发布</case>
+                    <case value="2">借款标审核后</case>
+                    <case value="3">借款中投资人操作</case>
+                    <case value="4">借款中借款人操作</case>
+                    <case value="5">复审中投资人操作</case>
+                    <case value="6">复审中借款人操作</case>
+                    <case value="7">复审后投资人操作</case>
+                    <case value="8">复审后借款人操作</case>
+                    <case value="9">借款到期收款</case>
+                    <case value="10">借款到期还款</case>
+                    <case value="11">逾期</case>
+                    <case value="12">提现</case>
+                    <case value="15">债权转让投资人操作</case>
+                    <case value="16">债权转让借款人操作</case>
+                    <case value="17">流标</case>
+                    </switch>
+                </td>
+                <td>{$vo.actionname.total}元</td>
+                <td>{$vo.actionname.available}元</td>
+                <td>{$vo.actionname.operation}元</td>
+                <td>{$vo.actionname.instructions}</td>
+              </tr>
+</volist>
+            </tbody>
+          </table>
+          <div class="pagination pagination-centered">
+          <ul>{$page}</ul>
+          </div>
+<div>
+</div>
+<!--底部 -->
+<div id="export" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>导出</h3>
+    </div>
+    <div class="modal-body">
+    <div class="alert alert-info">
+        <p>每次导出条数最多5000条，如果数据总合以超5000条请输入上一份导出文件的最大ID值</p>
+    </div>
+    <form method="post" action="__APP__/TIFAWEB_DSWJCMS/Loan/recordExport">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>开始ID：</td>
+          <td>
+             	<input name="fid" type="text"  value=''/>
+          </td>
+          
+          </tr>
+          
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<include file="Index:footer" />

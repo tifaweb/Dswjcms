@@ -1,0 +1,74 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">待审核</li>
+</ul>
+<table class="table table-striped table-bordered table-condensed" id="table">
+            <thead>
+              <tr>
+                <th>用户名</th>
+                <th>标题</th>
+                <th>金额</th>
+                <th>利率</th>
+                <th>期限</th>
+                <th>类型</th>
+                <th>状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+<volist name="borrow" id="vo">
+                <tr>
+                <td>
+                       {$vo.username}
+                </td>
+                <td>
+                       {$vo.title}
+                </td>
+                <td>
+                       {$vo.money}元
+                </td>
+                <td>
+                       {$vo.rates}%
+                </td>
+                <td>
+                       {$vo.deadlines}
+                </td>
+                <td>
+                       {$vo.type_name}
+                </td>
+                <td>
+                       {$vo.state_name}
+                </td>
+                <td>
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Loan/review_page/{$vo.id}.html" data-rel="tooltip" class="icon icon-color icon-book" title="审核"></a>
+                	<if condition="$vo.type eq 7">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Loan/flow/id/{$vo.id}.html" data-rel="tooltip" class="icon icon-color icon-edit" title="修改"></a>
+                    <else/>
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Loan/index/id/{$vo.id}.html" data-rel="tooltip" class="icon icon-color icon-edit" title="修改"></a>
+                    </if>
+                </td>
+              </tr>
+			  <input name="id[]" type="hidden" value="{$vo.id}" />
+</volist>
+            </tbody>
+          </table>
+          <div class="pagination pagination-centered">
+              <ul>{$page}</ul>
+              </div>
+<div>
+</div>
+<!--底部 -->
+
+<include file="Index:footer" />

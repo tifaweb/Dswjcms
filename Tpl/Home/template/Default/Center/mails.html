@@ -1,0 +1,88 @@
+<include file="Index:header" />
+<!--头部 end -->
+<include file="top" />
+<div class=" row-fluid">
+<div class="container paddtop">
+<!-- 二级-->
+<ul class="center_secondary">
+    <li <eq name="mid" value=""> class="active"</eq>><a href="__ROOT__/Center/mails.html">全部信息</a></li>
+    <li <eq name="mid" value="0"> class="active"</eq>><a href="__ROOT__/Center/mails/mid/0.html">未读</a></li>
+    <li <eq name="mid" value="1"> class="active"</eq>><a href="__ROOT__/Center/mails/mid/1.html">已读</a></li>
+    <li <eq name="mid" value="2"> class="active"</eq>><a href="__ROOT__/Center/mails/mid/2.html">回收站</a></li>
+</ul>
+<!-- 二级end-->
+    <div id="content" class="center_zt">
+    		<input id="datasort" type="hidden" value="2" />
+         <table class="table table-striped" id="table">
+            <thead>
+              <tr>  
+                <th>标题</th>
+                <th>发件者</th>
+                <th>时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            <volist name="all" id="vo">
+                <tr>	
+                  <td>
+                    <if condition="$vo.state eq 0">
+                    <i class="icon icon-color icon-envelope-closed" data-rel="tooltip" title="未读"></i>
+                    <else />
+                    <i class="icon icon-color icon-mail-open" data-rel="tooltip" title="已读"></i>
+                    </if>
+                    <a href="#edit" data-toggle="modal" onclick=" $('#title').html('{$vo.title}');mail('{$vo.id}')">{$vo.title}</a>
+                  </td>
+                  <td>系统</td>
+                  <td>{$vo.time|date="Y-m-d H:i",###}</td>
+                  <td>
+                  <if condition="$vo.state eq 2">
+                  	<a href="#" onclick="if(confirm('是否要还原？'))window.location.href='__URL__/reduction/id/{$vo.id}'">还原</a>
+                  <else/>
+                     <a href="#" data-rel="tooltip" class="icon icon-color icon-trash" title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__URL__/stationexit/{$vo.id}'"></a>
+                  </if>
+                  </td>  
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <div class="pagination pagination-centered">
+              <ul>{$page}</ul>
+              </div>
+    </div>
+    <!-- right end--> 
+</div>
+<!-- container end -->
+<div id="edit" class="modal hide fade in" style="top:20%">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h2 id="title"></h2>
+    </div>
+    <div class="modal-body">
+    <p  id="mail_nr"></p>
+        
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal">确定</button>
+    </div>
+</div>
+<!--底部  start-->
+<script>
+function mail(id){
+	$("#mail_nr").load("__URL__/standLetter", {id:id});	
+}
+</script>
+<script>
+//AJAX分页
+$(function(){ 
+	$(".pagination-centered a").click(function(){ 
+		var loading='<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>加载中...</div> </div>';
+		$("#table").html(loading);
+		$.get($(this).attr("href"),function(data){ 
+			$("body").html(data); 
+		}) 
+		return false; 
+	}) 
+}) 
+</script>
+<include file="Index:footer" />

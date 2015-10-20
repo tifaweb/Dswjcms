@@ -1,0 +1,258 @@
+<include file="Index:header" />
+<!--头部 end -->
+<include file="top" />
+<div class=" row-fluid">
+<div class="container paddtop">
+<!-- 二级-->
+<ul class="center_secondary">
+    <li <eq name="mid" value="issue"> class="active"</eq>><a href="__ROOT__/Center/loan/issue.html">发布的借款</a></li>
+    <li <eq name="mid" value="overdue"> class="active"</eq>><a href="__ROOT__/Center/loan/overdue.html">逾期的借款</a></li>
+    <li <eq name="mid" value="is"> class="active"</eq>><a href="__ROOT__/Center/loan/is.html">正在还款的借款</a></li>
+    
+</ul>
+<!-- 二级end-->
+    <div id="content" class="center_zt">
+      	<switch name="mid" >
+            <case value="issue">
+            <!--发布的借款 start-->
+                 <input id="datasort" type="hidden" value="5" />
+                <table class="table table-striped datatable ">
+                    <thead>
+                      <tr>
+                        <th>标题</th>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>年利率</th>
+                        <th>期限</th>
+                        <th>发布时间</th>
+                        <th style="width:120px;">进度</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td><a href="__ROOT__/Loan/invest/{$vo.id}.html" data-rel="tooltip" title="{$vo.title}">{$vo.title}</a></td>
+                            <td>{$vo.type_name}</td>
+                            <td>{$vo.money|number_format=2,'.',','}</td>
+                            <td>{$vo.rates}%</td>
+                            <td>{$vo.deadline}</td>
+                            <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                            <td>
+                            <if condition="$vo.state eq 10 ">
+                            	<div class="progress" data-rel="tooltip" title="{$vo.ratios}%">
+                      			<div class="bar" style="width: {$vo.ratios}%;"></div>
+                    			</div>
+                            <else/>
+                            <if condition="$vo.type eq 7">
+                            <else/>
+                                <div class="progress" data-rel="tooltip" title="{$vo.ratio}%">
+                      			<div class="bar" style="width: {$vo.ratio}%;"></div>
+                    			</div>
+                             </if>
+                            </if>
+                            </td>
+                            <td>{$vo.state_name}</td>
+                            <td>
+                                <if condition="$vo.state eq 0 ">
+                                	<if condition="$vo.type eq 7">
+                                	<a href="__ROOT__/Borrow/flow/id/{$vo.id}.html" >修改</a><br/>
+                                    <else/>
+                                    <a href="__ROOT__/Borrow/index/{$vo.id}.html" >修改</a><br/>
+                                    </if>
+                                <a href="#undo" data-toggle="modal" onclick="$('#undo_id').val({$vo.id});">撤销</a>
+                                <elseif condition="(($vo.state egt 7) and ($v.state elt 9)) or ($v.state eq 11) "/>
+                                    <if condition="$vo.type eq 7 ">
+                                    <else/>
+                                    <a href="__ROOT__/Center/agreement.html?bid={$vo.id}" data-rel="tooltip" title="查看协议书" class="icon-list-alt"></a>
+                                    </if>
+                                <else/>
+                                无
+                                </if>
+                            </td>
+                         </tr>
+                         </volist>
+                    </tbody>
+                    
+                </table>
+            <!--发布的借款 end-->
+            </case>
+            <case value="overdue">
+            <!--逾期的借款 start-->
+                <table class="table table-striped datatable ">
+                    <thead>
+                      <tr>
+                        <th>标题</th>
+                        <th>逾期本息</th>
+                        <th>逾期天数</th>
+                        <th>逾期管理费</th>  
+                        <th>逾期罚息</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <volist name="overd" id="vo">
+                        <tr>
+                            <td><a href="__ROOT__/Loan/invest/{$vo.bid}.html" data-rel="tooltip" title="{$vo.title}">{$vo.title}</a></td>
+                            <td>{$vo.money|number_format=2,'.',','}</td>
+                            <td>{$vo.days}</td>
+                            <td>{$vo.overdue|number_format=2,'.',','}</td>
+                            <td>{$vo.penalty|number_format=2,'.',','}</td>
+                            <if condition="$vo.type eq 1 ">
+                            <td>已还</td>
+                         	<else/>
+                            <td><a onclick="if(confirm('确定要还款？'))window.location.href='__URL__/latePayment?bid={$vo.bid}&days={$vo.days}'" href="#">还款</a></td>
+                            </if>
+                         </tr>
+                    </volist>
+                    </tbody>
+                            
+                </table>
+            <!--逾期的借款 end-->
+            </case>
+            <case value="is">
+            <!--正在还款的借款 start-->
+                <table class="table table-striped datatable ">
+                    <thead>
+                      <tr>
+                        <th>标题</th>
+                        <th>类型</th>
+                        <th>借款金额</th>
+                        <th>年利率</th>
+                        <th>借款期限</th>  
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <volist name="list" id="vo">
+                    <if condition="($vo.type neq 7) and ($vo.state eq 7)">
+                        <tr>
+                            <td><a href="__ROOT__/Loan/invest/{$vo.id}.html" data-rel="tooltip" title="{$vo.title}">{$vo.title}</a></td>
+                            <td>{$vo.type_name}</td>
+                            <td>{$vo.money|number_format=2,'.',','}</td>
+                            <td>{$vo.rates}%</td>
+                            <td>{$vo.deadline}</td>
+                            <td><a href="__ROOT__/Center/agreement.html?bid={$vo.id}" data-rel="tooltip" title="查看协议书" class="icon-list-alt"></a>&nbsp;&nbsp;<a href="__ROOT__/Center/loan/plan?bid={$vo.id}">还款</a></td>
+                         </tr>
+                    </if>
+                    </volist>
+                    </tbody>
+                            
+                </table>
+            <!--正在还款的借款 end-->
+            </case>
+            <case value="plan">
+            <!--还款计划 start-->
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>期数</th>
+                        <th>还款金额</th>
+                        <th>管理费</th>
+                        <th>还款时间</th>  
+                        <th>状态</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <volist name="refun" id="vo">
+                        <tr>
+                            <td>{$vo.nper}</td>
+                            <td>{$vo.money|number_format=2,'.',','}</td>
+                            <td>{$interest|number_format=2,'.',','}</td>
+                            <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                            <if condition="$vo.type eq 1 ">
+                            <td>已还</td>
+                            <elseif condition="$vo.type eq 2 "/>
+                            <td>逾期</td>
+                         	<else/>
+                            <td><a href="#edit" data-toggle="modal" data-rel="tooltip" onclick="var id={$vo.nper};$('#ajax_id').val(id);">还款</a></td>
+                            </if>
+                         </tr>
+                   </volist> 
+                    </tbody>
+                           
+                </table>
+            <!--还款计划 end-->
+            </case>
+            <default />空
+        </switch>
+    </div>
+    <!-- right end--> 
+
+<!-- container end -->
+<!--底部  start-->
+<!--撤销 start-->
+<div id="undo" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>撤销</h3>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__URL__/tfUpda'>
+		<input name="q" type="hidden" value="borrow" />
+        <input name="u" type="hidden" value="__ROOT__/Center/loan/issue.html" />
+        <input name="n" type="hidden" value="撤销" />
+        <input id="undo_id" name="sid" type="hidden" value="" />
+        <input type="hidden" name="state" value="13"/>
+        <div class="span4">
+      	  <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+          <input class="input-large" name="proving" type="text"  style="width:50px;margin-top:10px;" title="验证码" data-rel="tooltip"/>
+          <button class="btn btn-primary" type="submit">
+              确认提交
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--撤销 end-->
+<!--还款中 start-->
+<div id="edit" class="modal hide fade"  style="width:500px;left:55%;top:30%">
+<form method="post">
+    <input id="ajax_id" type="hidden" value="" />
+    <input id="ajax_uid" type="hidden" value="" />
+    <input id="ajax_fid" type="hidden" value="" />
+    <input id="ajax_gid" type="hidden" value="" />
+    <div class="modal-header">
+      <h3>友好提示</h3>
+    </div>
+    <div class="modal-body cloan_top">
+    <p><div class="invest_loading"><div>接下来的操作需要一段时间，请保持网络通畅</div></div></p>
+    <div class="span5 text-right">
+    
+  	 <a class="btn btn-primary" onclick="var id=$('#ajax_id').val();var bid={$Think.get.bid};var fid=$('#ajax_fid').val();var uid=$('#ajax_uid').val();var gid=$('#ajax_gid').val();ajaxrefund(id,bid,fid,uid,gid);">
+          确认提交
+      </a>
+  	</div>
+  </div>
+</form>
+</div>
+
+<!--还款中 end-->
+<script>
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+function ajaxrefund(id,bid,fid,uid,gid){
+	var loading='<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>处理中</div> </div>';
+	$(".cloan_top").html(loading);
+	
+	if(gid>0){
+		$(".cloan_top").load("__URL__/flowrepayment", {id:id,bid:bid,uid:uid,fid:fid,gid:gid},function(){
+			setTimeout("window.location.href='__ROOT__/Center/loan/flowplan?bid="+bid+"'",3000);
+		});	
+	}else{
+		
+		$(".cloan_top").load("__URL__/repayment", {id:id,bid:bid},function(){
+			setTimeout("window.location.href='__ROOT__/Center/loan/plan?bid="+bid+"'",3000);
+		});	
+	}
+}
+</script>
+</div>
+<include file="Index:footer" />

@@ -1,34 +1,264 @@
 </div>
  <!-- Footer
     ================================================== -->
-    <div class="hfooter row-fluid">
-      <div class="container">
-        <p class="foot">
-        <span class="span5">
-        <a href="__ROOT__/Site/page/id/1.html">关于我们</a> <span class="footer_halve">|</span>
-        <a href="__ROOT__/Site/page/id/8.html">联系我们</a>
-        </span>
-        <span class="span7 text-right">{$s.sys_copy}</span>
-        </p>
-        {$Think.config.DS_POWERED}
-      </div>
+<div class="sup-footer" role="menu">
+    <!--Container start-->
+    <div class="container">
+
+
+        <!--Row start-->
+        <div class="row-fluid">
+
+            <!--Contact start-->
+            <div class="span6">
+
+                <h3>联系我们</h3>
+
+                <ul class="unstyled">
+                    <li><i class="icon icon-darkgray icon-bookmark"></i>&nbsp;&nbsp;{$s.sys_officeAddress}</li>
+                    <li><i class="icon icon-darkgray icon-cellphone"></i>&nbsp;&nbsp;{$s.sys_phone}</li>
+                    <li><i class="icon icon-darkgray icon-print"></i>&nbsp;&nbsp;{$s.sys_fax}</li>
+                    <li><i class="icon icon-darkgray icon-envelope-closed"></i>&nbsp;&nbsp;{$s.sys_email}</li>
+                </ul>
+
+            </div>
+            <!--Contact end-->
+
+            <!--Guide start-->
+            <div class="span3 visible-desktop">
+
+                <h3>关于我们</h3>
+
+                <ul class="unstyled">
+                    <li><a href="__ROOT__/Site/page/id/1.html">关于我们</a></li>
+                    <li><a href="__ROOT__/Site/listTpl/id/16.html">新闻中心</a></li>
+                    <li><a href="__ROOT__/Site/listTpl/id/21.html">联系我们</a></li> 
+                </ul>
+
+            </div>
+            <!--Guide end-->
+
+            <!--Law start-->
+            <div class="span3 visible-desktop">
+
+                <h3>新手指南</h3>
+
+                <ul class="unstyled">
+                    <li><a href="__ROOT__/Site/listTpl/id/28.html">名词解释</a></li>
+                    <li><a href="__ROOT__/Site/page/id/29.html">收费规则</a></li>
+                    <li><a href="__ROOT__/Site/listTpl/id/33.html">帮助中心</a></li>
+                </ul>
+
+            </div>
+            <!--Law end-->
+
+        </div>
+        <!--Row end-->
+        <hr class="dashed visible-desktop">
+        <div class="row-fluid visible-desktop">
+            <!--Follow start-->
+            <div class="span12">
+                <ul class="inline widget-list">
+                    <li>
+                        <a title="" data-original-title="" class="no-link qqgroup fwidget" id="qqgroup-popover" href="javascript:void(0)" data-toggle="popover" data-placement="top">
+                            <span class="social-qq-pure"></span>
+                            <span class="widget-text">投资理财群</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)" target="_blank" class="weibo fwidget">
+                            <span class="social-weibo-pure"></span>
+                            <span class="widget-text">{$s.sys_briefTitle}微博</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a title="" data-original-title="" class="no-link wechat fwidget" id="wechat-popover" data-toggle="popover" data-placement="top">
+                            <span class="social-wechat-pure"></span>
+                            <span class="widget-text">{$s.sys_briefTitle}微信</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="calculator no-link fwidget" href="__ROOT__/Index/counter.html" id="act_cal">
+                            <span class="social-calc-pure"></span>
+                            <span class="widget-text">理财计算器</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--Follow end-->
+        </div>
+
+            <div class="row-fluid favlink">
+
+                <div class="span12">
+                    <p>
+                        <b>友情链接：</b>
+                        <volist name="links" id="ls">
+                             <span class="links_fg"><a target="_blank" href="{$ls.url}">{$ls.title}</a></span>
+                        </volist>
+                    </p>
+                </div>
+
+            </div>
+            <div class="copyright pull-left">
+                {$s.sys_copy}
+            </div>
     </div>
+    <!--Container  end-->
+
+</div>
+<!--Footer end-->
+
+
+    <div class="online-service hidden-phone">
+    <a class="online-service-title" href="http://wpa.qq.com/msgrd?v=3&uin=819016953&site=qq&menu=yes" target="_blank">
+        <div class="social-qq-pure"></div>
+        <h4 style="">在线客服</h4>
+    </a>
+</div>
+
+<!--Calculator start-->
     {$ajax_list}
 <!-- external javascript
 	================================================== -->
-    <!-- 城市 -->
-    <script src="__PUBLIC__/js/region.js"></script>
-	<script src="__PUBLIC__/js/jq_area.js"></script>
+	<!-- jQuery UI -->
+    <!-- 首页宽屏轮播-->
+	
     <!--[if lte IE 6]>
     <script type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap-ie.js"></script>
     <![endif]-->
 	<!-- bootstrap-->
     <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
-	<!-- application script for Charisma demo -->
-	<script src="__PUBLIC__/bootstrap/js/charisma.js"></script>
-  
-<script>
-{$endjs}
+    <script src="__PUBLIC__/bootstrap/js/jquery.dataTables.min.js"></script>
+    <script>
+	$(document).ready(function(){
+		$.extend( $.fn.dataTableExt.oPagination, {
+			"bootstrap": {
+				"fnInit": function( oSettings, nPaging, fnDraw ) {
+					var oLang = oSettings.oLanguage.oPaginate;
+					var fnClickHandler = function ( e ) {
+						e.preventDefault();
+						if ( oSettings.oApi._fnPageChange(oSettings, e.data.action) ) {
+							fnDraw( oSettings );
+						}
+					};
+		
+					$(nPaging).addClass('pagination').append(
+						'<ul>'+
+							'<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
+							'<li class="next disabled"><a href="#">'+oLang.sNext+' &rarr; </a></li>'+
+						'</ul>'
+					);
+					var els = $('a', nPaging);
+					$(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
+					$(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
+				},
+		
+				"fnUpdate": function ( oSettings, fnDraw ) {
+					var iListLength = 5;
+					var oPaging = oSettings.oInstance.fnPagingInfo();
+					var an = oSettings.aanFeatures.p;
+					var i, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
+		
+					if ( oPaging.iTotalPages < iListLength) {
+						iStart = 1;
+						iEnd = oPaging.iTotalPages;
+					}
+					else if ( oPaging.iPage <= iHalf ) {
+						iStart = 1;
+						iEnd = iListLength;
+					} else if ( oPaging.iPage >= (oPaging.iTotalPages-iHalf) ) {
+						iStart = oPaging.iTotalPages - iListLength + 1;
+						iEnd = oPaging.iTotalPages;
+					} else {
+						iStart = oPaging.iPage - iHalf + 1;
+						iEnd = iStart + iListLength - 1;
+					}
+		
+					for ( i=0, iLen=an.length ; i<iLen ; i++ ) {
+						// remove the middle elements
+						$('li:gt(0)', an[i]).filter(':not(:last)').remove();
+		
+						// add the new list items and their event handlers
+						for ( j=iStart ; j<=iEnd ; j++ ) {
+							sClass = (j==oPaging.iPage+1) ? 'class="active"' : '';
+							$('<li '+sClass+'><a href="#">'+j+'</a></li>')
+								.insertBefore( $('li:last', an[i])[0] )
+								.bind('click', function (e) {
+									e.preventDefault();
+									oSettings._iDisplayStart = (parseInt($('a', this).text(),10)-1) * oPaging.iLength;
+									fnDraw( oSettings );
+								} );
+						}
+		
+						// add / remove disabled classes from the static elements
+						if ( oPaging.iPage === 0 ) {
+							$('li:first', an[i]).addClass('disabled');
+						} else {
+							$('li:first', an[i]).removeClass('disabled');
+						}
+		
+						if ( oPaging.iPage === oPaging.iTotalPages-1 || oPaging.iTotalPages === 0 ) {
+							$('li:last', an[i]).addClass('disabled');
+						} else {
+							$('li:last', an[i]).removeClass('disabled');
+						}
+					}
+				}
+			}
+		});
+     //datatable
+	var datasort=$('#datasort').val()?$('#datasort').val():0;//排序根据哪列
+	var dataasc=$('#dataasc').val()?"asc":"desc";//排序条件
+	$('.datatable').dataTable({
+			"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
+			"sPaginationType": "bootstrap",
+			"aaSorting": [[ datasort, dataasc ]],
+			"oLanguage": {
+			"sLengthMenu": "_MENU_ 每页显示数"
+			}
+		} );
+	
+});
 </script>
+    <script>
+$(document).ready(function () {
+            
+            $("#wechat-popover").popover({
+                html: true,
+                content: "<p style='white-space:nowrap'>扫码关注{$s.sys_briefTitle}微信</p><div style='width:120px;height:120px;margin-left:5px;'><img src='__PUBLIC__/img/erb.jpg' style='width:120px;height:120px;'></div>",
+                trigger: "hover"
+            });
+
+        $("#qqgroup-popover").popover({
+            html: true,
+            content: "<p style='white-space:nowrap'>{$s.sys_briefTitle}投资理财群 : </p><p style='white-space:nowrap'>群：<a target='_blank' href='http://shang.qq.com/wpa/qunwpa?idkey=bd41e8df34767e61c882d9599becec595fb5e51476c50470c9c5f26df5ef5f2f'><img border='0' src='http://pub.idqqimg.com/wpa/images/group.png' alt='天贷-投资理财群' title='天贷-投资理财群'></a></b></p><p>申请加入投资理财群时<br />请提供{$s.sys_briefTitle}用户名</p>",
+            trigger: "click"
+        });
+
+            //disable pager invalid link
+            $('.pagination a[href^=#]').on('click', function (e) {
+                e.preventDefault();
+            });
+            $('a.no-link[href^=#]').on('click', function (e) {
+                e.preventDefault();
+            });
+        })	
+
+{$endjs}
+//计划任务
+window.onload = Schedule();
+function Schedule(){
+$.post("__ROOT__/Api/Autos/timing", {id:1} );
+
+}
+$('a[href="#"][data-top!=true]').click(function(e){
+		e.preventDefault();
+	});
+</script>
+
 </body>
 </html>

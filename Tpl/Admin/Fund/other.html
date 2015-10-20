@@ -1,0 +1,60 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">其它费用操作</li>
+</ul>
+<form class="form-horizontal" method="post">
+  <div class="control-group">
+    <label class="control-label">变动方式:</label>
+    <div class="controls">
+         <label class="checkbox inline radio">
+          <input type="radio" name="change"  value="1" checked>
+          奖励
+        </label>
+        <label class="checkbox inline radio">
+          <input type="radio" name="change"  value="2" >
+          扣除
+        </label>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">会员ID:</label>
+    <div class="controls">
+         <input class="span1" type="text" name="uid" placeholder="请输入会员ID..">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">操作金额:</label>
+    <div class="controls">
+         <input class="span2" type="text" name="price" placeholder="请输入金额..">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">说明:</label>
+    <div class="controls">
+         <textarea name="explain"  placeholder="请输入说明.."></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+     <button class="btn btn-primary" type="submit">
+     提交
+     </button>
+    </div>
+  </div>
+</form>
+<div>
+</div>
+<!--底部 -->
+<include file="Index:footer" />

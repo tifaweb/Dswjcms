@@ -1,0 +1,99 @@
+<include file="Index:header" />
+
+<div class="container-fluid">
+	<div class="row-fluid">
+        <!--左栏 starts -->
+		<include file="left" />
+        <!--左栏 end -->
+			
+			
+       <!-- content starts -->
+      <div id="content" class="span10">
+          <ul class="breadcrumb">
+              <li>
+                  <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+              </li>
+              <li class="active">担保额度申请</li>
+ 
+          </ul>
+          
+          <table class="table table-striped table-bordered table-condensed datatable">
+            <thead>
+              <tr>
+                <th>用户名</th>
+                <th>担保额度</th>
+                <th>状态</th>
+                <td>申请时间</td>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+			 <volist name="list" id="vo">
+              <tr>
+                <td>{$vo.username}</td>
+                <td>{$vo.assure}</td>
+                <th>
+                	<switch name="vo.state">
+                        <case value="1">申请</case>
+                        <case value="2">通过</case>
+                        <default />不通过
+                    </switch>
+
+                </th>
+                <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                <td>
+                	<a href="#edit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-search" title="查看详情" onclick='edit({$vo.uid})'></a>
+                  	<if condition="$vo.state eq 1">
+                    <a href="#audit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-book" title="审核" onclick="$('#up_id').val({$vo.id});$('#up_uid').val({$vo.uid});$('#up_assure').val({$vo.assure});"></a>
+                	</if>
+                </td>
+              </tr>
+            </volist>
+            </tbody>
+           
+          </table>          
+          
+
+
+        
+      </div>
+       <!-- content end -->
+   </div>
+</div>
+<!--审核 start-->
+<div id="audit" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>审核</h3>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Loan/assureforadd'>
+        <input id="up_id" name="sid" type="hidden" value="" />
+        <input id="up_uid" name="uid" type="hidden" value="" />
+        <input id="up_assure" name="upass" type="hidden" value="" />
+        <p class="form-inline">   
+          <label class="radio"><input type="radio" name="state" value="2" checked/> 通过</label>
+          <label class="radio"><input type="radio" name="state" value="3" /> 不通过</label>
+        </p>
+        <div class="span5">
+      	  <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+          <input class="input-large" name="proving" type="text"  style="width:50px;margin-top: 10px;" title="验证码" data-rel="tooltip"/>
+          <button class="btn btn-primary" type="submit">
+              确认提交
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--审核 end-->
+<!--用户信息 start-->
+<div id="edit" class="modal hide fade"  style="width:900px;left:35%">
+    
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>用户信息</h3>
+    </div>
+    <div id='edits'></div>
+</div>
+<!--用户信息 end-->
+<include file="Index:footer" />

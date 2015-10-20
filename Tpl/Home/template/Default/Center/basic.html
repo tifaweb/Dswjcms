@@ -1,0 +1,158 @@
+<include file="Index:header" />
+<!--头部 end -->
+<include file="top" />
+<div class=" row-fluid">
+<div class="container paddtop">
+<!-- 二级-->
+<ul class="center_secondary">
+    <li <eq name="mid" value="personal_data"> class="active"</eq>><a href="__ROOT__/Center/basic/personal_data.html">个人资料</a></li>
+    <li><a href="__ROOT__/Home/Center/portrait.html">头像</a></li>
+</ul>
+<!-- 二级end-->
+    <div id="content" class="center_zt">
+      	<switch name="mid" >
+            <case value="personal_data">
+            <!--个人资料 start-->
+			 <form method="post"  action='__URL__/tfUpda'>
+             	<input name="q" type="hidden" value="ufo" />
+                <input name="u" type="hidden" value="__ROOT__/Center/basic/personal_data.html" />
+                <input name="g" type="hidden" value="uid" />
+                <input name="sid" type="hidden" value="{$Think.session.user_uid}" />
+<volist name="userinfo" id="v">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>*所在地址：</td>
+                            <td  class="form-inline" id="area">
+                            	<if condition="$v.location eq ''">
+                                	省份 <select id="province"  name="location[]" style="width:100px;"></select> 城市 <select id="city" style="width:110px;"  name="location[]"></select>	区/县 <select id="county"  style="width:140px;" name="location[]"></select>
+                                <else/>
+                                	<span id="show">{$v.location}&nbsp;&nbsp;<a href="#" onclick="$('#show').toggle();$('#location').toggle();$('#province').attr({ name: 'location[]'});$('#city').attr({ name: 'location[]'});$('#county').attr({ name: 'location[]'});">更换</a></span>
+									<span id="location" style="display: none;">省份 <select id="province"   style="width:100px;"></select> 城市 <select id="city" style="width:110px;"  ></select>	区/县 <select id="county"  style="width:140px;"></select></span>
+                                </if>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>婚姻状况：</td>
+                            <td class="form-inline">
+                            	<label class="radio"><input type="radio" name="marriage" value="0" <eq name="v.marriage" value="0">checked</eq>/> 保密</label>
+                                <label class="radio"><input type="radio" name="marriage" value="1" <eq name="v.marriage" value="1">checked</eq>/> 未婚</label>
+                                <label class="radio"><input type="radio" name="marriage" value="2" <eq name="v.marriage" value="2">checked</eq>/> 已婚</label>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>学历：</td>
+                            <td>
+                            	<select name="education" style="width:100px;">  
+                                		<option value='0' >保密</option> 
+                                		<volist name="education" id="vo">
+                                        		<if condition="$vo.value eq $v.education ">
+                                                <option value='{$vo.value}' selected>{$vo.name}</option>
+                                                <else />
+                                                <option value='{$vo.value}' >{$vo.name}</option>
+                                                </if>
+                                        </volist>
+                                </select>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>月收入：</td>
+                            <td>
+                            	<select name="monthly_income" style="width:140px;">   
+                                        <option value='0' >保密</option>
+                                        <volist name="monthly_income" id="vo">
+                                        		<if condition="$vo.value eq $v.monthly_income ">
+                                                <option value='{$vo.value}' selected>{$vo.name}</option>
+                                                <else />
+                                                <option value='{$vo.value}' >{$vo.name}</option>
+                                                </if>
+                                        </volist>
+                                </select>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>住房条件：</td>
+                            <td>
+                            	<select name="housing" style="width:120px;">   
+                                        <option value='0' >保密</option>
+                                        <volist name="housing" id="vo">
+                                        		<if condition="$vo.value eq $v.housing ">
+                                                <option value='{$vo.value}' selected>{$vo.name}</option>
+                                                <else />
+                                                <option value='{$vo.value}' >{$vo.name}</option>
+                                                </if>
+                                        </volist>
+                                </select>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>购车情况：</td>
+                            <td>
+                            	<select name="buy_cars" style="width:120px;">   
+                                        <option value='0' >保密</option>
+                                        <volist name="buy_cars" id="vo">
+                                        		<if condition="$vo.value eq $v.buy_cars ">
+                                                <option value='{$vo.value}' selected>{$vo.name}</option>
+                                                <else />
+                                                <option value='{$vo.value}' >{$vo.name}</option>
+                                                </if>
+                                        </volist>
+                                </select>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>*QQ：</td>
+                            <td><input name="qq" type="text" class="span4" value="{$v.qq}"/></td>
+                         </tr>
+                         <tr>
+                            <td>*固定电话：</td>
+                            <td><input name="fixed_line" type="text" class="span4" value="{$v.fixed_line}"/></td>
+                         </tr>
+                         <tr>
+                            <td>当前所在行业：</td>
+                            <td>
+                            	<select name="industry" style="width:120px;">   
+                                        <option value='0' >保密</option>
+                                        <volist name="industry" id="vo">
+                                        		<if condition="$vo.value eq $v.industry ">
+                                                <option value='{$vo.value}' selected>{$vo.name}</option>
+                                                <else />
+                                                <option value='{$vo.value}' >{$vo.name}</option>
+                                                </if>
+                                        </volist>
+                                </select>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>公司：</td>
+                            <td><input name="company" type="text" value="{$v.company}"/></td>
+                         </tr>
+                         <tr>
+                            <td></td>
+                            <td>
+                            <button class="btn btn-primary" type="submit">
+                              确认提交
+                          </button>
+                            </td>
+                         </tr>
+                    </tbody>
+                </table>
+</volist>
+            <!--个人资料 end-->
+            </case>
+            <default />空
+        	</form>
+        </switch>
+    </div>
+    <!-- right end--> 
+</div>
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />
+<script src="__PUBLIC__/js/region.js"></script>
+<script src="__PUBLIC__/js/jq_area.js"></script>
+<script>
+$(function(){
+	$("#area").area({cache:region});
+});
+</script>

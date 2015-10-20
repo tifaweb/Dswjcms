@@ -1,0 +1,105 @@
+<include file="Index:header" />
+<!--头部 end -->
+<div class="page-desc js-ignore-pagemark">
+    <!-- start:Page-desc-inner -->
+    <div class="page-desc-inner">
+        <div class="container">
+            <h3>邮箱验证</h3>
+        </div>
+    </div>
+    <!-- end:Page-desc-inner -->
+</div>
+<!--主体 -->
+<div class="container">
+    <!--Row start -->
+    <div class="row">
+        <!--Wall start -->
+        <div class="span4 offset4 control-panle">
+            <div class="control-panle-header">
+    <h4>邮箱验证</h4>
+</div>
+<hr>
+ <form id="form-horizontal" name="myform" method="post" action='__URL__/eRegister'>
+    <div class="row-fluid">
+        
+        <div class="control-group">
+            <label class="control-label">邮箱&nbsp;<span class="red">*</span></label>
+            <div class="controls">
+               <input class="span12" type="text" id="email" name="email" datatype="e" nullmsg="请输入邮箱！" ajaxurl="__URL__/ajaxverify" placeholder="邮箱"> 
+               <input type="button" id="btn" value="免费获取验证码"  class="btn btn-primary" ajaxurl="__URL__/ajaxverify"/>
+            </div>
+            <span class="help-block"></span>
+        </div>
+        <div class="control-group">
+            <label class="control-label">邮箱验证码&nbsp;<span class="red">*</span></label>
+            <div class="controls">
+               <input class="span12" type="text" name="emailcode" datatype="*" nullmsg="请输入邮箱验证码！" ajaxurl="__URL__/ajaxverify" placeholder="邮箱验证码"  maxlength="6">
+            </div>
+            <span class="help-block"></span>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary span12" style="margin-left: 0" tabindex="4">提交</button>
+    </div>
+</form>
+
+        </div>
+        <!--Wall end-->
+    </div>
+    <!--Row end-->
+</div>
+
+
+<!-- 主体 end-->
+<!--底部 -->
+ <script language="JavaScript">
+	function changeVerify(){
+		var timenow = new Date().getTime();
+		document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+	}
+</script>
+<script src="__PUBLIC__/jquery/Validform_v5.3.2min.js"></script>
+<script language="JavaScript">
+ $(function(){
+	//$(".form-horizontal").Validform();  //就这一行代码！;
+
+	$("#form-horizontal").Validform({
+		datatype:{
+			"me" : /^[\u4E00-\u9FA5\uf900-\ufa2d\w]{2,16}$/,
+		}
+	});
+})
+</script>
+<script type="text/javascript">
+//获取验证码倒计时
+var wait=60;
+function time(o) {
+		if (wait == 0) {
+			o.removeAttribute("disabled");			
+			o.value="免费获取验证码";
+			wait = 60;
+		} else {
+			o.setAttribute("disabled", true);
+			o.value="重新发送(" + wait + ")";
+			wait--;
+			setTimeout(function() {
+				time(o)
+			},
+			1000)
+		}
+	}
+$(function(){
+	$('#btn').click( function () { 
+		var email=$('#email').val();
+		var myreg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		 if(!myreg.test(email))
+        {
+            alert('请输入有效的邮箱地址！');
+            return false;
+        }
+		time(this); 
+		$.post("__URL__/emMessage", {email:email} );
+	});
+});
+</script>
+<include file="Index:footer" />
+<!--底部 end-->

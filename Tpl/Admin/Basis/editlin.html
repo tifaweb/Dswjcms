@@ -1,0 +1,91 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Basis/linebank.html">线下银行</a> <span class="divider">/</span>
+      </li>
+      <li class="active">编辑</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Basis/linebank.html" >返回线下银行</a></div>
+</ul>
+<form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Basis/tfUpda'>
+<input name="q" type="hidden" value="off" />
+<input name="u" type="hidden" value="__APP__/TIFAWEB_DSWJCMS/Basis/linebank.html" />
+<input name="sid" type="hidden" value="{$Think.get.id}" />
+<input name="n" type="hidden" value="线下银行更新" />
+ <table class="table table-striped table-bordered table-condensed">
+   <tbody>
+	  <tr>
+        <td>
+               充值类型：
+        </td>
+        <td>
+          <select name="type" class="span2" style="width:160px;">   
+                <volist name="list" id="v">
+                <if condition="$v.value eq $vo.type ">
+                <option value='{$v.value}' selected>{$v.name}</option>
+                <else/>
+                <option value='{$v.value}' >{$v.name}</option>
+                </if>
+                </volist>
+           </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+               支行名称：
+        </td>
+        <td>
+          <input name="bank_name" type="text" class="span6" placeholder="请输入支行名称..." value="{$vo.bank_name}">
+        </td>
+      </tr>
+      <tr>
+        <td>
+               收款人：
+        </td>
+        <td>
+          <input name="name" type="text" class="span6" placeholder="请输入收款人..." value="{$vo.name}">
+        </td>
+      </tr>
+      <tr>
+        <td>
+               银行账户：
+        </td>
+        <td>
+          <input name="bank" type="text" class="span6" placeholder="请输入银行账户..." value="{$vo.bank}">
+        </td>
+      </tr>
+      <tr>
+        <td>
+               排序：
+        </td>
+        <td>
+          <input name="order" type="text" class="span2"  value="{$vo.order}">
+        </td>
+      </tr>
+	</tbody>
+ </table>
+<div>
+<div class="span4">
+
+</div>
+<div class="span5">
+          <button class="btn btn-primary" type="submit">
+              确认修改
+          </button>
+            <a href="__APP__/TIFAWEB_DSWJCMS/Basis/linebank.html" class="btn btn-info ajax-link">取消</a>
+</div>
+</div>
+</form>
+<!--底部 -->
+<include file="Index:footer" />

@@ -10,7 +10,7 @@
 <!--左栏 end -->
 <ul class="breadcrumb">
       <li>
-        <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
       </li>
       <li class="active">界面风格</li>
       <div  class="pull-right"> <a href="#" onclick="colourRefresh()">刷新</a></div>
@@ -40,14 +40,14 @@
  *
  **/
 function colourRefresh(){
-	$("#colour_switch").load("__URL__/colourRefresh", {limit:1});
+	$("#colour_switch").load("__APP__/TIFAWEB_DSWJCMS/Index/colourRefresh", {limit:1});
 }
 /**
  * @设为默认
  *
  **/
 function setDefault(dir){
-	$("#colour_switch").load("__URL__/setDefault", {dir:dir});
+	$("#colour_switch").load("__APP__/TIFAWEB_DSWJCMS/Index/setDefault", {dir:dir});
 }
 </script>
 <include file="footer" />

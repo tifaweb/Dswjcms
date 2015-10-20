@@ -1,0 +1,344 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS/Loan/institutions.html">机构担保</a> <span class="divider">/</span>
+      </li>
+      <li class="active">详细信息</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Loan/institutions.html" >返回机构担保</a></div>
+</ul>
+<if condition="$Think.get.pid eq 1">
+<!--发布 -->
+<form class="form-horizontal" name="myform" id="myform" method="post" action='__APP__/TIFAWEB_DSWJCMS/Loan/institutionIssue'>
+<table class="table table-bordered">
+		 <tbody>
+          <tr>
+            <td>企业名称:</td>
+            <td>{$Guara.name}</td>
+          </tr>
+          <tr>
+            <td>担保公司:</td>
+            <td>{$Guara.gcompanys}</td>
+          </tr>
+          <tr>
+            <td>*注册年限:</td>
+            <td class="controls">
+            	<div  class="input-append">
+                    <input name="agelimit" type="text" class="span4" maxlength="3"  datatype="n" nullmsg="请输入注册年限！"><span class="add-on">年</span>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>*注册资金:</td>
+            <td class="controls">
+            	<div  class="input-append">
+                    <input name="assets" type="text" class="span6" maxlength="11"  datatype="n" nullmsg="请输入注册资金！"><span class="add-on">万元</span>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>*净值资产:</td>
+            <td class="controls">
+            	<div  class="input-append">
+                    <input name="worth" type="text" class="span6" maxlength="11"  datatype="n" nullmsg="请输入净值资产！"><span class="add-on">万元</span>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>*上年度企业经营现金流入:</td>
+            <td class="controls">
+            	<div  class="input-append">
+                    <input name="annual" type="text" class="span6" maxlength="11"  datatype="n" nullmsg="请输入上年度企业经营现金流入！"><span class="add-on">万元</span>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>是否省、市重点企业:</td>
+            <td class="form-inline">
+               <label class="radio"><input type="radio" name="key" value="0" checked/> 否</label>
+            	<label class="radio"><input type="radio" name="key" value="1" /> 是</label>
+            </td>
+          </tr>
+          <tr>
+            <td>经营情况:</td>
+            <td class="controls"><textarea class="span3" name="business" style="height:100px;" datatype="*" nullmsg="请输入经营情况！" placeholder="请输入经营情况..."  maxlength="400"></textarea></td>
+          </tr>
+          <tr>
+            <td>征信记录:</td>
+            <td class="controls"><textarea class="span3" name="reporting" style="height:100px;" datatype="*" nullmsg="请输入征信记录！" placeholder="请输入征信记录..." maxlength="200"></textarea></td>
+          </tr>
+          <tr>
+            <td>财务状况:</td>
+            <td class="controls"><textarea class="cleditor" name="financial" datatype="*" nullmsg="请输入财务状况！"></textarea></td>
+          </tr>
+          <tr>
+          	<td> 担保情况: </td>
+            <td class="controls"> <textarea class="span3" name="guarantee" style="height:100px;" datatype="*" nullmsg="请输入担保情况！" placeholder="请输入担保情况..." maxlength="100"></textarea></td>
+          </tr>
+          <tr>
+            <td>反担保情况:</td>
+            <td class="controls"><textarea class="span3" name="cguarantee" style="height:100px;" datatype="*" nullmsg="请输入反担保情况！" placeholder="请输入反担保情况..." maxlength="100"></textarea></td>
+          </tr>
+          <tr>
+            <td>风险控制综述:</td>
+            <td class="controls"><textarea class="span3" name="review" style="height:100px;" datatype="*" nullmsg="请输入风险控制综述！" placeholder="请输入风险控制综述..." maxlength="400"></textarea> </td>
+          </tr>
+          <tr>
+            <td>*标题:</td>
+            <td class="controls"><input name="title" type="text" class="span3" placeholder="请输入标题..."  maxlength="25"  datatype="*" nullmsg="请输入标题！"></td>
+          </tr>
+          <tr>
+            <td>*年利率:</td>
+            <td class="controls">
+            	<div  class="input-append">
+					<input name="rates" class="span5" type="text" maxlength="2"  datatype="n" nullmsg="请输入年利率！"><span class="add-on">%</span>
+            	</div>
+            </td>
+          </tr>
+          <tr>
+            <td> 统计单位:</td>
+            <td>按月</td>
+          </tr>
+          <tr>
+            <td>借款期限:</td>
+            <td>
+                   <select name="deadline" style="width:80px;" id="deadline">  
+                   <option value="{$Guara.deadline}" selected>{$Guara.deadline}个月</option> 
+                    <volist name="linkage.deadline_month" id="ue">
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                    </volist>
+                    </select>
+                    <select style="width:80px;display: none;" id="deadline1">   
+                     <volist name="linkage.deadline_day" id="ue">
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                    </volist>
+                    </select>
+            </td>
+          </tr>
+          <tr>
+            <td>还款方式:</td>
+            <td>
+                   <select name="way" class="span2">   
+                    <volist name="linkage.way" id="ue">
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                    </volist>
+                    </select>
+            </td>
+          </tr>
+          <tr>
+            <td>有效时间:</td>
+            <td>
+                   <select name="valid" style="width:80px;">   
+                   <volist name="linkage.valid" id="ue">
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                    </volist>
+                    </select>
+            </td>          </tr>
+          <tr>
+            <td>密码标状态:</td>
+            <td><span onclick="$('#pass1').toggle();$('#pass').toggle();"><input name="code" data-no-uniform="true"  type="checkbox" class="iphone-toggle" value="1"></span></td>
+          </tr>
+          <tr>
+            <td>密码:</td>
+            <td>
+                   <span id="pass" class="input-xlarge uneditable-input span2" ></span>
+                   <input id="pass1" name="password" type="password" class="span2" placeholder="请输入密码..." style="display: none;">
+            </td>
+          </tr>
+          <tr>
+            <td>最低投标金额:</td>
+            <td>
+                   <select name="min" style="width:80px;">   
+                    <volist name="linkage.min" id="ue">
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                    </volist>
+                    </select>
+            </td>
+          </tr>
+          <tr>
+            <td>最高投标金额:</td>
+            <td>
+                   <select name="max" style="width:100px;">   
+                    <volist name="linkage.max" id="ue">
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                    </volist>
+                    </select>
+            </td>
+          </tr>
+          <tr>
+            <td>*借款金额:</td>
+            <td class="controls">
+            	<div  class="input-append">
+                    <input name="money" type="text" class="span8" placeholder="请输入借款金额..." onkeyup="var money=$(this).val();$('#surplus').val(money);moneys(money);" maxlength="13"  datatype="n3-13" nullmsg="请输入借款金额！" value="{$Guara.money}0000"><span class="add-on">元</span>
+                    <input id="surplus" name="surplus" type="hidden" value="{$Guara.money}0000"/>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>投标奖励:</td>
+            <td>
+            	<label class="radio"><input type="radio" name="reward_type" value="0" checked  onclick="choose_reward(1)"/> 无</label><BR />
+          		<div class="input-prepend input-append" style="margin-bottom: 10px;">
+                <label class="radio"><input type="radio" name="reward_type" value="1" onclick="choose_reward(2)"/> </label>
+                <span class="add-on">按金额奖励：</span><input id="reward_1" name="reward" class="span4 input-xlarge" type="text" disabled><span class="add-on">元</span>
+                </div>
+                <br/>
+                <div class="input-prepend input-append">
+                <label class="radio"><input type="radio" name="reward_type" value="2"  onclick="choose_reward(3)"/> </label>
+                <span class="add-on">按比例奖励：</span><input id="reward_2" name="reward" class="span4 input-xlarge" type="text" disabled><span class="add-on">%</span>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>*合同协议:</td>
+            <td class="controls">
+            	<ul class="thumbnails" id="file_content">
+                </ul>  
+                <input id="file_url" type="hidden" value="__PUBLIC__/uploadify/uploads/mark/"/>
+                <input id="folder" type="hidden" value="mark"/>
+                <input type="hidden" id="folder_id" value="{$kid}"/>
+                <input data-no-uniform="true" type="file" name="file_goods" id="file_goods" />   
+            </td>
+          </tr>
+          <tr>
+            <td>*企业实地照片:</td>
+            <td class="controls">
+            	<ul class="thumbnails" id="file_contents">
+                </ul>  
+                <input id="file_urls" type="hidden" value="__PUBLIC__/uploadify/uploads/mark/"/>
+                <input type="hidden" id="folder_ids" value="{$kid}"/>
+                <input data-no-uniform="true" type="file" id="file_good" />   
+            </td>
+          </tr>
+          <tr>
+            <td>
+                   详细说明:
+            </td>
+            <td >
+              	<textarea class="editor span12" name="content" style="height:400px;"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+	  <div class="control-group">
+    <label class="control-label"></label>
+    <div class="controls">
+      <input class="input-large" name="proving" maxlength="4" type="text"  style="width:50px;margin-top: 10px;" title="验证码" data-rel="tooltip"/>          	            	
+      <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;position: relative;top: 5px;"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-info">确认发布</button>
+    </div>
+  </div>
+  <input name="state" type="hidden" value="1"/>
+  <input name="gid" type="hidden" value="{$Think.get.id}"/>
+  <input name="uid" type="hidden" value="{$Guara.uid}"/>
+  <input name="type" type="hidden" value="8"/>
+</form>
+<!--底部 -->
+<script>
+function choose_reward(type){
+	if (type==1){
+		$("#reward_1").attr("disabled","disabled");
+		$("#reward_2").attr("disabled","disabled");
+	}else if(type==2){
+		$("#reward_1").removeAttr("disabled");
+		$("#reward_2").attr("disabled","disabled");
+	}else{
+		$("#reward_2").removeAttr("disabled");
+		$("#reward_1").attr("disabled","disabled");
+	}
+}
+function switchover(id){
+	if(id==1){
+		$('#deadline1').hide();$('#deadline').show();$('#deadline').attr('name','deadline');$('#deadline1').attr('name','');
+	}else{
+		$('#deadline1').show();$('#deadline').hide();$('#deadline1').attr('name','deadline');$('#deadline').attr('name','');
+	}
+}
+function intExit(id,img)
+{
+	$('#i'+id).empty();
+	$.post("__APP__/TIFAWEB_DSWJCMS/Loan/pathExit", {img:'./Public/uploadify/uploads/mark/'+img} );
+}
+</script>
+<!--发布 end -->
+<else/>
+<table class="table table-striped table-bordered table-condensed">
+<tbody>
+    <tr><td>企业名称：</td><td style="width:80%;">{$Guara.name}</td></tr>
+    <tr><td>担保公司:</td><td>{$Guara.gcompanys}</td></tr>
+    <tr><td>注册年限:</td><td>{$Guara.guarantee.agelimit}年</td></tr>
+    <tr><td>注册资金:</td><td>{$Guara.guarantee.assets|number_format=2,'.',','}万元</td></tr>
+    <tr><td>净值资产:</td><td>{$Guara.guarantee.worth|number_format=2,'.',','}万元</td></tr>
+    <tr><td>上年度企业经营现金流入:</td><td>{$Guara.guarantee.annual|number_format=2,'.',','}万元</td></tr>
+    <tr><td>是否省、市重点企业:</td><td>{$Guara['guarantee']['key']?'是':'否'}</td></tr>
+    <tr><td>经营情况:</td><td>{$Guara.guarantee.business}</td></tr>
+    <tr><td>财务状况:</td><td>{$Guara.guarantee.financial}</td></tr>
+    <tr><td> 担保情况: </td><td>{$Guara.guarantee.guarantee}</td></tr>
+    <tr><td>反担保情况:</td><td>{$Guara.guarantee.cguarantee}</td></tr>
+    <tr><td>风险控制综述:</td><td>{$Guara.guarantee.review}</td></tr>
+    <tr><td>标题:</td><td>{$Guara.boow.title}</td></tr>
+    <tr><td>年利率:</td><td>{$Guara.boow.rates}%</td></tr>
+    <tr><td>统计单位:</td><td>按月</td></tr>
+    <tr><td>借款期限:</td><td>{$Guara.boow.deadlines}</td></tr>
+    <tr><td>还款方式:</td><td>{$Guara.boow.way}</td></tr>
+    <tr><td>审核时间：</td><td>{$Guara.boow.checktime|date="Y-m-d H:i:s",###}</td></tr>
+    <tr><td>失效时间：</td><td>{$Guara.boow.endtime|date="Y-m-d H:i:s",###}</td></tr>
+    <tr><td>结束时间：</td><td>{$Guara.boow.limittime|date="Y-m-d H:i:s",###}</td></tr>
+    <tr><td>密码标开启/关闭：</td><td><if condition="$Guara.boow.code neq 0">开启<else /> 关闭</if></td></tr>
+    <tr><td>最低投标金额:</td><td>{$Guara.boow.min_name}</td></tr>
+    <tr><td>最高投标金额:</td><td>{$Guara.boow.max_name}</td></tr>
+    <tr><td>借款金额:</td><td>{$Guara.boow.money|number_format=2,'.',','}元</td></tr>
+    <tr><td>投标奖励：</td><td>{$Guara['boow']['rewards']?$Guara['boow']['rewards']:'无'}</td></tr>
+    <tr><td>合同协议:</td>
+    <td class="controls">
+        <ul class="thumbnails" id="file_content">
+        <foreach name="Guara.img" item="vo" key="kid">
+            <li id="i{$kid}" class="thumbnail">
+            	<a class="cboxElement" href="__PUBLIC__/uploadify/uploads/mark/{$vo}">
+                <img id="feil{$kid}" src="__PUBLIC__/uploadify/uploads/mark/{$vo}">
+                </a>
+            </li>
+        </foreach>
+        </ul>    
+    </td>
+    </tr>
+    <tr>
+    <td>*企业实地照片:</td>
+    <td class="controls">
+        <ul class="thumbnails" id="file_contents">
+        <foreach name="Guara.agr" item="vo" key="kid">
+            <li id="i{$kid}" class="thumbnail">
+            	<a class="cboxElement" href="__PUBLIC__/uploadify/uploads/mark/{$vo}">
+                <img id="feil{$kid}" src="__PUBLIC__/uploadify/uploads/mark/{$vo}">
+                </a>
+            </li>
+        </foreach>
+        </ul>    
+    </td>
+    </tr>
+    <tr>
+    <td>推荐：</td>
+    <td class="form-inline">
+    	<if condition="$ed.boow.stick eq 0">不推荐<else />推荐</if>
+    </td>
+    </tr>
+    <tr><td>详细说明：</td><td>{$Guara['boow']['content']?$Guara['boow']['content']:'无'}</td></tr>
+</tbody>
+</table>
+</if>
+<include file="Index:footer" />

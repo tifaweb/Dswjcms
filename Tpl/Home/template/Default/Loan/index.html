@@ -1,0 +1,106 @@
+<include file="Index:header" />
+
+<!--头部 end -->
+<!-- container start --> 
+<div class="sub-nav" sup="Project">
+<input id="type" type="hidden" value="0" />
+<input id="state" type="hidden" value="0" />
+    <div class="sub-nav-inner">
+        <div class="container">
+            <!--Navigation start-->
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <ul class="nav" id="types">
+                        <li onclick="integral('type',0);$(this).addClass('active');" class="active"><a href="javascript:void(0)">全部</a></li>
+                        <li onclick="integral('type',2);$(this).addClass('active');"><a href="javascript:void(0)">抵押标</a></li>
+                        <li onclick="integral('type',3);$(this).addClass('active');"><a href="javascript:void(0)">质押标</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--Navigation end-->
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span9 separate">
+            <div class="wall">
+                <p style="margin-bottom: 0;">
+                    <ul id="states" class="loan_state">
+                    	<li onclick="integral('state',0);$(this).addClass('active');" class="active"><a href="javascript:void(0)">全部</a></li>
+                        <li onclick="integral('state',1);$(this).addClass('active');"><a href="javascript:void(0)">招标中</a></li>
+                        <li onclick="integral('state',7);$(this).addClass('active');"><a href="javascript:void(0)">还款中</a></li>
+                        <li onclick="integral('state',9);$(this).addClass('active');"><a href="javascript:void(0)">已成功</a></li>
+                        <li onclick="integral('state',14);$(this).addClass('active');"><a href="javascript:void(0)">已流标</a></li>
+                        <li onclick="integral('state',8);$(this).addClass('active');"><a href="javascript:void(0)">已逾期</a></li>
+                    </ul>
+                </p>
+            </div>
+<!--借款标 state-->
+<div class="loan_ajax"></div>
+<!--借款标 end-->
+</div>
+
+        <div class="span3 post-thumbnail">
+           <section>
+                <a href="__ROOT__/Site/listTpl/id/28.html" class="more">更多</a>
+                <h3>名词解释</h3>
+                <ul>
+                <volist name="explanation" id="vo">
+                <li><a href="__ROOT__/Site/article/id/{$vo.id}.html" target="_blank" title="{$vo.title}">{$vo.title}</a></li>
+                </volist> 
+                </ul>
+            </section>
+            <hr>
+            <section>
+                <a href="__ROOT__/Site/listTpl/id/32.html" class="more">更多</a>
+                <h3>平台公告</h3>
+                <ul>
+                <volist name="new" id="vo">
+                <li><a href="__ROOT__/Site/article/id/{$vo.id}.html" target="_blank" title="{$vo.title}">{$vo.title}</a></li>
+                </volist> 
+                </ul>
+            </section>
+            <hr>
+            <section>
+                <a href="__ROOT__/Site/listTpl/id/31.html" class="more">更多</a>
+                <h3>帮助中心</h3>
+                <ul>
+                <volist name="help" id="vo">
+                <li><a href="__ROOT__/Site/article/id/{$vo.id}.html" target="_blank" title="{$vo.title}">{$vo.title}</a></li>
+                </volist> 
+                </ul>
+            </section>
+            <hr>
+
+        </div>
+    </div>
+</div>
+<!-- container end -->
+<!--底部  start-->
+<!--二维码-->
+<script>
+window.onload = integral();
+
+function integral(){
+	var loading='<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>加载中...</div> </div>';
+	$(".loan_ajax").html(loading);
+	$(".loan_ajax").load("__URL__/loanAjax", {type:0,state:0,scope:'undefined',classify:'undefined'});
+		
+}
+function qrcode(id){
+	var qrd=$('#qrd'+id).val();
+	if(qrd==1){
+		$('#qrcode'+id).fadeIn("slow");
+		$('#qrd'+id).val(0);
+	}else{
+		$('#qrcode'+id).fadeOut("slow");
+		$('#qrd'+id).val(1);
+	}
+	var loading='<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/spinner-mini.gif"/></div><div></div> </div>';
+		$("#qrdimg"+id).html(loading);
+	$("#qrdimg"+id).load("__URL__/qrcodeajax", {id:id});
+}
+</script>
+<!--二维码 end-->
+<include file="Index:footer" />

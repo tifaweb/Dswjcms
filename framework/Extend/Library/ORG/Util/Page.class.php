@@ -31,7 +31,7 @@ class Page {
     // 分页的栏的总页数
     protected $coolPages   ;
     // 分页显示定制
-    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'最后一页','theme'=>' <li><a href="#">%totalRow% %header% %nowPage%/%totalPage% 页 %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%</a></li>');
+    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'最后一页','theme'=>' <li><span>%totalRow% %header% %nowPage%/%totalPage% 页 %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%</span></li>');
     // 默认分页变量名
     protected $varPage;
 
@@ -96,6 +96,11 @@ class Page {
             }
             $parameter[$p]  =   '__PAGE__';
             $url            =   U('',$parameter);
+			//2014/09/22后台自定义转换地址
+			if(!strpos(__SELF__,'Admin')){
+			$url            =   str_replace('Admin',TIFAWEB_DSWJCMS,$url);
+			}
+			
         }
         //上下翻页字符串
         $upRow          =   $this->nowPage-1;
@@ -141,7 +146,7 @@ class Page {
                 }
             }else{
                 if($this->totalPages != 1){
-                    $linkPage .= "<li class='active'><a href='#'>".$page."</a></li>";
+                    $linkPage .= "<li class='active'><span>".$page."</span></li>";
                 }
             }
         }

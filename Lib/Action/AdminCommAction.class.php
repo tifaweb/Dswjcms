@@ -12,24 +12,30 @@
 // +----------------------------------------------------------------------
 defined('THINK_PATH') or exit();
 class AdminCommAction extends CommAction {
-	public function _initialize() {
-	   header("Content-Type:text/html; charset=utf-8");
-       import('ORG.Util.Authority');//加载类库
-       $auth=new Authority();	
-	   //后台 admin_name
-		  $uid=$this->_session('admin_uid');
-		  $user =$this->_session('admin_name');
-	   $prompt=$uid?"你没有权限":"请登陆";
-	   $url=$uid?"":"__ROOT__/Admin/Logo.html";
-	   if($user !="admin"){
-		 if(!$auth->getAuth(GROUP_NAME.'/'.MODULE_NAME.'/'.ACTION_NAME,$uid)){
-			//echo $user;
-			 $this->error($prompt,$url);
-		 }
-	   }
-		$system=$this->systems();
-		$this->assign('s',$system);
+	protected function _initialize() {
+		header("Content-Type:text/html; charset=utf-8");
+		$this->adminVerify();
 	}
+	
+	/**
+	 * @后台验证
+     * @作者		shop猫
+	 * @版权		宁波天发网络
+	 * @官网		http://www.tifaweb.com http://www.dswjcms.com
+	 */
+	protected function adminVerify(){
+		if($this->_session('admin_uid')){
+			$users=M('admin')->field('username,password')->where(array('id'=>$this->_session('admin_uid')))->find();
+			if($this->_session('admin_verify') !== MD5($users['username'].DS_ENTERPRISE.$users['password'].DS_EN_ENTERPRISE)){
+				session('admin_uid',null);
+				session('admin_name',null);
+				session('admin_verify',null);
+				$this->error("请先重新登陆",'__APP__/TIFAWEB_DSWJCMS/Logo.html');
+			}
+		}else{
+			$this->error("请先登陆",'__APP__/TIFAWEB_DSWJCMS/Logo.html');
+		}
+	 }
 	
 	/**
 	 *
@@ -55,6 +61,21 @@ class AdminCommAction extends CommAction {
 	
 	/**
 	 *
+	 * @后台更新带验证码
+	 * @作者		shop猫
+	 * @版权		宁波天发网络
+	 * @官网		http://www.tifaweb.com http://www.dswjcms.com
+	 */	
+	public function tfUpdas(){
+		if($this->_session('verify') != md5($this->_post('proving'))) {
+		   $this->error('验证码错误！');
+			exit;
+		}
+		$this->upda();
+	}
+	
+	/**
+	 *
 	 * @后台删除
 	 * @作者		shop猫
 	 * @版权		宁波天发网络
@@ -66,7 +87,7 @@ class AdminCommAction extends CommAction {
 	
 	/**
 	 *
-	 * @后台更新
+	 * @带积分更新
 	 * @作者		shop猫
 	 * @版权		宁波天发网络
 	 * @官网		http://www.tifaweb.com http://www.dswjcms.com
@@ -75,6 +96,20 @@ class AdminCommAction extends CommAction {
 		$this->integral_upda();
 	}
 	
+	/**
+	 *
+	 * @后台更新带验证码
+	 * @作者		shop猫
+	 * @版权		宁波天发网络
+	 * @官网		http://www.tifaweb.com http://www.dswjcms.com
+	 */	
+	public function iUpdas(){
+		if($this->_session('verify') != md5($this->_post('proving'))) {
+		   $this->error('验证码错误！');
+			exit;
+		}
+		$this->integral_upda();
+	}
 }
 
 ?>

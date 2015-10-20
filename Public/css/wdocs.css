@@ -1,3 +1,6 @@
+a {outline: none !important;}
+a:active {star:expression(this.onFocus=this.blur())!important;}
+:focus { outline:0!important; }
 ul, ol,li {list-style:none outside none; }
 body > .navbar {
   font-size: 12px;

@@ -17,7 +17,7 @@ class ArticleModel extends  RelationModel{
   );
 	protected $_auto=array(
 
-	array('addtime','time',1,'function'),
+	array('addtime','time','','function',1),
 
 	);
 

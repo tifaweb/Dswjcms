@@ -1,0 +1,118 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">积分等级</li>
+      <div  class="pull-right"> <a data-toggle="modal" data-rel="tooltip" href="#audit">添加积分等级</a></div>
+</ul>
+<table class="table table-striped table-bordered table-condensed datatable ">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>等级名称</th>
+                <th>图片</th>
+                <th>分值</th>
+                <th>操作</th>
+              </tr>
+            <thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                <td>
+                       {$vo.id}
+                </td>
+                <td>
+                       {$vo.name}
+                </td>
+                <td>
+                      <img src="__PUBLIC__/uploadify/uploads/grade_img/{$vo.img}"/>
+                </td>
+                <td>
+                      {$vo.min}-{$vo.max}
+                </td>    
+                <td>
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Basis/editint/{$vo.id}.html" data-rel="tooltip" class="ajax-link icon icon-color icon-edit" title="编辑"></a>
+                    <a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__APP__/TIFAWEB_DSWJCMS/Basis/deleint/{$vo.id}'"></a>
+                </td>
+              </tr>
+            </volist>
+            </tbody>
+          </table>
+<div>
+</div>
+<!--添加积分等级 start-->
+<div id="audit" class="modal hide fade">
+    
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>添加积分等级</h3>
+    </div>
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Basis/tfAdd' >
+    <input name="q" type="hidden" value="memgrade" />
+    <input name="u" type="hidden" value="__APP__/TIFAWEB_DSWJCMS/Basis/integrallevel.html" />
+    <input name="n" type="hidden" value="积分等级添加" />
+    <table class="table">
+        <tbody>
+          <tr>
+            <td>
+                   等级名称：
+            </td>
+            <td>
+              <input name="name" type="text" class="span6" placeholder="请输入等级名称...">
+            </td>
+          </tr>
+          <tr>
+            <td>
+                   图片：
+            </td>
+            <td>
+                <img id="feil" />
+                <input id="img" name="img" type="hidden" />
+                <input id="folder" type="hidden" value="grade_img"/>
+                <input id="file_delete" type="hidden" value="/uploads/grade_img/1381309359.4541.gif"/>
+                <input data-no-uniform="true" type="file" id="file_upload" /> 
+            </td>
+          </tr>
+          <tr>
+            <td>
+                   最小值：
+            </td>
+            <td>
+              <input name="min" type="text" class="span6" placeholder="请输入最小值...">
+            </td>
+          </tr>
+          <tr>
+            <td>
+                   最大值：
+            </td>
+            <td>
+              <input name="max" type="text" class="span6" placeholder="请输入最大值...">
+            </td>
+          </tr>
+        </tbody>      
+    </table>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        <button type="submit" class="btn btn-primary" >确认添加</button>
+    </div>
+    </form>
+</div>
+<!--添加积分等级 end-->
+<!--底部 -->
+<script>
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+</script>
+<include file="Index:footer" />

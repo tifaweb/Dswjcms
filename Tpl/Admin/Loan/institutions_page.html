@@ -1,0 +1,126 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS/Loan/institutions.html">机构担保</a> <span class="divider">/</span>
+      </li>
+      <li class="active">详细信息</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Loan/institutions.html" >返回机构担保</a></div>
+</ul>
+<form class="form-horizontal" name="myform" id="myform" method="post" action='__APP__/TIFAWEB_DSWJCMS/Loan/tfUpda'>
+<input name="q" type="hidden" value="Guar" />
+<input name="u" type="hidden" value="__APP__/TIFAWEB_DSWJCMS/Loan/institutions.html" />
+<input name="n" type="hidden" value="分配" />
+<input name="g" type="hidden" value="id" />
+<input name="sid" type="hidden" value="{$Think.get.id}" />
+  <div class="control-group">
+    <label class="control-label">企业名称</label>
+    <div class="controls">
+      <span class="input-xlarge uneditable-input">{$Guara.name}</span>
+    </div>
+  </div>  
+  <div class="control-group">
+    <label class="control-label">联系人</label>
+    <div class="controls">
+   	  <span class="input-xlarge uneditable-input">{$Guara.contact}</span>	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">手机号码</label>
+    <div class="controls">
+   	  <span class="input-xlarge uneditable-input">{$Guara.cellphone}</span>	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">意向融资金额</label>
+    <div class="controls">
+   	  <span class="input-xlarge uneditable-input">{$Guara.money}万元</span>	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">所在区域</label>
+    <div class="controls">
+   	  <span class="input-xlarge uneditable-input">{$Guara.locations}</span>	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">预期融资期限</label>
+    <div class="controls">
+   	  <span class="input-xlarge uneditable-input">{$Guara.deadline}个月</span>	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">所属行业</label>
+    <div class="controls">
+   	   <span class="input-xlarge uneditable-input">{$Guara.industrys}</span>	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">备注说明</label>
+    <div class="controls">          	            	
+   	   <span class="input-xlarge uneditable-input uneditable-textarea">{$Guara.note}</span>	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">担保公司</label>
+    <div class="controls">
+    <if condition="$Think.get.pid lt 2">
+    	<select name="gcompany" datatype="*" nullmsg="担保公司必须！">
+          <option value=''>请选择</option>
+          <volist name="guaran" id="ue">
+                <option value='{$ue.id}' >{$ue.name}</option>
+          </volist>
+        </select>
+    <else/>
+    	<select name="gcompany" datatype="*" nullmsg="担保公司必须！">
+         <option value="{$Guara.gcompany}">{$Guara.gcompanys} </option>
+          <volist name="guaran" id="ue">
+             <option value='{$ue.id}' >{$ue.name}</option>
+          </volist>
+        </select>
+    </if>
+    <span>&nbsp;<a href="__APP__/TIFAWEB_DSWJCMS/Basis/editgcompany.html" class="icon icon-blue icon-plus" title="添加"></a></span>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">审核</label>
+    <div class="controls">
+    	<div class="form-inline">
+          <label class="radio"><input type="radio" name="type" value="1" checked/> 分配</label>
+          <label class="radio"><input type="radio" name="type" value="2" /> 撤销</label>
+          <label class="radio"><input type="radio" name="type" value="3" /> 通过</label>
+        </div>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">审核说明</label>
+    <div class="controls">
+      <textarea name="audit" class="span4" placeholder="请输入审核说明"  maxlength="200">{$Guara.audit}</textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"></label>
+    <div class="controls">
+      <input class="input-large" name="proving" maxlength="4" type="text"  style="width:50px;margin-top: 10px;" title="验证码" data-rel="tooltip"/>          	            	
+      <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;position: relative;top: 5px;"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-info">确认分配</button>
+    </div>
+  </div>
+</form>
+<!--底部 -->
+<include file="Index:footer" />

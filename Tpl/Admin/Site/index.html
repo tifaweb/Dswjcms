@@ -15,10 +15,10 @@
       <div id="content" class="span10">
           <ul class="breadcrumb">
               <li>
-                  <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+                  <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
               </li>
               <li class="active">栏目管理</li>
-              <div  class="pull-right"> <a  data-rel="tooltip" href="__ROOT__/Admin/Site/addSite.html" >添加新栏目</a></div>
+              <div  class="pull-right"> <a  data-rel="tooltip" href="__APP__/TIFAWEB_DSWJCMS/Site/addSite.html" >添加新栏目</a></div>
           </ul>
           
           <table class="table table-striped table-bordered table-condensed">
@@ -37,7 +37,7 @@
               <tr>
                 <td>{$vo.id}</td>
                 <td>
-                <a href="__ROOT__/Admin/Site/editSite/id/{$vo.id}.html">
+                <a href="__APP__/TIFAWEB_DSWJCMS/Site/editSite/id/{$vo.id}.html">
                   <span class="cla{$vo.order}">
                   <if condition="$vo['order'] eq 1 ">
                   {$vo.title}
@@ -61,8 +61,8 @@
                 <td>{$vo['status']?'显示':'隐藏'}</td>
                 <td>{$vo.orde}</td>
                 <td>
-                   <a href="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html" data-rel="tooltip"  class="icon icon-color icon-search" title="查看文章"></a>
-                    <a href="__ROOT__/Admin/Site/editSite/id/{$vo.id}.html" data-rel="tooltip"  class="icon icon-color icon-edit" title="编辑栏目"></a>
+                   <a href="__APP__/TIFAWEB_DSWJCMS/Site/articleList/id/{$vo.id}.html" data-rel="tooltip"  class="icon icon-color icon-search" title="查看文章"></a>
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Site/editSite/id/{$vo.id}.html" data-rel="tooltip"  class="icon icon-color icon-edit" title="编辑栏目"></a>
                   <if condition="$vo['type'] eq 1 ">
                     <a href="__ROOT__{$vo.link}"  
                     data-rel="tooltip" class="icon icon-color icon-image" title="预览栏目"></a>
@@ -73,11 +73,10 @@
                     <a href="__ROOT__/Site/page/id/{$vo.id}"  
                      data-rel="tooltip" class="icon icon-color icon-image" title="预览栏目"></a>
                   </if>
-                <if condition="intval($vo['order']) lt 3 ">
-                   <a href="__ROOT__/Admin/Site/addSite/pid/{$vo.id}" data-rel="tooltip"  class="icon icon-color icon-plus" title="添加子栏目"></a>
+                <if condition="intval($vo['order']) lt 3 && $vo['type'] eq 1 ">
+                   <a href="__APP__/TIFAWEB_DSWJCMS/Site/addSite/pid/{$vo.id}" data-rel="tooltip"  class="icon icon-color icon-plus" title="添加子栏目"></a>
                  </if>
-                   <a href="__ROOT__/Admin/Site/addArticle/id/{$vo.id}.html" data-rel="tooltip"  class="icon icon-color icon-compose" title="添加文章"></a>       
-                   <a href="#" data-rel="tooltip" class="icon icon-color icon-trash" title="删除栏目" onclick="if(confirm('是否要删除？'))window.location.href='__URL__/delSite/id/{$vo.id}'"></a>
+                   <a href="#" data-rel="tooltip" class="icon icon-color icon-trash" title="删除栏目" onclick="if(confirm('是否要删除？'))window.location.href='__APP__/TIFAWEB_DSWJCMS/Site/delSite/id/{$vo.id}'"></a>
                    
                 </td>
               </tr>

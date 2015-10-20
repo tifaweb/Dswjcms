@@ -1,0 +1,247 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">贷款栏目</li>
+      <div  class="pull-right">
+      <a href="#screening" data-toggle="modal">筛选</a>&nbsp;&nbsp;
+      <a data-toggle="modal"  data-rel="tooltip" href="#mod">导出</a></div>
+</ul>
+<table class="table table-striped table-bordered table-condensed" id="table">
+            <thead>
+              <tr>
+              	<th>标号</th>
+                <th>用户名</th>
+                <th>标题</th>
+                <th>金额</th>
+                <th>利率</th>
+                <th>期限</th>
+                <th>类型</th>
+                <th>状态</th>
+                <th>推荐</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+<volist name="borrow" id="vo">
+                <tr>
+                <td>
+                       {$vo.id}
+                </td>
+                <td>
+                       {$vo.username}
+                </td>
+                <td>
+                       {$vo.title}
+                </td>
+                <td>
+                       {$vo.money}元
+                </td>
+                <td>
+                       {$vo.rates}%
+                </td>
+                <td>
+                       {$vo.deadlines}
+                </td>
+                <td>
+                       {$vo.type_name}
+                </td>
+                <td>
+                       {$vo.state_name}
+                </td>
+                <td class="form-inline">
+                    <if condition="$vo.stick eq 0">
+                    <label class="radio"><input type="radio" name="stick{$vo.id}" value="0" class="noty" checked data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var stick=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Loan/entry_stick", { id: {$vo.id},stick:stick} );'/> 否</label>
+                    <label class="radio"><input type="radio" name="stick{$vo.id}" value="1" class="noty" data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var stick=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Loan/entry_stick", { id: {$vo.id},stick:stick} );'/> 是</label>
+                   <else />
+                    <label class="radio"><input type="radio" name="stick{$vo.id}" value="0" class="noty"data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var stick=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Loan/entry_stick", { id: {$vo.id},stick:stick} );'/> 否</label>
+                    <label class="radio"><input type="radio" name="stick{$vo.id}" value="1" checked class="noty" data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var stick=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Loan/entry_stick, { id: {$vo.id},stick:stick} );'/> 是</label>
+                   </if>
+                </td>
+                <td>
+                    <if condition="$vo.state eq 0">
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Loan/review_page/{$vo.id}.html" data-rel="tooltip" class="icon icon-color icon-book" title="审核"></a>
+                    <elseif condition="$vo.state eq 5"/>
+                    <a href="#audit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-book"title="复审" onclick="$('#up_id').val({$vo.id});"></a>
+                    <else />
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Loan/review_page/{$vo.id}.html"  data-rel="tooltip" class="icon-search " title="查看"></a>
+                    </if>
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Loan/irecord/bid/{$vo.id}.html" data-rel="tooltip" class="icon icon-color icon-calendar" title="投标记录"></a>
+                </td>
+              </tr>
+			  <input name="id[]" type="hidden" value="{$vo.id}" />
+</volist>
+            </tbody>
+          </table>
+          <div class="pagination pagination-centered">
+          <ul>{$page}</ul>
+          </div>
+<div>
+</div>
+<!--底部 -->
+<!--复审 start-->
+<div id="audit" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>审核</h3>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Loan/borrowUpda'>
+		<input name="q" type="hidden" value="borrow" />
+        <input name="u" type="hidden" value="__APP__/TIFAWEB_DSWJCMS/Loan/pending.html" />
+        <input id="up_id" name="id" type="hidden" value="" />
+        <p class="form-inline">   
+          <label class="radio"><input type="radio" name="state" value="7" checked/> 通过</label>
+          <label class="radio"><input type="radio" name="state" value="6" /> 不通过</label>
+        </p>
+        <div class="span10">
+      	  <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 10px;"/>
+          <input class="input-large" name="proving" type="text"  style="width:50px;margin-top: 10px;" title="验证码" data-rel="tooltip"/>
+          <button class="btn btn-primary" type="submit">
+              确认提交
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--复审 end-->
+<!--导出设置 start-->
+<div id="mod" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>导出设置</h3>
+    </div>
+    <div class="alert alert-info">
+        <p>每次导出条数最多5000条，如果数据总合以超5000条请输入上一份导出文件的最大ID值</p>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Loan/integExport'>
+       <table class="table">
+        <tbody>
+           <tr>
+          <td>开始ID：</td>
+          <td>
+             	<input name="fid" type="text"  value=''/>
+          </td>
+          
+          </tr>
+          <tr>
+          <td>导出类型：</td>
+          <td>
+             	<select name="type">  
+                	<option value='' >全部</option> 
+                    <option value='0'>秒还标</option>
+                    <option value='1'>抵押标</option>
+                    <option value='2'>质押标</option>
+                    <option value='3'>净值标</option>
+                    <option value='4'>信用标</option>
+                    
+                </select>
+          </td>
+          </tr>
+          <tr>
+          <td>导出状态：</td>
+          <td>
+             	<select name="state">  
+                	<option value='' >全部</option> 
+                    <option value='0'>待审核</option>
+                    <option value='1'>审核通过</option>
+                    <option value='2'>审核失败</option>
+                    <option value='3'>用户取消</option>
+                    <option value='4'>流标</option>
+                    <option value='5'>满标待审</option>
+                    <option value='6'>满标审核失败</option>
+                    <option value='7'>还款</option>
+                    <option value='8'>逾期</option>
+                    <option value='9'>完成</option>
+                    
+                </select>
+          </td>
+          </tr>
+        </tbody>
+       	</table>
+        <div class="span10">
+          <button class="btn btn-primary" type="submit">
+              导出
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--导出设置 end-->
+<!--筛选 start-->
+<div id="screening" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>筛选</h3>
+    </div>
+    <div class="modal-body">
+    <form method="get">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>查询：</td>
+          <td>
+             	<input name="title" type="text" placeholder="用户名/标题/标号..." value="{$Think.get.title}">
+          </td>
+          </tr>
+          <tr>
+          <td>类型：</td>
+          <td>
+             	<select name="type">  
+                	<option value=''>全部</option> 
+                    <option value='0' <eq name="Think.get.type" value="0">selected="selected"</eq>>秒还标</option>
+                    <option value='1' <eq name="Think.get.type" value="1">selected="selected"</eq>>抵押标</option>
+                    <option value='2' <eq name="Think.get.type" value="2">selected="selected"</eq>>质押标</option>
+                    <option value='3' <eq name="Think.get.type" value="3">selected="selected"</eq>>净值标</option>
+                    <option value='4' <eq name="Think.get.type" value="4">selected="selected"</eq>>信用标</option>
+                </select>
+          </td>
+          </tr>
+          <tr>
+          <td>状态：</td>
+          <td>
+             	<select name="state">  
+                	<option value='' >全部</option> 
+                    <option value='0' <eq name="Think.get.state" value="0">selected="selected"</eq>>待审核</option>
+                    <option value='1' <eq name="Think.get.state" value="1">selected="selected"</eq>>审核通过</option>
+                    <option value='2' <eq name="Think.get.state" value="2">selected="selected"</eq>>审核失败</option>
+                    <option value='3' <eq name="Think.get.state" value="3">selected="selected"</eq>>用户取消</option>
+                    <option value='4' <eq name="Think.get.state" value="4">selected="selected"</eq>>流标</option>
+                    <option value='5' <eq name="Think.get.state" value="5">selected="selected"</eq>>满标待审</option>
+                    <option value='6' <eq name="Think.get.state" value="6">selected="selected"</eq>>满标审核失败</option>
+                    <option value='7' <eq name="Think.get.state" value="7">selected="selected"</eq>>还款</option>
+                    <option value='8' <eq name="Think.get.state" value="8">selected="selected"</eq>>逾期</option>
+                    <option value='9' <eq name="Think.get.state" value="9">selected="selected"</eq>>完成</option>
+                    
+                </select>
+          </td>
+          </tr>
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<!--筛选 end-->
+<script>
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+</script>
+<include file="Index:footer" />

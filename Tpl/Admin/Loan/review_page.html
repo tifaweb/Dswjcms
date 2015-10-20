@@ -1,0 +1,213 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS/Loan/entry.html">贷款列表</a> <span class="divider">/</span>
+      </li>
+      <li class="active">审核</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Loan/entry.html" >返回贷款列表</a></div>
+</ul>
+<form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Loan/review_validation'>
+<input name="typ" type="hidden" value="{$ed.type_name}" />
+<volist name="borrow" id="ed">
+<table class="table table-striped table-bordered table-condensed">
+<tbody>
+<tbody>
+    <tr><td>借款类型：</td><td>{$ed.type_name}</td></tr>
+    <tr><td>借款用户：</td><td>{$ed.username} <a href="#mEssage" data-toggle="modal" data-rel="tooltip" />用户信息</a></td>
+    </tr>
+    <tr><td>发布时间：</td><td>{$ed.time|date="Y-m-d H:i:s",###}</td></tr>
+    <if condition="$ed.checktime">
+    <tr><td>审核时间：</td><td><if condition="$ed.checktime neq 0">{$ed.checktime|date="Y-m-d H:i:s",###}<else /> 无</if></td></tr>
+    <tr><td>结束时间：</td><td><if condition="$ed.endtime neq 0">{$ed.endtime|date="Y-m-d H:i:s",###}<else /> 无</if></td></tr>
+    <tr><td>还款结束时间：</td><td><if condition="$ed.limittime neq 0">{$ed.limittime|date="Y-m-d H:i:s",###}<else /> 无</if></td></tr>
+    </if>
+    <tr><td>标题：</td><td><if condition="$ed.title">{$ed.title}<else /> 无</if></td></tr>
+    <if condition="$ed.type neq 7">
+    <tr><td>利率：</td><td><if condition="$ed.rates neq 0">{$ed.rates}%<else /> 无</if></td></tr>
+    <tr><td>借款用途：</td><td>{$ed.use}</td></tr>
+    <tr><td>借款期限：</td><td>{$ed.deadlines}</td></tr>
+    <tr><td>还款方式：</td><td>{$ed.way}</td></tr>
+    <tr><td>有效时间：</td><td>{$ed.valid}</td></tr>
+    <else/>
+    <tr><td>原利率：</td><td><if condition="$ed.rates neq 0">{$ed.rates}%<else /> 无</if></td></tr>
+    <tr><td>原借款用途：</td><td>{$ed.use}</td></tr>
+    <tr><td>原借款期限：</td><td>{$ed.deadlines}</td></tr>
+    <tr><td>原还款方式：</td><td>{$ed.way}</td></tr>
+    </if>
+    <tr><td>密码标开启/关闭：</td><td><if condition="$ed.code neq 0">开启<else /> 关闭</if></td></tr>
+    <!--<tr><td>密码：</td><td>{$ed.password}</td></tr>-->
+    <if condition="$ed.type eq 7">
+    <tr><td>每份认购金额：</td><td>{$ed.min}元</td></tr>
+    <else/>
+    <tr><td>最低投标金额：</td><td>{$ed.min}元</td></tr>
+    <tr><td>最高投标金额：</td><td>{$ed['max']?$ed['max']:'无限制'}</td></tr>
+    </if>
+    <if condition="$ed.type eq 7">
+    <tr><td>流转期限：</td><td>{$ed.flow_deadlines}</td></tr>
+    <tr><td>最低认购期限：</td><td>{$ed.min_limits}</td></tr>
+    </if>
+    <tr><td>公开隐私开启/关闭：</td><td><if condition="$ed.privacy neq 0">开启<else /> 关闭</if></td></tr>
+    <tr><td>借款金额：</td><td>{$ed.money}元</td></tr>
+    <tr><td>投标奖励：</td><td>{$ed['rewards']?$ed['rewards']:'无'}</td></tr>
+    <tr><td>抵押物信息：</td><td>{$ed['mortgage']?$ed['mortgage']:'无'}</td></tr>
+    <tr><td>合同协议:</td>
+    <td class="controls">
+        <ul class="thumbnails" id="file_content">
+        <foreach name="ed.img" item="vo" key="kid">
+            <li id="i{$kid}" class="thumbnail">
+            	<a class="cboxElement" href="__PUBLIC__/uploadify/uploads/mark/{$vo}">
+                <img id="feil{$kid}" src="__PUBLIC__/uploadify/uploads/mark/{$vo}">
+                </a>
+            </li>
+        </foreach>
+        </ul>    
+    </td>
+    </tr>
+    <tr>
+    <td>*企业实地照片:</td>
+    <td class="controls">
+        <ul class="thumbnails" id="file_contents">
+        <foreach name="ed.agr" item="vo" key="kid">
+            <li id="i{$kid}" class="thumbnail">
+            	<a class="cboxElement" href="__PUBLIC__/uploadify/uploads/mark/{$vo}">
+                <img id="feil{$kid}" src="__PUBLIC__/uploadify/uploads/mark/{$vo}">
+                </a>
+            </li>
+        </foreach>
+        </ul>    
+    </td>
+    </tr>
+    <tr><td>借款说明：</td><td><textarea class="cleditor" rows="3">{$ed.content}</textarea></td></tr>
+    <tr>
+    <td>推荐：</td>
+    <td class="form-inline">
+    <if condition="$pid eq 2">
+    	<if condition="$ed.Stick eq 0">不推荐<else />推荐</if>
+    <else /> 
+        <if condition="$ed.state neq '0'">
+        	<if condition="$ed.stick eq 1">推荐<else />不推荐</if>
+        <else />
+            <label class="radio"><input type="radio" name="stick" value="0" checked/> 否</label>
+            <label class="radio"><input type="radio" name="stick" value="1" /> 是</label>
+        </if>
+    </if>
+    </td>
+    </tr>
+    <tr>
+    <td>审核：</td>
+    <td class="form-inline">   
+    <if condition="$ed.state neq '0'">
+    {$ed.state_name}
+    <else /> 
+    <if condition="$ed.type eq '5'">
+    <label class="radio"><input type="radio" name="state" value="10" checked/> 通过</label>
+    <else/>
+    <label class="radio"><input type="radio" name="state" value="1" checked/> 通过</label>
+    </if>
+    <label class="radio"><input type="radio" name="state" value="12" /> 不通过</label>
+    </if>
+    </td>
+    </tr>
+    <tr><td>审核备注：</td><td><if condition="$ed.state neq 0"><textarea class="cleditor" rows="3">{$ed.review_note}</textarea><else /> <textarea name="review_note" class="cleditor" rows="3"></textarea></if></td></tr>
+</tbody>
+</table>
+<div>
+<div class="span4">
+
+</div>
+<if condition="$ed.state eq 0">
+<div class="span5">
+          <button class="btn btn-primary" type="submit">
+              提交
+          </button>
+           
+			<input name="id" type="hidden" value="{$ed.id}" />
+</div>
+</if>
+</div>
+</form>
+<!--底部 -->
+<!--用户信息 开始-->
+<div id="mEssage" class="modal hide fade" style="width:900px;left:35%">
+
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>用户信息</h3>
+    </div>
+    <div class="modal-body">
+    <table class="table table-striped table-bordered table-condensed">
+    <tbody>
+    <tr><th>会员ID：</th><td>{$ed.uid}</td><th>用户名：</th><td>{$ed.username}</td></tr>
+    <tr><th>真实姓名：</th><td>{$ed.name}</td><th>性别：</th><td>{$ed.gender}</td></tr>
+    <tr><th>民族：</th><td>{$ed.national}</td><th>出生日期：</th><td>{$ed.born|date="Y-m-d",###}</td></tr>
+    <tr><th>身份证：</th><td>{$ed.idcard}
+     <foreach name="ed.idcard_img" item="v">
+       &nbsp;&nbsp;&nbsp;&nbsp; <a href="__PUBLIC__/uploadify/uploads/idcard/{$v}" class="cboxElement">
+        证件{$key+1}
+        </a>
+    </foreach>
+    </td><th>籍贯：</th><td>{$ed.native_place}</td></tr>
+    <tr><th>所在地：</th><td>{$ed.location}</td><th>婚姻状况：</th><td>{$ed.marriage}</td></tr>
+    <tr><th>学历：</th><td>{$ed.education}</td><th>月收入：</th><td>{$ed.monthly_income}</td></tr>
+    <tr><th>住房条件：</th><td>{$ed.housing}</td><th>购车情况：</th><td>{$ed.buy_cars}</td></tr>
+    <tr><th>行业：</th><td>{$ed.industry}</td><th>公司：</th><td>{$ed.company}</td></tr>
+    <tr><th>QQ：</th><td>{$ed.qq}</td><th>邮箱：</th><td>{$ed.email}</td></tr>
+    <tr><th>固话：</th><td>{$ed.fixed_line}</td><th>手机：</th><td>{$ed.cellphone}</td></tr>
+    <tr>
+    <!--<th>微信：</th><td>{$ed.wechat}</td>-->
+    <th>认证：</th><td>
+    <if condition="$ed.email_audit gt 1">
+    <a class="icon icon-orange icon-envelope-closed ajax-link" href="#"  data-rel="tooltip" title="邮箱已认证"></a>
+    <else />
+    <a class="icon icon-envelope-closed ajax-link" href="#" data-rel="tooltip" title="邮箱未认证"></a>
+    </if>
+    <if condition="$ed.certification gt 1">
+    <a class="icon icon-orange icon-profile" href="#"  data-rel="tooltip" title="实名已认证"></a>
+    <else />
+    <a class="icon icon-profile" href="#" data-rel="tooltip" title="实名未认证"></a>
+    </if>
+    <if condition="$ls.video_audit gt 1">
+    <a class="icon icon-orange icon-comment-video ajax-link" href="#"  data-rel="tooltip" title="视频已认证"></a>
+    <else />
+    <a class="icon icon-comment-video ajax-link" href="#" data-rel="tooltip" title="视频未认证"></a>
+    </if>
+    <if condition="$ls.site_audit gt 1">
+    <a class="icon icon-orange icon-users ajax-link" href="#"  data-rel="tooltip" title="现场已认证"></a>
+    <else />
+    <a class="icon icon-users ajax-link" href="#" data-rel="tooltip" title="现场未认证"></a>
+    </if>
+    <!--<if condition="$ls.wechat_audit gt 1">
+    <a class="icon icon-orange icon-messages ajax-link" href="#"  data-rel="tooltip" title="微信已认证"></a>
+    <else />
+    <a class="icon icon-messages ajax-link" href="#" data-rel="tooltip" title="微信未认证"></a>
+    </if>-->
+    <if condition="$ls.cellphone_audit gt 1">
+    <a class="icon icon-orange icon-cellphone ajax-link" href="#"  data-rel="tooltip" title="手机已认证"></a>
+    <else />
+    <a class="icon icon-cellphone ajax-link" href="#" data-rel="tooltip" title="手机未认证"></a>
+    </if>
+    </td>
+    <th></th><td></td>
+    </tr>
+    </tbody>
+</volist>
+    </table>
+ 
+    </div>
+    
+</div>
+
+<!--用户信息 结束-->
+<include file="Index:footer" />

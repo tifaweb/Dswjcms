@@ -23,23 +23,23 @@
       <div id="content" class="span10">
           <ul class="breadcrumb">
               <li>
-                  <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+                  <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
               </li>
               <li class="active">内容管理</li>
-             <div  class="pull-right"> <a  data-rel="tooltip" href="__ROOT__/Admin/Site/addArticle.html" >添加文章</a></div>
+             <div  class="pull-right"> <a  data-rel="tooltip" href="__APP__/TIFAWEB_DSWJCMS/Site/addArticle.html" >添加文章</a></div>
           </ul>
           <ul class="breadcrumb">
             <li>
             <select id="catid" name="catid" onchange="var id=$(this).val();toSearch(id)">
-            <option id="o_0"  value="0"  class="cla0" url="__ROOT__/Admin/Site/articleList/id/0.html" onclick="toSearch(this)">全部</option>
+            <option id="o_0"  value="0"  class="cla0" url="__APP__/TIFAWEB_DSWJCMS/Site/articleList/id/0.html" onclick="toSearch(this)">全部</option>
                <volist name="site" id="vo">
                
                    <if condition="$vo['order'] eq 1 ">
-                   <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html">{$vo.title}</option>
+                   <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__APP__/TIFAWEB_DSWJCMS/Site/articleList/id/{$vo.id}.html">{$vo.title}</option>
                    <elseif condition="$vo['order'] eq 2 " />
-                     <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html">├ {$vo.title}</option>
+                     <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__APP__/TIFAWEB_DSWJCMS/Site/articleList/id/{$vo.id}.html">├ {$vo.title}</option>
                     <elseif condition="$vo['order'] eq 3 " /> 
-                    <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__ROOT__/Admin/Site/articleList/id/{$vo.id}.html">│├  {$vo.title}</option>
+                    <option id="o_{$vo.id}" value="{$vo.id}"  class="cla{$vo.order}" url="__APP__/TIFAWEB_DSWJCMS/Site/articleList/id/{$vo.id}.html">│├  {$vo.title}</option>
                     </if>
                
                </volist>
@@ -61,7 +61,7 @@
               <tr>
                 <td>{$vo.id}</td>
                 <td>
-                <a href="__ROOT__/Home/Site/article/id/{$vo.id}.html">
+                <a href="__ROOT__/Site/article/id/{$vo.id}.html">
 
                    {$vo.title}
 
@@ -72,8 +72,8 @@
                 <td>
                    <a href="__ROOT__/Site/article/id/{$vo.id}.html"   data-rel="tooltip"
                     class=" icon icon-color icon-search" title="查看文章"></a>
-                   <a data-rel="tooltip" href="__ROOT__/Admin/Site/editArticle/id/{$vo.id}.html"  class="icon icon-color icon-edit" title="修改文章"></a>
-                   <a data-rel="tooltip" href="#" onclick="if(confirm('是否要删除？'))window.location.href='__URL__/dellelist/id/{$vo.id}'"  class="icon icon-color icon-trash" title="删除文章"></a>
+                   <a data-rel="tooltip" href="__APP__/TIFAWEB_DSWJCMS/Site/editArticle/id/{$vo.id}.html"  class="icon icon-color icon-edit" title="修改文章"></a>
+                   <a data-rel="tooltip" href="#" onclick="if(confirm('是否要删除？'))window.location.href='__APP__/TIFAWEB_DSWJCMS/Site/dellelist/id/{$vo.id}'"  class="icon icon-color icon-trash" title="删除文章"></a>
                 </td>
               </tr>
             </volist>

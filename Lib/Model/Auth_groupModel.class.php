@@ -19,7 +19,7 @@ class Auth_groupModel extends  RelationModel{
 
 		$id=intval($_REQUEST['id']);
 		$mod = D("Auth_group_access");
-		$mod->where("group_id=".$id)->delete();
+		$mod->where('group_id="'.$id.'"')->delete();
 	}
 	
 

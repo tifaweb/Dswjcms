@@ -95,8 +95,8 @@
             </tr>
 			<tr>
                 <td class="onetd"><strong>数据表前缀：</strong></td>
-                <td><input name="dbprefix" id="dbprefix" type="text" value="ds_" class="input-txt" />
-                        <small>如无特殊需要,请不要修改</small></td>
+                <td><input name="dbprefix" id="dbprefix" type="text" value="ds_" class="input-txt"   readonly="true"/>
+                        <small>不可修改</small></td>
             </tr>
 			<tr>
                 <td class="onetd"><strong>数据库名称：</strong></td>

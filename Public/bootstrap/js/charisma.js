@@ -1,13 +1,12 @@
+//计划任务
+window.onload = Schedule();
+function Schedule(){
+	//$.post("__URL__/pathExit", {img:'./Public/uploadify/uploads/gcompany/'+img} );
+}
 $('a').bind("focus", function(){
     $(this).blur();
 })
-//积分商城条件选择页面刷新值还原
-function myfun(){
- 　　$("#type").val(0);	
-	$("#scope").val(0);	
-	$("#classify").val(0);
-}
-window.onload = myfun;
+
 $(document).ready(function(){
 	//themes, change CSS with JS
 	//default theme(CSS) is cerulean, change it if needed
@@ -177,7 +176,8 @@ function docReady(){
 
 	//file manager
 	var elf = $('.file-manager').elfinder({
-		url : '/Public/misc/elfinder-connector/connector.php'  // connector URL (REQUIRED)
+		url : '/Public/misc/elfinder-connector/connector.php',  // connector URL (REQUIRED)
+		lang: 'zh_CN',
 	}).elfinder('instance');
 
 	//iOS / iPhone style toggle switch
@@ -194,17 +194,81 @@ function docReady(){
 //		'uploader' : '/Public/misc/uploadify.php'
 //		// Put your options here
 //	});
+	//单图
 	var img_id_upload=new Array();//初始化数组，存储已经上传的图片名
 	var img_var="";
-	var i=$("#folder_id").val()?$("#folder_id").val():0;//初始化数组下标
-	var folder=$("#folder").val();
-	var file_url=$("#file_url").val();
-	var file_delete=$("#file_delete").val();	//如果存在图片就删除
-	$('#file_upload').uploadify({
+	var i=$(".folder_id").val()?$(".folder_id").val():0;//初始化数组下标
+	var fr=$(".folder").val()?$(".folder").val():'undefined';
+	var fl=$(".file_url").val();
+	$('#file_up').uploadify({
+		'formData'     : {
+			'folder' : fr,
+		},
     	'auto'     : true,//关闭自动上传
     	'removeTimeout' : 1,//文件队列上传完成1秒后删除
         'swf'      : '/Public/uploadify/uploadify.swf',
-        'uploader' : '/Public/uploadify/uploadify.php?folder='+folder+'&file_delete='+file_delete,
+        'uploader' : '/Public/uploadify/uploadify.php',
+        'method'   : 'post',//方法，服务端可以用$_POST数组获取数据
+		'buttonText' : '选择图片',//设置按钮文本
+        'multi'    : false,//允许同时上传多张图片
+        'uploadLimit' : 100,//一次最多只允许上传100张图片
+        'fileTypeDesc' : 'Image Files',//只允许上传图像
+        'fileTypeExts' : '*.gif; *.jpg;*.png;',//限制允许上传的图片后缀
+        'fileSizeLimit' : '800KB',//限制上传的图片不得超过500KB
+        'onUploadSuccess' : function(file, data, response) {//每次成功上传后执行的回调函数，从服务端返回数据到前端
+               img_id_upload[i]=data;
+               i++;
+				$("#file_up_content").append("<li id='i"+i+"'><input name='idcard_img[]' type='hidden'  value='"+data+"'/><a id='feila"+i+"' ><img id='feil"+i+"' src='"+fl+data+"' style='width:150px;height:150px;'></li>");
+        },
+        'onQueueComplete' : function(queueData) {//上传队列全部完成后执行的回调函数
+            //if(img_id_upload.length>0)
+            //alert('成功上传的文件有：'+encodeURIComponent(img_id_upload));
+        }
+        // Put your options here
+    });
+	//单图
+	$('#file_up2').uploadify({
+		'formData'     : {
+			'folder' : fr,
+		},
+    	'auto'     : true,//关闭自动上传
+    	'removeTimeout' : 1,//文件队列上传完成1秒后删除
+        'swf'      : '/Public/uploadify/uploadify.swf',
+        'uploader' : '/Public/uploadify/uploadify.php',
+        'method'   : 'post',//方法，服务端可以用$_POST数组获取数据
+		'buttonText' : '选择图片',//设置按钮文本
+        'multi'    : false,//允许同时上传多张图片
+        'uploadLimit' : 100,//一次最多只允许上传100张图片
+        'fileTypeDesc' : 'Image Files',//只允许上传图像
+        'fileTypeExts' : '*.gif; *.jpg;*.png;',//限制允许上传的图片后缀
+        'fileSizeLimit' : '800KB',//限制上传的图片不得超过500KB
+        'onUploadSuccess' : function(file, data, response) {//每次成功上传后执行的回调函数，从服务端返回数据到前端
+               img_id_upload[i]=data;
+               i++;
+				$("#file2_up_content").append("<li id='i"+i+"'><input name='idcard_img[]' type='hidden'  value='"+data+"'/><a id='feila"+i+"' ><img id='feil"+i+"' src='"+fl+data+"' style='width:150px;height:150px;'></li>");
+        },
+        'onQueueComplete' : function(queueData) {//上传队列全部完成后执行的回调函数
+            //if(img_id_upload.length>0)
+            //alert('成功上传的文件有：'+encodeURIComponent(img_id_upload));
+        }
+        // Put your options here
+    });
+
+
+	var img_id_upload=new Array();//初始化数组，存储已经上传的图片名
+	var img_var="";
+	var i=$("#folder_id").val()?$("#folder_id").val():0;//初始化数组下标
+	var folder=$("#folder").val()?$("#folder").val():'undefined';
+	var file_url=$("#file_url").val();
+	var file_delete=$("#file_delete").val();	//如果存在图片就删除
+	$('#file_upload').uploadify({
+		'formData'     : {
+			'folder' : folder,
+		},
+    	'auto'     : true,//关闭自动上传
+    	'removeTimeout' : 1,//文件队列上传完成1秒后删除
+        'swf'      : '/Public/uploadify/uploadify.swf',
+        'uploader' : '/Public/uploadify/uploadify.php',
         'method'   : 'post',//方法，服务端可以用$_POST数组获取数据
 		'buttonText' : '选择图片',//设置按钮文本
         'multi'    : false,//允许同时上传多张图片
@@ -231,10 +295,13 @@ function docReady(){
 	
 	//uploadify - 多图
 	$('#file_uploads').uploadify({
+		'formData'     : {
+			'folder' : folder,
+		},
     	'auto'     : true,//关闭自动上传
     	'removeTimeout' : 1,//文件队列上传完成1秒后删除
         'swf'      : '/Public/uploadify/uploadify.swf',
-        'uploader' : '/Public/uploadify/uploadify.php?folder='+folder,
+        'uploader' : '/Public/uploadify/uploadify.php',
         'method'   : 'post',//方法，服务端可以用$_POST数组获取数据
 		'buttonText' : '选择图片',//设置按钮文本
         'multi'    : true,//允许同时上传多张图片
@@ -257,10 +324,13 @@ function docReady(){
 	
 	//uploadify - 多图+显示
 	$('#file_goods').uploadify({
+		'formData'     : {
+			'folder' : folder,
+		},
     	'auto'     : true,//关闭自动上传
     	'removeTimeout' : 1,//文件队列上传完成1秒后删除
         'swf'      : '/Public/uploadify/uploadify.swf',
-        'uploader' : '/Public/uploadify/uploadify.php?folder='+folder,
+        'uploader' : '/Public/uploadify/uploadify.php',
         'method'   : 'post',//方法，服务端可以用$_POST数组获取数据
 		'buttonText' : '选择图片',//设置按钮文本
         'multi'    : true,//允许同时上传多张图片
@@ -284,10 +354,13 @@ function docReady(){
 	var i=$("#folder_ids").val()?$("#folder_ids").val():0;//初始化数组下标
 	var file_urls=$("#file_urls").val();
 	$('#file_good').uploadify({
+		'formData'     : {
+			'folder' : folder,
+		},
     	'auto'     : true,//关闭自动上传
     	'removeTimeout' : 1,//文件队列上传完成1秒后删除
         'swf'      : '/Public/uploadify/uploadify.swf',
-        'uploader' : '/Public/uploadify/uploadify.php?folder='+folder,
+        'uploader' : '/Public/uploadify/uploadify.php',
         'method'   : 'post',//方法，服务端可以用$_POST数组获取数据
 		'buttonText' : '选择图片',//设置按钮文本
         'multi'    : true,//允许同时上传多张图片

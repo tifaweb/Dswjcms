@@ -1,0 +1,79 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Basis/integrallevel.html">积分等级</a> <span class="divider">/</span>
+      </li>
+      <li class="active">编辑</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Basis/integrallevel.html" >返回积分等级</a></div>
+</ul>
+<form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Basis/tfUpda'>
+<input name="q" type="hidden" value="memgrade" />
+<input name="u" type="hidden" value="__APP__/TIFAWEB_DSWJCMS/Basis/integrallevel.html" />
+<input name="sid" type="hidden" value="{$Think.get.id}" />
+<input name="n" type="hidden" value="积分等级更新" />
+ <table class="table table-striped table-bordered table-condensed">
+   <tbody>
+	  <tr>
+        <td>
+               等级名称：
+        </td>
+        <td>
+          <input name="name" type="text" class="span6" placeholder="请输入等级名称..." value="{$vo.name}">
+        </td>
+      </tr>
+      <tr>
+        <td>
+               图片：
+        </td>
+        <td>
+          		<img id="feil" src="__PUBLIC__/uploadify/uploads/grade_img/{$vo.img}"/>
+                <input id="img" name="img" type="hidden" value="{$vo.img}"/>
+                <input id="folder" type="hidden" value="grade_img"/>
+                <input id="file_delete" type="hidden" value="/uploads/grade_img/{$vo.img}"/>
+                <input data-no-uniform="true" type="file" id="file_upload" /> 
+        </td>
+      </tr>
+      <tr>
+        <td>
+               最小值：
+        </td>
+        <td>
+          <input name="min" type="text" class="span6" placeholder="请输入最小值..." value="{$vo.min}">
+        </td>
+      </tr>
+      <tr>
+        <td>
+               最大值：
+        </td>
+        <td>
+          <input name="max" type="text" class="span6" placeholder="请输入最大值..." value="{$vo.max}">
+        </td>
+      </tr>
+	</tbody>
+ </table>
+<div>
+<div class="span4">
+
+</div>
+<div class="span5">
+          <button class="btn btn-primary" type="submit">
+              确认修改
+          </button>
+            <a href="__APP__/TIFAWEB_DSWJCMS/Basis/integrallevel.html" class="btn btn-info ajax-link">取消</a>
+</div>
+</div>
+</form>
+<!--底部 -->
+<include file="Index:footer" />

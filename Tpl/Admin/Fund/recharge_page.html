@@ -1,0 +1,92 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS/Fund/recharge.html">充值列表</a> <span class="divider">/</span>
+      </li>
+      <li class="active">审核</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Fund/recharge.html" >返回充值列表</a></div>
+</ul>
+ 
+ <table class="table table-striped table-bordered table-condensed">
+   <tbody>
+                      <tbody>
+                      <tr>
+                        <td>订单号：</td>
+                        <td> {$list.nid}</td>
+                      </tr>
+                      <tr>
+                        <td>用户名：</td>
+                        <td> {$list.username}</td>
+                      </tr>
+                      <tr>
+                        <td>流水号：</td>
+                        <td> {$list['number']?$list['number']:'无'}</td>
+                      </tr>
+                      <tr>
+                        <td>充值银行：</td>
+                        <td>{$list['oid_array']['type_name']?$list['oid_array']['type_name']:'无'}</td>
+                      </tr>
+                      <tr>
+                        <td>充值银行分行：</td>
+                        <td>{$list['oid_array']['bank_name']?$list['oid_array']['bank_name']:'无'}</td>
+                      </tr>
+                      <tr>
+                        <td>充值账号：</td>
+                        <td>{$list['oid_array']['bank']?$list['oid_array']['bank']:'无'}</td>
+                      </tr>
+                      <tr>
+                        <td>充值金额：</td>
+                        <td> {$list.money} 元</td>
+                      </tr>
+                      <tr>
+                        <td>充值手续费：</td>
+                        <td> {$list.poundage} 元</td>
+                      </tr>
+                      <tr>
+                        <td>到账金额：</td>
+                        <td> {$list.account_money} 元</td>
+                      </tr>
+                      <tr>
+                        <td>充值时间：</td>
+                        <td> {$list.time|date="Y-m-d H:i:s",###}</td>
+                      </tr>
+                      <tr>
+                        <td>状态：</td>
+                        <td> 
+                        	<switch name="list.type">
+                                <case value="1">充值申请</case>
+                                <case value="2">充值成功</case>
+                                <case value="3">充值失败</case>
+                                <default />撤销充值
+                            </switch>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>审核人：</td>
+                        <td> {$list.handlers}</td>
+                      </tr>
+                      <tr>
+                        <td>审核时间：</td>
+                        <td> {$list.audittime|date="Y-m-d  H:i:s",###}</td>
+                      </tr>
+                    </tbody>
+ </table>
+<div>
+<div class="span4">
+
+</div>
+</div>
+<!--底部 -->
+<include file="Index:footer" />

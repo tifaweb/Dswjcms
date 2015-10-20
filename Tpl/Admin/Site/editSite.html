@@ -11,10 +11,10 @@
       <div id="content" class="span10">
           <ul class="breadcrumb">
               <li>
-                  <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+                  <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
               </li>
               <li>
-                  <a href="__ROOT__/Admin/Site.html">栏目管理</a> <span class="divider">/</span>
+                  <a href="__APP__/TIFAWEB_DSWJCMS/Site.html">栏目管理</a> <span class="divider">/</span>
               </li>
               <li class="active">添加栏目</li>
               
@@ -28,11 +28,11 @@
 
 
             </ul>
- <form method="post"  action='__URL__/tfUpda'>
+ <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Site/tfUpda'>
   <input name="sid" type="hidden" value="{$list['id']}" />
  <input name="user_id" type="hidden" value="{$list['user_id']}" />
   <input name="catpid" id="catpid" type="hidden" value="{$list['catpid']}" />
-  <input name="u"  type="hidden" value="__ROOT__/Admin/Site.html" />
+  <input name="u"  type="hidden" value="__APP__/TIFAWEB_DSWJCMS/Site.html" />
    <input name="aid" id="aid" type="hidden" value="{$list['aid']}" />
             <div id="myTabContent" class="tab-content">
 
@@ -107,7 +107,7 @@
                                                描述：
                                         </td>
                                         <td>
-                                          <textarea name="remark" class="span5"  maxlength="200" style="height:200px;">{$list['keyword']}</textarea>
+                                          <textarea name="remark" class="span5"  maxlength="200" style="height:200px;">{$list['remark']}</textarea>
                                         </td>
                                       </tr>
 
@@ -117,29 +117,21 @@
                                         </td>
                                         <td class="form-inline">
                                         <if condition="intval($list['type']) eq 1">
-                                          <label class="radio"><input type="radio" name="type" value="1" checked/> 封面</label>
-                                          <label class="radio"><input type="radio" name="type" value="2" /> 列表</label>
-                                          <label class="radio"><input type="radio" name="type" value="3" /> 内容</label>
+                                          <label class="radio"><input type="radio" name="type" value="1" checked onclick="$('#content_tpl').val('content')"/> 封面</label>
+                                          <label class="radio"><input type="radio" name="type" value="2" onclick="$('#content_tpl').val('content')"/> 列表</label>
+                                          <label class="radio"><input type="radio" name="type" value="3" onclick="$('#content_tpl').val('page')"/> 内容</label>
                                          <elseif condition="intval($list['type']) eq 2" />
-                                          <label class="radio"><input type="radio" name="type" value="1" /> 封面</label>
-                                          <label class="radio"><input type="radio" name="type" value="2" checked/> 列表</label>
-                                          <label class="radio"><input type="radio" name="type" value="3" /> 内容</label>
+                                          <label class="radio"><input type="radio" name="type" value="1" onclick="$('#content_tpl').val('content')"/> 封面</label>
+                                          <label class="radio"><input type="radio" name="type" value="2" checked onclick="$('#content_tpl').val('content')"/> 列表</label>
+                                          <label class="radio"><input type="radio" name="type" value="3" onclick="$('#content_tpl').val('page')"/> 内容</label>
                                           <else />
-                                           <label class="radio"><input type="radio" name="type" value="1" /> 封面</label>
-                                          <label class="radio"><input type="radio" name="type" value="2" /> 列表</label>
-                                          <label class="radio"><input type="radio" name="type" value="3" checked/> 内容</label>                                         
+                                           <label class="radio"><input type="radio" name="type" value="1" onclick="$('#content_tpl').val('content')"/> 封面</label>
+                                          <label class="radio"><input type="radio" name="type" value="2" onclick="$('#content_tpl').val('content')"/> 列表</label>
+                                          <label class="radio"><input type="radio" name="type" value="3" checked onclick="$('#content_tpl').val('page')"/> 内容</label>                                         
                                           </if>
                                           
                                         </td>
                                       </tr>
-                                       <tr>
-                                        <td>
-                                               封面模板：
-                                        </td>
-                                        <td class="form-inline">
-                                              无
-                                        </td>
-                                      </tr>   
                                        <tr>
                                         <td>
                                                列表模板：
@@ -153,7 +145,7 @@
                                                内容页模板：
                                         </td>
                                         <td class="form-inline">
-                                              <input name="content_tpl" type="text" class="span5" value="{$list['content_tpl']}">
+                                              <input name="content_tpl"  id="content_tpl" type="text" class="span5" value="{$list['content_tpl']}">
                                         </td>
                                       </tr>                                                                                                               
                                       

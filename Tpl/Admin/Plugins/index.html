@@ -1,0 +1,163 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">插件列表</li>
+      <div class="pull-right"> <a href="__APP__/TIFAWEB_DSWJCMS/Plugins/addplugins.html">添加</a></div>
+      
+</ul>
+
+<div id="plugins">
+	<table class="table table-striped table-bordered table-condensed datatable">
+            <thead>
+              <tr>
+                <th>名称</th>
+                <th>标识</th>
+                <th>描述</th>
+                <th>状态</th>
+                <th>作者</th>
+                <th>版本</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+                <volist name="directory.data" id="vo">
+                <tr>
+                <td>
+                       {$vo.title}
+                </td>
+                <td>
+                       {$vo.name}
+                </td>
+                <td>
+                       {$vo.describe}
+                </td>
+                <td>
+                    <if condition="$vo.type eq 0">
+                    未安装
+                    <elseif condition="$vo.type eq 1"/>
+                    已安装
+                    <elseif condition="$vo.type eq 2"/>
+                    已卸载
+                    </if>
+                </td>
+                <td>
+                        {$vo.author}
+                </td>
+                <td>
+                        {$vo.version}
+                </td>
+                <td>
+                	<if condition="$vo.type eq 0 or $vo.type eq 2">
+                    <a href="#" onclick="ajaxplugin(1,'{$vo.name}')">安装</a>
+                    <elseif condition="$vo.type eq 1"/>
+                    <a href="#" onclick="ajaxplugin(3,'{$vo.name}')">卸载</a>
+                    	<if condition="$vo.allocationtype eq 1">
+                        <a href="__APP__/TIFAWEB_DSWJCMS{$vo.allocation.url}">配置</a>
+                        <elseif condition="$vo.allocationtype eq 2"/>
+                         <a data-toggle="modal" data-rel="tooltip" href="#allocation" onclick="ajaxdata({$key},1)">配置</a>
+                        </if>
+                    </if>
+                    <a data-toggle="modal" data-rel="tooltip" href="#explain" onclick="ajaxdata({$key},0)">说明</a>
+                </td>
+              </tr>
+</volist>
+            </tbody>
+          </table>
+          <div class="pagination pagination-centered">
+          <ul>{$page}</ul>
+          </div>
+</div>
+<!--底部 -->
+<include file="Index:footer" />
+<div id="popping">
+	<div class="jd"><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-4.gif"/></div>
+	<div class="cc"><p id="prompt">正在安装中，请耐心等待，如长时间未响应，请关掉后重新下载插件进行安装。</p></div>
+</div>
+<div id="bgbackdrop"></div>
+<script>
+function ajaxplugin(type,name){
+	$('#bgbackdrop').show();
+	$('#popping').show();
+	
+	$.ajax({
+	   type: "POST",
+	   
+	   url: '__ROOT__/TIFAWEB_DSWJCMS/Plugins/ajaxplugins',
+	   data: {type:type,name:name},
+	   dataType:'json',
+	   success: function(msg){
+		   if(msg.status==1){	//成功
+			  $('#prompt').html(msg.info);
+			  	setTimeout(function () {
+					location.reload();
+				}, 1000);
+		   }else{
+			   $('#prompt').html('<div class="redPrompt">'+msg.info+'</div>');
+			   setTimeout(function () {
+					location.reload();
+				}, 3000);
+		   }
+	   }
+	});
+}
+function ajaxdata(id,type){
+	$.ajax({
+	   type: "POST",
+	   
+	   url: '__ROOT__/TIFAWEB_DSWJCMS/Plugins/ajaxdata',
+	   data: {type:type,id:id},
+	   success: function(msg){
+		 if(type==1){
+			$('#allocations').html(msg);
+		 }else{
+			$('#explains').html(msg);
+		  }
+	   }
+	});
+}
+</script>
+<!--说明 开始-->
+<div id="explain" class="modal hide fade">
+
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>说明</h3>
+    </div>
+
+    <div class="modal-header" id="explains">
+    </div>
+</div>
+<!--说明 结束-->
+<!--配置 开始-->
+<div id="allocation" class="modal hide fade">
+
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>配置</h3>
+    </div>
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Plugins/configurationSave'>
+    
+    <table class="table">
+                    <tbody id="allocations">
+                    
+                    </tbody>
+
+    </table>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" >保存</button>
+    </div>
+    </form>
+    
+</div>
+<!--配置 结束-->

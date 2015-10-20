@@ -1,0 +1,104 @@
+<include file="Index:header" />
+<!--头部 end -->
+<style>
+@media(min-width:1200px) {
+.input-append .add-on{height: 19.5px;}
+}
+</style>
+<!--主体 -->
+<div class="sub-nav" sup="Project">
+    <div class="sub-nav-inner">
+        <div class="container">
+            <!--Navigation start-->
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        <li class="active"><a href="javascript:void(0)">计算器</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--Navigation end-->
+        </div>
+    </div>
+</div>
+<!-- container start --> 
+<div class=" row-fluid">
+<div class="container counter">
+
+  <form class="form-horizontal">
+  	
+	<div class="span6">
+    <dl>
+        <dd><span>借款金额：</span>
+        <span class="input-append">
+            <input class="" name="money" type="text" placeholder="请输入借款金额..." /><span class="add-on">元</span>
+        </span>	
+         </dd>
+          <dd>
+        <span>年&nbsp;&nbsp;利&nbsp;率：</span>
+        <span class="input-append">
+            <input class="" name="rate" type="text" placeholder="请输入年利率..." /><span class="add-on">%</span>
+        </span>
+         </dd>
+         <dd>
+            <span>借款期限：</span>
+            <select id="deadline" name="deadline" >
+             <volist name="linkage.deadline_month" id="ue">
+           <option value='{$ue.value}' >{$ue.name}</option>
+            </volist>
+           
+            </select>
+            <select  id="deadline1" style="display: none;">
+            <volist name="linkage.deadline_day" id="ue">
+           <option value='{$ue.value}' >{$ue.name}</option>
+            </volist>
+            </select>
+         </dd>
+         <dd>
+            <span>还款方式：</span>
+            <select name="way">
+            <volist name="linkage.way" id="ue">
+               <option value='{$ue.value}' >{$ue.name}</option>
+            </volist>
+            </select>
+         </dd>
+         <dd>
+        <span>统计单位：</span>
+        <label class="checkbox inline counter_check">
+            <input name="unit" type="radio" value="0" checked onclick="switchover(1);">
+            按月
+        </label>
+        <label class="checkbox inline counter_check">
+            <input name="unit" type="radio" value="1" onclick="switchover(2);">
+            按天
+        </label>
+        
+         </dd>   
+	</dl>
+    </div> 
+    <div class="span6 wall">
+    	<h3>说明：</h3>
+        <dl class="dl-horizontal">
+        	<dt>月付息到期还本</dt><dd> 一般借款人常用的还款方式，根据借款期限和借款利率计算出每月应还利息，最后一个月需连本金一同还清。 </dd>
+        	<dt>按月还本息</dt><dd> 根据借款期限和借款利率计算出总的利息，再加上本金除以借款期限，每个月还款金额一致。 </dd>
+        </dl>
+    </div>       
+                <div class="clearfix"></div>
+                <p class="center">
+                <a class="btn btn-primary span12" onclick="counterOclick()">开始计算</a>
+                </p>
+        </form>
+        <h3 class="counter_result span12">
+          计算结果
+        </h3>
+        <div  id="sounter_result" class="span12">
+        <div class="couter_total">
+
+        </div>
+    	</div>
+</div>
+</div>
+<!-- container end -->
+<!--底部 -->
+<include file="Index:footer" />
+<!--底部 end-->

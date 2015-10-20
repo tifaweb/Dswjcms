@@ -10,15 +10,15 @@
 <!--左栏 end -->
 <ul class="breadcrumb">
       <li>
-        <a href="__ROOT__/Admin">首页</a> <span class="divider">/</span>
+        <a href="__APP__/TIFAWEB_DSWJCMS">首页</a> <span class="divider">/</span>
       </li>
       <li>
-        <a href="__ROOT__/Admin/Basis/links.html">友情链接</a> <span class="divider">/</span>
+        <a href="__APP__/TIFAWEB_DSWJCMS/Basis/links.html">友情链接</a> <span class="divider">/</span>
       </li>
       <li class="active">更新</li>
-    <div  class="pull-right"> <a class="ajax-link" href="__ROOT__/Admin/Basis/links.html" >返回友情链接</a></div>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Basis/links.html" >返回友情链接</a></div>
 </ul>
-<form method="post"  action='__URL__/editli'>
+<form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Basis/editli'>
  <table class="table table-striped table-bordered table-condensed">
  <volist name="edlist" id="ed">
    <tbody>
@@ -88,7 +88,7 @@
           <button class="btn btn-primary" type="submit">
               确认修改
           </button>
-            <a href="__ROOT__/Admin/Basis/links.html" class="btn btn-info ajax-link">取消</a>
+            <a href="__APP__/TIFAWEB_DSWJCMS/Basis/links.html" class="btn btn-info ajax-link">取消</a>
 			<input name="id" type="hidden" value="{$ed.id}" />
 </div>
 </div>

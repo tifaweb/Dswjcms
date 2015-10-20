@@ -1,0 +1,162 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">认证列表</li>
+      <div  class="pull-right"> 
+    <a href="#screening" data-toggle="modal">筛选</a>
+    </div>
+</ul>
+<table class="table table-striped table-bordered table-condensed  ">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>实名认证</th>
+                <th>邮箱认证</th>
+                <th>手机认证</th>
+                <th>视频认证</th>
+                <th>现场认证</th>
+                <th>查看</th>
+               <!-- <th>微信认证</th>-->
+              </tr>
+            </thead>
+            <tbody>
+<volist name="audit" id="vo">
+                <tr>
+                <td>
+                       {$vo.id}
+                </td>
+                <td>
+                       {$vo.username}
+                </td>
+                <td>
+                	<if condition="$vo.certification eq 0">
+                    	未申请
+                    <elseif condition="$vo.certification eq 1"/>
+                    	<span class="orange">申请中</span>
+                    <elseif condition="$vo.certification eq 2"/>
+                    	<span class="icon icon-color icon-check" title="通过" data-rel="tooltip"></span>
+                    <else />
+                    	<span class="grey">申请失败</span>
+                    </if>
+
+                       
+                </td>
+                <td>
+                    <if condition="$vo.email_audit eq 0">
+                    	未申请
+                    <elseif condition="$vo.email_audit eq 1"/>
+                    	<span class="orange">申请中</span>
+                    <elseif condition="$vo.email_audit eq 2"/>
+                    	<span class="icon icon-color icon-check" title="通过" data-rel="tooltip"></span>
+                    <else />
+                    	<span class="grey">申请失败</span>
+                    </if>
+                </td>
+                <td>
+                    <if condition="$vo.cellphone_audit eq 0">
+                    	未申请
+                    <elseif condition="$vo.cellphone_audit eq 1"/>
+                    	<span class="orange">申请中</span>
+                    <elseif condition="$vo.cellphone_audit eq 2"/>
+                    	<span class="icon icon-color icon-check" title="通过" data-rel="tooltip"></span>
+                    <else />
+                    	<span class="grey">申请失败</span>
+                    </if>   
+                </td>
+                <td>
+                     <if condition="$vo.video_audit eq 0">
+                    	未申请
+                    <elseif condition="$vo.video_audit eq 1"/>
+                    	<span class="orange">申请中</span>
+                    <elseif condition="$vo.video_audit eq 2"/>
+                    	<span class="icon icon-color icon-check" title="通过" data-rel="tooltip"></span>
+                    <else />
+                    	<span class="grey">申请失败</span>
+                    </if>
+                </td>
+                <td>
+                    <if condition="$vo.site_audit eq 0">
+                    	未申请
+                    <elseif condition="$vo.site_audit eq 1"/>
+                    	<span class="orange">申请中</span>
+                    <elseif condition="$vo.site_audit eq 2"/>
+                    	<span class="icon icon-color icon-check" title="通过" data-rel="tooltip"></span>
+                    <else />
+                    	<span class="grey">申请失败</span>
+                    </if>
+                </td>
+                <!--<td>
+                    <if condition="$vo.wechat_audit eq 0">
+                    	未申请
+                    <elseif condition="$vo.wechat_audit eq 1"/>
+                    	<span class="orange">申请中</span>
+                    <elseif condition="$vo.wechat_audit eq 2"/>
+                    	<span class="icon icon-color icon-check" title="通过" data-rel="tooltip"></span>
+                    <else />
+                    	<span class="grey">申请失败</span>
+                    </if>
+                </td>-->
+                <td>
+                <a href="#edit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-search" title="查看详情" onclick='edit({$vo.id})'></a>
+                </td>
+              </tr>
+			  <input name="id[]" type="hidden" value="{$vo.id}" />
+</volist>
+            </tbody>
+          </table>
+           <div class="pagination pagination-centered">
+          <ul>{$page}</ul>
+          </div>
+<div>
+</div>
+<!--底部 -->
+<!--用户信息 start-->
+<div id="edit" class="modal hide fade"  style="width:900px;left:35%">
+    
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>用户信息</h3>
+    </div>
+    <div id='edits'></div>
+</div>
+<!--用户信息 end-->
+<div id="screening" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>筛选</h3>
+    </div>
+    <div class="modal-body">
+    <form method="get">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>查询：</td>
+          <td>
+             	<input name="title" type="text" placeholder="用户名..." value="{$Think.get.title}">
+          </td>
+          </tr>
+          
+          
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<include file="Index:footer" />

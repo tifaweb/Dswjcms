@@ -1,0 +1,182 @@
+<include file="Index:header" />
+<!-- container start --> 
+<include file="top" />
+<div class=" row-fluid">
+<div class="container paddtop">
+<!-- 二级-->
+<ul class="center_secondary">
+    <li <eq name="mid" value="isclosed"> class="active"</eq>><a href="__ROOT__/Center/invest/mid/isclosed.html">正在收款的借款</a></li>
+    <li <eq name="mid" value="overdue"> class="active"</eq>><a href="__ROOT__/Center/invest/mid/overdue.html">逾期的借款</a></li>
+    <li <eq name="mid" value="isbid"> class="active"</eq>><a href="__ROOT__/Center/invest/mid/isbid.html">我投标的借款</a></li>
+</ul>
+<!-- 二级end-->
+
+    <!-- right start-->
+    <div id="content" class="center_zt">
+      	<switch name="mid" >
+            <case value="isclosed">
+            <!--正在收款的借款 start-->
+                <table class="table table-striped datatable ">
+                    <thead>
+                      <tr>
+                        <th>标题</th>
+                        <th>类型</th>
+                        <th>借款金额</th>
+                        <th>年利率</th>
+                        <th>借款期限</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="isclosed" id="v">
+                    <if condition="$v['details']['state'] eq 7 && $v['collection'] neq 1">
+                        <tr>
+                            <td><a href="__ROOT__/Loan/invest/{$v.details.id}.html" data-rel="tooltip" title="{$v.details.title}">{$v.details.title}</a></td>
+                            <td>{$v.details.type_name}</td>
+                            <td>{$v.details.money|number_format=2,'.',','}元</td>
+                            <td>{$v.details.rates}%</td>
+                            <td>{$v.details.deadlines}</td>
+                            <td><a href="__ROOT__/Center/agreement.html?bid={$v.details.id}" data-rel="tooltip" title="查看协议书" class="icon-list-alt"></a>&nbsp;&nbsp;<a href="__ROOT__/Center/invest/mid/plan?bid={$v.details.id}" class="icon-time" data-rel="tooltip" title="查看还款进度"></a></td>
+                         </tr>
+                    </if>
+                    </volist>
+                    </tbody>
+                </table>
+            <!--正在收款的借款 end-->
+            </case>
+            <case value="overdue">
+            <!--逾期的借款 start-->
+                <table class="table table-striped datatable ">
+                    <thead>
+                      <tr>
+                        <th>标题</th>
+                        <th>逾期本息</th>
+                        <th>逾期天数</th>
+                        <th>逾期罚息</th>  
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <volist name="overdue" id="vo">
+                        <tr>
+                            <td><a href="__ROOT__/Loan/invest/{$vo.bid}.html" data-rel="tooltip" title="{$vo.title}">{$vo.title}</a></td>
+                            <td>{$vo.money|number_format=2,'.',','}</td>
+                            <td>{$vo.days}</td>
+                            <td>{$vo.penalty|number_format=2,'.',','}</td>
+                            <if condition="$vo.type eq 0 ">
+                            <td>未还</td>
+                         	<else/>
+                            <td>已还</td>
+                            </if>
+                         </tr>
+                    </volist>
+                    </tbody>
+                            
+                </table>
+            <!--逾期的借款 end-->
+            </case>
+            <case value="plan">
+            <!--还款计划 start-->
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>期数</th>
+                        <th>还款金额</th>
+                        <th>还款时间</th>  
+                        <th>状态</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <volist name="refun" id="vo">
+                        <tr>
+                            <td>{$vo.nper}</td>
+                            <td>{$vo.money|number_format=2,'.',','}</td>
+                            <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                            <if condition="$vo.type eq 1 ">
+                            <td>已还</td>
+                            <elseif condition="$vo.type eq 2 "/>
+                             <td>已逾期</td>
+                         	<else/>
+                            <td>正在还款</td>
+                            </if>
+                         </tr>
+                   </volist> 
+                    </tbody>
+                           
+                </table>
+            <!--还款计划 end-->
+            </case>
+            <case value="isbid">
+            <!--投标的借款 start-->
+                <table class="table table-striped" id="table">
+                    <thead>
+                      <tr>
+                        <th>标题</th>
+                        <th>类型</th>
+                        <th>借款者</th>
+                        <th>金额</th>
+                        <th>年利率</th>
+                        <th>借出金额</th>
+                        <th>可收利息</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="isbid" id="v">
+                    <if condition="$v['actionname']['aid'] lt 1">
+                        <tr>
+                            <td><a href="__APP__/Loan/invest/{$v.details.id}" data-rel="tooltip" title="{$v.details.title}">{$v.details.title}</a></td>
+                           <td>{$v.details.type_name}</td>
+                            <td>{$v.details.username}</td>
+                            <td>{$v.details.money|number_format=2,'.',','}元</td>
+                            <td>{$v.details.rates}%</td>
+                            
+                            <td>{$v.actionname.operation|number_format=2,'.',','}元</td>
+                            <td>{$v.actionname.interest}元</td>
+                            <if condition="$v['collection'] neq 1">
+                            <td>{$v.details.state_name}</td>
+                            <else/>
+                            <td>债权已转让</td>
+                            </if>
+                            <td>
+                            <if condition="($v['details']['state'] egt 7) and ($v['details']['state'] elt 9) and ($v['collection'] neq 1)">
+                                <a href="__ROOT__/Center/agreement.html?bid={$v.actionname.bid}" data-rel="tooltip" title="查看协议书" class="icon-list-alt"></a>
+                            <else/>
+                            无
+                            </if>
+                            </td>
+                         </tr>
+                     </if>
+                    </volist>
+                    </tbody>
+                </table>
+                <div class="pagination pagination-centered">
+              <ul>{$page}</ul>
+              </div>
+            <!--投标的借款 end-->
+            </case>
+            
+            <default />空
+        </switch>
+    </div>
+    <!-- right end--> 
+</div>
+<!-- container end -->
+<!--底部  start-->
+<include file="Index:footer" />
+<script>
+//AJAX分页
+$(function(){ 
+	$(".pagination-centered a").click(function(){ 
+		var loading='<div class="invest_loading"><div><img src="__PUBLIC__/bootstrap/img/ajax-loaders/ajax-loader-1.gif"/></div><div>加载中...</div> </div>';
+		$("#table").html(loading);
+		$.get($(this).attr("href"),function(data){ 
+			$("body").html(data); 
+		}) 
+		return false; 
+	}) 
+}) 
+</script>

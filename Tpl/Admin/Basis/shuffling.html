@@ -10,7 +10,7 @@
 <!--左栏 end -->
 <ul class="breadcrumb">
       <li>
-        <a href="/">首页</a> <span class="divider">/</span>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
       </li>
       <li class="active">轮播图片</li>
     <div  class="pull-right"> <a data-toggle="modal" data-rel="tooltip" href="#aDdit">添加轮播图片</a></div>
@@ -53,20 +53,20 @@
                 </td>
                 <td class="form-inline">
                     <if condition="$vo.state eq 0">
-                   <label class="radio"><input type="radio" name="state{$vo.id}" value="0" class="noty" checked data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var state=$(this).val();$.post("__URL__/savesh", { id: {$vo.id},state:state} );'/> 显示</label>
-                  <label class="radio"><input type="radio" name="state{$vo.id}" value="1" class="noty" data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var state=$(this).val();$.post("__URL__/savesh", { id: {$vo.id},state:state} );'/> 隐藏</label>
+                   <label class="radio"><input type="radio" name="state{$vo.id}" value="0" class="noty" checked data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var state=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Basis/savesh", { id: {$vo.id},state:state} );'/> 显示</label>
+                  <label class="radio"><input type="radio" name="state{$vo.id}" value="1" class="noty" data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var state=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Basis/savesh", { id: {$vo.id},state:state} );'/> 隐藏</label>
                    <else />
-                   <label class="radio"><input type="radio" name="state{$vo.id}" value="0" class="noty"data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var state=$(this).val();$.post("__URL__/savesh", { id: {$vo.id},state:state} );'/> 显示</label>
-                  <label class="radio"><input type="radio" name="state{$vo.id}" value="1" checked class="noty" data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var state=$(this).val();$.post("__URL__/savesh, { id: {$vo.id},state:state} );'/> 隐藏</label>
+                   <label class="radio"><input type="radio" name="state{$vo.id}" value="0" class="noty"data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var state=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Basis/savesh", { id: {$vo.id},state:state} );'/> 显示</label>
+                  <label class="radio"><input type="radio" name="state{$vo.id}" value="1" checked class="noty" data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' onclick='var state=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Basis/savesh, { id: {$vo.id},state:state} );'/> 隐藏</label>
                   </if>
                 </td>
                 <td  width="200">
 
-                  <input data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' name="order" type="text" value="{$vo.order}" class="span3 notys" onblur='var order=$(this).val();$.post("__URL__/savesh", { id: {$vo.id},order:order} );'/>
+                  <input data-noty-options='{"text":"修改成功","layout":"center","type":"success"}' name="order" type="text" value="{$vo.order}" class="span3 notys" onblur='var order=$(this).val();$.post("__APP__/TIFAWEB_DSWJCMS/Basis/savesh", { id: {$vo.id},order:order} );'/>
                 </td>
                 <td>
-                    <a href="__ROOT__/Admin/Basis/editshu/{$vo.id}.html" data-rel="tooltip" class="ajax-link icon icon-color icon-edit" title="编辑"></a>
-                    <a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__URL__/delesh/{$vo.id}'"></a>
+                    <a href="__APP__/TIFAWEB_DSWJCMS/Basis/editshu/{$vo.id}.html" data-rel="tooltip" class="ajax-link icon icon-color icon-edit" title="编辑"></a>
+                    <a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__APP__/TIFAWEB_DSWJCMS/Basis/delesh/{$vo.id}'"></a>
                 </td>
               </tr>
 			  <input name="id[]" type="hidden" value="{$vo.id}" />
@@ -86,7 +86,7 @@
       <a class="close" data-dismiss="modal" >&times;</a>
       <h3>添加轮播图片</h3>
     </div>
-    <form method="post"  action='__URL__/addsh'>
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Basis/addsh'>
     <table class="table">
                     <tbody>
                       <tr>

@@ -11,7 +11,7 @@
       <div id="content" class="span10">
           <ul class="breadcrumb">
               <li>
-                  <a href="__ROOT__/Admin.html">首页</a> <span class="divider">/</span>
+                  <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
               </li>
               <li class="active">管理员管理</li>
               <div  class="pull-right"> <a data-toggle="modal" data-rel="tooltip" href="#aDdit" >添加管理员 </a></div>
@@ -42,7 +42,7 @@
                 </if>
                 <td>
                   <a href="#edit" data-toggle="modal" data-rel="tooltip" class="icon icon-color icon-edit" title="编辑" onclick='edit({$vo.id})'></a>
-                  <a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__URL__/exitman?id={$vo.id}'"></a>
+                  <a href="#" data-rel="tooltip" class="icon icon-color icon-trash"title="删除" onclick="if(confirm('是否要删除？'))window.location.href='__APP__/TIFAWEB_DSWJCMS/User/exitman?id={$vo.id}'"></a>
                 </td>
               </tr>
             </volist>
@@ -64,9 +64,9 @@
       <h3>添加管理员</h3>
     </div>
     <div class="modal-body">
-    <form method="post"  action='__URL__/tfAdd'>
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/User/tfAdd'>
     <input name="q" id="q" type="hidden" value="am" />
-	<input name="u" type="hidden" value="__ROOT__/Admin/User/manage.html" />
+	<input name="u" type="hidden" value="__APP__/TIFAWEB_DSWJCMS/User/manage.html" />
     <table class="table">
                     <tbody>
                       <tr>
@@ -117,9 +117,9 @@
       <h3>编辑</h3>
     </div>
     <div class="modal-body">
-    <form method="post"  action='__URL__/tfUpda'>
+    <form method="post"  action='__APP__/TIFAWEB_DSWJCMS/User/tfUpda'>
     <input name="q" type="hidden" value="am" />
-    <input name="u" type="hidden" value="__ROOT__/Admin/User/manage.html" />
+    <input name="u" type="hidden" value="__APP__/TIFAWEB_DSWJCMS/User/manage.html" />
     <input name="n" type="hidden" value="修改" />
    <div id='edits'></div>
     <div class="modal-footer"> 

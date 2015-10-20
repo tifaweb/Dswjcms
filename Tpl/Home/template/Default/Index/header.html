@@ -2,20 +2,31 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="utf-8">
-	<title><if condition="($si['link'] eq '/') OR ($si['link'] eq '')"><else/>{$si['title']}-</if>{$s.sys_name}-{$Think.config.DS_TOP_POWERED}</title>
+	<title><if condition="($si['link'] eq '/') OR ($si['link'] eq '')"><else/>{$si['title']}-</if>{$s.sys_name}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="{$si['remark']?$si['remark']:$s['sys_describe']}{$so.title}">
 	<meta name="KeyWords" content="{$si['keyword']?$si['keyword']:$s['sys_keyword']}{$so.title}">
     <meta name="generator" content="Dswjcms! X1.0" />
     <meta name="author" content="Dswjcms! Team and Tf Team" />
     <meta name="copyright" content="2013-2014 Tf Inc." />
-    <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+    <meta property="qc:admins" content="6461155451641617526375" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+<!--[if lt IE 9 ] >
+<META http-equiv="X-UA-Compatible" content="IE=8" > </META>
+<![endif]-->
+     <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href='__PUBLIC__/bootstrap/css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='__PUBLIC__/bootstrap/css/uploadify.css' rel='stylesheet'>
+    <link href='__PUBLIC__/bootstrap/css/jquery-ui-1.8.21.custom.css' rel='stylesheet'>
+    <link href='__PUBLIC__/bootstrap/css/uniform.default.css' rel='stylesheet'>
     <link href="__PUBLIC__/css/hdocs.css" rel="stylesheet">
     <link href='__PUBLIC__/bootstrap/css/opa-icons.css' rel='stylesheet'>
+    <link href='__PUBLIC__/css/fotorama.css' rel='stylesheet'>
     <link  href="__PUBLIC__/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    	<![endif]-->
+    <link href='__PUBLIC__/jmhz/css/hdocs.css' rel='stylesheet'>
+    <link href='__PUBLIC__/jmhz/css/css.css' rel='stylesheet'>
+    <link href='__PUBLIC__/bootstrap/css/colorbox.css' rel='stylesheet'>
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/css/jquery.datetimepicker.css">
     <!--[if lte IE 6]>
     <link href="__PUBLIC__/bootstrap/css/bootstrap-ie6.min.css" rel="stylesheet" type="text/css">
     <link href="__PUBLIC__/bootstrap/css/ie.css" rel="stylesheet" type="text/css">
@@ -24,52 +35,75 @@
     {$head}
 	<link rel="shortcut icon" href="__PUBLIC__/bootstrap/img/favicon.ico">
     <!-- jQuery -->
+    <script src="__PUBLIC__/js/timecount.js"></script>
     <script src="__PUBLIC__/bootstrap/js/jquery-1.7.2.min.js"></script>
     
 </head>
 
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
-<!-- navbar start -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-		  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="__ROOT__">Dswjcms</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-                  <li class="{$active.index}">
-                    <a href="/">主页</a>
-                  </li>
-                  <li  class="{$active.about}">
-                    <a href="__ROOT__/Site/page/id/1.html">关于我们</a>
-                  </li>
-                  <li  class="{$active.contact}">
-                    <a href="__ROOT__/Site/page/id/8.html">联系我们</a>
-                  </li>
-                   <li class="divider-vertical"></li>
-              <if condition="$Think.session.user_name eq ''">
-                   <li>
-                    <a href="__ROOT__/Logo/register.html">注册</a>
-                  </li>
-                  <li>
-                    <a href="__ROOT__/Logo/login.html">登陆</a>
-                  </li>
-                <else />
-                  <li>
-                  	<a href="__ROOT__/Center.html">欢迎您  {$Think.session.user_name}</a>
-                  </li>
-                  <li>
-                    <a href="__ROOT__/Logo/exits.html">退出</a>
-                  </li>
-              </if>
-            </ul>
-          </div>
+ <!--start: Header -->
+<header>
+
+    <!--start: Container -->
+    <div class="container">
+
+        <div role="banner" class="visible-desktop row-fluid">
+            <div class="span6">
+                <a href="/">
+                    <img src="__PUBLIC__/uploadify/uploads/logo/{$s.sys_logo}" style="height: 80px;margin-top: 10px;" alt="{$s.sys_briefTitle}"></a>
+            </div>
+
+            <div class="info span6">
+            <if condition="$Think.session.user_name eq ''">
+                <a href="__ROOT__/Logo/login.html">登陆</a>
+                |
+                <a href="__ROOT__/Logo/register.html">注册</a>
+            <else />
+            	{$Think.session.user_name}
+                |
+                <a href="__ROOT__/Center/mails.html">消息</a>
+                |
+                <a href="__ROOT__/Logo/exits.html">退出</a>
+            </if>
+                <span class="phone">{$s.sys_phone}</span>
+                <small>服务时间：9:00 - 17:00</small>
+            </div>
+
         </div>
-      </div>
+
+        <hr class="dashed visible-desktop">
+
+        <!--start: Navigation -->
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-inner">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand hidden-desktop" href="/">
+                    <img src="__PUBLIC__/uploadify/uploads/logo/{$s.sys_logo}" style="height: 50px;" alt="{$s.sys_briefTitle}"></a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="{$active.index}"><a href="/">首页</a></li>
+                        <li class="{$active.loan}"><a href="__ROOT__/Loan.html">我要投资</a></li>
+                        <li class="{$active.borrow}"><a href="__ROOT__/Borrow/welfare.html">我要融资</a></li>
+                    </ul>
+                    <ul class="nav pull-right">
+
+                        <li class="{$active.security}"><a href="__ROOT__/Site/page/id/34">安全保障</a></li>
+                        <li class="{$active.center}"><a href="__ROOT__/Center.html">我的账户</a></li>
+                        <li class="{$active.explanation}" ><a href="__ROOT__/Site/listTpl/id/28.html">名词解释</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--end: Navigation -->
+
     </div>
- <div class="zt">
- <!-- navbar end -->
+    <!--end: Container-->
+
+</header>
+<!--end: Header-->
+<div class="layout">

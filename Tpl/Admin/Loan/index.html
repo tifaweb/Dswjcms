@@ -1,0 +1,528 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS/Loan/review.html">待审核</a> <span class="divider">/</span>
+      </li>
+      <li class="active">编辑</li>
+</ul>
+</div>
+<!-- container start --> 
+<div class="container paddtop jump_top">
+<if condition="$b.id gt 0 ">
+<form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Loan/ordinaryEdit'  class="form-horizontal" >
+<input name="sid" type="hidden" value="{$Think.get.id}" />
+<input name="user_uid" type="hidden" value="{$b.uid}" />
+<else/>
+<form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Loan/ordinaryAdd'  class="form-horizontal" >
+</if>
+        
+    <table class="table table-striped table-bordered table-condensed">
+        <thead>
+          <tr>
+          
+            <th>
+            <if condition="$b.id gt 0 ">
+            <switch name="b.type">
+                    <case value="0"><input name="type" type="hidden" value="0" />秒还标：</case>
+                    <case value="1"><input name="type" type="hidden" value="1" />抵押标：</case>
+                    <case value="2"><input name="type" type="hidden" value="2" />质押标：</case>
+                    <case value="3"><input name="type" type="hidden" value="3" />净值标：</case>
+                    <case value="4"><input name="type" type="hidden" value="4" />信用标：</case>
+                    <default />秒还标：
+            </switch>
+            <else/>
+            <switch name="Think.get.mid">
+                    <case value="second">秒还标：</case>
+                    <case value="mortgage">抵押标：</case>
+                    <case value="pledge">质押标：</case>
+                    <case value="worth">净值标：</case>
+                    <case value="credit">信用标：</case>
+                    <default />秒还标：
+            </switch>
+            </if>
+            </th>
+            <th colspan="2" >
+            	<div class="alert alert-error">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <eq name="Think.get.mid" value="worth">发布的借款金额不能超过（待收金额*{$s.sys_net}%)<br/></eq>
+                    <eq name="Think.get.mid" value="credit">请确保您的可用会员积分大于({$s.sys_credit}分)<br/></eq>
+                    发布借款信息必须先进行<a href="__ROOT__/Center/approve/autonym.html">《实名认证》</a><a href="__ROOT__/Center/approve/email.html">《邮箱认证》</a><a href="__ROOT__/Center/basic/personal_data.html">《完善个人资料》</a>
+                    <br />带*号必填，请填写真实有效的信息，以便更快通过审核，借到钱
+                </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:100px;">
+                   *标题:
+            </td>
+            <td>
+                   <input name="title" type="text" placeholder="请输入标题..."  maxlength="25"  datatype="*" nullmsg="请输入标题！" value="{$b.title}">
+            </td>
+            <td style="width:500px;">
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    填写借款标题，写的好一点，能借到的机会就大一点
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   *年利率:
+            </td>
+            <td>
+            	<div  class="input-append">
+					<input name="rates" class="span3" type="text" maxlength="2"  datatype="n" nullmsg="请输入年利率！" value="<egt name="b.rates" value="1">{$b.rates|floor}</egt>"><span class="add-on">%</span>
+            	</div>
+            </td>
+            <td>
+            	<div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    填写您提供给投资者的年利率,所填写的利率是您还款的年利率<br />年利率不能超过银行当期利率的4倍
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   借款用途:
+            </td>
+            <td>
+                   <select name="use" class="span4">   
+                   <volist name="linkage.use" id="ue">
+                   			<if condition="$b.use eq $ue.value ">
+                            <option value='{$ue.value}' selected="selected">{$ue.name}</option>
+                            <else/>
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                            </if>
+                    </volist>
+                    </select>
+            </td>
+            <td>
+             	<div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    说明借款的具体用途
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   统计单位:
+            </td>
+            <td>
+            	<label class="checkbox inline counter_check">
+                    <input name="candra" type="radio" value="0" {$b['candra']==0?checked:''} onclick="switchover(1);">
+                    按月
+                </label>
+                <label class="checkbox inline counter_check">
+                    <input name="candra" type="radio" value="1" {$b['candra']==1?checked:''} onclick="switchover(2);">
+                    按天
+                </label>
+            </td>
+            <td>
+               	<div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    按月或按天
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   借款期限:
+            </td>
+            <td>
+            	<label class=" inline">
+                <if condition="$b['candra'] eq 0 ">
+                   <select name="deadline" style="width:80px;" id="deadline">   
+                <else/>
+                <select style="width:80px;display: none;" id="deadline">
+                </if>
+                    <volist name="linkage.deadline_month" id="ue" >
+                            
+                            <if condition="$b.deadline eq $ue.value ">
+                            <option value='{$ue.value}' selected="selected">{$ue.name}</option>
+                            <else/>
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                            </if>
+                    </volist>
+                    </select>
+                    <if condition="$b['candra'] eq 0 ">
+                     <select style="width:80px;display: none;" id="deadline1">   
+                    <else/>
+                     <select name="deadline" style="width:80px;" id="deadline1">   
+                    </if>
+                    
+                     <volist name="linkage.deadline_day" id="ue">
+                            <if condition="$b.deadline eq $ue.value ">
+                            <option value='{$ue.value}' selected="selected">{$ue.name}</option>
+                            <else/>
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                            </if>
+                    </volist>
+                    </select>
+                </label>
+            </td>
+            <td>
+               	<div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    借款周期
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   还款方式:
+            </td>
+            <td>
+                   <select name="way" class="span4">   
+                    <volist name="linkage.way" id="ue">
+                            <if condition="$b.way eq $ue.value ">
+                            <option value='{$ue.value}' selected="selected">{$ue.name}</option>
+                            <else/>
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                            </if>
+                    </volist>
+                    </select>
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    还款方式：1、每月付利息，到期付本金2、每月付利息+本金
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   有效时间:
+            </td>
+            <td>
+                   <select name="valid" style="width:80px;">   
+                   <volist name="linkage.valid" id="ue">
+                            <if condition="$b.valid eq $ue.value ">
+                            <option value='{$ue.value}' selected="selected">{$ue.name}</option>
+                            <else/>
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                            </if>
+                    </volist>
+                    </select>
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    此标展示天数，进度满100%直接进入复审环节
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   密码标状态:
+            </td>
+            <td>
+           		   <label class="checkbox inline counter_check">
+                        <input name="code" type="radio" value="0" {$b['code']==0?checked:''}  onclick="$('#pass1').hide();$('#pass').show();">
+                        关
+                    </label>
+                    <label class="checkbox inline counter_check">
+                        <input name="code" type="radio" value="1" {$b['code']==1?checked:''}  onclick="$('#pass1').show();$('#pass').hide();">
+                        开
+                    </label>
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    如果设为密码标，只有知道密码的投资者才能够进行投标
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   密码:
+            </td>
+            <td>
+                   <span id="pass" class="input-xlarge uneditable-input span4" style="{$b['code']==1?'display: none;':''}"></span>
+                   <input id="pass1" name="password" type="password" class="span4" value="{$b.password}" placeholder="请输入密码..." style="{$b['code']==1?'':'display: none;'}">
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    如果设为密码标，请在此处填写密码
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   最低投标金额:
+            </td>
+            <td>
+                   <select name="min" style="width:80px;">   
+                    <volist name="linkage.min" id="ue">n>
+                            <if condition="$b.min eq $ue.value ">
+                            <option value='{$ue.value}' selected="selected">{$ue.name}</option>
+                            <else/>
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                            </if>
+                    </volist>
+                    </select>
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    允许投资者对一个借款标的最低投标金额的限制
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   最高投标金额:
+            </td>
+            <td>
+                   <select name="max" style="width:100px;">   
+                    <volist name="linkage.max" id="ue">
+                            <if condition="$b.max eq $ue.value ">
+                            <option value='{$ue.value}' selected="selected">{$ue.name}</option>
+                            <else/>
+                            <option value='{$ue.value}' >{$ue.name}</option>
+                            </if>
+                    </volist>
+                    </select>
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    允许投资者对一个借款标的投标总额的限制
+                </div>
+            </td>
+          </tr>
+        </tbody>
+       <!-- <tbody>
+          <tr>
+            <td>
+                   隐私状态:
+            </td>
+            <td>
+                   <input name="privacy" data-no-uniform="true" type="checkbox" class="iphone-toggle"  value="1" checked="checked">
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    是否对非VIP会员公开身份信息、个人信息
+                </div>
+            </td>
+          </tr>
+        </tbody>-->
+        <tbody>
+          <tr>
+            <td>
+                   *借款金额:
+            </td>
+            <td>
+            	<div  class="input-append">
+                <if condition="$Think.get.mid eq 'guarantee'">
+                   	<input name="money" type="text" class="span4" placeholder="请输入借款金额..." onkeyup="var money=$(this).val();$('#surplus').val(money);$('#assure').val(money);moneys(money);" maxlength="7"  datatype="n3-7" nullmsg="请输入借款金额！"><span class="add-on">元</span>
+                   	<input id="assure" name="assure" type="hidden" />
+                    <input id="surplus" name="surplus" type="hidden" />
+                <else/>
+                    <input name="money" value="<egt name="b.money" value="1">{$b.money|floor}</egt>" type="text" class="span4" placeholder="请输入借款金额..." onkeyup="var money=$(this).val();$('#surplus').val(money);moneys(money);" maxlength="7"  datatype="n3-7" nullmsg="请输入借款金额！"><span class="add-on">元</span>
+                    <input id="surplus" name="surplus" type="hidden"  value="<egt name="b.money" value="1">{$b.money|floor}</egt>"/>
+                </if>
+                </div>
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    借款金额应在100元至9,000,000元之间。交易币种均为人民币。<BR />
+                    <a target="_blank" href="__ROOT__/Site/page/id/29.html" class="atv">
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   投标奖励:
+            </td>
+            <td>
+            	<label class="radio"><input type="radio" name="reward_type" value="0" {$b['reward_type']==0?'checked':''} onclick="choose_reward(1)"/> 无</label><BR />
+          		<div class="input-prepend input-append" style="margin-bottom: 10px;">
+                <label class="radio"><input type="radio" name="reward_type" value="1" {$b['reward_type']==1?'checked':''} onclick="choose_reward(2)"/> </label>
+                <span class="add-on">按金额奖励：</span><input id="reward_1" name="reward" value="<eq name="b.reward_type" value="1">{$b.reward|floor}</eq>" class="span2 input-xlarge" type="text" {$b['reward_type']==1?'':'disabled'}><span class="add-on">元</span>
+                </div>
+                <div class="input-prepend input-append">
+                <label class="radio"><input type="radio" name="reward_type" value="2" {$b['reward_type']==2?'checked':''}  onclick="choose_reward(3)"/> </label>
+                <span class="add-on">按比例奖励：</span><input id="reward_2" name="reward" value="<eq name="b.reward_type" value="2">{$b.reward|floor}</eq>" class="span2 input-xlarge" type="text" {$b['reward_type']==2?'':'disabled'}><span class="add-on">%</span>
+                </div>
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    奖励金额将会冻结您帐户中相应的账户余额，请确保帐户有足够的余额
+                </div>
+            </td>
+          </tr>
+        </tbody>
+         <if condition="$b.type eq 1 or $b.type eq 2">
+        <tbody>
+          <tr>
+            <td style="width:200px;">
+                   *抵押物信息:
+            </td>
+                <td class="controls"><textarea class="cleditor" name="mortgage"  nullmsg="请输入抵押物信息！">{$b.mortgage}</textarea></td>
+            <td style="width:500px;">
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    抵押物信息
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        </if>
+        <tbody>
+        <tr>
+            <td>*合同协议:</td>
+            <td class="controls">
+            	<ul class="thumbnails" id="file_content">
+                <foreach name="b.img" item="vo" key="kid">
+                    <li id="i{$kid}">
+                        <div class="top"><a class="icon icon-color icon-close" onclick="intExit({$kid},'i')"></a></div>
+                        
+                        <img src="__PUBLIC__/uploadify/uploads/mark/{$vo}" style="width:150px;height:150px;">
+                        
+                        <input name="img[]" type="hidden"  value="{$vo}"/>
+                    </li>
+                </foreach>
+                </ul>  
+                <input id="file_url" type="hidden" value="__PUBLIC__/uploadify/uploads/mark/"/>
+                <input id="folder" type="hidden" value="mark"/>
+                <input type="hidden" id="folder_id" value="{$kid}"/>
+                <input data-no-uniform="true" type="file" name="file_goods" id="file_goods" />   
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    上传和此借款相关的所有协议，建议上传前先打水印,10张以内
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>*考查相册:</td>
+            <td class="controls">
+            	<ul class="thumbnails" id="file_contents">
+                <foreach name="b.agr" item="vo" key="kid">
+                    <li id="j{$kid}">
+                        <div class="top"><a class="icon icon-color icon-close" onclick="intExit({$kid},'j')"></a></div>
+                        
+                        <img src="__PUBLIC__/uploadify/uploads/mark/{$vo}" style="width:150px;height:150px;">
+                        
+                        <input name="agr[]" type="hidden"  value="{$vo}"/>
+                    </li>
+                </foreach>
+                </ul>  
+                <input id="file_urls" type="hidden" value="__PUBLIC__/uploadify/uploads/mark/"/>
+                <input type="hidden" id="folder_ids" value="{$kid}"/>
+                <input data-no-uniform="true" type="file" id="file_good" />   
+            </td>
+            <td>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    上传和此借款相关的所有实地照片，建议上传前先打水印,10张以内
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>
+                   详细说明:
+            </td>
+            <td colspan="2" >
+              	<textarea class="editor" name="content" style="width:800px;height:400px;">{$b.content}</textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+	  <div class="span4"></div>
+	  <div class="span10">
+          <button class="btn btn-primary" type="submit">
+              确认提交
+          </button>
+      </div>
+</form>
+</div>
+<!-- container end -->
+<script src="__PUBLIC__/jquery/Validform_v5.3.2min.js"></script>
+<script>
+function choose_reward(type){
+	if (type==1){
+		$("#reward_1").attr("disabled","disabled");
+		$("#reward_2").attr("disabled","disabled");
+	}else if(type==2){
+		$("#reward_1").removeAttr("disabled");
+		$("#reward_2").attr("disabled","disabled");
+	}else{
+		$("#reward_2").removeAttr("disabled");
+		$("#reward_1").attr("disabled","disabled");
+	}
+}
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+function switchover(id){
+	if(id==1){
+		$('#deadline1').hide();$('#deadline').show();$('#deadline').attr('name','deadline');$('#deadline1').attr('name','');
+	}else{
+		$('#deadline1').show();$('#deadline').hide();$('#deadline1').attr('name','deadline');$('#deadline').attr('name','');
+	}
+}
+ $(function(){
+	//$(".form-horizontal").Validform();  //就这一行代码！;
+
+	$(".form-horizontal").Validform({
+		datatype:{
+			"me" : /^[\u4E00-\u9FA5\uf900-\ufa2d\w]{2,16}$/,
+		}
+	});
+})
+function intExit(id,fd)
+{
+	$('#'+fd+id).empty();
+}
+</script>
+<!--底部  start-->
+<div>
+</div>
+<include file="Index:footer" />

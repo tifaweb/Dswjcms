@@ -7,9 +7,9 @@
 	<meta name="generator" content="Dswjcms! X1.0" />
     <meta name="author" content="Dswjcms! Team and Tf Team" />
     <meta name="copyright" content="2013-2014 Tf Inc." />
-
+    <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
 	<!-- The styles -->
-	<link id="bs-css" href="__PUBLIC__/bootstrap/css/bootstrap-classic.css" rel="stylesheet">
+	<link id="bs-css" href="__PUBLIC__/bootstrap/css/bootstrap-cerulean.css" rel="stylesheet">
 	<style type="text/css">
 	  body {
 		padding-bottom: 40px;
@@ -29,7 +29,6 @@
     <link href="__PUBLIC__/css/docs.css" rel="stylesheet">
 	<link href='__PUBLIC__/bootstrap/css/jquery.cleditor.css' rel='stylesheet'>
 	<link href='__PUBLIC__/bootstrap/css/jquery.noty.css' rel='stylesheet'>
-	<link href='__PUBLIC__/bootstrap/css/noty_theme_default.css' rel='stylesheet'>
 	<link href='__PUBLIC__/bootstrap/css/elfinder.min.css' rel='stylesheet'>
 	<link href='__PUBLIC__/bootstrap/css/elfinder.theme.css' rel='stylesheet'>
 	<link href='__PUBLIC__/bootstrap/css/jquery.iphone.toggle.css' rel='stylesheet'>
@@ -37,7 +36,6 @@
 	<link href='__PUBLIC__/bootstrap/css/uploadify.css' rel='stylesheet'>
     <link href='__PUBLIC__/css/fotorama.css' rel='stylesheet'>
     <link  href="__PUBLIC__/css/style.css" rel="stylesheet">
-    {$head}
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -45,8 +43,6 @@
 
 	<!-- The fav icon -->
 	<link rel="shortcut icon" href="__PUBLIC__/bootstrap/img/favicon.ico">
-    <!-- jQuery -->
-	<script src="__PUBLIC__/bootstrap/js/jquery-1.7.2.min.js"></script>
 </head>
 
 <body>
@@ -88,10 +84,17 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-                        <li><a href="__ROOT__/Admin/Index/system.html"><i class="icon-blank <eq name="Url" value="Index">icon-ok</eq>"></i>系统配置</a></li>
-                        <li><a href="__ROOT__/Admin/Basis/shuffling.html" ><i class="icon-blank <eq name="Url" value="linebank">icon-ok</eq>"></i>基础配置</a></li>
-                        <li><a href="__ROOT__/Admin/Site.html" ><i class="icon-blank <eq name="Url" value="Loan">icon-ok</eq>"></i>文章管理</a></li>
-                        <li><a href="__ROOT__/Admin/User.html" ><i class="icon-blank <eq name="Url" value="Integral">icon-ok</eq>"></i>用户管理</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Index/system.html"><i class="icon-blank <eq name="Url" value="Index">icon-ok</eq>"></i>系统配置</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Basis/linebank.html" ><i class="icon-blank <eq name="Url" value="linebank">icon-ok</eq>"></i>基础配置</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Site.html" ><i class="icon-blank <eq name="Url" value="Loan">icon-ok</eq>"></i>文章管理</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Loan/review.html" ><i class="icon-blank <eq name="Url" value="Loan">icon-ok</eq>"></i>贷款管理</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Instation.html" ><i class="icon-blank <eq name="Url" value="Loan">icon-ok</eq>"></i>站内信</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Audit/entry.html" ><i class="icon-blank <eq name="Url" value="Loan">icon-ok</eq>"></i>认证管理</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Fund/recharge.html" ><i class="icon-blank <eq name="Url" value="Loan">icon-ok</eq>"></i>资金管理</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Ganged.html" ><i class="icon-blank <eq name="Url" value="Integral">icon-ok</eq>"></i>联动管理</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/User.html" ><i class="icon-blank <eq name="Url" value="Integral">icon-ok</eq>"></i>用户管理</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Credit.html" ><i class="icon-blank "></i>征信查询</a></li>
+                                                <li><a href="__APP__/TIFAWEB_DSWJCMS/Plugins/index.html" ><i class="icon-blank "></i>插件管理</a></li>
 					</ul>
 				</div>
 				<!-- 栏目切换 ends -->
@@ -102,13 +105,13 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a  href="{:U('Admin/Logo/loginout')}" >退出</a></li>
+						<li><a  href="__APP__/TIFAWEB_DSWJCMS/Logo/loginout" >退出</a></li>
 					</ul>
 				</div>
 				<!-- user dropdown ends -->
                 <!-- theme selector starts -->
 				<div class="btn-group pull-right theme-container" >
-					<a class="btn dropdown-toggle"  href="__ROOT__/Admin.html">
+					<a class="btn dropdown-toggle"  href="__APP__/TIFAWEB_DSWJCMS.html">
                     	<i class="icon-home"></i> 回到首页
 					</a>
 				</div>

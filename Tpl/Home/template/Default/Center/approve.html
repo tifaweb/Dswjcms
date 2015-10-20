@@ -1,0 +1,547 @@
+<include file="Index:header" />
+<!--头部 end -->
+<include file="top" />
+<div class=" row-fluid">
+<div class="container paddtop">
+<!-- 二级-->
+<ul class="center_secondary">
+    <li <eq name="mid" value="autonym"> class="active"</eq>><a href="__ROOT__/Center/approve/autonym.html">实名认证</a></li>
+    <li <eq name="mid" value="email"> class="active"</eq>><a href="__ROOT__/Center/approve/email.html">邮箱认证</a></li>
+    <li <eq name="mid" value="cellphone"> class="active"</eq>><a href="__ROOT__/Center/approve/cellphone.html">手机认证</a></li>
+    <li <eq name="mid" value="video"> class="active"</eq>><a href="__ROOT__/Center/approve/video.html">视频认证</a></li>
+    <li <eq name="mid" value="scene"> class="active"</eq>><a href="__ROOT__/Center/approve/scene.html">现场认证</a></li>
+</ul>
+<!-- 二级end-->
+    <div id="content" class="center_zt">
+<volist name="user_details" id="vo">
+      	<switch name="mid" >
+            <case value="autonym">
+            <!--实名认证 start-->
+            <form method="post"  action='__URL__/autonymUpda'>
+                <if condition="$certification eq 0 or $certification eq 3 ">
+                <input name="certification" type="hidden" value="1"/>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>真实姓名：</td>
+                            <td><input name="name" type="text" class="span2"/></td>
+                         </tr>
+                         <tr>
+                            <td>性别：</td>
+                            <td class="form-inline">
+                            	<label class="radio"><input type="radio" name="gender" value="0" checked/> 男</label>
+                                <label class="radio"><input type="radio" name="gender" value="1" /> 女</label>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>民族：</td>
+                            <td>
+                            	<select name="national" style="width:100px;">   
+                                        <volist name="list" id="vo">
+                                        <if condition="$vo.value eq 56">
+                                        <option value='{$vo.value}' selected>{$vo.name}</option>
+                                        <else/>
+                                        <option value='{$vo.value}' >{$vo.name}</option>
+                                        </if>
+                                        </volist>
+                                </select>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>出生日期：</td>
+                            <td>
+                            <input name="born" type="text" id="activitytime"/>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>身份证号：</td>
+                            <td><input name="idcard" type="text" /></td>
+                         </tr>
+                         <tr>
+                            <td>籍贯：</td>
+                            <td  class="form-inline approve_sf" id="area">
+									<select id="province"  name="native_place[]" style="width:100px;"></select><span>省</span><select id="city" style="width:110px;"  name="native_place[]"></select><span>市</span><select id="county"  style="width:140px;" name="native_place[]"></select>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>身份证正面上传：</td>
+                            <td>
+                            	<div id="file_up_content"></div>
+                                <input class="folder" type="hidden" value="idcard"/>
+                                 <input class="file_url" type="hidden" value="__PUBLIC__/uploadify/uploads/idcard/"/>
+                                <input data-no-uniform="true" type="file" id="file_up" />
+                            </td>
+                            
+                         </tr>
+                         <tr>
+                            <td>身份证反面上传：</td>
+                            <td>
+                              	<div id="file2_up_content"></div>
+                                <input data-no-uniform="true" type="file" id="file_up2" />
+                            </td>
+                            
+                         </tr>
+                    </tbody>
+                </table>
+                
+                 <div class="span10">
+                  <button class="btn btn-primary" type="submit">
+                      确认提交
+                  </button>
+                </div>
+                 <elseif condition="$certification eq 1"/>
+                <div class="alert alert-info span10">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <p>实名认证已提交，审核时间为1-3个工作日，请耐心等待。</p>
+                </div>
+                <else />
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>用户名：</td>
+                            <td>{$vo.username}</td>
+                        </tr>
+                        <tr>
+                            <td>真实姓名：</td>
+                            <td>{$vo.name}</td>
+                        </tr>
+                        <tr>
+                            <td>性别：</td>
+                            <td>{$vo.gender}</td>
+                        </tr>
+                        <tr>
+                            <td>民族：</td>
+                            <td>{$vo.national}</td>
+                        </tr>
+                        <tr>
+                            <td>出生日期：</td>
+                            <td>{$vo.born|date="Y-m-d",###}</td>
+                        </tr>
+                        <tr>
+                            <td>身份证号：</td>
+                            <td>{$vo.idcard|substr=0,13}*****</td>
+                        </tr>
+                        <tr>
+                            <td>籍贯：</td>
+                            <td>{$vo.native_place}</td>
+                        </tr>
+                    </tbody>
+                </table>	
+                </if>
+            <!--实名认证 end-->
+            </case>
+            <case value="email">
+            <!--邮箱认证 start-->
+            <form method="post"  action='__URL__/emailVerify'>
+                <if condition="$vo.email_audit eq 2 ">
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>您的邮箱已激活{$vo.email}</p>
+                </div>
+                <else />
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>您的邮箱还没有通过认证{$vo.email}</p>
+                </div>
+                <div class="approve_email">
+                    <span style="width:100px;">邮箱：</span>
+                    <span><input name="email" type="text" value="{$vo.email}"/></span>
+                    <span><button class="btn btn-primary" type="submit">发送验证</button></span>
+                </div>
+                </if>
+            <!--邮箱认证 end-->
+            </case>
+            <case value="cellphone">
+            <!--手机认证 start-->
+                <if condition="$vo.cellphone_audit eq 2 ">
+                 <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>您的手机已通过认证。{$vo.cellphone}<br/>如手机号码已变更，请重新提交进行更换</p>
+                </div>
+                <form method="post" class="form-horizontal"  action='__URL__/cellphoneedit'>
+                        <div class="control-group">
+                            <label class="control-label">手机&nbsp;<span class="red">*</span></label>
+                            <div class="controls">
+                               <input style="width:150px;"  value="{$vo.cellphone}" type="text" id="phone" name="cellphone" datatype="m" nullmsg="请输入手机号！"  maxlength="11" placeholder="手机号"> 
+                               <input type="button" id="btn" value="免费获取验证码"  class="btn btn-primary" ajaxurl="__URL__/ajaxverify"/><span id="abc"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">手机验证码&nbsp;<span class="red">*</span></label>
+                            <div class="controls">
+                               <input style="width:80px;" type="text" name="cellpcode" datatype="*" nullmsg="请输入手机验证码！" ajaxurl="__URL__/ajaxverify" placeholder="手机验证码"  maxlength="6">
+                            </div>
+                        </div>
+                        
+                        <div class="approve_email">
+                            <span style="margin-left: 180px;"><button type="submit" class="btn btn-primary">提交</button></span>
+                        </div>
+                <elseif condition="$vo.cellphone_audit eq 1 "/>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>手机认证已提交，我们的工作人员会及时联系您的。{$vo.cellphone}</p>
+                </div>
+                <else/>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>您的手机还没通过认证。</p>
+                </div>
+                    <if condition="$s.sys_appphone eq 1">
+                    <else/>
+                    <form method="post"  action='__URL__/appphone'>
+                        <div class="approve_email">
+                            <span style="width:100px;">手机号码：</span>
+                            <span><input name="cellphone" maxlength="11"   type="text" value="{$vo.cellphone}"/></span>
+                            <span><button type="submit" class="btn btn-primary">提交</button></span>
+                        </div>
+                    </if>
+                </if>
+            <!--手机认证 end-->
+            </case>
+            <case value="video">
+            <!--视频认证 start-->
+            <form method="post"  action='__URL__/tfUpda'>
+            <input name="q" type="hidden" value="ufo" />
+            <input name="u" type="hidden" value="__URL__/approve/video" />
+            <input name="n" type="hidden" value="视频认证申请" />
+            <input name="g" type="hidden" value="uid" />
+            <input name="sid" type="hidden" value="{$Think.session.user_uid}" />
+            <input name="video_audit" type="hidden" value="1" />
+                <if condition="$vo.video_audit eq 2 ">
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>您已通过视频认证。</p>
+                </div>
+                <elseif condition="$vo.video_audit eq 1 "/>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>视频认证已申请，工作人员将在1-5个工作日联系您进行认证。</p>
+                </div>
+                <else/>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>您还没通过视频认证。请申请认证，我们的客服会联系您，请耐心等待</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr class="span12">
+                            <td class="span2">
+                            	<button class="btn btn-primary" type="submit">申请认证</button>
+                            </td>
+                            <td class="span8">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </if>
+            <!--视频认证 end-->
+            </case>
+            <case value="scene">
+            <!--现场认证 start-->
+            <form method="post"  action='__URL__/tfUpda'>
+            <input name="q" type="hidden" value="ufo" />
+            <input name="u" type="hidden" value="__ROOT__/Center/approve/scene.html" />
+            <input name="n" type="hidden" value="现场认证申请" />
+            <input name="g" type="hidden" value="uid" />
+            <input name="sid" type="hidden" value="{$Think.session.user_uid}" />
+            <input name="site_audit" type="hidden" value="1" />
+                <if condition="$vo.site_audit eq 2 ">
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>您已通过现场认证。</p>
+                </div>
+                <elseif condition="$vo.site_audit eq 1 "/>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>现场认证已申请，工作人员将在1-5个工作日联系您，请耐心等待。</p>
+                </div>
+                <else/>
+                <div class="alert alert-info">
+            		<a class="close" data-dismiss="alert">×</a>
+                    <p>您还没通过现场认证。请申请认证，我们的客服会联系您并安排现场认证</p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr class="span12">
+                            <td class="span2">
+                            	<button class="btn btn-primary" type="submit">申请认证</button>
+                            </td>
+                            <td class="span8">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </if>
+            <!--现场认证 end-->
+            </case>
+            <case value="vip">
+            <!--VIP start-->
+                <form method="post"  action='__URL__/updaVip'>
+                <if condition="$vip_points eq 0">
+                <table class="table">
+                    <tbody>
+                         <tr>
+                            <td>付费模式：</td>
+                            <td class="approve_vip">
+                            	<a id="vip_1" class="hove" href="#" onclick="vipmod(1)">按月付费</a>
+                                <a id="vip_2" href="#" onclick="vipmod(2)">按年付费</a>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>开通时长：</td>
+                            <td class="input-append">
+                            <input type="text" name="length" id="length" class="span4" value="1" onkeyup="vipmod();value=value.replace(/[^0-9]/g,'')"/><span id="year"  class="add-on">月</span>
+                            <input name="mod" id="mod" type="hidden" value="1" />
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>应付金额：</td>
+                            <td><span class="approve_with">{$systems.sys_vipm}<input name="price" type="hidden" value="{$systems.sys_vipm}" /></span>&nbsp;&nbsp;<span style="font-size: 16px;">元</span></td>
+                         </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                            <button class="btn btn-primary" type="submit">
+                              确认提交
+                          </button>
+                            </td>
+                         </tr>
+                    </tbody>
+                </table>
+               
+                 <div class="span10">
+                  
+                </div>
+                 <elseif condition="$vip_points eq 1"/>
+                 <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <p>VIP申请已提交，审核时间为1-3个工作日，请耐心等待。</p>
+                </div>
+                 <elseif condition="$vip_points eq 3"/>
+                 <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <p>VIP申请失败，请重新申请</p>
+                 </div>
+                    <table class="table">
+                    <tbody>
+                         <tr>
+                            <td>付费模式：</td>
+                            <td class="approve_vip">
+                            	<a id="vip_1" class="hove" href="#" onclick="vipmod(1)">按月付费</a>
+                                <a id="vip_2" href="#" onclick="vipmod(2)">按年付费</a>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>开通时长：</td>
+                            <td class="input-append">
+                            <input type="text" name="length" id="length" class="span4" value="1" onkeyup="vipmod();value=value.replace(/[^0-9]/g,'')"/><span id="year"  class="add-on">月</span>
+                            <input name="mod" id="mod" type="hidden" value="1" />
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>应付金额：</td>
+                            <td><span class="approve_with">{$systems.sys_vipm}<input name="price" type="hidden" value="{$systems.sys_vipm}" /></span>&nbsp;&nbsp;<span style="font-size: 16px;">元</span></td>
+                         </tr>
+                         <tr>
+                            <td></td>
+                            <td>
+                            <button class="btn btn-primary" type="submit">
+                              确认提交
+                          </button>
+                            </td>
+                         </tr>
+                    </tbody>
+                </table>
+               
+                 <div class="span10">
+                  
+                </div>
+                <elseif condition="$vip_points eq 4"/>
+                 <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <p>VIP已过期，请重新申请</p>
+                 </div>
+                    <table class="table">
+                    <tbody>
+                         <tr>
+                            <td>付费模式：</td>
+                            <td class="approve_vip">
+                            	<a id="vip_1" class="hove" href="#" onclick="vipmod(1)">按月付费</a>
+                                <a id="vip_2" href="#" onclick="vipmod(2)">按年付费</a>
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>开通时长：</td>
+                            <td class="input-append">
+                            <input type="text" name="length" id="length" class="span4" value="1" onkeyup="vipmod();value=value.replace(/[^0-9]/g,'')"/><span id="year"  class="add-on">月</span>
+                            <input name="mod" id="mod" type="hidden" value="1" />
+                            </td>
+                         </tr>
+                         <tr>
+                            <td>应付金额：</td>
+                            <td><span class="approve_with">{$systems.sys_vipm}<input name="price" type="hidden" value="{$systems.sys_vipm}" /></span>&nbsp;&nbsp;<span style="font-size: 16px;">元</span></td>
+                         </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                            <button class="btn btn-primary" type="submit">
+                              确认提交
+                          </button>
+                            </td>
+                         </tr>
+                    </tbody>
+                </table>
+                <else />
+                <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <p>你已经是VIP会员</p>
+                </div>
+                </if>
+            <!--VIP end-->
+            </case>
+            <case value="other">
+            <!--其它 start-->
+           <div class="other row-fluid">
+           <volist name="linkage" id="vo">
+           	   <div class="span4 wall">
+              {$vo.name}
+               <if condition="$vo.state eq 0">
+               <a href="#undo" data-toggle="modal" onclick="$('#type').val('{$vo.value}');" class="label label-info">认证</a>
+               <elseif condition="$vo.state eq 1"/>
+               <a href="javascript:void(0)" class="label label-warning">审核中</a>
+               <elseif condition="$vo.state eq 2"/>
+               <a href="javascript:void(0)" class="label label-success">已通过</a>
+               <else/>
+               <a href="#undo" data-toggle="modal" onclick="$('#type').val('{$vo.value}');" class="label label-important">重新认证</a>
+               </if>
+               </div>
+           </volist>
+              
+           </div>
+            <!--其它 end-->
+            </case>
+            <default />空
+        </switch>
+     </form>
+</volist>
+    </div>
+</div>
+    <!-- right end--> 
+<!-- container end -->
+<!--申请 start-->
+<div id="undo" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>认证</h3>
+    </div>
+    <div class="modal-body">
+    <form method="post"  action='__URL__/certification'  class="form-horizontal">
+    <input id="type" name="type" type="hidden" value=""/>
+    	<table class="table table-striped table-bordered table-condensed">
+        <tbody>
+          <tr>
+            <td style="width:100px;">
+                   证明材料:
+            </td>
+            <td>
+                   <div id="file_up_content"></div>
+                    <input class="folder" type="hidden" value="approve"/>
+                     <input class="file_url" type="hidden" value="__PUBLIC__/uploadify/uploads/approve/"/>
+                    <input data-no-uniform="true" type="file" id="file_up" />
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td style="width:100px;">
+                   验证码:
+            </td>
+            <td>
+                 <input type="text" class="span2" name="proving" placeholder="验证码" maxlength="4">
+          <img class="CaptchaImage" id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;padding-left: 5px;position: relative;top: 5px;"/>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+        <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">
+              确认提交
+          </button>   
+          </div> 
+    </form>
+    </div>
+</div>
+<!--申请 end-->
+
+<!--底部  start-->
+<include file="Index:footer" />
+<script src="__PUBLIC__/jquery/Validform_v5.3.2min.js"></script>
+<script language="JavaScript">
+function changeVerify(){
+	var timenow = new Date().getTime();
+	document.getElementById("verifyImg").src="/index.php/Public/verify/"+timenow;
+}
+ $(function(){
+	$(".form-horizontal").Validform();  //就这一行代码！;
+})
+</script>
+<script type="text/javascript">
+//获取验证码倒计时
+var wait=60;
+function time(o) {
+		if (wait == 0) {
+			o.removeAttribute("disabled");			
+			o.value="免费获取验证码";
+			wait = 60;
+		} else {
+			o.setAttribute("disabled", true);
+			o.value="重新发送(" + wait + ")";
+			wait--;
+			setTimeout(function() {
+				time(o)
+			},
+			1000)
+		}
+	}
+$(function(){
+	$('#btn').click( function () { 
+		var phone=$('#phone').val();
+		var myreg = /^(13[0-9]|15[0|3|6|7|8|9]|18[5|8|9])\d{8}$/;
+		 if(!myreg.test(phone))
+        {
+            alert('请输入有效的手机号码！');
+            return false;
+        }
+		time(this); 
+		//$.post("__URL__/cellpcode", {id:1} );
+		$('#abc').load("__URL__/reMessage", {phone:phone} );
+	});
+});
+</script>
+<script src="__PUBLIC__/js/region.js"></script>
+<script src="__PUBLIC__/js/jq_area.js"></script>
+<script>
+$(function(){
+	$("#area").area({cache:region});
+});
+</script>
+<script src="__PUBLIC__/js/jquery.datetimepicker.js"></script>
+<script>
+$('#activitytime').datetimepicker({lang:'ch',timepicker:false,format:'Y/m/d',});
+</script>
+<script src="__PUBLIC__/bootstrap/js/jquery-ui-1.8.21.custom.min.js"></script>
+
+<!-- 选择或下拉增强器 -->
+<script src="__PUBLIC__/bootstrap/js/jquery.chosen.min.js"></script>
+<!-- 整输入器复选框、广播和文件 -->
+<script src="__PUBLIC__/bootstrap/js/jquery.uniform.min.js"></script>
+<!-- editor -->
+<script src="__PUBLIC__/editor/kindeditor-min.js"></script>
+<!-- 通知插件-->
+<script src="__PUBLIC__/bootstrap/js/jquery.noty.js"></script>
+<!-- 自动增长textarea插件 -->
+<script src="__PUBLIC__/bootstrap/js/jquery.autogrow-textarea.js"></script>
+<!-- 多个文件上传插件-->
+<script src="__PUBLIC__/bootstrap/js/jquery.uploadify-3.1.min.js"></script>
+<!-- 为魅力演示应用程序脚本 -->
+<script src="__PUBLIC__/bootstrap/js/charismah.js"></script>

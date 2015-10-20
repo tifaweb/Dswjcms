@@ -434,6 +434,61 @@ class Image {
         }
         Image::output($im, $type);
     }
+	
+	/**
+     * 生成图像验证码(新加，可设置大小)
+     * @static
+     * @access public
+     * @param string $length  位数
+     * @param string $mode  类型  //0：混合 1:数字  2:英文大写   3:英文小写 4：中文
+     * @param string $type 图像格式
+     * @param string $width  宽度
+     * @param string $height  高度
+     * @return string
+     */
+    static function buildDedeVerify($length=4, $mode=1, $type='png', $width=64, $height=28,$verifyName='verify',$font_size= 14){
+        import('ORG.Util.String');
+        $randval = String::randString($length, $mode);
+        session($verifyName, md5(strtoupper($randval)));
+        //主要参数
+        $font_file   = EXTEND_PATH.'Fonts/ggbi.ttf';
+        //创建图片，并设置背景色
+        $im = @imagecreate($width, $height);
+        imagecolorallocate($im, 255,255,255);
+        
+        //文字随机颜色
+        $fontColor[]  = imagecolorallocate($im, 0x15, 0x15, 0x15);
+        $fontColor[]  = imagecolorallocate($im, 0x95, 0x1e, 0x04);
+        $fontColor[]  = imagecolorallocate($im, 0x93, 0x14, 0xa9);
+        $fontColor[]  = imagecolorallocate($im, 0x12, 0x81, 0x0a);
+        $fontColor[]  = imagecolorallocate($im, 0x06, 0x3a, 0xd5);
+        //背景横线
+        $lineColor1 = imagecolorallocate($im, 0xda, 0xd9, 0xd1);
+        for($j=3; $j<=$height-3; $j=$j+3)
+        {
+            imageline($im, 2, $j, $width - 2, $j, $lineColor1);
+        }
+        
+        //背景竖线
+        $lineColor2 = imagecolorallocate($im, 0xda,0xd9,0xd1);
+        for($j=2;$j<100;$j=$j+6){
+            imageline($im, $j, 0, $j+8, $height, $lineColor2);
+        }
+
+        $bordercolor = imagecolorallocate($im, 0x9d, 0x9e, 0x96);
+        imagerectangle($im, 0, 0, $width-1, $height-1, $bordercolor);
+
+        
+        //输出文字
+        for($i=0;$i<$length;$i++){
+            $bc = mt_rand(0, 1);
+            $stringColor = imagecolorallocate($im, mt_rand(0, 200), mt_rand(0, 120), mt_rand(0, 120));
+            $y_pos = $i==0 ? ($width-$font_size*$length)/2 : ($width-$font_size*$length)/2+$i*($font_size+2);
+            $c = mt_rand(0, 32);
+            @imagettftext($im, $font_size, $c, $y_pos, ($height + $font_size)/2, $stringColor, $font_file, $randval[$i]);
+        }
+        Image::output($im, $type);
+    }
 
     /**
      * 把图像转换成字符显示

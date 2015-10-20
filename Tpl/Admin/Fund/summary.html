@@ -1,0 +1,142 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">用户资金汇总</li>
+      <div  class="pull-right">
+      <a href="#screening" data-toggle="modal">筛选</a>&nbsp;&nbsp;
+      <a href="#export" data-toggle="modal">导出</a></div>
+</ul>
+<table class="table table-striped table-bordered table-condensed  ">
+            <thead>
+              <tr>
+              	<th>ID</th>
+              	<th>用户名</th>
+                <th>总资金</th>
+                <th>可用资金</th>
+                <th>冻结资金</th>
+                <th>待收资金</th>
+                <th>待还资金</th>
+                <th>待收利息</th>
+                <th>已赚利息</th>
+                <th>已赚奖励</th>
+                <th>逾期金额</th>
+              </tr>
+            </thead>
+            <tbody>
+<volist name="money" id="vo">
+                <tr>
+                <td>
+                       {$vo.id}
+                </td>
+                <td>
+                       {$vo.username}
+                </td>
+                <td>
+                       {$vo.total_money|number_format=2,'.',','}
+                </td>
+                <td>
+                       {$vo.available_funds|number_format=2,'.',','}
+                </td>
+                <td>
+                      {$vo.freeze_funds|number_format=2,'.',','}
+                </td>
+                <td>
+                      {$vo.due_in|number_format=2,'.',','}
+                </td>
+                <td>
+                      {$vo.stay_still|number_format=2,'.',','}
+                </td>
+                <td>
+                      {$vo.stay_interest|number_format=2,'.',','}
+                </td>
+                <td>{$vo.make_interest|number_format=2,'.',','}</td>
+                <td>
+                      {$vo.make_reward|number_format=2,'.',','}    
+                </td>
+                <td>
+                    {$vo.overdue|number_format=2,'.',','}    
+                </td>
+              </tr>
+</volist>
+            </tbody>
+          </table>
+          <div class="pagination pagination-centered">
+          <ul>{$page}</ul>
+          </div>
+<div>
+</div>
+<!--底部 -->
+<script>
+function changeVerify(){
+    var timenow = new Date().getTime();
+    document.getElementById('verifyImg').src='__APP__/Public/verify/'+timenow;
+}
+</script>
+<div id="screening" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>筛选</h3>
+    </div>
+    <div class="modal-body">
+    <form method="get">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>查询：</td>
+          <td>
+             	<input name="title" type="text" placeholder="用户名..." value="{$Think.get.title}">
+          </td>
+          </tr>
+          
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<div id="export" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>导出</h3>
+    </div>
+    <div class="modal-body">
+    <div class="alert alert-info">
+        <p>每次导出条数最多5000条，如果数据总合以超5000条请输入上一份导出文件的最大ID值</p>
+    </div>
+    <form method="post" action="__APP__/TIFAWEB_DSWJCMS/Fund/summaryExport">
+       <table class="table">
+        <tbody>
+          <tr>
+          <td>开始ID：</td>
+          <td>
+             	<input name="fid" type="text"  value=''/>
+          </td>
+          
+          </tr>
+          
+        </tbody>
+       	</table>
+        <div class="pull-right">
+          <button class="btn btn-primary" type="submit">
+              确定
+          </button>
+      	</div>
+    </form>
+    </div>
+</div>
+<include file="Index:footer" />

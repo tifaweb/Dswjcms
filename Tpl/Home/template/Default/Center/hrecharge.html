@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>jump......</title>
+    <meta http-equiv="content-Type" content="text/html; charset=gb2312" />
+  </head>
+  <body>
+    <form action="{$hosting.form_url}" method="post" id="frm1">
+      <input type="hidden" name="Mer_code" value="{$hosting.Mer_code}">
+      <input type="hidden" name="Billno" value="{$hosting.Billno}">
+      <input type="hidden" name="Amount" value="{$hosting.Amount}" >
+      <input type="hidden" name="Date" value="{$hosting.Date}">
+      <input type="hidden" name="Currency_Type" value="{$hosting.Currency_Type}">
+      <input type="hidden" name="Gateway_Type" value="{$hosting.Gateway_Type}">
+      <input type="hidden" name="Lang" value="{$hosting.Lang}">
+      <input type="hidden" name="Merchanturl" value="{$hosting.Merchanturl}">
+      <input type="hidden" name="FailUrl" value="{$hosting.FailUrl}">
+      <input type="hidden" name="ErrorUrl" value="{$hosting.ErrorUrl}">
+      <input type="hidden" name="Attach" value="{$hosting.Attach}">
+      <input type="hidden" name="DispAmount" value="{$hosting.DispAmount}">
+      <input type="hidden" name="OrderEncodeType" value="{$hosting.OrderEncodeType}">
+      <input type="hidden" name="RetEncodeType" value="{$hosting.RetEncodeType}">
+      <input type="hidden" name="Rettype" value="{$hosting.Rettype}">
+      <input type="hidden" name="ServerUrl" value="{$hosting.ServerUrl}">
+      <input type="hidden" name="SignMD5" value="{$hosting.SignMD5}">
+    </form>
+    <script language="javascript">
+      document.getElementById("frm1").submit();
+    </script>
+  </body>
+</html>

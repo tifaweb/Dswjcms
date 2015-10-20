@@ -1,0 +1,122 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS/Basis/gcompany.html">担保公司</a> <span class="divider">/</span>
+      </li>
+      <li class="active">详细信息</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Basis/gcompany.html" >返回担保公司</a></div>
+</ul>
+<if condition="$Think.get.id gt 0 ">
+<form class="form-horizontal" name="myform" id="myform" method="post" action='__APP__/TIFAWEB_DSWJCMS/Basis/edgcompany'>
+<input name="id" type="hidden" value="{$Think.get.id}" />
+<else/>
+<form class="form-horizontal" name="myform" id="myform" method="post" action='__APP__/TIFAWEB_DSWJCMS/Basis/addgcompany'>
+</if>
+  <div class="control-group">
+    <label class="control-label">担保公司名称</label>
+    <div class="controls">
+      <input type="text" name="name" value="{$list.name}" datatype="me" errormsg="担保公司名称有误！" nullmsg="请输入担保公司名称！"  placeholder="请输入担保公司名称" maxlength="30">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">LOGO</label>
+    <div class="controls">
+      <img id="feil" src="__PUBLIC__/uploadify/uploads/gcompany/{$list.logo}"/>
+        <input id="img" name="logo" type="hidden" value="{$list.logo}"/>
+        <input id="folder" type="hidden" value="gcompany"/>
+        <input data-no-uniform="true" type="file" id="file_upload" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">QQ</label>
+    <div class="controls">
+      <input type="text" name="qq" value="{$list.qq}" datatype="n5-12" errormsg="QQ号码有误！" nullmsg="请输入QQ号码！" placeholder="请输入QQ号码" maxlength="12">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">固话</label>
+    <div class="controls">
+      <input type="text" name="fixed_line" value="{$list.fixed_line}" ignore="ignore" datatype="n7-15" errormsg="固话号码有误！" nullmsg="请输入固话号码！" placeholder="请输入固话号码" maxlength="15">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">手机</label>
+    <div class="controls">
+      <input type="text" name="cellphone" value="{$list.cellphone}" datatype="m" errormsg="手机号码有误！" nullmsg="请输入手机号码！" placeholder="请输入手机号码" maxlength="11">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">关键字</label>
+    <div class="controls">
+    	<textarea name="keyword" class="span4" placeholder="请输入关键字">{$list.keyword}</textarea>           	            	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">描述</label>
+    <div class="controls">
+    	<textarea name="remark" class="span12" style="height:100px;" placeholder="请输入描述">{$list.remark}</textarea>           	            	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">公司介绍</label>
+    <div class="controls">
+    	<textarea name="content" class="span12" style="height:200px;" placeholder="请输入公司介绍">{$list.content}</textarea>           	            	
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">证件</label>
+    <div class="controls">
+      <ul class="thumbnails" id="file_content">
+        <foreach name="list.img" item="vo" key="kid">
+            <li id="i{$kid}" >
+                <div class="top"><a class="icon icon-color icon-close" onclick="intExit({$kid},'{$vo}')"></a></div>
+                <a id="feila{$kid}" >
+                <img id="feil{$kid}" src="__PUBLIC__/uploadify/uploads/gcompany/{$vo}" style="width:150px;height:150px;">
+                </a>
+                <input name="img[]" type="hidden"  value="{$vo}"/>
+            </li>
+        </foreach>
+        </ul>  
+        <input id="file_url" type="hidden" value="__PUBLIC__/uploadify/uploads/gcompany/"/>
+        <input id="folder" type="hidden" value="gcompany"/>
+        <input type="hidden" id="folder_id" value="{$kid}"/>
+        <input data-no-uniform="true" type="file" id="file_goods" /> 
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label"></label>
+    <div class="controls">
+      <input class="input-large" name="proving" maxlength="4" type="text"  style="width:50px;margin-top: 10px;" title="验证码" data-rel="tooltip"/>          	            	
+      <img id="verifyImg" src='__APP__/Public/verify/' onClick="changeVerify()" title="点击刷新验证码" data-rel="tooltip" style="cursor:pointer;position: relative;top: 5px;"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-info">提交</button>
+    </div>
+  </div>
+</form>
+<div>
+</div>
+</form>
+<!--底部 -->
+<script>
+function intExit(id,img)
+{
+	$('#i'+id).empty();
+	$.post("__APP__/TIFAWEB_DSWJCMS/Basis/pathExit", {img:'./Public/uploadify/uploads/gcompany/'+img} );
+}
+</script>
+<include file="Index:footer" />

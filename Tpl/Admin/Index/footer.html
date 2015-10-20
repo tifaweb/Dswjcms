@@ -15,11 +15,10 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 
-	
+	<!-- jQuery -->
+	<script src="__PUBLIC__/bootstrap/js/jquery-1.7.2.min.js"></script>
 	<!-- jQuery UI -->
 	<script src="__PUBLIC__/bootstrap/js/jquery-ui-1.8.21.custom.min.js"></script>
-    <!-- 木马轮播插件-->
-	<script src="__PUBLIC__/js/fotorama.js"></script>
     <!-- bootstrap-->
     <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
 	
@@ -29,14 +28,6 @@
 	<script src='__PUBLIC__/bootstrap/js/fullcalendar.min.js'></script>
 	<!-- data table plugin -->
 	<script src='__PUBLIC__/bootstrap/js/jquery.dataTables.min.js'></script>
-
-	<!-- chart libraries start -->
-	<script src="__PUBLIC__/bootstrap/js/excanvas.js"></script>
-	<script src="__PUBLIC__/bootstrap/js/jquery.flot.min.js"></script>
-	<script src="__PUBLIC__/bootstrap/js/jquery.flot.pie.min.js"></script>
-	<script src="__PUBLIC__/bootstrap/js/jquery.flot.stack.js"></script>
-	<script src="__PUBLIC__/bootstrap/js/jquery.flot.resize.min.js"></script>
-	<!-- chart libraries end -->
 
 	<!-- select or dropdown enhancer -->
 	<script src="__PUBLIC__/bootstrap/js/jquery.chosen.min.js"></script>
@@ -52,6 +43,7 @@
 	<script src="__PUBLIC__/bootstrap/js/jquery.noty.js"></script>
 	<!-- file manager library -->
 	<script src="__PUBLIC__/bootstrap/js/jquery.elfinder.min.js"></script>
+    <script src="__PUBLIC__/bootstrap/js/elfinder.zh_CN.js"></script>
 	<!-- star rating plugin -->
 	<script src="__PUBLIC__/bootstrap/js/jquery.raty.min.js"></script>
 	<!-- for iOS style toggle switch -->
@@ -66,6 +58,7 @@
 	<script src="__PUBLIC__/bootstrap/js/charisma.js"></script>
     <!-- JS验证 -->
     <script src="__PUBLIC__/jquery/Validform_v5.3.2min.js"></script>
+     
 <script>
 {$endjs}
 function changeVerify(){
@@ -84,6 +77,12 @@ function changeVerify(){
 		}
 	});
 })
+//计划任务
+window.onload = Schedule();
+function Schedule(){
+$.post("__ROOT__/Api/Autos/timing", {id:1} );
+
+}
 </script>
 </body>
 </html>

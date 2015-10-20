@@ -266,7 +266,9 @@ class Model {
      protected function _facade($data) {
         // 检查非数据字段
         if(!empty($this->fields)) {
+			
             foreach ($data as $key=>$val){
+				$key=str_replace('`', ' ', $key);		//	2013/9/23	添加正则为了让前台传入带“`”的字段能正常通过验证，从而解决因数据库字段名和函数冲突
                 if(!in_array($key,$this->fields,true)){
                     unset($data[$key]);
                 }elseif(is_scalar($val)) {
@@ -283,7 +285,7 @@ class Model {
         $this->_before_write($data);
         return $data;
      }
-
+	
     // 写入数据前的回调方法 包括新增和更新
     protected function _before_write(&$data) {}
 
@@ -398,14 +400,19 @@ class Model {
         }
         // 数据处理
         $data       =   $this->_facade($data);
+		
         // 分析表达式
         $options    =   $this->_parseOptions($options);
-        $pk         =   $this->getPk();
+        if(false === $this->_before_update($data,$options)) {
+            return false;
+        }
         if(!isset($options['where']) ) {
             // 如果存在主键数据 则自动作为更新条件
-            if(isset($data[$pk])) {
+            if(isset($data[$this->getPk()])) {
+                $pk                 =   $this->getPk();
                 $where[$pk]         =   $data[$pk];
                 $options['where']   =   $where;
+                $pkValue            =   $data[$pk];
                 unset($data[$pk]);
             }else{
                 // 如果没有任何更新条件则不执行
@@ -413,12 +420,6 @@ class Model {
                 return false;
             }
         }
-        if(is_array($options['where']) && isset($options['where'][$pk])){
-            $pkValue    =   $options['where'][$pk];
-        }        
-        if(false === $this->_before_update($data,$options)) {
-            return false;
-        }        
         $result     =   $this->db->update($data,$options);
         if(false !== $result) {
             if(isset($pkValue)) $data[$pk]   =  $pkValue;
@@ -445,23 +446,21 @@ class Model {
             else
                 return false;
         }
-        $pk   =  $this->getPk();
         if(is_numeric($options)  || is_string($options)) {
             // 根据主键删除记录
+            $pk   =  $this->getPk();
             if(strpos($options,',')) {
                 $where[$pk]     =  array('IN', $options);
             }else{
                 $where[$pk]     =  $options;
             }
+            $pkValue            =  $where[$pk];
             $options            =  array();
             $options['where']   =  $where;
         }
         // 分析表达式
         $options =  $this->_parseOptions($options);
-        if(is_array($options['where']) && isset($options['where'][$pk])){
-            $pkValue    =   $options['where'][$pk];
-        }
-        $result  =    $this->db->delete($options);
+        $result=    $this->db->delete($options);
         if(false !== $result) {
             $data = array();
             if(isset($pkValue)) $data[$pk]   =  $pkValue;
@@ -581,9 +580,7 @@ class Model {
     protected function _parseType(&$data,$key) {
         if(empty($this->options['bind'][':'.$key])){
             $fieldType = strtolower($this->fields['_type'][$key]);
-            if(false !== strpos($fieldType,'enum')){
-                // 支持ENUM类型优先检测
-            }elseif(false === strpos($fieldType,'bigint') && false !== strpos($fieldType,'int')) {
+            if(false === strpos($fieldType,'bigint') && false !== strpos($fieldType,'int')) {
                 $data[$key]   =  intval($data[$key]);
             }elseif(false !== strpos($fieldType,'float') || false !== strpos($fieldType,'double')){
                 $data[$key]   =  floatval($data[$key]);
@@ -898,7 +895,15 @@ class Model {
             $_auto   =   $this->_auto;
         }
         // 自动填充
+	   /**
+		*
+		* @time	2013/9/8
+		* @author	shop猫
+		* @amend	当参数5设为1时，当程序调用$_auto自动忽视form没有传过来的参数 添加行数:903 935-939
+		*
+	    */
         if(isset($_auto)) {
+			$request=array_keys($_REQUEST);	//获取提交的参数并取其键名
             foreach ($_auto as $auto){
                 // 填充因子定义格式
                 // array('field','填充内容','填充条件','附加规则',[额外参数])
@@ -930,6 +935,11 @@ class Model {
                     }
                     if(false === $data[$auto[0]] )   unset($data[$auto[0]]);
                 }
+				if($auto[4]==1){	//设为1时不执行$_auto
+					if(!in_array($auto[0],$request)){
+						unset($data[$auto[0]]);
+					}
+				}
             }
         }
         return $data;
@@ -958,6 +968,7 @@ class Model {
                 // 验证因子定义格式
                 // array(field,rule,message,condition,type,when,params)
                 // 判断是否需要执行验证
+				
                 if(empty($val[5]) || $val[5]== self::MODEL_BOTH || $val[5]== $type ) {
                     if(0==strpos($val[2],'{%') && strpos($val[2],'}'))
                         // 支持提示信息的多语言 使用 {%语言定义} 方式
@@ -1152,10 +1163,9 @@ class Model {
         // 分析表达式
         if(true === $parse) {
             $options =  $this->_parseOptions();
-            $sql    =   $this->db->parseSql($sql,$options);
+            $sql  =   $this->db->parseSql($sql,$options);
         }elseif(is_array($parse)){ // SQL预处理
-            $parse  =   array_map(array($this->db,'escapeString'),$parse);
-            $sql    =   vsprintf($sql,$parse);
+            $sql  = vsprintf($sql,$parse);
         }else{
             $sql    =   strtr($sql,array('__TABLE__'=>$this->getTableName(),'__PREFIX__'=>C('DB_PREFIX')));
         }

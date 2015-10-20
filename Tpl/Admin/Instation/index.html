@@ -1,0 +1,95 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">发送站内信</li>
+</ul>
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a href="#home">单发</a></li>
+  <li><a href="#profile">群发</a></li>
+</ul>
+ 
+<div class="tab-content">
+  <div class="tab-pane active" id="home">
+  <!--单发-->
+	<form class="form-horizontal" action="__APP__/TIFAWEB_DSWJCMS/Instation/sends" method="post">
+      <div class="control-group">
+        <label class="control-label">标题：</label>
+        <div class="controls">
+          <input type="text" name="title" placeholder="请输入标题">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">收件人：</label>
+        <div class="controls">
+        	<label class="checkbox inline" style="padding-left: 0px;">
+          <input type="text" id="sid" name="sid" style="width:80px;" placeholder="输入用户ID">
+          </label>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">内容：</label>
+        <div class="controls">
+          <textarea rows="3" name="msg" placeholder="请输入发送内容"></textarea>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-small btn-inverse">发送</button>
+          
+        </div>
+      </div>
+    </form>
+  <!--单发 end-->
+  </div>
+  <div class="tab-pane" id="profile">
+  <!--群发-->
+  <form class="form-horizontal" action="__APP__/TIFAWEB_DSWJCMS/Instation/sends" method="post">
+  <input name="type" type="hidden" value="1" />
+      <div class="control-group">
+        <label class="control-label">标题：</label>
+        <div class="controls">
+          <input type="text" name="title" placeholder="请输入标题">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">收件人：</label>
+        <div class="controls">
+        	<label class="checkbox inline" style="padding-left: 0px;">
+          <textarea id="sidarr" name="sid" placeholder="请输入用户ID,以‘,’分割"></textarea>
+          </label>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">内容：</label>
+        <div class="controls">
+          <textarea rows="3" name="msg" placeholder="请输入发送内容"></textarea>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-small btn-inverse">发送</button>
+          
+        </div>
+      </div>
+    </form>
+  <!--群发 end-->
+  </div>
+</div>
+ 
+<div>
+</div>
+<!--底部 -->
+<script>
+</script>
+<include file="Index:footer" />

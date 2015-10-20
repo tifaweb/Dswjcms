@@ -39,7 +39,7 @@ class SiteModel extends  RelationModel{
 			
 		   $mod = D("Site_add");
            if($create=$mod->create()){
-			   $mod->where('id='.$_REQUEST['aid'])->save();
+			   $mod->where('id="'.$_REQUEST['aid'].'"')->save();
 		   }
 		}
 

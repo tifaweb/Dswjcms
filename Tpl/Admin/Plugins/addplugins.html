@@ -1,0 +1,91 @@
+<include file="Index:header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS/Plugins/index.html">插件管理</a> <span class="divider">/</span>
+      </li>
+      <li class="active">添加插件</li>
+    <div  class="pull-right"> <a class="ajax-link" href="__APP__/TIFAWEB_DSWJCMS/Plugins/index.html" >返回插件列表</a></div>
+</ul>
+<form method="post"  action='__APP__/TIFAWEB_DSWJCMS/Plugins/addpluginss'>
+ <table class="table table-striped table-bordered table-condensed">
+   <tbody>
+	  <tr>
+		<td style="width:120px;">
+			   插件名称：
+		</td>
+		<td>
+		  <input name="title" type="text" class="span2" placeholder="请输入插件名称..." value="" maxlength="25">
+          <p>插件名称，如：支付宝双接口</p>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			   作者：
+		</td>
+		<td>
+		  <input name="author" type="text" class="span2" placeholder="请输入作者..." value="" maxlength="20">
+          <p>插件开发者姓名，如：purl</p>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			   插件标识：
+		</td>
+		<td>
+		  <input name="name" type="text" class="span2" placeholder="请输入插件标识..." value="" maxlength="20">
+          <p>插件标识及插件文件名，只支持英文，且首字母大写，格式：特定标识+插件标识，如：Dswjcmsalipay</p>
+		</td>
+	  </tr>
+	  <tr>
+		<td>
+			   插件描述：
+		</td>
+		<td>
+		  <input name="describe" type="text" class="span2" placeholder="请输入插件描述..."  value="" maxlength="200">
+          <p>插件作用及介绍简单描述</p>
+		</td>
+	  </tr>
+      <tr>
+		<td>
+			   插件说明：
+		</td>
+		<td>
+          <textarea class="cleditor" name="instructions"  nullmsg="插件说明！"></textarea>
+		</td>
+	  </tr>
+      <tr>
+		<td>
+			   插件版本号：
+		</td>
+		<td>
+		  <input name="version" type="text" class="span2" placeholder=""  value="0.01">
+          <p>插件版本号，默认为0.01</p>
+		</td>
+	  </tr>
+	</tbody>
+ </table>
+<div>
+<div class="span2">
+
+</div>
+<div class="span2">
+          <button class="btn btn-primary" type="submit">
+              提交
+          </button>
+</div>
+</div>
+</form>
+<!--底部 -->
+<include file="Index:footer" />
