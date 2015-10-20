@@ -13,6 +13,10 @@
 defined('THINK_PATH') or exit();
 class AdminCommAction extends CommAction {
 	protected function _initialize() {
+		//后台自定义地址
+		if(strpos(__SELF__,TIFAWEB_DSWJCMS)<1){
+			$this->jumps(__ROOT__.'/error.html');
+		}
 		header("Content-Type:text/html; charset=utf-8");
 		$this->adminVerify();
 	}

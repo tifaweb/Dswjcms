@@ -29,7 +29,7 @@ MYSQL5.0+APACHE2.0/+PHP5.3
 将根目录下的Install文件夹和install.php文件删除掉（不删除可能会带来安全隐患）
 到这一步时，地址栏再输入：www.dswjcms.com，就可以看到系统正常运营了。
 *后台地址*
-域名/Admin
+域名/Dswjcms
 初始账号：admin
 初始密码：admin
 更多资料请访问
