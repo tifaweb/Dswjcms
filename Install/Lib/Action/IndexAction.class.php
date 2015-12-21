@@ -14,7 +14,7 @@ class IndexAction extends Action {
 			++$i;
 			if ($i == $iLine) {
 				if($index == strlen($line)-1)
-					$arr[] = substr($line, 0, strlen($line)-1) . $s . "n";
+					$arr[] = substr($line, 0, strlen($line)-1) . $s ;
 				else
 					$arr[] = substr($line, 0, $index) . $s . substr($line, $index);
 			}else {

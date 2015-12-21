@@ -156,26 +156,9 @@
                 <if condition="$vo.cellphone_audit eq 2 ">
                  <div class="alert alert-info">
             		<a class="close" data-dismiss="alert">×</a>
-                    <p>您的手机已通过认证。{$vo.cellphone}<br/>如手机号码已变更，请重新提交进行更换</p>
+                    <p>您的手机已通过认证。{$vo.cellphone}</p>
                 </div>
-                <form method="post" class="form-horizontal"  action='__URL__/cellphoneedit'>
-                        <div class="control-group">
-                            <label class="control-label">手机&nbsp;<span class="red">*</span></label>
-                            <div class="controls">
-                               <input style="width:150px;"  value="{$vo.cellphone}" type="text" id="phone" name="cellphone" datatype="m" nullmsg="请输入手机号！"  maxlength="11" placeholder="手机号"> 
-                               <input type="button" id="btn" value="免费获取验证码"  class="btn btn-primary" ajaxurl="__URL__/ajaxverify"/><span id="abc"></span>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">手机验证码&nbsp;<span class="red">*</span></label>
-                            <div class="controls">
-                               <input style="width:80px;" type="text" name="cellpcode" datatype="*" nullmsg="请输入手机验证码！" ajaxurl="__URL__/ajaxverify" placeholder="手机验证码"  maxlength="6">
-                            </div>
-                        </div>
-                        
-                        <div class="approve_email">
-                            <span style="margin-left: 180px;"><button type="submit" class="btn btn-primary">提交</button></span>
-                        </div>
+                
                 <elseif condition="$vo.cellphone_audit eq 1 "/>
                 <div class="alert alert-info">
             		<a class="close" data-dismiss="alert">×</a>
@@ -485,39 +468,7 @@ function changeVerify(){
 	$(".form-horizontal").Validform();  //就这一行代码！;
 })
 </script>
-<script type="text/javascript">
-//获取验证码倒计时
-var wait=60;
-function time(o) {
-		if (wait == 0) {
-			o.removeAttribute("disabled");			
-			o.value="免费获取验证码";
-			wait = 60;
-		} else {
-			o.setAttribute("disabled", true);
-			o.value="重新发送(" + wait + ")";
-			wait--;
-			setTimeout(function() {
-				time(o)
-			},
-			1000)
-		}
-	}
-$(function(){
-	$('#btn').click( function () { 
-		var phone=$('#phone').val();
-		var myreg = /^(13[0-9]|15[0|3|6|7|8|9]|18[5|8|9])\d{8}$/;
-		 if(!myreg.test(phone))
-        {
-            alert('请输入有效的手机号码！');
-            return false;
-        }
-		time(this); 
-		//$.post("__URL__/cellpcode", {id:1} );
-		$('#abc').load("__URL__/reMessage", {phone:phone} );
-	});
-});
-</script>
+
 <script src="__PUBLIC__/js/region.js"></script>
 <script src="__PUBLIC__/js/jq_area.js"></script>
 <script>

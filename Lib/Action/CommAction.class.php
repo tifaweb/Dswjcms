@@ -244,6 +244,10 @@ class CommAction extends SharingAction{
 				}
 				//记录添加点
 				$sendMsg=$this->silSingle(array('title'=>$e,'sid'=>$sid,'msg'=>$e));//站内信
+				//如果是实名认证
+				if($o=='certification'){
+					$this->creditShared($sid);
+				}
 				 $this->success($n."成功",$u);
 				
 			 }else{

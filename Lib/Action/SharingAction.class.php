@@ -1236,7 +1236,7 @@ class SharingAction extends Action{
 				$uids=$uid>0?" and `uid`=".$uid:'';
 					$user_log=$user_log->where('`type`='.$type.$bids.$uids)->order('`time` DESC ')->limit($limit)->select();
 				if(!$user_log){
-					return 0;
+					return array();
 				}
 				
 				foreach($user_log as $id=>$ulog){
@@ -2839,7 +2839,7 @@ class SharingAction extends Action{
 	*/
 	protected function singleReceipt($id){
 		$Instation=M('instation');
-		$find=$Instation->field('state,msg')->where('`id`='.$id)->find();
+		$find=$Instation->field('state,msg')->where('`id`="'.$id.'"')->find();
 		if($find['state']<1){
 			$Instation->where('`id`='.$id)->setField('state',1);
 		}
@@ -3012,7 +3012,7 @@ class SharingAction extends Action{
 	* @版权		宁波天发网络
 	* @官网		http://www.tifaweb.com http://www.dswjcms.com
 	*/
-	public function creditShared($uid){
+	protected function creditShared($uid){
 		//密钥验证,以下内容不可修改，修改后将无法使用征信功能
 		if($uid>0){
 			$userinfo=M('userinfo')->where(array('uid'=>$uid))->find();
@@ -3038,7 +3038,7 @@ class SharingAction extends Action{
 	 *  @版权		宁波天发网络
 	 *  @官网		http://www.tifaweb.com http://www.dswjcms.com
 	 **/
-	public function encryption($json,$type=0){
+	protected function encryption($json,$type=0){
 		$md5json=MD5($json);
 		$curlPost['md5json']=$md5json;	//加密后的信息
 		$curlPost['json']=$json;	//原信息
@@ -3058,7 +3058,7 @@ class SharingAction extends Action{
 	 *  @版权		宁波天发网络
 	 *  @官网		http://www.tifaweb.com http://www.dswjcms.com
 	 **/
-	public function dsRealTransmission($json){
+	protected function dsRealTransmission($json){
 		$md5json=MD5($json);
 		$curlPost['md5json']=$md5json;	//加密后的信息
 		$curlPost['json']=$json;	//原信息

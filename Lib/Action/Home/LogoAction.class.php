@@ -195,7 +195,7 @@ class LogoAction extends HomeAction {
 	//邮箱找回密码提交
 	public function rsPassword(){
 		$user=D('User');
-		$users=$user->where('id='.$this->_post('uid'))->find();
+		$users=$user->where('id="'.$this->_post('uid').'"')->find();
 		if($user->create()){
 			$result = $user->where(array('id'=>$this->_post('uid')))->save();
 			if($result){
