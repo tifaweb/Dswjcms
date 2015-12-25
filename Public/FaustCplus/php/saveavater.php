@@ -4,6 +4,11 @@
 *
 */
 if($_GET['action']){
+	$action=explode('user_',$_GET['action']);
+	if( count($action) !=2 || !is_numeric($action[1])){
+		echo 'Illegal operation!';
+		exit;
+	}
 	$input = file_get_contents('php://input');
 	$data = explode('--------------------', $input);
 

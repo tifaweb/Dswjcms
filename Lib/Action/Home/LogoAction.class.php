@@ -195,7 +195,12 @@ class LogoAction extends HomeAction {
 	//邮箱找回密码提交
 	public function rsPassword(){
 		$user=D('User');
+		$cache = cache(array('expire'=>50));
+		$value = $cache->get('rpawss'.$this->_post('uid'));
 		$users=$user->where('id="'.$this->_post('uid').'"')->find();
+		if(!md5($users['email'])==$value){
+			$this->error("链接已过期！","__ROOT__/Logo/login.html");
+		}
 		if($user->create()){
 			$result = $user->where(array('id'=>$this->_post('uid')))->save();
 			if($result){
