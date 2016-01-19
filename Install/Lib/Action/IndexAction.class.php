@@ -63,7 +63,7 @@ class IndexAction extends Action {
 
  			    //检查目录的可写
  			     $results=array();
- 					 $mdirs=array('Tpl','Conf','Public');
+ 					 $mdirs=array('Tpl','Conf','Public','Lib/Plugin');
  					 foreach($mdirs as $key=>$mdir)
  					 {
 						$results[$key]['mdir']=$mdir;
