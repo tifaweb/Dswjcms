@@ -109,10 +109,9 @@ class PluginsAction extends AdminCommAction {
 		$logo=$this->_post('logo');
 		$explain=file_get_contents('./Lib/Plugin/'.$logo.'/explain.tf');
 		$explain=json_decode($explain, true);
-		$explain['allocation']['checking']['value']=$this->_post('checking');
-		$explain['allocation']['account']['value']=$this->_post('account');
-		$explain['allocation']['pid']['value']=$this->_post('pid');
-		
+		foreach($explain['allocation'] as $id=>$all){
+			$explain['allocation'][$id]['value']=$this->_post($id);
+		}
 		$explain=json_encode($explain);
 		file_put_contents('./Lib/Plugin/'.$logo.'/explain.tf', $explain);
 		F('templateDatas',NULL);
@@ -168,6 +167,11 @@ class '.$this->_post('name').' extends Basis {
 		file_put_contents('./Lib/Plugin/'.$this->_post('name').'/'.$this->_post('name').'.class.php', $class);
 		F('templateDatas',NULL);
 		$this->success("插件创建成功","__APP__/TIFAWEB_DSWJCMS/Plugins/index.html");
+	}
+	
+	//刷新插件
+	public function ajaxPluginsRefresh(){
+		F('templateDatas',NULL);
 	}
 }
 ?>

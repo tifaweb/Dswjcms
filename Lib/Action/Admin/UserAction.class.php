@@ -109,7 +109,7 @@ function edits(id){
     public function passajax(){
 		$id=$this->_post("id");
 		$mod = D("User");
-		$borrow=$mod->where('id='.$id)->find();
+		$borrow=$mod->where('id="'.$id.'"')->find();
 		echo '
 			<table class="table">
         <tbody>
@@ -131,7 +131,7 @@ function edits(id){
    public function exituse(){
 	   $mod =  D("User");
 		if($this->_get('id')){
-			 $result = $mod->where("id=".$this->_get('id'))->delete();
+			 $result = $mod->where('id="'.$this->_get('id').'"')->delete();
 			 if($result){
 				 $this->Record('删除用户成功');//后台操作
 				$this->success('删除成功');
@@ -163,7 +163,7 @@ function edit(id){
     public function adminajax(){
 		$id=$this->_post("id");
 		$mod = D("Admin");
-		$borrow=$mod->where('id='.$id)->find();
+		$borrow=$mod->where('id="'.$id.'"')->find();
 		echo '
 			<table class="table">
         <tbody>
@@ -189,7 +189,7 @@ function edit(id){
    public function exitman(){
 	   $mod =D("Admin");
 		if($this->_get('id')){
-			 $result = $mod->where("id=".$this->_get('id'))->delete();
+			 $result = $mod->where('id="'.$this->_get('id').'"')->delete();
 			 if($result){
 				 $this->Record('删除管理员成功');//后台操作
 				$this->success('删除成功');

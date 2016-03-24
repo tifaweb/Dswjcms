@@ -106,6 +106,11 @@ class Basis{
 		if (file_exists('./Lib/Plugin/'.$logo.'/install.tf')) {
 			$update_str='';
 			file_put_contents('./Lib/Plugin/'.$logo.'/install.tf', $update_str);
+			$explain=file_get_contents('./Lib/Plugin/'.$logo.'/explain.tf');
+			$explain=json_decode($explain, true);
+			$explain['type']=2;
+			$explain=json_encode($explain);
+			file_put_contents('./Lib/Plugin/'.$logo.'/explain.tf', $explain);
 			return 1;
 		}else{
 			$this->Dserror('插件不完整，无法删除');
@@ -130,11 +135,17 @@ class Basis{
 			'.$endtags;
 		}
 		if (file_exists($path)) {
+			$patharr=explode("/",$path);
+			if($patharr[1]=='Tpl'){	//HTML注释
+				$replacestart='<!--';
+				$replaceend='-->';
+			}else{	//其它注释
+				$replacestart='/*';
+				$replaceend='*/';
+			}
 			$fileget=file_get_contents($path);
-			$replace=$starttags.'
-			/*'.$logo.' start*/
-			'.$replace.'
-			/*'.$logo.' end*/'.$endtags;
+			$replace=$starttags.$replacestart.$logo.' start'.$replaceend.$replace.$replacestart.$logo.' end'.$replaceend.$endtags;
+			
 			$update_str = preg_replace($find, $replace, $fileget); 
 			file_put_contents($path, $update_str);
 			return 1;
@@ -153,8 +164,16 @@ class Basis{
 	*/
 	protected function DsdeleteFile($path,$logo){
 		if (file_exists($path)) {
+			$patharr=explode("/",$path);
+			if($patharr[1]=='Tpl'){	//HTML注释
+				$replacestart='<!--';
+				$replaceend='-->';
+			}else{	//其它注释
+				$replacestart='\/\*';
+				$replaceend='\*\/';
+			}
 			$fileget=file_get_contents($path);
-			$find="/\/\*".$logo." start\*\/.*?\/\*".$logo." end\*\//s";
+			$find="/".$replacestart.$logo." start".$replaceend.".*?".$replacestart.$logo." end".$replaceend."/s";;
 			$update_str = preg_replace($find,'', $fileget); 
 			file_put_contents($path, $update_str);
 			return 1;
@@ -178,11 +197,7 @@ class Basis{
 			foreach($fileget['data'] as $id=>$f){
 				M($id)->where('`id`='.$f)->delete();
 			}
-			$explain=file_get_contents('./Lib/Plugin/'.$logo.'/explain.tf');
-			$explain=json_decode($explain, true);
-			$explain['type']=2;
-			$explain=json_encode($explain);
-			file_put_contents('./Lib/Plugin/'.$logo.'/explain.tf', $explain);
+			
 			return 1;
 		}else{
 			 $this->Dserror('插件删除失败，请检查项目是否有读写权限或请重新下载');

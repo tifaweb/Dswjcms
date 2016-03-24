@@ -629,7 +629,7 @@ class CenterAction extends HomeAction {
 	public function basic(){
 		$this->homeVerify();
 		$unite=M('unite');
-		$list=$unite->field('pid,name,value')->where('`state`=0 and `pid`=8 or `pid`=9 or `pid`=10 or `pid`=11 or `pid`=12')->order('`order` asc,`id` asc')->select();
+		$list=$unite->field('pid,name,value')->where('`state`=0 and (`pid`=8 or `pid`=9 or `pid`=10 or `pid`=11 or `pid`=12)')->order('`order` asc,`id` asc')->select();
 		foreach($list as $lt){
 			switch($lt[pid]){
 				case 8:

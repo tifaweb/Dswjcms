@@ -48,7 +48,7 @@ class IndexAction extends AdminCommAction {
     public function delesy(){
             $system=M('System');
             $id=$this->_get('id');
-            $system->where('id='.$id)->delete();
+            $system->where('id="'.$id.'"')->delete();
 			$this->Record('删除系统参数');//后台操作
 			F('systems',NULL);
             $this->success('删除成功', '__APP__/TIFAWEB_DSWJCMS/Index/system');
@@ -58,7 +58,7 @@ class IndexAction extends AdminCommAction {
     public function editsys(){
             $System = M('system');
             $id=$this->_get('id');
-            $edlist = $System->where('id='.$id)->select();
+            $edlist = $System->where('id="'.$id.'"')->select();
     		$this->assign('edlist',$edlist);
             $this->display();
     }
@@ -66,7 +66,7 @@ class IndexAction extends AdminCommAction {
     public function savesys(){
             $system=D('System');
 			if($create=$system->create()){	
-				$system->where('id='.$this->_post('id'))->save($create);
+				$system->where('id="'.$this->_post('id').'"')->save($create);
 				F('systems',NULL);
 				$this->Record('参数修改成功');//后台操作
 				$this->success('参数修改成功', '__APP__/TIFAWEB_DSWJCMS/Index/system');

@@ -15,7 +15,7 @@ defined('THINK_PATH') or exit();
 class LoadAction extends Action{
 	public function viewGroupUser($id){
 				if($id){
-			$where= "group_id =".$id;
+			$where= 'group_id ="'.$id.'"';
 		}else{
 			$this->error("请选择用户组");
 		}
@@ -38,7 +38,7 @@ class LoadAction extends Action{
 	//重新加载提成分组成员
 	public function viewCommisionUser($id){
 				if($id){
-			$where= "group_id =".$id;
+			$where= 'group_id ="'.$id.'"';
 		}else{
 			$this->error("请选择用户组");
 		}

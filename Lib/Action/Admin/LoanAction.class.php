@@ -37,7 +37,7 @@ class LoanAction extends AdminCommAction {
 		$head='<link  href="__PUBLIC__/css/style.css" rel="stylesheet">';
 		$this->assign('head',$head);
 		$Borrow=D("Borrowing");
-		$borrow=$Borrow->where('id='.$this->_get('id'))->find();
+		$borrow=$Borrow->where('id="'.$this->_get('id').'"')->find();
 		$data=explode(";",$borrow['data']);//分割合同协议和企业实地照片
 		$borrow['img']=array_filter(explode(",",$data[0]));
 		$borrow['agr']=array_filter(explode(",",$data[1]));
@@ -50,7 +50,7 @@ class LoanAction extends AdminCommAction {
 	public function ordinaryEdit(){
 		$model=D('Borrowing');
 		$money=M('money');
-		$mone=$money->where('uid='.$this->_post('user_uid'))->find();
+		$mone=$money->where('uid="'.$this->_post('user_uid').'"')->find();
 		$systems=$this->systems();
 		if($create=$model->create()){
 			$img=implode(",",$this->_post('img'));
@@ -89,14 +89,14 @@ class LoanAction extends AdminCommAction {
 			if($this->_get('title')){
 				$uid=M('user')->field('id')->where('`username`="'.$this->_get('title').'"')->find();
 				$uid=$uid['id'];
-				$uid=$uid?"`uid`=".$uid." or ":"";
-				$bids=is_numeric($this->_get('title'))?"`id`=".$this->_get('title')." or ":"";
+				$uid=$uid?'`uid`="'.$uid.'" or ':'';
+				$bids=is_numeric($this->_get('title'))?'`id`="'.$this->_get('title').'" or ':"";
 				$where.="(".$uid.$bids."`title` LIKE '%".$this->_get('title')."%')";
 			}
 		}
 		
 		if($this->_get('type')>0){
-			$where.=" and `type`=".$this->_get('type');
+			$where.=' and `type`="'.$this->_get('type').'"';
 		}
 		if(is_numeric($_GET['state'])){
 			$where.=" and `state`='".$this->_get('state')."'";
@@ -199,7 +199,7 @@ class LoanAction extends AdminCommAction {
 	public function borrowUpda(){
 		$sid=intval($this->_post('id'));
 		$state=intval($this->_post('state'));
-		$borr=D('Borrowing')->relation(true)->where('`id`='.$sid)->find();
+		$borr=D('Borrowing')->relation(true)->where('`id`="'.$sid.'"')->find();
 		$model = M('borrowing');
 		if($borr['candra']==0){	//获取用户选择的是月标还是天标
 			$month=$borr['deadline'];
@@ -395,7 +395,7 @@ function edit(id){
 	*/
 	public function borrows($id){
 		$borrowing = M("borrowing");
-		return $borrowing->where('id='.$id)->field('stick,state')->find();
+		return $borrowing->where('id="'.$id.'"')->field('stick,state')->find();
 	}
 	
 	

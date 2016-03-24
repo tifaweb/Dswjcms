@@ -33,7 +33,7 @@ class SiteAction extends AdminCommAction {
 	public function addSite($pid=0){
 		$user_id = $_SESSION['admin_uid'] ?$_SESSION['admin_uid'] : 0;
 		if($pid){
-			$list = D("Site")->where("id=".$pid)->find();
+			$list = D("Site")->where('id="'.$pid.'"')->find();
 			$catpid=$list['catpid']."-".$pid;
 			$list['newOrder'] = intval($list['order'])+1;
 		}else{
@@ -62,8 +62,8 @@ class SiteAction extends AdminCommAction {
 		$field = "id,pid,concat(catpid,'-',id) as absPath,title,order";
 		$order = " absPath,id ";
 		$site = $mod->field($field)->order($order)->select();
-		$list = $mod->where("id=".$id)->relation("site_add")->find();
-		$sites = D("Site")->where("id=".$list['pid'])->find();	
+		$list = $mod->where('id="'.$id.'"')->relation("site_add")->find();
+		$sites = D("Site")->where('id="'.$list['pid'].'"')->find();	
 		if(!$sites){
 			$sites['title']='顶级类目';
 		}
@@ -81,7 +81,7 @@ class SiteAction extends AdminCommAction {
 			$order = " absPath,id ";
 			$list = $mod->field($field)->where('type=2')->order($order)->select();
 		}else{
-		     $site = $mod->where("id=".$id)->find();
+		     $site = $mod->where('id="'.$id.'"')->find();
 		}
 		$user_id = $_SESSION['admin_uid'];
 		$this->assign('site',$site);
@@ -127,7 +127,7 @@ class SiteAction extends AdminCommAction {
 	//显示文章
 	public function articleList($id=0){
         if($id){
-	       $where = "catid=".$id;
+	       $where = 'catid="'.$id.'"';
 		}else{
 			$where = "id>0";
 
@@ -169,7 +169,7 @@ class SiteAction extends AdminCommAction {
 			$this->error("请先选择文章");
 		}	
 		$mod = D("Article");
-		$list = $mod->where("id=".$id)->relation("Article_add")->find();	
+		$list = $mod->where('id="'.$id.'"')->relation("Article_add")->find();	
 		if(!$list){
 			$this->error("找不到文章");
 		}	
@@ -177,7 +177,7 @@ class SiteAction extends AdminCommAction {
 		$field = "id,pid,concat(catpid,'-',id) as absPath,title,order";
 		$order = " absPath,id ";
 		$site = $mod->field($field)->where('type=2')->order($order)->select();
-		$sites = D("Site")->where("id=".$list['catid'])->find();	
+		$sites = D("Site")->where('id="'.$list['catid'].'"')->find();	
 		$this->assign('site',$site);
 		$this->assign('sites',$sites);
 		$this->assign('list',$list);
@@ -190,7 +190,7 @@ class SiteAction extends AdminCommAction {
 			$this->error("请先选择文章");
 		}
 		$mod = M("article");
-		$dele=$mod->where('id='.$id)->delete();
+		$dele=$mod->where('id="'.$id.'"')->delete();
 		if($dele){
 			$this->Record('删除文章成功');//后台操作
 			$this->success('删除成功');

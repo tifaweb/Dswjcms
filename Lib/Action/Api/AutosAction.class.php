@@ -39,7 +39,7 @@ class AutosAction extends CommAction {
 			
 			$models = new Model();
 			$collection=D('Collection');
-			$overd=$overdue->where('type=0 or type=2')->limit(10)->select();	//查询处于逾期上的逾期记录
+			$overd=$overdue->where('type=0 or type=2')->select();	//查询处于逾期上的逾期记录
 			if($overd){
 				foreach($overd as $ov){	
 					if(time()-$refund['refund_'.$ov['bid']]>=86400){	//一天只执行一次

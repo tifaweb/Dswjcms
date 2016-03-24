@@ -13,7 +13,7 @@
         <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
       </li>
       <li class="active">插件列表</li>
-      <div class="pull-right"> <a href="__APP__/TIFAWEB_DSWJCMS/Plugins/addplugins.html">添加</a></div>
+      <div class="pull-right"><a href="#" onclick="refreshs()">刷新</a>&nbsp;&nbsp;<a href="__APP__/TIFAWEB_DSWJCMS/Plugins/addplugins.html">添加</a></div>
       
 </ul>
 
@@ -126,6 +126,18 @@ function ajaxdata(id,type){
 	   }
 	});
 }
+
+function refreshs(){
+	$.ajax({
+	   type: "POST",
+	   
+	   url: '__ROOT__/TIFAWEB_DSWJCMS/Plugins/ajaxPluginsRefresh',
+	   data: {type:1},
+	   success: function(msg){
+		 location.reload();
+	   }
+	});
+}
 </script>
 <!--说明 开始-->
 <div id="explain" class="modal hide fade">
@@ -135,7 +147,7 @@ function ajaxdata(id,type){
       <h3>说明</h3>
     </div>
 
-    <div class="modal-header" id="explains">
+    <div class="modal-header" id="explains" style="height:400px;">
     </div>
 </div>
 <!--说明 结束-->

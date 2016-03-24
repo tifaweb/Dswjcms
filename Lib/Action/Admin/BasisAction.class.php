@@ -35,7 +35,7 @@ class BasisAction extends AdminCommAction {
 		$unite=M('unite');
 		$offline=M('offline');
 		$list=$unite->field('name,value')->where('`state`=0 and `pid`=14')->order('`order` asc,`id` asc')->select();
-		$edlist=reset($offline->where('`id`='.$this->_get('id'))->select());
+		$edlist=reset($offline->where('`id`="'.$this->_get('id').'"')->select());
 		$this->assign('list',$list);
 		$this->assign('vo',$edlist);
         $this->display();
@@ -66,7 +66,7 @@ class BasisAction extends AdminCommAction {
 	//线上银行编辑
 	public function editonl(){
 		$online=M('online');
-		$list=$online->where('`id`='.$this->_get('id'))->find();
+		$list=$online->where('`id`="'.$this->_get('id').'"')->find();
         $this->assign('vo',$list);
 		$this->display();
     }
@@ -96,7 +96,7 @@ class BasisAction extends AdminCommAction {
 	//积分等级更新
 	public function editint(){
 		$grade=M('membership_grade');
-		$edlist=reset($grade->where('`id`='.$this->_get('id'))->select());
+		$edlist=reset($grade->where('`id`="'.$this->_get('id').'"')->select());
 		$this->assign('vo',$edlist);
         $this->display();
     }
@@ -104,7 +104,7 @@ class BasisAction extends AdminCommAction {
 	//积分等级删除
 	public function deleint(){
 		$grade=M('membership_grade');
-		$edlist=reset($grade->where('`id`='.$this->_get('id'))->select());
+		$edlist=reset($grade->where('`id`="'.$this->_get('id').'"')->select());
 		unlink('./Public/uploadify/uploads/grade_img/'.$edlist['img']);	//删除图片
 		$result = $grade->where(array('id'=>$this->_get('id')))->delete();
 		if($result){
@@ -196,7 +196,7 @@ class BasisAction extends AdminCommAction {
     public function editshu(){
             $Shuff = M('shuffling');
             $id=$this->_get('id');
-            $edlist = $Shuff->where('id='.$id)->select();
+            $edlist = $Shuff->where('id="'.$id.'"')->select();
             $this->assign('edlist',$edlist);
             $this->display();
     }
@@ -216,7 +216,7 @@ class BasisAction extends AdminCommAction {
     public function delesh(){
             $Shuff=M('shuffling');
             $id=$this->_get('id');
-            $Shuff->where('id='.$id)->delete();
+            $Shuff->where('id="'.$id.'"')->delete();
 			$this->Record('轮播图片删除成功');//后台操作
             $this->success('删除成功', '__APP__/TIFAWEB_DSWJCMS/Basis/shuffling');
     }
@@ -265,7 +265,7 @@ class BasisAction extends AdminCommAction {
     public function editlink(){
             $Shuff = M('links');
             $id=$this->_get('id');
-            $edlist = $Shuff->where('id='.$id)->select();
+            $edlist = $Shuff->where('id="'.$id.'"')->select();
             $this->assign('edlist',$edlist);
             $this->display();
     }
@@ -285,7 +285,7 @@ class BasisAction extends AdminCommAction {
     public function deleli(){
             $Shuff=M('links');
             $id=$this->_get('id');
-            $Shuff->where('id='.$id)->delete();
+            $Shuff->where('id="'.$id.'"')->delete();
 			$this->Record('友情链接删除成功');//后台操作
             $this->success('删除成功', '__APP__/TIFAWEB_DSWJCMS/Basis/links');
     }
@@ -346,7 +346,7 @@ class BasisAction extends AdminCommAction {
     public function editgcompany(){
 		if($this->_get('id')>0){
 			$Shuff=D('Guaranteecomp');
-			$guaran=$Shuff->where('id='.$this->_get('id'))->find();
+			$guaran=$Shuff->where('id="'.$this->_get('id').'"')->find();
 			$guaran['img']=explode(",",$guaran['img']);
 			$this->assign('list',$guaran);
 		}
@@ -381,7 +381,7 @@ class BasisAction extends AdminCommAction {
 				$this->error($Shuff->getError());
 		}
 		$create['img']=implode(",",$create['img']);
-		$last=$Shuff->where('id='.$this->_post('id'))->save($create);
+		$last=$Shuff->where('id="'.$this->_post('id').'"')->save($create);
 		if($last){
 			$this->Record('更新担保公司成功');//后台操作
 				$this->success('更新成功', '__APP__/TIFAWEB_DSWJCMS/Basis/gcompany');

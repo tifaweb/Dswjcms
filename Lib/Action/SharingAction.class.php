@@ -623,7 +623,7 @@ class SharingAction extends Action{
 			}else if($systems['sys_topUFC']==1){	//小于免费额度收取手续费
 				if($m<=$systems['sys_rechargeFA']){	//小于免费提现额度
 					//充值手续费=（充值金额-免费额度）*充值手续费率
-					$wfp=round(($m-$systems['sys_rechargeFA'])*$systems['sys_topUpFees'],2);;
+					$wfp=round($m*$systems['sys_topUpFees'],2);
 				}else{
 					$wfp=0;
 				}
@@ -1859,11 +1859,12 @@ class SharingAction extends Action{
 			unset($sendMsg);
 		}	
 		if($borrowlog){//借款者操作
-			$stay_still=$this->refunds($borr['id']);	//还款记录
+			
 			$bid_record=$this->specifyUser('4',$borr['id']);
 			$bid_record=reset($bid_record);
 			$interestReward=$bid_record['interest']+$bid_record['operation_reward'];	//利息+奖励
 			if($borr['state']==7){	//审核通过
+				$stay_still=$this->refunds($borr['id']);	//还款记录
 				$array['type']				=8;
 				$array['uid']				= $borr['uid'];
 				$array['bid']				=$borr['id'];

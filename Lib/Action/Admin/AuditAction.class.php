@@ -17,7 +17,7 @@ class AuditAction extends AdminCommAction {
 		if($this->_get('title')){
 			$uid=M('user')->field('id')->where('`username`="'.$this->_get('title').'"')->find();
 			$uid=$uid['id'];
-			$where=$uid?"`id`=".$uid:'';
+			$where=$uid?'`id`="'.$uid.'"':'';
 		}
 		import('ORG.Util.Page');// 导入分页类
         $count      = M('userinfo')->where($where)->count();// 查询满足要求的总记录数
