@@ -1,39 +1,109 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>安装程序 - 内容管理系统</title>
-<link href="__ROOT__/Install/Tpl/Public/style.css" rel="stylesheet" type="text/css" />
-</head>
-
+	<meta charset="utf-8">
+	<title>DSP2P-Dswjcms安装程序</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="DSP2P傻瓜式一键安装，佣有一套商城只需10秒">
+	<meta name="KeyWords" content="DSP2P安装,dsphp一键安装,dsphp程序安装">
+    <meta name="generator" content="DSP2P!" />
+    <meta name="author" content="Dswjcms! Team and Tf Team" />
+    <meta name="copyright" content="2013-<php>echo date('Y');</php> Tf Inc." />
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/common.css" rel="stylesheet">
+	<script src="__PUBLIC__/js/jquery-1.7.1.min.js"></script>
+    <script src="__PUBLIC__/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/js/common.js"></script>
+ </head>
 <body>
-
-<div class="top">
-	<div class="top-version">
-		<!-- 版本信息 -->
-		<h2></h2>
-	</div>
-</div>
-
-<div class="main">
-	<div class="pleft">
-		<dl class="setpbox t1">
-			<dt>安装步骤</dt>
-			<dd>
-				<ul>
-					<li class="now">许可协议</li>
-					<li>环境检测</li>
-					<li>参数配置</li>
-					<li>正在安装</li>
-					<li>安装完成</li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-	<div class="pright">
-		<div class="pr-title"><h3>阅读许可协议</h3></div>
-		<div class="pr-agreement">
-			版权所有 (c) 2013-2016，宁波市鄞州区天发网络科技有限公司<br/>
+	<div class="container index">
+    	<div class="logo"><img src="__PUBLIC__/images/logo.png"></div>
+        <div class="name">DSP2P</div>
+        <div id="sp-1" <eq name="state" value="1"> class="hide"</eq>>
+            <div class="describe">傻瓜式安装，搭建商城最快只需10秒</div>
+            <div class="agreement"><a data-toggle="modal"  data-rel="tooltip" href="#Contract">《我已经阅读并同意此协议》</a></div>
+            <div class="btncenter"><button type="submit" class="btn btn-inverse btn-large">下一步</button></div>
+        </div>
+        <div id="sp-2"  class="hide">
+        	<div class="environment">
+            	<div class="proajax">
+                    
+                </div>
+                <div class="btncenter"><button type="submit" class="btn btn-inverse btn-large">重新检测</button></div>
+            </div>
+        </div>
+        <div id="sp-3" class="hide">
+        	<div class="sqlform">
+        	<form class="form-horizontal">
+              <div class="inputlist">
+                  <input name="dbhost" type="text" placeholder="数据库主机" value="localhost">
+                  <div class="instructions">一般为localhost</div>
+              </div>
+              <div class="inputlist">
+                  <input name="dbuser" type="text" placeholder="数据库用户"  value="root">
+                  <div class="instructions">一般为root</div>
+              </div>
+              <div class="inputlist">
+                  <input name="dbpwd" type="text" placeholder="数据库密码">
+                  <div class="instructions">一般为空</div>
+              </div>
+              <div class="inputlist">
+                  <input name="dbname" type="text" placeholder="数据库名称">
+                  <div class="instructions"></div>
+              </div>
+              <div class="dbprompt"></div>
+            </form>
+            </div>
+			<div class="btncenter"><button type="submit" class="btn btn-inverse btn-large">下一步</button></div>
+        </div>
+        <div id="sp-4" class="hide">
+            <div class="centerLoader"><div class="loader"></div></div>
+			<div class="describe">安装中，请勿关闭窗口</div>
+            <div class="btncenter"></div>
+        </div>
+        <div id="sp-5" <neq name="state" value="1"> class="hide"</neq>>
+			<div class="successful">安装成功</div>
+            <div class="agreement">后台默认用户名和密码均为:admin</div>
+            <div class="btnList">
+            	<div class="row-fluid">
+                    <div class="span6">
+                    <a target="_blank" href="/" class="btn btn-success">访问前台</a>
+                    </div>
+                    <div class="span6">
+                    <a target="_blank" href="http://<php>echo $_SERVER['SERVER_NAME'];</php>/Dswjcms/Logo/index.html" class="btn btn-warning">访问后台</a>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6">
+                    <a target="_blank" href="http://www.dswjcms.com/Manual.html" class="btn btn-danger">在线手册</a>
+                    </div>
+                    <div class="span6">
+                    <a target="_blank" href="http://www.dswjcms.com/bbs.html" class="btn btn-inverse">官方论坛</a>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6">
+                    <a target="_blank" href="http://www.dswjcms.com/Plugin.html" class="btn btn-primary">插件市场</a>
+                    </div>
+                    <div class="span6">
+                    <a target="_blank" href="http://www.dswjcms.com/Plugin.html" class="btn">模板市场</a>
+                    </div>
+                </div>
+            </div>
+            <div class="btncenter"><a target="_blank" href="http://www.dswjcms.com" class="btn btn-inverse btn-large">访问官网</a></div>
+        </div>
+    </div>
+    
+ <!--协议 start-->
+<div id="Contract" class="modal hide fade in" >
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal" >&times;</a>
+      <h3>许可协议</h3>
+    </div>
+    <div class="modal-body">
+        <div class="pr-agreement">
+			版权所有 (c) 2013-<php>echo date('Y');</php>，宁波市鄞州区天发网络科技有限公司<br/>
 保留所有权利。<br/>
 
 感谢您选择dswjcms产品。希望我们的努力能为您提供一个高效快速、强大的站点解决方案，和强大的金融解决方案。宁波天发网络公司网址为 http://www.tifaweb.com，DSWJCMS产品官方网址为 http://www.dswjcms.com<br/>
@@ -90,16 +160,11 @@ III. 有限担保和免责声明<br/>
 
 <b>宁波市鄞州区天发网络科技有限公司</b><br/>
 		</div>
-		<div class="btn-box">
-			<input name="readpact" type="checkbox" id="readpact" value="" /><label for="readpact"><strong class="fc-690 fs-14">我已经阅读并同意此协议</strong></label>
-			<input type="button" class="btn-next" value="继续" onclick="document.getElementById('readpact').checked ?window.location.href='__URL__/install/step/1' : alert('您必须同意软件许可协议才能安装！');" />
-		</div>
-	</div>
+        
+    </div>
+    <div class="modal-footer">
+              <button class="btn btn-primary"  data-dismiss="modal">确定</button>
+            </div>
 </div>
-
-<div class="foot">
-
-</div>
-
+<!--协议 end-->
 </body>
-</html>

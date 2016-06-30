@@ -393,6 +393,27 @@ class IndexAction extends AdminCommAction {
 			';
 		}
 	}	
+	
+	//环境切换
+	public function contextSwitching(){
+		$path='./index.php';
+		if (file_exists($path)) {
+			
+			$fileget=file_get_contents($path);
+			if($this->_post('id')==1){	//正式环境
+				$replace="//define('APP_DEBUG";
+				$update_str = preg_replace('/define\(\'APP_DEBUG/', $replace, $fileget); 
+			}else{
+				$replace="define('APP_DEBUG";
+				$update_str = preg_replace('/\/\/define\(\'APP_DEBUG/', $replace, $fileget); 
+			}
+			file_put_contents($path, $update_str);
+			$this->ajaxReturn(1,'切换成功',1);
+		}else{
+			$this->ajaxReturn(0,'无读写权限',0);
+		}
+		
+	}
 }
 
 ?>

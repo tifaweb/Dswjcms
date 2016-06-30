@@ -207,6 +207,59 @@
                     </dl>
                 </div>
             </div>
+            <h3>环境切换</h3>
+            <script>
+			function contextSwitching(id){
+				$.ajax({
+					type: "POST",
+					url: "__APP__/TIFAWEB_DSWJCMS/Index/contextSwitching.html",
+					data:{id:id},
+					success: function(msg){
+						if(msg.status==1){
+							alert(msg.info);
+							window.location.href='__APP__/TIFAWEB_DSWJCMS/Index/index.html';
+						}else{
+							alert(msg.info);
+						}
+					}
+				});
+			}
+			</script>
+            <div class="row-fluid">
+            <br/>
+            <table class="table table-striped table-bordered table-condensed">
+            <tbody>
+                <tr>
+                <td style="width:200px;">开发环境</td>
+                <td style="width:200px;">
+                <label class="radio"><input type="radio" name="validation" value="1" class="noty" <eq name="Think.const.APP_DEBUG" value="1">checked</eq>  onclick="contextSwitching(0)"/>测试环境</label>
+                <label class="radio"><input type="radio" name="validation" value="0" class="noty" <neq name="Think.const.APP_DEBUG" value="1">checked</neq> onclick="contextSwitching(1)"/>正式环境</label>
+                </td>
+                <td style="width:600px;">
+                测试环境下不会对模板进行缓存，更适合技术人员进行调试；正式环境下，将对模板和一些数据进行缓存处理，修改的内容有可能不会马上更新，如需要调试，请切换到测试环境，然后刷新下页面。
+                </td>
+              </tr>
+            </tbody>
+            
+            </table>
+            </div>
+            <h3>参考资料</h3>
+            <div class="row-fluid">
+            	<div class="span6">
+                    <dl class="dl-horizontal">
+                        <dt>官方网站：</dt><dd><a target="_blank" href="http://www.dswjcms.com/">http://www.dswjcms.com/</a></dd>
+                        <dt>插件模板市场：</dt><dd><a target="_blank" href="http://www.dswjcms.com/Plugin.html">http://www.dswjcms.com/Plugin.html</a></dd>
+                        <dt>售前支持：</dt><dd>安装问题都可以通过官方找到解决方案，也可通过官方论坛进行提问，我们将在2-3个工作日内进行解答</dd>
+                    </dl>
+                </div>
+                <div class="span6">
+                    <dl class="dl-horizontal">
+                    	<dt>官方论坛：</dt><dd><a target="_blank" href="http://www.dswjcms.com/bbs">http://www.dswjcms.com/bbs</a></dd>
+                        <dt>在线手册：</dt><dd><a target="_blank" href="http://www.dswjcms.com/Manual.html">http://www.dswjcms.com/Manual.html</a></dd>
+                        <dt>售后支持：</dt><dd>项目运营中发现任何问题，都可通过官方提供的渠道寻求免费帮助<br/><span class="red">注：仅支持以下2种情况的站点，其它情况，将不提供帮助（包括免费和付费）<br/>一、已购买授权，并仅只在授权域名下单独运行。<br/>二、1、官方相关版权信息并未去除;2、有做过友情链接"Dswjcms"，或底部加有"由Dswjcms提供技术支持"字样和链接到Dswjcms官网的URL</span></dd>
+                    </dl>
+                </div>
+            </div>
         </div>
         
 <!--底部 -->
