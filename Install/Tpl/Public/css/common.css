@@ -1,0 +1,151 @@
+a {outline: none !important;}
+a:active {star:expression(this.onFocus=this.blur())!important;}
+:focus { outline:0!important; }
+body{
+	background-color: #2b93dc;	
+}
+.index{min-height:700px;}
+.index .logo{
+	text-align: center;
+	margin-top: 50px;
+}
+.index .name{
+	font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+	font-size: 80px;
+	line-height: 1;
+	letter-spacing: -2px;
+	color: #FFF;
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+}
+.index .describe{
+	color: #FFF;
+	text-align: center;
+	font-size: 18px;
+	margin-top: 10px;
+	text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+}
+.index .agreement{
+	color: #FFF;
+	text-align: center;
+	margin-top: 10px;
+}
+.index .agreement a{
+	color: #FFF;
+	font-size: 18px;
+}
+.index .btncenter{
+	text-align: center;
+	margin-top:20px;
+}
+.index .btncenter .btn{
+	width:200px;
+}
+.index .centerLoader{
+	height:80px;
+	padding-top: 50px;
+}
+.index .environment{
+	text-align: left;
+	width:350px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 30px;
+}
+.index .problem{
+	color: #F00;
+	font-size: 16px;
+	line-height: 30px;
+}
+.index .tutorial a{
+	color: #636;
+}
+.index .solution{
+	color: #FFF;
+	line-height: 30px;
+}
+.index .sqlform{
+	text-align: left;
+	width:220px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+}
+.index .inputlist{
+	margin-bottom:20px;
+}
+.index .instructions{
+	color: #FFF;	
+}
+.index .successful{
+	color: #FFF;
+	font-size: 25px;
+	text-align: center;
+	line-height: 45px;
+}
+.index .btnList{
+	width:300px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+}
+.index .btnList .span6{
+	text-align: center;
+	margin-top: 10px;
+}
+.dbprompt{
+	font-size: 12px;	
+}
+.loader, .loader:before, .loader:after {
+background: #FFF;
+-webkit-animation: load1 1s infinite ease-in-out;
+animation: load1 1s infinite ease-in-out;
+width: 1em;
+height: 4em;
+}
+.loader:before,
+.loader:after {
+position: absolute;
+top: 0;
+content: '';
+}
+.loader:before {
+left: -1.5em;
+}
+.loader {
+text-indent: -9em;
+margin: 2px auto;
+position: relative;
+font-size: 11px;
+-webkit-animation-delay: 0.16s;
+animation-delay: 0.16s;
+}
+.loader:after { left: 1.5em;
+-webkit-animation-delay: 0.32s;
+animation-delay: 0.32s;
+}
+@-webkit-keyframes load1 {
+0%,
+80%,
+100% {
+box-shadow: 0 0 #FFF;
+height: 4em;
+}
+40% {
+box-shadow: 0 -2em #ffffff;
+height: 5em;
+}
+}
+@keyframes load1 {
+0%,
+80%,
+100% {
+box-shadow: 0 0 #FFF;
+height: 4em;
+}
+40% {
+box-shadow: 0 -2em #ffffff;
+height: 5em;
+}
+}
+
