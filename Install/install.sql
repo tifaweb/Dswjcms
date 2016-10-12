@@ -4325,7 +4325,7 @@ INSERT INTO `ds_system` (`id`, `state`, `prompt`, `value`, `name`, `type`) VALUE
 (10, '邮编', '请输入邮编', '315100', 'sys_code', 1),
 (11, '传真', '请输入传真', '', 'sys_fax', 1),
 (12, '版权信息', '请输入版权信息', 'Copyright ©2014-2016 Dswjcms，打造中国网贷第一品牌', 'sys_copy', 1),
-(13, '利息管理费', '请输入利息管理费', '0.005', 'sys_InterestMF', 1),
+(13, '借款管理费', '请输入借款管理费', '0.005', 'sys_InterestMF', 1),
 (15, '提现手续费免费额度', '请输入额度', '100', 'sys_wFPoundage', 1),
 (16, '提现手续费率', '请输入提现手续费', '0.001', 'sys_withdrawalPoundage', 1),
 (17, '网站标题（简）', '请输入网站标题', 'Dswjcms', 'sys_briefTitle', 1),
@@ -4346,7 +4346,8 @@ INSERT INTO `ds_system` (`id`, `state`, `prompt`, `value`, `name`, `type`) VALUE
 (42, '手机认证方式0人工1自动', '请输入0或1', '0', 'sys_appphone', 1),
 (43, '是否关闭站点1是0否', '请输入1或0', '0', 'sys_site_switch', 1),
 (44, '站点关闭显示内容', '请输入内容', '网站升级中，升级时间：2013-12-23 13：10：00 至 2013-12-24 08:00:00', 'sys_site_cause', 2),
-(47, '合同显示平台名称', '请输入名称', 'Dswjcms', 'sys_bargainName', 1);
+(47, '合同显示平台名称', '请输入名称', 'Dswjcms', 'sys_bargainName', 1),
+(48, '利息管理费', '请输入百分比', '0', 'sys_interestManagement', 1);
 
 -- --------------------------------------------------------
 

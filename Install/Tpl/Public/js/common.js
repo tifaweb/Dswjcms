@@ -14,7 +14,10 @@ $(document).ready(function(){
 				   $('#sp-2').show();
 				   $('#sp-2 .proajax').html(msg.info);
 			   }
-		   }
+		   },
+		   error: function() {
+ 				alert('环境不支持，请配置子域名或将项目放到根目录');
+   			},
 		});
 	})
 	

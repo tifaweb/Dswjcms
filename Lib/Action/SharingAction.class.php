@@ -2031,15 +2031,23 @@ class SharingAction extends Action{
 		$this->mailNotice($mailNotice);
 		/*投资者操作*/
 		$aidarr=array();
+		$system=$this->systems();
 		foreach($colle as $co){
 			
 			//还款状态更新
 			$collection->where(array('bid'=>$bid,'nper'=>$id,'uid'=>$co['uid']))->save(array('type'=>1));
+			if($system['sys_interestManagement']>0){
+				$interestmanagementfee=round($co['interest']*$system['sys_interestManagement']*0.01,2);//利息管理费
+			}
 			//增加用户资金
-			$models->query("UPDATE `ds_money` SET `total_money` = total_money+".$co['money'].",`available_funds` = available_funds+".$co['money'].",`stay_interest` = stay_interest-".$co['interest'].",`make_interest` = make_interest+".$co['interest'].",`due_in` = due_in-".$co['money']." WHERE `uid` =".$co['uid']);
+			$models->query("UPDATE `ds_money` SET `total_money` = total_money+".($co['money']-$interestmanagementfee).",`available_funds` = available_funds+".($co['money']-$interestmanagementfee).",`stay_interest` = stay_interest-".$co['interest'].",`make_interest` = make_interest+".($co['interest']-$interestmanagementfee).",`due_in` = due_in-".$co['money']." WHERE `uid` =".$co['uid']);
 			$total=$money->field('total_money,available_funds,freeze_funds')->where(array('uid'=>$co['uid']))->find();	//查询资金
 			
 				//记录添加点
+				if($interestmanagementfee>0){
+					//利息管理费
+					$moneyLog=$this->moneyLog(array(0,'【'.$borr['title'].'】第'.$id.'期收款，扣除利息管理费',$interestmanagementfee,'平台',$total['total_money'],$total['available_funds'],$total['freeze_funds'],$co['uid']),1);//资金记录
+				}
 				$moneyLog=$this->moneyLog(array(0,'【'.$borr['title'].'】第'.$id.'期收款',$co['money'],$borr['username'],$total['total_money'],$total['available_funds'],$total['freeze_funds'],$co['uid']),2);//资金记录
 				$sendMsg=$this->silSingle(array('title'=>'对【'.$borr['title'].'】第'.$id.'期收款','sid'=>$co['uid'],'msg'=>'<a href="'.__ROOT__.'/Loan/invest/'.$bid.'.html">【'.$borr['title'].'】</a>第'.$id.'期成功收款'));//站内信
 				//邮件通知
@@ -2078,6 +2086,7 @@ class SharingAction extends Action{
 	* @官网		http://www.tifaweb.com http://www.dswjcms.com
 	*/
 	public function latePayment($bid,$days,$ms=0){
+		$system=$this->systems();
 		$refund=M('refund');
 		$overdue=D('Overdue');
 		$coverdue=D('Coverdue');
@@ -2095,17 +2104,22 @@ class SharingAction extends Action{
 		if($mon['available_funds']<$voerd_total){	//判断用户资金是否够还款
 			$this->error("可用资金不足！");
 		}
-		if($days<=30){	//小于30天
-		
 			//执行还款
 			$cover=$coverdue->relation(true)->where('bid="'.$bid.'" and `uid` != "'.$this->_session('user_uid').'"')->select();
 			foreach($cover as $co){
 				$ar['money']=$co['money']+$this->penaltyInterest($co['money'],$co['days']);//投资人应收本息+罚息
 				$ar['interest']=$co['interest']+$this->penaltyInterest($co['money'],$co['days']);//投资人应收利息+罚息
-				$models->query("UPDATE `ds_money` SET `total_money` = total_money+".$ar['money'].",`available_funds` = available_funds+".$ar['money'].",`stay_interest` = stay_interest-".$co['interest'].",`make_interest` = make_interest+".$ar['interest'].",`due_in` = due_in-".$co['money']." WHERE `uid` =".$co['uid']);	//平台代付
+				if($system['sys_interestManagement']>0){
+					$interestmanagementfee=round($ar['interest']*$system['sys_interestManagement']*0.01,2);//利息管理费
+				}
+				$models->query("UPDATE `ds_money` SET `total_money` = total_money+".($ar['money']-$interestmanagementfee).",`available_funds` = available_funds+".($ar['money']-$interestmanagementfee).",`stay_interest` = stay_interest-".$co['interest'].",`make_interest` = make_interest+".($ar['interest']-$interestmanagementfee).",`due_in` = due_in-".$co['money']." WHERE `uid` =".$co['uid']);
 				//投资者
 				$total=$money->field('total_money,available_funds,freeze_funds')->where(array('uid'=>$co['uid']))->find();	//查询资金
 				//记录添加点
+				//利息管理费
+				if($interestmanagementfee>0){
+					$moneyLog=$this->moneyLog(array(0,'对【'.$co['title'].'】的逾期收款，扣除利息管理费',$interestmanagementfee,'平台',$total['total_money'],$total['available_funds'],$total['freeze_funds'],$co['uid']),1);//资金记录		
+				}
 				$moneyLog=$this->moneyLog(array(0,'对【'.$co['title'].'】的逾期收款',$ar['money'],$this->_session('user_name'),$total['total_money'],$total['available_funds'],$total['freeze_funds'],$co['uid']),2);//资金记录		
 				$this->silSingle(array('title'=>'对【'.$co['title'].'】的逾期收款','sid'=>$co['uid'],'msg'=>'对<a href="'.__ROOT__.'/Loan/invest/'.$co['bid'].'.html">【'.$co['title'].'】</a>的逾期收款，账户增加：'.$ar['money'].' 元'));//站内信
 				//邮件通知
@@ -2157,42 +2171,7 @@ class SharingAction extends Action{
 			$overdue->where(array('uid'=>$this->_session('user_uid'),'bid'=>$bid))->setField('type',1);	//更新逾期状态改为已
 			$coverdue->where('bid='.$bid)->setField('type',1);	//更新逾期状态改为已还
 			
-		}else{
-			$arr['total_money']=$mon['total_money']-$voerd_total;
-			$arr['available_funds']=$mon['available_funds']-$voerd_total;
-			$arr['stay_still']=$mon['stay_still']-$overd['money'];
-			$money->where(array('uid'=>$this->_session('user_uid')))->save($arr);	//扣除借款金额
-			$overdue->where(array('uid'=>$this->_session('user_uid'),'bid'=>$bid))->setField('type',1);	//更新逾期状态
-			$total=$money->field('total_money,available_funds,freeze_funds')->where(array('uid'=>$this->_session('user_uid')))->find();	//查询资金
-			//记录添加点
-			$moneyLog=$this->moneyLog(array(0,'对【'.$overd['title'].'】的逾期还款',$overd['money'],'平台',($total['total_money']+$overd_int+$penalty_int+$overd_management),($total['available_funds']+$overd_int+$penalty_int+$overd_management),$total['freeze_funds']),19);//资金记录	
-			$moneyLog=$this->moneyLog(array(0,'对【'.$overd['title'].'】的逾期还款',$overd['money'],'平台',($total['total_money']+$overd_int+$penalty_int+$overd_management),($total['available_funds']+$overd_int+$penalty_int+$overd_management),$total['freeze_funds'],-1),21);//资金记录		
-			$this->silSingle(array('title'=>'对【'.$overd['title'].'】的逾期还款','sid'=>$this->_session('user_uid'),'msg'=>'对<a href="'.__ROOT__.'/Loan/invest/'.$overd['uid'].'.html">【'.$overd['title'].'】</a>的逾期还款，账户减少：'.$voerd_total.' 元'));//站内信
-			//邮件通知
-			unset($mailNotice);
-			$mailNotice['uid']=$this->_session('user_uid');
-			$mailNotice['title']='对【'.$overd['title'].'】的逾期收款';
-			$mailNotice['content']='
-				<div style="margin: 6px 0 60px 0;">
-					<p>对【'.$overd['title'].'】的逾期收款</p>
-					<p>对<a href="http://'.$_SERVER['HTTP_HOST'].__APP__.'/Loan/invest/'.$overd['uid'].'.html">【'.$overd['title'].'】</a>的逾期还款，账户减少：'.$voerd_total.' 元</p>
-					<p>如果您的邮箱不支持链接点击，请将以上链接地址拷贝到你的浏览器地址栏中。</p>
-				</div>
-				<div style="color: #999;">
-					<p>发件时间：'.date('Y/m/d H:i:s').'</p>
-					<p>此邮件为系统自动发出的，请勿直接回复。</p>
-				</div>';
-			$this->mailNotice($mailNotice);
-			//逾期管理费扣除
-			$moneyLog=$this->moneyLog(array(0,'对【'.$overd['title'].'】的逾期还款扣除逾期管理费用',$overd_int,'平台',($total['total_money']+$penalty_int+$overd_management),($total['available_funds']+$penalty_int+$overd_management),$total['freeze_funds']),14);//资金记录		
-			$this->silSingle(array('title'=>'【'.$overd['title'].'】的逾期还款扣除逾期管理费用','sid'=>$this->_session('user_uid'),'msg'=>'【'.$overd['title'].'】的逾期还款扣除逾期管理费用'.$overd_int.' 元','admin'));//站内信
-			//罚息
-			$moneyLog=$this->moneyLog(array(0,'对【'.$overd['title'].'】的逾期还款扣除罚息费用',$penalty_int,'平台',($total['total_money']+$overd_management),($total['available_funds']),$total['freeze_funds']+$overd_management),19);//资金记录		
-			$this->silSingle(array('title'=>'【'.$overd['title'].'】的逾期还款扣除罚息费用','sid'=>$this->_session('user_uid'),'msg'=>'【'.$overd['title'].'】的逾期还款扣除罚息费用'.$penalty_int.' 元'));//站内信
-			//借款管理费
-			$moneyLog=$this->moneyLog(array(0,'对【'.$overd['title'].'】的逾期还款扣除借款管理费',$overd_management,'平台',($total['total_money']),($total['available_funds']),$total['freeze_funds']),10);//资金记录		
-			$this->silSingle(array('title'=>'【'.$overd['title'].'】的逾期还款扣除借款管理费','sid'=>$this->_session('user_uid'),'msg'=>'【'.$overd['title'].'】的逾期还款扣除借款管理费'.$overd_management.' 元'));//站内信
-		}
+		
 		$borrows->where(array('id'=>$bid))->save(array('state'=>9));	//将标状态改变还款成功
 		if($ms==1){
 			$this->success('还款成功','__URL__/Win/loan/overdue');
@@ -2907,8 +2886,8 @@ class SharingAction extends Action{
 	protected function requestForm($para_temp, $method, $button_name,$action) {
 		//待请求参数数组
 		$sHtml = "<form id='alipaysubmit' name='form1' action='".$action."' method='".$method."'>";
-		while (list ($key, $val) = each ($para_temp)) {
-            $sHtml.= "<input type='hidden' name='".$key."' value='".$val."'/>";
+		foreach($para_temp as $id=>$p){
+            $sHtml.= "<input type='hidden' name='".$id."' value='".$p."'/>";
         }
 		//submit按钮控件请不要含有name属性
         $sHtml = $sHtml."<input type='submit' value='".$button_name."'></form>";
