@@ -414,6 +414,101 @@ class IndexAction extends AdminCommAction {
 		}
 		
 	}
+	//--------APP界面风格-----------
+    public function wcolour(){
+		$directory = F('wdirectory'); 	//模板
+		$dirname = F('wdirname');  // 默认模板
+		if(!$directory){
+			$directory=$this->templateData('./Tpl/Win/template/');
+			F('wdirectory',$directory);
+			$directory=F('wdirectory');	
+		}
+		if(!$dirname){
+			$dir="Default";
+			F('wdirname',$dir);
+			$dirname=F('wdirname');
+		}
+		$this->assign('num',$directory['num']);
+		unset($directory['num']);
+		$this->assign('dirname',$dirname);
+		$this->assign('list',$directory);
+		$this->display();
+	}
+	
+	//APP界面设为默认
+	public function wsetDefault(){
+		if($this->_post('dir')){
+			F('wdirname',NULL);
+			F('wdirname',$this->_post('dir'));
+			$dirname=F('wdirname');
+			$directory = F('wdirectory');
+			$num=$directory['num'];
+			unset($directory['num']);
+			echo '
+			<p>共<span class="red">'.$num.'</span>套模板</p>
+			<ul class="thumbnails colour_switch">
+			';
+			foreach($directory as $dir){
+				echo '
+					<li class="span2">
+						<a class="thumbnail" onclick="setDefault(\''.$dir[3].'\');">
+						  <img src="/Tpl/Win/template/'.$dir[3].'/direct.png" style="width:200px;height:250px;">
+						  <div class="title">
+						  <h4>'.$dir[0].'</h4>
+						  <p>'.$dir[1].'</p>
+						  <p><span>作者:'.$dir[2].'</span></p>
+						  </div>
+						  <p><em>';
+				echo $dir[3]==$dirname?"默认模板":"";
+				echo "</em></p>
+						</a>
+					  </li>
+				";
+			}
+			echo '
+				</ul>
+			</div>
+			';
+		}
+	}
+	
+	//APP界面刷新
+	public function wcolourRefresh(){
+		if($this->_post('limit')==1){
+			$dirname = F('wdirname');
+			F('wdirectory',NULL);
+			$directory=$this->templateData('./Tpl/Win/template/');
+			F('wdirectory',$directory);
+			$directory = F('wdirectory');
+			$num=$directory['num'];
+			unset($directory['num']);
+			echo '
+			<p>共<span class="red">'.$num.'</span>套模板</p>
+			<ul class="thumbnails colour_switch">
+			';
+			foreach($directory as $dir){
+				echo '
+					<li class="span2">
+						<a class="thumbnail" onclick="setDefault(\''.$dir[3].'\');">
+						  <img src="/Tpl/Win/template/'.$dir[3].'/direct.png" style="width:200px;height:250px;">
+						  <div class="title">
+						  <h4>'.$dir[0].'</h4>
+						  <p>'.$dir[1].'</p>
+						  <p><span>作者:'.$dir[2].'</span></p>
+						  </div>
+						  <p><em>';
+				echo $dir[3]==$dirname?"默认模板":"";
+				echo "</em></p>
+						</a>
+					  </li>
+				";
+			}
+			echo '
+				</ul>
+			</div>
+			';
+		}
+	}
 }
 
 ?>

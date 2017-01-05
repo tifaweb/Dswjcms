@@ -19,7 +19,7 @@ class IndexAction extends HomeAction {
 		
 		$this->assign('borrow',$borrow);
 		$shuffling = M('shuffling');
-		$shufflings=$shuffling->field('title,img,url')->where('`state`=0')->order('`order` ASC')->select();
+		$shufflings=$shuffling->field('title,img,url')->where('`state`=0 and type=0')->order('`order` ASC')->select();
 		$shcount=$shuffling->field('title,img,url')->where('`state`=0')->count();
 		$this->assign('shcount',$shcount);
 		$this->assign('shuff',$shufflings);

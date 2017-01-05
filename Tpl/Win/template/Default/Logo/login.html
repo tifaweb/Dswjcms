@@ -1,0 +1,27 @@
+<include file="Index:header" />
+
+<!--顶 end -->
+<!--头 start-->
+<div class="header blankheader">
+    <div class="leftback">
+        <a class="back" href="javascript:history.back(-1);"></a>
+    </div>
+        <div class="rightbg">
+            <a href="__ROOT__/Win/Logo/register.html">注册</a>
+        </div>
+</div>
+<!--头 end-->
+<div class="content">
+    <div class="loginp">
+    <div class="login-list">
+        <form id="sublogo" onsubmit="return false">
+            <div id="errorMsgUp" class="vtip errs none"> </div>
+            <input type="text" name="username" class="redinput" placeholder="用户名/手机号">
+            <input type="password" name="password" class="redinput" placeholder="请输入密码" >
+            <div id="sublogo_prompt" class="prompt"></div>
+            <input type="submit" class='abtn' value='立即登录' onClick="submission('sublogo','Logo/sublogo','Center');"/>
+        </form>
+    </div>
+</div>
+<!--底部  start-->
+<include file="Index:footer" />

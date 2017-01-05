@@ -1,0 +1,53 @@
+<include file="header" />
+<!--头部 end -->
+<!--左栏 starts -->
+<div class="container-fluid">
+		<div class="row-fluid">
+			<include file="left" />
+
+			<div id="content" class="span10">
+			<!-- content starts -->
+<!--左栏 end -->
+<ul class="breadcrumb">
+      <li>
+        <a href="__APP__/TIFAWEB_DSWJCMS.html">首页</a> <span class="divider">/</span>
+      </li>
+      <li class="active">微信界面风格</li>
+      <div  class="pull-right"> <a href="#" onclick="colourRefresh()">刷新</a></div>
+</ul>
+<div id="colour_switch">
+<p>共<span class="red">{$num}</span>套模板</p>
+<ul class="thumbnails colour_switch">
+<volist name="list" id="vo">
+  <li class="span2">
+    <a class="thumbnail" onclick="setDefault('{$vo.3}');">
+      <img src="/Tpl/Win/template/{$vo.3}/direct.png" style="width:200px;height:250px;">
+      <div class="title">
+      <h4>{$vo.0}</h4>
+      <p>{$vo.1}</p>
+      <p><span>作者:{$vo.2}</span></p>
+      </div>
+      <p><em>{$vo[3]==$dirname?"默认模板":''}</em></p>
+    </a>
+  </li>
+</volist>
+</ul>
+</div>
+<!--底部 -->
+<script>
+/**
+ * @点击刷新
+ *
+ **/
+function colourRefresh(){
+	$("#colour_switch").load("__APP__/TIFAWEB_DSWJCMS/Index/wcolourRefresh", {limit:1});
+}
+/**
+ * @设为默认
+ *
+ **/
+function setDefault(dir){
+	$("#colour_switch").load("__APP__/TIFAWEB_DSWJCMS/Index/wsetDefault", {dir:dir});
+}
+</script>
+<include file="footer" />

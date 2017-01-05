@@ -1,0 +1,59 @@
+<include file="Index:header" />
+<style>
+.red{
+	color: #F00;
+	text-align: center;
+	margin-top: 20px;
+}
+.green{
+	text-align: center;
+	margin-top: 20px;
+}
+</style>
+<!--顶 end -->
+<!--头 start-->
+<div class="header blankheader">
+    <div class="leftback">
+        <a class="back" href="javascript:history.back(-1);"></a>
+    </div>
+        <div class="redtitle cheader">提示</div>
+</div>
+<!--头 end-->
+<div class="content chebb-xq">
+<!-- container start --> 
+
+<div class="row-fluid index">
+    <div class="jump_top span12">
+    	<div class="span12 loan_search center">
+		<present name="message">
+        <p class="green"><?php echo($message); ?></p>
+		<script>window.location.href='<?php echo($jumpUrl); ?>';</script>
+        <else/>          	   
+            <p class="red"><?php echo($error); ?></p>
+            
+          <p class="jump" style="display: none;">
+            页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait">2</b>
+            </p>
+         </present>   
+      </div>
+         
+    </div>
+  </div>
+</div>
+
+<!-- container end -->
+
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 500);
+})();
+</script>
+<!--底部  start-->
+<include file="Index:footer" />

@@ -1,0 +1,27 @@
+<php>if($_SESSION['app']==1){</php>
+<footer class="fdfooter">
+    <ul id="commondh">
+        <li><a href="__ROOT__/Win/Index/index.html"><span class="fa fa-home"></span><div class="title">首页</div></a></li>
+        <li><a href="__ROOT__/Win/Center.html"><span class="fa fa-user"></span><div class="title">我的</div></a></li>
+        <li><a href="__ROOT__/Win/Index/connectus.html"><span class="fa fa-commenting"></span><div class="title">关于</div></a></li>
+    </ul>
+</footer>
+<php>}else{</php>
+<footer class="footer">
+    <div class="menu">
+        <a href="__ROOT__/Win/Index/index.html">
+            首页
+        </a>
+        <a href="__ROOT__/Win/Index/connectus.html">
+            联系我们
+        </a>
+        <a href="__ROOT__/Win/Center.html">
+            我的
+        </a>
+        <a href="{$Think.session.domain}">
+            电脑版
+        </a>
+    </div>
+</footer>
+<php>}</php>
+</body></html>

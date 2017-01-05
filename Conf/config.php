@@ -5,7 +5,7 @@ return array(
  'DB_PORT'   => 3306, // 端口        
 
 'DB_SQL_BUILD_CACHE' => true,//SQL缓存
- 'APP_GROUP_LIST' => 'Home,Admin,Api', //项目分组设定
+ 'APP_GROUP_LIST' => 'Home,Admin,Api,Win', //项目分组设定
  'TMPL_PARSE_STRING'  =>array(
      'TIFAWEB_DSWJCMS' => 'Dswjcms',
   ),
@@ -56,6 +56,6 @@ return array(
 	'DS_ENTERPRISE'			=>	'点石为金借贷系统',
 	'DS_EN_ENTERPRISE'		=>	'dswjjd',
 	'DS_TOP_POWERED'		=>	'Powered by Dswjcms!',
-	'DS_POWERED'			=>	'<p class="pull-left">Powered by <strong><a href="http://www.dswjcms.com" target="_blank">Dswjcms!</a></strong> <em>1.5.2</em><br/>&copy; 2013-2016 <a href="http://www.tifaweb.com" target="_blank">Tf Inc.</a></p>',
+	'DS_POWERED'			=>	'<p class="pull-left">Powered by <strong><a href="http://www.dswjcms.com" target="_blank">Dswjcms!</a></strong> <em>1.6</em><br/>&copy; 2013-2017 <a href="http://www.tifaweb.com" target="_blank">Tf Inc.</a></p>',
 );
 ?>

@@ -4172,7 +4172,7 @@ CREATE TABLE IF NOT EXISTS `ds_shuffling` (
 --
 
 INSERT INTO `ds_shuffling` (`id`, `title`, `type`, `state`, `time`, `img`, `order`, `url`) VALUES
-(10, '11', 0, 0, '1404563509', '1404563628.2053.png', 0, 'javascript:void(0)');
+(11, '1', 1, 0, '1481793042', '1481793041.2397.png', 0, 'javascript:void(0)');
 
 -- --------------------------------------------------------
 

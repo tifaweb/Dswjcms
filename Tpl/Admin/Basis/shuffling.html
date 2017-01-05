@@ -40,7 +40,9 @@
                 <td>
                        <if condition="$vo.type eq 0">
                            首页轮播
-                       <else />
+                       <elseif condition="$vo.type eq 1"/>
+                       APP轮播
+                       <else/>
                        </if>
                 </td>
                 <td>
@@ -104,6 +106,7 @@
                         <td>
                             <select name="type">
                                     <option value="0">首页轮播</option>
+                                    <option value="1">APP轮播</option>
                             </select>
                         </td>
                       </tr>

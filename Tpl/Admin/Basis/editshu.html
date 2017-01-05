@@ -37,7 +37,8 @@
                         </td>
                         <td>
                             <select name="type">
-                                    <option value="0">首页轮播</option>
+                                    <option value="0" {$ed['type']==0?'selected':''}>首页轮播</option>
+                                    <option value="1" {$ed['type']==1?'selected':''}>APP轮播</option>
                             </select>
                         </td>
                       </tr>

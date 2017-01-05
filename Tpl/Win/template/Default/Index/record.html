@@ -1,0 +1,46 @@
+<include file="Index:header" />
+
+<!--顶 end -->
+<!--头 start-->
+<div class="header blankheader">
+    <div class="leftback">
+        <a class="back" href="javascript:history.back(-1);"></a>
+    </div>
+        <div class="redtitle cheader">投标记录</div>
+</div>
+<!--头 end-->
+		
+		<!--内容-->
+        <div class="content tzjl">
+		<table>
+			<tbody><tr>
+				<td>投标人</td>
+				<td>投标金额</td>
+				<td>投标时间</td>
+			</tr>
+            <foreach name="log" item="vo">
+			<tr>
+                <td>{$vo.uname}</td>
+                <td>{$vo.operation|number_format=2,'.',','}</td>
+                <td>{$vo.time|date="Y-m-d H:i",###}</td>
+            </tr>
+            </foreach>
+                </tbody>
+            </table>
+	</div>
+        <!--内容 end-->
+    <div class="chebb_btn">
+		<ul>{$show}</ul>
+	</div>
+<!--底部  start-->
+<include file="Index:footer" />
+<script>
+$(document).ready(function(){
+	$(".chebb_btn a").click(function(){ 
+		$.get($(this).attr("href"),function(data){ 
+			$("body").html(data); 
+		}) 
+		return false; 
+	}) 
+});
+</script>

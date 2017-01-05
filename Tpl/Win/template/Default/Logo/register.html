@@ -1,0 +1,192 @@
+<include file="Index:header" />
+
+<!--顶 end -->
+<!--头 start-->
+<div class="header blankheader">
+    <div class="leftback">
+        <a class="back" href="javascript:history.back(-1);"></a>
+    </div>
+        <div class="redtitle cheader">注册</div>
+        <div class="rightbg">
+            <a href="__ROOT__/Win/Logo/login.html">登录</a>
+        </div>
+</div>
+<!--头 end-->
+<div class="content">
+	
+    <div class="content loginp">
+		<div class="login-list">
+			<form id="subregister" onsubmit="return false">
+				<div id="errorMsgUp" class="vtip errs none">
+				    请重新输入账号
+				</div>
+			    <input name="username" class="redinput" placeholder="手机号" required type="text"  maxlength="11">
+			    <input name="password" class="redinput" placeholder="请输入6~15位密码" required type="password" maxlength="15">
+			     <input name="conform_password" class="redinput" placeholder="确认密码" required type="password" maxlength="15">
+			    <div class="checkup">注册代表已同意<a class="xy" href="__ROOT__/Win/Index/agreement.html">《{$s.sys_briefTitle}服务协议》</a></div>
+			    <input type="text" name="uid" value="{$lsuid}" style="display: none;">
+			    <div id="subregister_prompt" class="prompt"></div>
+			    <input class="abtn" value="立即注册" type="submit" onClick="submission('subregister','Logo/addreg','Center');">
+			 </form>
+			
+		</div>
+</div>
+<!--底部  start-->
+<include file="Index:footer" />
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+  /*
+   * 注意：
+   * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入"公众号设置"的"功能设置"里填写"JS接口安全域名"。
+   * 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
+   * 3. 常见问题及完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+   *
+   * 开发中遇到问题详见文档"附录5-常见错误及解决办法"解决，如仍未能解决可通过以下渠道反馈：
+   * 邮箱地址：weixin-open@qq.com
+   * 邮件主题：【微信JS-SDK反馈】具体问题
+   * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
+   */
+ var title='推荐您注册成为红蚂蚁会员，理财只在指尖。';
+ var desc='红蚂蚁最安全的投资理财平台。100%足额房产抵押，保证您的资金安全。';
+ var links='http://www.hmyol.com/Win/Logo/register/promote/{$promote}.html';
+ var imgUrl='http://www.hmyol.com/Public/img/win.png'; 
+ 
+  wx.config({
+    debug: false,
+    appId: '{$js_sign.appid}',
+    timestamp: '{$js_sign.timestamp}',
+    nonceStr: '{$js_sign.noncestr}',
+    signature: '{$js_sign.signature}',
+    jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'hideMenuItems',
+        'showMenuItems',
+        'hideAllNonBaseMenuItem',
+        'showAllNonBaseMenuItem',
+        'translateVoice',
+        'startRecord',
+        'stopRecord',
+        'onRecordEnd',
+        'playVoice',
+        'pauseVoice',
+        'stopVoice',
+        'uploadVoice',
+        'downloadVoice',
+        'chooseImage',
+        'previewImage',
+        'uploadImage',
+        'downloadImage',
+        'getNetworkType',
+        'openLocation',
+        'getLocation',
+        'hideOptionMenu',
+        'showOptionMenu',
+        'closeWindow',
+        'scanQRCode',
+        'chooseWXPay',
+        'openProductSpecificView',
+        'addCard',
+        'chooseCard',
+        'openCard'
+      ]
+  });
+  wx.ready(function () {
+    // 在这里调用 API
+	  // 2. 分享接口
+	  // 2.1 监听"分享给朋友"，按钮点击、自定义分享内容及分享结果接口
+		wx.onMenuShareAppMessage({
+		  title: title,
+		  desc: desc,
+		  link: links,
+		  imgUrl: imgUrl,
+		  trigger: function (res) {
+			//alert("点击分享：" +JSON.stringify(res));
+			  // 用户确认分享后执行的回调函数
+		  },
+		  success: function (res) {
+			//alert("分享成功：" +JSON.stringify(res));
+			  // 用户确认分享后执行的回调函数
+		  },
+		  cancel: function (res) {
+			//alert("取消分享：" +JSON.stringify(res));
+			  // 用户取消分享后执行的回调函数
+		  },
+		  fail:function (res) {
+			//alert("分享失败：" +JSON.stringify(res));
+		  }
+		});
+	
+	  // 2.2 监听"分享到朋友圈"按钮点击、自定义分享内容及分享结果接口
+		wx.onMenuShareTimeline({
+		  title: title,
+		  desc: desc,
+		  link: links,
+		  imgUrl: imgUrl,
+		  trigger: function (res) {
+				//alert("点击分享：" +JSON.stringify(res));
+				// 用户确认分享后执行的回调函数
+			},
+			success: function (res) {
+				//alert("分享成功：" +JSON.stringify(res));
+				// 用户确认分享后执行的回调函数
+			},
+			cancel: function (res) {
+				//alert("取消分享：" +JSON.stringify(res));
+				// 用户取消分享后执行的回调函数
+			},
+			fail:function (res) {
+				//alert("分享失败：" +JSON.stringify(res));
+			}
+		});
+	
+	  // 2.3 监听"分享到QQ"按钮点击、自定义分享内容及分享结果接口
+		wx.onMenuShareQQ({
+		 title: title,
+		  desc: desc,
+		  link: links,
+		  imgUrl: imgUrl,
+		  trigger: function (res) {
+			//alert("点击分享：" +JSON.stringify(res));
+			  // 用户确认分享后执行的回调函数
+		  },
+		  success: function (res) {
+			//alert("分享成功：" +JSON.stringify(res));
+			  // 用户确认分享后执行的回调函数
+		  },
+		  cancel: function (res) {
+			//alert("取消分享：" +JSON.stringify(res));
+			  // 用户取消分享后执行的回调函数
+		  },
+		  fail:function (res) {
+			//alert("分享失败：" +JSON.stringify(res));
+		  }
+		});
+	  
+	  // 2.4 监听"分享到微博"按钮点击、自定义分享内容及分享结果接口
+		wx.onMenuShareWeibo({
+		  title: title,
+		  desc: desc,
+		  link: links,
+		  imgUrl: imgUrl,
+		  trigger: function (res) {
+				//alert("点击分享：" +JSON.stringify(res));
+				// 用户确认分享后执行的回调函数
+			},
+			success: function (res) {
+				//alert("分享成功：" +JSON.stringify(res));
+				// 用户确认分享后执行的回调函数
+			},
+			cancel: function (res) {
+				//alert("取消分享：" +JSON.stringify(res));
+				// 用户取消分享后执行的回调函数
+			},
+			fail:function (res) {
+				//alert("分享失败：" +JSON.stringify(res));
+			}
+		});
+  });
+</script>

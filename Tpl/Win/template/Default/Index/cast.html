@@ -1,0 +1,72 @@
+<include file="Index:header" />
+<style>
+.head{
+	margin-bottom: 10px;
+	font-family: "微软雅黑";
+	padding-bottom: 10px;
+	padding-top: 10px;
+	
+}
+.chebb-xq form{
+	padding-left: 20px;
+	padding-right:20px;
+}
+#pl{
+	width: 100%;
+	height: 40px;
+	padding: 10px;
+	margin-bottom: 10px;
+	background: none repeat scroll 0% 0% #FFF;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	font-size: 14px;
+	font-weight: normal;
+	box-sizing: border-box;
+}
+.made {
+	float: right;
+	color: #0088D1;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	position: relative;
+	bottom: 40px;
+	right: 5px;
+}
+.prompt{width:100% !important;margin-bottom: 5px;}
+</style>
+<!--顶 end -->
+<!--头 start-->
+<div class="header blankheader">
+    <div class="leftback">
+        <a class="back" href="javascript:history.back(-1);"></a>
+    </div>
+        <div class="redtitle cheader">投标确认</div>
+</div>
+<!--头 end-->
+<div class="content chebb-xq">
+  <form id="subcast" onsubmit="return false">
+  <p class="head">项目可投金额&nbsp;&nbsp;{$borrow.surplus|number_format=2,'.',','}元</p>
+  <p>
+    <input type="text" placeholder="请输入金额" id="pl" name="price" value="{$borrow.min}"></input>
+    <input name="id" type="hidden" value="{$borrow.id}" />
+    <span class="made">全投</span>
+  </p>
+    <p>可用金额&nbsp;&nbsp;{$borrow.available|number_format=2,'.',','}元</p>
+    <br />
+    <div id="subcast_prompt" class="prompt"></div>
+    <input type="submit" class='abtn' style="width:100%" value='立即投标' onClick="submission('subcast','Index/subcasts','Center/invest/mid/isbid');"/>
+  </form>
+</div>
+<!--底部  start-->
+<include file="Index:footer" />
+<script>
+	$('.made').click(function(){
+		var surplus='{$borrow.surplus}';
+		var available='{$borrow.available}';
+		if(surplus >=available){
+			$('#pl').val(Math.floor(available));
+		}else{
+			$('#pl').val(Math.floor(surplus));
+		}
+	});
+</script>

@@ -1,0 +1,115 @@
+<include file="Index:header" />
+
+<!--顶 end -->
+<!--头 start-->
+<div class="header blankheader">
+    <div class="leftback">
+        <a class="back" href="javascript:history.back(-1);"></a>
+    </div>
+        <div class="redtitle cheader">产品详情</div>
+</div>
+<!--头 end-->
+<div class="content chebb-xq">
+
+    <dl class="xq_dl">
+        <dt>
+                               
+            <em class="redtitle">{$borrow.title}</em>
+        </dt>
+        <dd class="dd1">
+            <h1>融资金额</h1>
+            <h2><b>{$borrow.money|number_format=2,'.',','}</b>元</h2>
+                
+        </dd>
+        <dd class="dd2">
+            <h1>已投金额</h1>
+            <h2><b>{$borrow['money']-$borrow['surplus']|number_format=2,'.',','}</b>元</h2>
+        </dd>
+        <dd class="dd3">
+            <h1>年利率</h1>
+            <h2><em>{$borrow.rates}%</em></h2>
+        </dd>
+        <dd class="dd3">
+            <h1>审核时间</h1>
+            <h2>
+                <em>
+                    {$borrow.checktime|date="Y-m-d",###}
+                                        </em>
+            </h2>
+        </dd>
+        <if condition="$borrow.limittime gt 0">
+        <dd class="dd3">
+            <h1>还款日期</h1>
+            <h2>
+                <em>
+                    {$borrow['limittime']|date="Y-m-d",###}
+                                        </em>
+            </h2>
+        </dd>
+        </if>
+        <dd class="dd4">
+            <h1><b class="icon-dd4b1"></b><span>本金保障</span></h1>
+            <h2><b class="bases-tasks"></b>
+                <span>
+                     {$borrow.way}
+                                        </span>
+            </h2>
+        </dd>
+    </dl>
+    <if condition="$borrow['state'] eq 1 or $borrow['state'] eq 2">
+    <a class="abtn bg-chebbbtn-xq" href="__ROOT__/Win/Index/cast/id/{$Think.get.id}">投标</a>
+    <else/>
+    <a class="abtn bg-chebbbtn-xq disable">
+    	<switch name="borrow['state']">
+            <case value="5">已满标</case>
+            <case value="7">正在还款</case>
+            <case value="8">已逾期</case>
+             <case value="9">已完成</case>
+             <case value="13">已取消</case>
+             <case value="14">已流标</case>
+            <default />已失效
+        </switch>
+    </a>
+    </if>
+    <div class="grayli">
+        <b>借款详情</b>
+        
+    </div> 
+    <div style="margin-right: 20px;margin-left: 20px;">
+    {$borrow.content}
+    </div>
+    <if condition="$borrow.type eq 1 or $borrow.type eq 2">
+    <!--抵押物信息-->
+    <div class="grayli">
+        <b>抵押物信息</b>
+        
+    </div> 
+    <div style="margin-right: 20px;margin-left: 20px;">
+    {$borrow['mortgage'] ==''?'无':$borrow.mortgage}
+    </div>
+    </if>
+    <div class="grayli">
+        <b>基本信息</b>
+        
+    </div> 
+    <div style="margin-right: 20px;margin-left: 20px;">
+    	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <td>所在地：{$borrow.location}</td>
+                    <td>婚姻状况：{$borrow.marriage}</td>
+                    <tr>
+                    <td>学历：{$borrow.education}</td>
+                    <td>月收入：{$borrow.monthly_income}</td>
+                    </tr>
+                    <td>住房条件：{$borrow.housing}</td>
+                    <td>购车情况：{$borrow.buy_cars}</td>
+                </tbody>
+              </table>
+    </div>
+    <a href="__ROOT__/Win/Index/record/id/{$Think.get.id}" class="grayli">
+        <b>投资记录</b>
+        <b class="next">下一页</b>
+    </a>
+</div>
+<!--底部  start-->
+<include file="Index:footer" />

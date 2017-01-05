@@ -1,0 +1,123 @@
+<include file="Index:header" />
+<link rel="stylesheet" href="/Tpl/Win/template/Default/Public/css/swiper.css">
+<script src="/Tpl/Win/template/Default/Public/js/swiper.js"></script>
+
+<style type="text/css">
+.pagination {
+  position: absolute;
+  z-index: 20;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+.swiper-pagination-switch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background: #555;
+  margin: 0 5px;
+  opacity: 0.8;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+.swiper-active-switch {
+  background: #fff;
+}
+.swiper-container{height:150px;}
+</style>
+<script src="/Tpl/Win/template/Default/Public/js/radialindicator.js"></script>
+<!--轮播-->
+<if condition="$shufflings eq ''">
+<else/>
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    <volist name="shufflings" id="ls">
+        <div class="swiper-slide"><a href="{$ls.url}"><img src="__PUBLIC__/uploadify/uploads/undefined/{$ls.img}" style="width:100%;height:150px;"/></a></div>
+    </volist>
+  </div>
+  <div class="pagination"></div>
+</div>
+<script> 
+var mySwiper = new Swiper('.swiper-container',{
+autoplay : 4000,//可选选项，自动滑动
+pagination : '.pagination',
+paginationClickable :true,
+})
+</script>
+</if>
+<!--轮播 end-->
+<div class="content">
+    <!--内容-->
+<div class="content chebb">
+	<!--列表-->
+    
+	<volist name="borrow" id="vo">
+		<div id="hotlist">
+            <div class="listitem" id="{$vo.id}">
+                <dl class="tit">
+                    <dt>
+                        <em class="redtitle">{$vo.title}</em>
+                  </dt>
+                </dl>
+                <dl>
+                    <dd>
+                        <span>金额<br><em class="bltitle">{$vo['money']}</em></span>
+                        <span class="nh">年利率<br><em class="greentitle">{$vo['rates']}%</em></span>
+                        <span class="nright">借款周期<br>
+                        <em class="bltitle">{$vo.deadline}	</em>
+                        </span>
+                    </dd>
+                </dl>
+    
+                <div class="percent_small indicatorContainer" id="lo{$key+1}" progress="{$vo['ratio']}"></div>
+            </div>
+      	</div> 
+      </volist>
+	<!--列表 end-->
+	<div class="chebb_btn">
+		<ul>{$show}</ul>
+	</div>
+</div>
+<!--底部  start-->
+<include file="Index:footer" />
+<script>
+(function () {
+	$(".chebb_btn a").click(function(){ 
+		
+		$.get($(this).attr("href"),function(data){ 
+			$("body").html(data); 
+		}) 
+		return false; 
+	}) 
+	
+	//跳转
+	$('.listitem').click(function (){
+		var id=$(this).attr('id');
+		window.location.href='__ROOT__/Win/Index/invest/id/'+id+'.html';
+	});
+	
+})();
+//进度条
+function circularProgress(id){
+	var radialObj = $("#lo"+id).radialIndicator({
+        radius: 22,
+		barColor: {
+            0: "#999",
+            50: "#0066FF",
+            100: "#78B461"
+        },
+        percentage: true
+    }).data("radialIndicator");
+
+    //Using Instance
+    radialObj.animate($("#lo"+id).attr("progress"));
+}
+//进度条数
+
+$(function(){ 
+	for(var i=1;i<=5;i++){
+		circularProgress(i);
+	}
+});
+</script>

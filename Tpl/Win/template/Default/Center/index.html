@@ -1,0 +1,55 @@
+<include file="Index:header" />
+
+<!--顶 end -->
+<div class="content user">
+		
+        <ul>
+            <li>
+                <div class="left username">{$Think.session.user_name}</div>
+            </li>
+            <li>
+                <a class="grayli">
+                    <b class="left">
+                        账号总额
+                    </b>
+                    <b class="fright">{$list.total_money|number_format=2,'.',','}元</b>
+                </a>
+            </li>
+            <li class="je">
+                <table class="btable">
+                    <tbody><tr>
+                        <td>
+                            <div>可用余额（元）</div>
+                            <div><a>{$list.available_funds|number_format=2,'.',','}</a></div>
+                        </td>
+                        <td><div>冻结金额（元）</div><div>{$list.freeze_funds|number_format=2,'.',','}</div></td>
+                    </tr>
+                </tbody></table>
+            </li>
+           <li>
+                <a href="__ROOT__/Win/Center/invest/mid/isclosed.html" class="grayli">
+                    <b>
+                        投资管理
+                    </b>
+                    <b class="next">下一页</b>
+                </a>
+            </li>
+            <li>
+                <div class="left">最近待收金额（元）：{$collection['money']|number_format=2,'.',','}</div>
+                <div class="right">待收时间：
+                <if condition="$collection['time'] gt 0">
+                {$collection['time']|date="Y-m-d H:i",###}
+                <else/>
+                无
+                </if>
+                
+                </div>
+            </li>
+            <a href="__ROOT__/Win/Logo/exits.html" class="abtn outbg">退出登录</a>
+            
+        </ul>			
+    </div>
+
+</div>
+<!--底部  start-->
+<include file="Index:footer" />

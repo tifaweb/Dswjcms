@@ -1,0 +1,162 @@
+<include file="Index:header" />
+
+<!--顶 end -->
+<!--头 start-->
+<div class="header blankheader">
+    <div class="leftback">
+        <a class="back" href="javascript:history.back(-1);"></a>
+    </div>
+        <div class="redtitle cheader">投资管理</div>
+</div>
+<!--头 end-->
+
+<div class="content user" style="min-height:400px;">
+<if condition="$Think.get.mid neq 'plan'">
+<div class="nav-bar">
+    <ul>
+        <li style="width:50%"><a <eq name="mid" value="isclosed"> class="bar-active"</eq> href="__ROOT__/Win/Center/invest/mid/isclosed.html">收款中</a></li>
+        <li style="width:50%"><a <eq name="mid" value="isbid"> class="bar-active"</eq> href="__ROOT__/Win/Center/invest/mid/isbid.html">投标的借款</a></li>
+    </ul>
+</div>
+</if>
+<switch name="mid" >
+  <case value="isclosed">
+    <!--正在收款的借款 start-->
+    	<volist name="isclosed" id="v">
+               <div id="hotlist">
+                <div class="listitem">
+                    <dl class="tit">
+                        <dt>
+                            <em class="redtitle"><a href="__ROOT__/Win/Index/invest/{$v.details.id}">{$v.details.title}</a></em>
+                      </dt>
+                    </dl>
+                    <dl class="tit">
+                        <dd>
+                            <span style="width:30%">借款金额<br><em class="bltitle">{$v.details.money|number_format=2,'.',','}			</em></span>
+                            <span style="width:20%" class="nh">年利率<br><em class="greentitle" style="font-size:12px;">{$v.details.rates}%</em></span>
+                            <span style="width:25%">还款日期<br>
+                            <em class="bltitle">{$v.details.limittime|date="Y/m/d",###}</em>
+                            </span>
+                            <span style="width:25%" class="nright">
+                            操作<br/>
+                            <em class="bltitle">
+                            <a href="__ROOT__/Win/Center/invest/mid/plan?bid={$v.details.id}">还款进度</a>
+                            </em>
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+              </div>
+         </volist>
+         <div class="chebb_btn">
+            <ul>{$show}</ul>
+        </div>
+        
+    <!--正在收款的借款 end-->
+    </case>
+    <case value="plan">
+    <!--还款计划 start-->
+    <div class="tzjl">
+        <table>
+            <tbody>
+            	<tr>
+                <td>期数</td>
+                <td>还款金额</td>
+                <td>还款时间</td>  
+                <td>状态</td>
+              </tr>
+            <volist name="refun" id="vo">
+                <tr>
+                    <td>{$vo.nper}</td>
+                    <td>{$vo.money|number_format=2,'.',','}</td>
+                    <td>{$vo.time|date="Y/m/d",###}</td>
+                    <if condition="$vo.type eq 1 ">
+                    <td>已还</td>
+                    <elseif condition="$vo.type eq 2 "/>
+                     <td>已逾期</td>
+                    <else/>
+                    <td>正在还款</td>
+                    </if>
+                 </tr>
+           </volist> 
+            </tbody>
+                   
+        </table>
+        </div>
+    <!--还款计划 end-->
+    </case>
+    <case value="isbid">
+    <!--投标的借款 start-->
+    	 <volist name="isbid" id="v">
+             <if condition="$v['actionname']['aid'] lt 1">
+               <div id="hotlist">
+                <div class="listitem" style="padding: 10px 10px;">
+                    <dl class="tit">
+                        <dt>
+                            <em class="redtitle"><a href="__ROOT__/Win/Index/invest/id/{$v.details.id}">{$v.details.title}</a></em>
+                      </dt>
+                    </dl>
+                    <dl class="tit">
+                        <dd>
+                            <span style="width:30%">投资金额<br><em class="bltitle">{$v.actionname.operation|number_format=2,'.',','}			</em></span>
+                            <span style="width:25%" class="nh">年利率<br><em class="greentitle"  style="font-size:12px;">{$v.details.rates}%</em></span>
+                            <span style="width:25%">可收利息<br>
+                            <em class="bltitle">{$v.actionname.interest}</em>
+                            </span>
+                            <span style="width:20%" class="nright">操作<br>
+                            <em class="bltitle"><if condition="$v['details']['state'] eq 7 or $v['details']['state'] eq 9">
+                                <a href="__ROOT__/Win/Center/agreement.html?bid={$v.actionname.bid}" >协议书</a>
+                            <else/>
+                            无
+                            </if></em>
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+              </div>
+           </if>
+         </volist>
+         <div class="chebb_btn">
+            <ul>{$show}</ul>
+        </div>
+    <!--投标的借款 end-->
+    </case>
+</switch>
+</div>
+<!--底部  start-->
+<include file="Index:footer" />
+<script>
+(function () {
+	$(".chebb_btn a").click(function(){ 
+		
+		$.get($(this).attr("href"),function(data){ 
+			$("body").html(data); 
+		}) 
+		return false; 
+	}) 
+	var animateDiv = $('.percent_small');
+	animateEle();
+	$(window).scroll(function () { animateEle() });
+	function animateEle() {
+		var playRange = { top: $(window).scrollTop(), bottom: $(window).scrollTop() + $(window).height() };
+		animateDiv.each(function () {
+			if (playRange.top <= $(this).offset().top && playRange.bottom >= $(this).offset().top && !$(this).data('bPlay')) {
+				$(this).data('bPlay', true);
+				var nPercent = $(this).parent().find('font').text().replace(/\%/, '');
+				//var nPercent = $(this).find('div').text().replace(/\%/, '');
+				$(this).svgCircle({
+					parent: $(this)[0],
+					w: 55,
+					R: 24,
+					sW: 6,
+					color: ["#78b461", "#78b461", "#78b461"],
+					perent: [100, nPercent],
+					speed: 150,
+					delay: 400
+				});
+			}
+		});
+	}
+	
+})();
+</script>
