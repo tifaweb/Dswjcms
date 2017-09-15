@@ -56,6 +56,6 @@ return array(
 	'DS_ENTERPRISE'			=>	'点石为金借贷系统',
 	'DS_EN_ENTERPRISE'		=>	'dswjjd',
 	'DS_TOP_POWERED'		=>	'Powered by Dswjcms!',
-	'DS_POWERED'			=>	'<p class="pull-left">Powered by <strong><a href="http://www.dswjcms.com" target="_blank">Dswjcms!</a></strong> <em>1.6.1</em><br/>&copy; 2013-2017 <a href="http://www.tifaweb.com" target="_blank">Tf Inc.</a></p>',
+	'DS_POWERED'			=>	'<p class="pull-left">Powered by <strong><a href="http://www.dswjcms.com" target="_blank">Dswjcms!</a></strong> <em>1.6.2</em><br/>&copy; 2013-2017 <a href="http://www.tifaweb.com" target="_blank">Tf Inc.</a></p>',
 );
 ?>

@@ -44,30 +44,6 @@ class AutosAction extends CommAction {
 				foreach($overd as $ov){	
 					if(time()-$refund['refund_'.$ov['bid']]>=86400){	//一天只执行一次
 						$arr['days']=$ov['days']+1;
-						if($arr['days']>30 && $ov['type'] !=='2'){	//如果逾期大于30系统代还
-						
-							$arr['type']=2;
-							//执行还款
-							$cover=$coverdue->relation(true)->where('bid='.$ov['bid'].' and `uid` != '.$ov['uid'])->select();
-							foreach($cover as $co){
-								$ar['money']=$co['money']+$this->penaltyInterest($co['money'],$co['days']);//投资人应收本息+罚息
-								$ar['interest']=$co['interest']+$this->penaltyInterest($co['money'],$co['days']);//投资人应收利息+罚息
-								$models->query("UPDATE `ds_money` SET `total_money` = total_money+".$ar['money'].",`available_funds` = available_funds+".$ar['money'].",`stay_interest` = stay_interest-".$co['interest'].",`make_interest` = make_interest+".$ar['interest'].",`due_in` = due_in-".$co['money']." WHERE `uid` =".$co['uid']);	//平台代付
-								//投资者
-								$money=M('money');
-								$total=$money->field('total_money,available_funds,freeze_funds')->where('uid='.$co['uid'])->find();	//查询资金
-								//记录添加点
-								$moneyLog=$this->moneyLog(array(0,'平台对【'.$co['title'].'】的代还款',$ar['money'],'平台',$total['total_money'],$total['available_funds'],$total['freeze_funds'],$co['uid']),2);//资金记录		
-								$this->silSingle(array('title'=>'平台对【'.$co['title'].'】的代还款','sid'=>$co['uid'],'msg'=>'平台对<a href="'.__ROOT__.'/Loan/invest/'.$co['bid'].'.html">【'.$co['title'].'】</a>的代还款，账户增加：'.$ar['money'].' 元'));//站内信
-								unset($ar);
-								$armoney+=$ar['money'];
-							}
-							$overdue->where(array('id'=>$ov['id']))->save(array('type'=>2));			//更新借款者逾期表
-							$coverdue->where(array('bid'=>$ov['bid']))->save(array('type'=>2));		//更新投资人逾期表
-						}
-						//记录添加点
-						$moneyLog=$this->moneyLog(array(0,'平台对【'.$co['title'].'】的逾期垫付',$armoney,'平台',0,0,0,-1),20);//资金记录
-						unset($armoney);
 						$overdue->where(array('id'=>$ov['id']))->setInc('days',1);			//更新借款者逾期表
 						$coverdue->where(array('bid'=>$ov['bid']))->setInc('days',1);		//更新投资人逾期表
 						if($refund){
