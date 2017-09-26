@@ -805,9 +805,21 @@ class CenterAction extends HomeAction {
 		$this->homeVerify();
 		$active['center']='active';
 		$this->assign('active',$active);
-		$head=$this->headPortrait('./Public/FaustCplus/php/img/big_user_'.$this->_session('user_uid').'.jpg');
+		$head=$this->headPortrait('./Public/uploadify/uploads/portrait/big_user_'.$this->_session('user_uid').'.jpg');
 		$this->assign('heads',$head);
+		
+		if($_POST['but']==1){
+			$info=$this->upload('portrait');
+			import('ORG.Util.Image.ThinkImage');
+			$img =new ThinkImage();
+			$img->open($info[0]['savepath'].$info[0]['savename'])->crop($img->width(), $img->height(), 0, 0,200,200)->save($info[0]['savepath'].'big_user_'.$this->_session('user_uid').'.'.$info[0]['extension']);
+			if(file_exists($info[0]['savepath'].$info[0]['savename'])){
+				unlink($info[0]['savepath'].$info[0]['savename']);
+			}
+			$this->success("上传成功","__ROOT__/Center/portrait.html");
+		}else{
 		$this->display();
+		}
     }
 	
 	

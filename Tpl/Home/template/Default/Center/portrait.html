@@ -7,42 +7,14 @@ html, body { height:100%; background-color: #ffffff;}
 <include file="top" />
 <div class=" row-fluid">
 <div class="container paddtop">
-<!-- 二级-->
-<!-- 二级end-->
-    <div id="content" class="center_zt">
-    	<div id="altContent"></div>
-		
-
-		<script type="text/javascript" src="__PUBLIC__/FaustCplus/swfobject.js"></script>
-		<script type="text/javascript">
-			var flashvars = {
-			  "jsfunc":"uploadevent",
-			  "imgUrl":'__PUBLIC__/FaustCplus/<if condition="$heads gt 0">php/img/raw_user_{$Think.session.user_uid}.jpg<else />php/img/raw_user_0.jpg</if>',
-			  "pid":"75642723",
-			  "uploadSrc":true,
-			  "showBrow":true,
-			  "showCame":true,
-			  "uploadUrl":"__PUBLIC__/FaustCplus/php/saveavater.php?action=user_{$Think.session.user_uid}"
-			};
-
-			var params = {
-				menu: "false",
-				scale: "noScale",
-				allowFullscreen: "true",
-				allowScriptAccess: "always",
-				wmode:"transparent",
-				bgcolor: "#FFFFFF"
-			};
-
-			var attributes = {
-				id:"FaustCplus"
-			};
-
-			swfobject.embedSWF("__PUBLIC__/FaustCplus/FaustCplus.swf", "altContent", "650", "500", "9.0.0", "", flashvars, params, attributes);
-
-		</script>
-    </div>
-    <!-- right end--> 
+    <form action="" enctype="multipart/form-data" method="post">  
+    <if condition="$heads gt 0">
+    <img src="__PUBLIC__/uploadify/uploads/portrait/big_user_{$Think.session.user_uid}.jpg"/><br/>
+    </if>
+    <input type="file" name="myfile"/>  
+    <button class="btn btn-primary" type="submit" value="1" name="but">上传头像</button>
+    </form>  
+    
 </div>
 <!-- container end -->
 <!--底部  start-->
