@@ -30,7 +30,7 @@ class WinAction extends CommAction{
 		}*/
 		$this->webScan();//安全检测记录
 		header("Content-Type:text/html; charset=utf-8");
-		$dirname = F('mdirname')?F('mdirname'):"Default";
+		$dirname = F('wdirname')?F('wdirname'):"Default";
 		C('DEFAULT_THEME','template/'.$dirname);	//自动切换模板
 		C('TMPL_ACTION_ERROR','Index/jump');	//默认错误跳转对应的模板文件
 		C('TMPL_ACTION_SUCCESS','Index/jump');	//默认成功跳转对应的模板文件
